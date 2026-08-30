@@ -215,6 +215,49 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
   .form-shell{padding:30px 22px}
   section{padding:64px 0}
 }
+#map-section .board{position:relative; border:1px solid var(--line); background:#fff}
+#map-section japan-map{height:620px; display:block}
+
+#map-section .filters{position:absolute; top:16px; right:16px; width:280px; background:rgba(252,252,250,.97);
+  border:1px solid var(--line); backdrop-filter:blur(6px); z-index:5; font-size:13px}
+#map-section .filters-head{display:flex; align-items:center; justify-content:space-between; padding:12px 14px; cursor:pointer; user-select:none}
+#map-section .filters-head .mono{color:var(--indigo)}
+#map-section .filters-head .chev{transition:transform .2s}
+#map-section .filters.collapsed .filters-head .chev{transform:rotate(-90deg)}
+#map-section .filters-body{padding:0 14px 14px; display:flex; flex-direction:column; gap:12px; max-height:70vh; overflow:auto}
+#map-section .filters.collapsed .filters-body{display:none}
+#map-section .axis-label{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--indigo-soft); margin-bottom:6px}
+#map-section .chips{display:flex; flex-wrap:wrap; gap:6px}
+#map-section .chip{font-size:12.5px; padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:#fff;
+  cursor:pointer; color:var(--body2); transition:.15s}
+#map-section .chip:hover{border-color:var(--indigo-soft)}
+#map-section .chip.on{background:var(--indigo); border-color:var(--indigo); color:#fff}
+#map-section .mode-row{display:flex; align-items:center; gap:8px; padding-top:4px; border-top:1px solid var(--line)}
+#map-section .mode-row .axis-label{margin:0}
+#map-section .modebtn{font-family:'PT Mono',monospace; font-size:11px; letter-spacing:.08em; padding:5px 10px; border:1px solid var(--indigo);
+  background:#fff; color:var(--indigo); cursor:pointer}
+#map-section .modebtn.on{background:var(--indigo); color:#fff}
+#map-section .reset{font-size:12px; color:var(--indigo-soft); background:none; border:0; text-decoration:underline; cursor:pointer; padding:0; align-self:flex-start}
+#map-section .count{position:absolute; left:16px; bottom:14px; z-index:5; font-family:'PT Mono',monospace; font-size:11px;
+  letter-spacing:.08em; color:var(--indigo-soft); background:rgba(252,252,250,.9); padding:6px 10px; border:1px solid var(--line)}
+
+#map-section .pop{position:absolute; z-index:20; width:260px; background:#fff; border:1px solid var(--line);
+  box-shadow:0 10px 30px rgba(20,20,20,.18); padding:14px 16px; font-size:13px; display:none}
+#map-section .pop.show{display:block}
+#map-section .pop .kj{font-family:serif; font-size:20px; color:var(--seal); display:block; margin-bottom:6px}
+#map-section .pop h3{font-size:17px; margin-bottom:6px; font-family:'Cormorant Garamond',serif; font-weight:600}
+#map-section .pop p{color:var(--body2); line-height:1.55; margin:0 0 10px}
+#map-section .pop a.go{font-size:12px; color:var(--seal); text-decoration:none; font-weight:600}
+#map-section .pop a.go:hover{text-decoration:underline}
+#map-section .pop .close{position:absolute; top:8px; right:10px; background:none; border:0; cursor:pointer; font-size:15px; color:var(--indigo-soft)}
+#map-section .pop .tagline{font-family:'PT Mono',monospace; font-size:10px; color:var(--indigo-soft); text-transform:uppercase; letter-spacing:.08em}
+
+@media(max-width:760px){
+  #map-section japan-map{height:520px}
+  #map-section .filters{width:calc(100% - 32px); right:16px; left:16px}
+  #map-section .pop{width:calc(100% - 48px)}
+}
+
 </style>
 </head>
 <body>
@@ -227,7 +270,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
     </a>
     <nav class="nav-links" aria-label="Основная навигация">
       <a href="#solution">Что мы делаем</a>
-      <a href="japan-map.html">Направления</a>
+      <a href="#map-section">Направления</a>
       <a href="#plans">Форматы</a>
       <a href="#how">Как это работает</a>
       <a href="#faq">Вопросы</a>
@@ -258,6 +301,54 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
       </div>
     </div>
     <div class="kanji-rail" aria-hidden="true">安心の旅</div>
+  </div>
+</section>
+
+<!-- ═══ MAP ═══ -->
+<section id="map-section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono">Направления</span>
+      <h2>Куда поехать в Японии</h2>
+      <p>Выберите настроение путешествия — на карте останутся только подходящие места. Токио, Осака, Киото, Фукуока и Хоккайдо
+        показаны как крупные направления: нажмите, чтобы перейти к подробному гиду.</p>
+    </div>
+
+    <div class="board">
+      <japan-map id="map" rail="off" panel="off" caption="off"
+        style="--jm-bg:#fff; --jm-ink:#16181A; --jm-accent:#B3352D; --jm-city-color:#1E3050; --jm-land:#EDEBE7; --jm-line:rgba(22,24,26,.18); --jm-font:'Inter',system-ui,sans-serif; --jm-duration:.6s"></japan-map>
+
+      <div class="filters" id="filters">
+        <div class="filters-head" id="filtersHead">
+          <span class="mono">Фильтры</span>
+          <span class="chev">▾</span>
+        </div>
+        <div class="filters-body">
+          <div>
+            <div class="axis-label">Впечатление</div>
+            <div class="chips type-chips" data-axis="type">
+              <button class="chip" data-val="view">Виды</button>
+              <button class="chip" data-val="food">Гастрономия</button>
+              <button class="chip" data-val="onsen">Онсэны</button>
+              <button class="chip" data-val="festival">Праздники</button>
+              <button class="chip" data-val="activity">Активности</button>
+              <button class="chip" data-val="history">История</button>
+              <button class="chip" data-val="night">Ночная жизнь</button>
+              <button class="chip" data-val="nature">Природа</button>
+            </div>
+          </div>
+          <div class="mode-row">
+            <span class="axis-label">Условие</span>
+            <button class="modebtn on" id="modeOr">ИЛИ</button>
+            <button class="modebtn" id="modeAnd">И</button>
+          </div>
+          <button class="reset" id="resetBtn">Сбросить фильтры</button>
+        </div>
+      </div>
+
+      <div class="count" id="count">40 из 40 точек</div>
+      <div class="pop" id="pop"></div>
+    </div>
   </div>
 </section>
 
@@ -725,5 +816,5094 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
 </script>
 -->
 
+<script>
+
+/*!
+ * <japan-map> — インタラクティブな日本地図（地方 → 都道府県の2段ドリルダウン）
+ * 依存: d3 v7（未読込なら自動でCDNから取得）
+ *
+ *   <script src="japan-map.js" defer><\/script>
+ *   <japan-map style="height:640px"></japan-map>
+ *
+ * 属性
+ *   data-src   GeoJSONのURL（既定: jsDelivr の dataofjapan/land）
+ *   d3-src     d3のURL（既定: unpkg d3@7）
+ *   rail       "off" で左の地方リストを隠す
+ *   panel      "off" で右の情報パネルを隠す
+ *   caption    "off" で右下のキャプションを隠す
+ *   region     初期選択の地方ID（hokkaido/tohoku/kanto/chubu/kinki/chugoku/shikoku/kyushu）
+ *   pref       初期選択の都道府県コード（1–47）
+ *
+ * プロパティ / メソッド
+ *   el.value            → {region, pref} | null
+ *   el.select(region, pref)  外部から選択（どちらも null で全体表示）
+ *   el.reset()
+ *   el.data = {13: {...}}    県コードごとの追加データ（パネルに表形式で表示）
+ *
+ * イベント（いずれも bubbles、detail に {region, pref, prefName, regionName}）
+ *   japan-map:select / japan-map:hover / japan-map:reset
+ *
+ * 配色は CSS カスタムプロパティで上書き可（ホスト要素に指定）
+ *   --jm-bg --jm-ink --jm-accent --jm-land --jm-line --jm-duration --jm-font
+ */
+(function () {
+  'use strict';
+
+  var GEO = 'https://cdn.jsdelivr.net/gh/dataofjapan/land@master/japan.geojson';
+  var D3 = 'https://unpkg.com/d3@7.9.0/dist/d3.min.js';
+
+  var REGIONS = [
+    {id:'hokkaido', name:'北海道', en:'Hokkaidō', ids:[1], prefs:1, area:'83,424', pop:'約514万人', hub:'札幌市',
+     lead:'日本最北の島。広大な農地と原生林、そして冬の厳しさが生活と産業のかたちを決めてきた地方です。',
+     note:'面積は全国の約2割を占める一方、人口密度は最も低い。'},
+    {id:'tohoku', name:'東北', en:'Tōhoku', ids:[2,3,4,5,6,7], prefs:6, area:'66,948', pop:'約855万人', hub:'仙台市',
+     lead:'奥羽山脈が南北に貫く、米と果樹の地方。太平洋側と日本海側で気候が大きく異なります。',
+     note:'夏祭りの文化が濃く、青森ねぶた・秋田竿燈・仙台七夕が並ぶ。'},
+    {id:'kanto', name:'関東', en:'Kantō', ids:[8,9,10,11,12,13,14], prefs:7, area:'32,433', pop:'約4,341万人', hub:'東京都区部',
+     lead:'日本最大の平野に人口の三分の一が集中する地方。政治・経済・情報の中心が重なっています。',
+     note:'国内総生産のおよそ3分の1を占める。'},
+    {id:'chubu', name:'中部', en:'Chūbu', ids:[15,16,17,18,19,20,21,22,23], prefs:9, area:'66,807', pop:'約2,133万人', hub:'名古屋市',
+     lead:'日本アルプスを抱え、日本海側・内陸・太平洋側の三つの顔をもつ地方。製造業の集積地でもあります。',
+     note:'自動車産業を中心に、日本最大の工業出荷額を持つ地域を含む。'},
+    {id:'kinki', name:'近畿', en:'Kinki', ids:[24,25,26,27,28,29,30], prefs:7, area:'33,126', pop:'約2,047万人', hub:'大阪市',
+     lead:'古代からの都が置かれた地方。歴史都市と商業都市が近接し、独自の言語文化を保っています。',
+     note:'京都・奈良に加え、琵琶湖は日本最大の湖。'},
+    {id:'chugoku', name:'中国', en:'Chūgoku', ids:[31,32,33,34,35], prefs:5, area:'31,922', pop:'約732万人', hub:'広島市',
+     lead:'中国山地が瀬戸内側と日本海側を分ける地方。穏やかな内海の港町が連なります。',
+     note:'瀬戸内海は年間降水量が少なく、日照時間が長い。'},
+    {id:'shikoku', name:'四国', en:'Shikoku', ids:[36,37,38,39], prefs:4, area:'18,803', pop:'約369万人', hub:'松山市',
+     lead:'四国山地が中央を走る、日本の主要四島でもっとも小さな島。八十八箇所を巡る遍路の道が全域を結びます。',
+     note:'太平洋側は日本有数の多雨地帯。'},
+    {id:'kyushu', name:'九州・沖縄', en:'Kyūshū & Okinawa', ids:[40,41,42,43,44,45,46,47], prefs:8, area:'44,513', pop:'約1,426万人', hub:'福岡市',
+     lead:'火山と温泉、そして大陸への玄関口。南へ連なる島々は亜熱帯の気候と独自の文化をもちます。',
+     note:'活火山が集中し、地熱発電の導入量が国内最大級。'}
+  ];
+  var PREF = {
+    1:['Hokkaidō','札幌市'],2:['Aomori','青森市'],3:['Iwate','盛岡市'],4:['Miyagi','仙台市'],5:['Akita','秋田市'],
+    6:['Yamagata','山形市'],7:['Fukushima','福島市'],8:['Ibaraki','水戸市'],9:['Tochigi','宇都宮市'],10:['Gunma','前橋市'],
+    11:['Saitama','さいたま市'],12:['Chiba','千葉市'],13:['Tōkyō','新宿区'],14:['Kanagawa','横浜市'],15:['Niigata','新潟市'],
+    16:['Toyama','富山市'],17:['Ishikawa','金沢市'],18:['Fukui','福井市'],19:['Yamanashi','甲府市'],20:['Nagano','長野市'],
+    21:['Gifu','岐阜市'],22:['Shizuoka','静岡市'],23:['Aichi','名古屋市'],24:['Mie','津市'],25:['Shiga','大津市'],
+    26:['Kyōto','京都市'],27:['Ōsaka','大阪市'],28:['Hyōgo','神戸市'],29:['Nara','奈良市'],30:['Wakayama','和歌山市'],
+    31:['Tottori','鳥取市'],32:['Shimane','松江市'],33:['Okayama','岡山市'],34:['Hiroshima','広島市'],35:['Yamaguchi','山口市'],
+    36:['Tokushima','徳島市'],37:['Kagawa','高松市'],38:['Ehime','松山市'],39:['Kōchi','高知市'],40:['Fukuoka','福岡市'],
+    41:['Saga','佐賀市'],42:['Nagasaki','長崎市'],43:['Kumamoto','熊本市'],44:['Ōita','大分市'],45:['Miyazaki','宮崎市'],
+    46:['Kagoshima','鹿児島市'],47:['Okinawa','那覇市']
+  };
+  var PREF_JA = {1:'北海道',2:'青森県',3:'岩手県',4:'宮城県',5:'秋田県',6:'山形県',7:'福島県',8:'茨城県',9:'栃木県',10:'群馬県',11:'埼玉県',12:'千葉県',13:'東京都',14:'神奈川県',15:'新潟県',16:'富山県',17:'石川県',18:'福井県',19:'山梨県',20:'長野県',21:'岐阜県',22:'静岡県',23:'愛知県',24:'三重県',25:'滋賀県',26:'京都府',27:'大阪府',28:'兵庫県',29:'奈良県',30:'和歌山県',31:'鳥取県',32:'島根県',33:'岡山県',34:'広島県',35:'山口県',36:'徳島県',37:'香川県',38:'愛媛県',39:'高知県',40:'福岡県',41:'佐賀県',42:'長崎県',43:'熊本県',44:'大分県',45:'宮崎県',46:'鹿児島県',47:'沖縄県'};
+
+  var REGION_OF = {}; REGIONS.forEach(function (r) { r.ids.forEach(function (i) { REGION_OF[i] = r.id; }); });
+  var byId = {}; REGIONS.forEach(function (r) { byId[r.id] = r; });
+
+  var CSS = `
+:host{
+  --_bg: var(--jm-bg, #f3f2f2);
+  --_ink: var(--jm-ink, #201e1d);
+  --_accent: var(--jm-accent, #ec3013);
+  --_land: var(--jm-land, #e2e0df);
+  --_line: var(--jm-line, rgba(32,30,29,.22));
+  --_dur: var(--jm-duration, .72s);
+  --_ease: cubic-bezier(.22,1,.36,1);
+  --_font: var(--jm-font, "Archivo","Noto Sans JP",system-ui,sans-serif);
+  --_tint: color-mix(in srgb, var(--_accent) 22%, var(--_bg));
+  --_tint2: color-mix(in srgb, var(--_accent) 38%, var(--_bg));
+  --_div: color-mix(in srgb, var(--_ink) 88%, transparent);
+  --_mute: color-mix(in srgb, var(--_ink) 52%, transparent);
+  display:block; position:relative; min-height:360px;
+  background:var(--_bg); color:var(--_ink); font-family:var(--_font);
+  container-type:inline-size;
+}
+*{box-sizing:border-box}
+.shell{display:grid; grid-template-columns:210px 1fr 340px; height:100%; min-height:inherit}
+.shell.no-rail{grid-template-columns:1fr 340px}
+.shell.no-panel{grid-template-columns:210px 1fr}
+.shell.no-rail.no-panel{grid-template-columns:1fr}
+.rail{border-right:2px solid var(--_div); display:flex; flex-direction:column; min-height:0; overflow:auto}
+.rail-list{display:flex; flex-direction:column}
+.rail.off,.panel.off,.cap.off{display:none}
+.head{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--_mute); padding:16px 16px 8px}
+.rail-item{display:grid; grid-template-columns:26px 1fr; align-items:baseline; gap:6px 10px; flex:none;
+  text-align:left; background:none; border:0; border-top:1px solid color-mix(in srgb,var(--_ink) 14%,transparent);
+  padding:11px 16px; cursor:pointer; color:inherit; font-family:inherit;
+  transition:background .18s linear, color .18s linear}
+.rail-item:last-of-type{border-bottom:1px solid color-mix(in srgb,var(--_ink) 14%,transparent)}
+.rail-item:hover{background:color-mix(in srgb,var(--_ink) 6%,transparent)}
+.rail-item.on{background:var(--_accent); color:var(--_bg)}
+.rail-num{font-size:11px; color:color-mix(in srgb,var(--_ink) 45%,transparent); font-variant-numeric:tabular-nums}
+.rail-item.on .rail-num,.rail-item.on .rail-en{color:rgba(255,255,255,.75)}
+.rail-name{font-size:15px; font-weight:800}
+.rail-en{grid-column:2; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:color-mix(in srgb,var(--_ink) 45%,transparent)}
+.rail-foot{margin-top:auto; padding:16px; font-size:11px; line-height:1.6; color:var(--_mute);
+  border-top:2px solid var(--_div)}
+.stage{position:relative; min-width:0; overflow:hidden}
+svg{display:block; width:100%; height:100%}
+.land{fill:var(--_land); stroke:var(--_line); stroke-width:.6; vector-effect:non-scaling-stroke;
+  transition:fill var(--_dur) var(--_ease), opacity .35s linear}
+.region{cursor:pointer}
+.region.hov .land{fill:var(--_tint); stroke:color-mix(in srgb,var(--_accent) 60%,transparent); stroke-width:1.1}
+.region.on .land{fill:var(--_tint2); stroke:color-mix(in srgb,var(--_accent) 70%,transparent)}
+.region.mute{opacity:.28}
+.pref.hov .land{fill:var(--_tint); stroke:color-mix(in srgb,var(--_accent) 60%,transparent); stroke-width:1.1}
+.pref.pick .land{fill:var(--_accent); stroke:color-mix(in srgb,var(--_accent) 40%,var(--_ink)); stroke-width:1.2}
+.pref.dim{opacity:.42}
+#camera{transition:transform var(--_dur) var(--_ease)}
+.rlabel{font-size:22px; font-weight:800; fill:var(--_ink); paint-order:stroke; stroke:var(--_bg);
+  stroke-width:5px; stroke-linejoin:round; pointer-events:none; transition:opacity .3s linear}
+.plabel{font-size:17px; font-weight:600; fill:var(--_ink); paint-order:stroke; stroke:var(--_bg);
+  stroke-width:4px; stroke-linejoin:round; pointer-events:none; text-anchor:middle}
+#prefLabels{opacity:0; transition:opacity .3s linear}
+#regionLabels.hide{opacity:0}
+.inset-frame{fill:none; stroke:color-mix(in srgb,var(--_ink) 20%,transparent); stroke-width:2;
+  transition:stroke .3s linear, stroke-width .3s linear}
+.inset-frame.focus{stroke:var(--_accent); stroke-width:4}
+.inset-cap{font-size:11px; letter-spacing:.12em; text-transform:uppercase; fill:var(--_mute)}
+.cap{position:absolute; right:20px; bottom:14px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  color:color-mix(in srgb,var(--_ink) 45%,transparent); pointer-events:none}
+.crumb{position:absolute; left:20px; top:18px; display:flex; align-items:center; gap:10px}
+.crumb button{font-size:11px; letter-spacing:.12em; text-transform:uppercase; background:none; border:0; padding:0;
+  cursor:pointer; color:var(--_accent); font-family:inherit}
+.crumb button:disabled{cursor:default; color:color-mix(in srgb,var(--_ink) 45%,transparent)}
+.crumb span{font-size:11px; color:color-mix(in srgb,var(--_ink) 35%,transparent)}
+.back{position:absolute; left:20px; top:44px; white-space:nowrap; font-family:inherit; font-size:13px;
+  padding:9px 16px; border:2px solid var(--_div); background:var(--_bg); color:var(--_ink); cursor:pointer;
+  opacity:0; transform:translateY(-6px); pointer-events:none;
+  transition:opacity .3s linear, transform .3s var(--_ease), background .15s linear}
+.back:hover{background:color-mix(in srgb,var(--_ink) 8%,transparent)}
+.back.on{opacity:1; transform:none; pointer-events:auto}
+.panel{border-left:2px solid var(--_div); position:relative; min-height:0; display:flex; flex-direction:column}
+.body{padding:0 20px 20px; overflow:auto; opacity:0; transform:translateY(10px);
+  transition:opacity .34s linear, transform .44s var(--_ease)}
+.body.on{opacity:1; transform:none}
+.hint{position:absolute; left:20px; right:20px; bottom:20px; font-size:13px; color:var(--_mute);
+  transition:opacity .3s linear}
+.hint.off{opacity:0}
+.kicker{font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--_accent)}
+.title{font-size:38px; line-height:1.05; margin:6px 0 2px; letter-spacing:-.02em; font-weight:800}
+.en{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--_mute)}
+.rule{border:0; border-top:2px solid var(--_div); margin:16px 0}
+.lead{font-size:14px; line-height:1.75; margin:0; text-wrap:pretty}
+table{width:100%; border-collapse:collapse; margin:16px 0}
+th{text-align:left; font-size:10px; letter-spacing:.1em; text-transform:uppercase; font-weight:600; width:38%;
+  color:var(--_mute); padding:9px 0; border-bottom:1px solid color-mix(in srgb,var(--_ink) 14%,transparent)}
+td{padding:9px 0; font-size:14px; font-variant-numeric:tabular-nums;
+  border-bottom:1px solid color-mix(in srgb,var(--_ink) 14%,transparent)}
+.sec{font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--_mute); margin-top:18px}
+.tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
+.tag{font-size:12px; white-space:nowrap; padding:4px 9px; border:1px solid color-mix(in srgb,var(--_ink) 28%,transparent);
+  cursor:pointer; transition:background .15s linear, color .15s linear}
+.tag:hover{background:var(--_tint)}
+.tag.on{background:var(--_accent); color:var(--_bg); border-color:var(--_accent)}
+.loading{position:absolute; inset:0; display:grid; place-items:center; font-size:12px; letter-spacing:.12em;
+  text-transform:uppercase; color:color-mix(in srgb,var(--_ink) 45%,transparent)}
+.jm-pin{transition:opacity .25s linear}
+.jm-pin .jm-dot{r:5; fill:var(--_accent); stroke:var(--_bg); stroke-width:2; transition:r .15s linear}
+.jm-pin:hover .jm-dot{r:7}
+.jm-pin-city .jm-dot{r:12; fill:var(--jm-city-color, #1E3050); stroke:var(--_bg); stroke-width:3}
+.jm-pin-city:hover .jm-dot{r:14}
+.jm-pin-city .jm-label{font-size:13px; font-weight:800}
+.jm-pin .jm-label{font-size:12px; font-weight:700; fill:var(--_ink); text-anchor:middle; paint-order:stroke;
+  stroke:var(--_bg); stroke-width:4px; stroke-linejoin:round; pointer-events:none}
+button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outline-offset:2px}
+@container (max-width: 900px){
+  .shell,.shell.no-rail,.shell.no-panel{grid-template-columns:1fr; grid-template-rows:auto 1fr auto}
+  .rail{border-right:0; border-bottom:2px solid var(--_div); overflow-x:auto; overflow-y:hidden}
+  .rail-list{flex-direction:row}
+  .rail .head,.rail-foot{display:none}
+  .rail-item{border-top:0; border-right:1px solid color-mix(in srgb,var(--_ink) 14%,transparent); min-width:104px}
+  .panel{border-left:0; border-top:2px solid var(--_div); max-height:44%}
+  .title{font-size:28px}
+}`;
+
+  var loader = null;
+  var D3_FALLBACKS = [
+    'https://unpkg.com/d3@7.9.0/dist/d3.min.js',
+    'https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js'
+  ];
+  function loadOneScript(src) {
+    return new Promise(function (res, rej) {
+      var s = document.createElement('script');
+      s.src = src; s.crossOrigin = 'anonymous';
+      s.onload = function () { res(window.d3); };
+      s.onerror = function () { rej(new Error('failed: ' + src)); };
+      document.head.appendChild(s);
+    });
+  }
+  function loadD3(src) {
+    if (window.d3 && window.d3.geoMercator) return Promise.resolve(window.d3);
+    if (loader) return loader;
+    var urls = src ? [src].concat(D3_FALLBACKS) : D3_FALLBACKS.slice();
+    loader = urls.reduce(function (chain, url) {
+      return chain.catch(function () { return loadOneScript(url); });
+    }, Promise.reject());
+    return loader;
+  }
+
+  var geoCache = {};
+  var GEO_FALLBACKS = [
+    'https://cdn.jsdelivr.net/gh/dataofjapan/land@master/japan.geojson',
+    'https://raw.githubusercontent.com/dataofjapan/land/master/japan.geojson'
+  ];
+  function fetchGeoOne(url) {
+    return fetch(url).then(function (r) {
+      if (!r.ok) throw new Error('GeoJSON ' + r.status);
+      return r.json();
+    });
+  }
+  function loadGeo(url) {
+    var key = url || 'default';
+    if (!geoCache[key]) {
+      var urls = url ? [url].concat(GEO_FALLBACKS) : GEO_FALLBACKS.slice();
+      geoCache[key] = urls.reduce(function (chain, u) {
+        return chain.catch(function () { return fetchGeoOne(u); });
+      }, Promise.reject());
+    }
+    return geoCache[key];
+  }
+
+  function esc(v) {
+    return String(v).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  class JapanMap extends HTMLElement {
+    static get observedAttributes() { return ['region', 'pref', 'rail', 'panel', 'caption']; }
+
+    constructor() {
+      super();
+      this._root = this.attachShadow({ mode: 'open' });
+      this._active = null; this._pref = null; this._extra = {};
+      this._ready = false; this._timer = null;
+      this.W = 1000; this.H = 900; this.PAD = 46;
+      this.INSET = { x: 40, y: 680, w: 190, h: 155 };
+      this.VB = { x: 0, y: 0, w: 1000, h: 900 };
+    }
+
+    get value() { return this._active ? { region: this._active, pref: this._pref } : null; }
+    set data(obj) { this._extra = obj || {}; if (this._ready) this._fillPanel(); }
+    get data() { return this._extra; }
+
+    select(region, pref) {
+      this._active = region && byId[region] ? region : null;
+      this._pref = this._active && pref && REGION_OF[+pref] === this._active ? +pref : null;
+      if (this._ready) this._render();
+      return this;
+    }
+    reset() { this.select(null); this._emit('reset'); return this; }
+
+    connectedCallback() {
+      if (this._built) return;
+      this._built = true;
+      this._build();
+      var self = this;
+      Promise.all([loadD3(this.getAttribute('d3-src') || D3), loadGeo(this.getAttribute('data-src') || GEO)])
+        .then(function (r) { self._draw(r[0], r[1]); })
+        .catch(function (e) {
+          var l = self._root.querySelector('.loading');
+          if (l) l.textContent = '地図データを読み込めませんでした';
+          console.error('[japan-map]', e);
+        });
+    }
+
+    attributeChangedCallback(n, o, v) {
+      if (!this._built) return;
+      if (n === 'region' || n === 'pref') this.select(this.getAttribute('region'), this.getAttribute('pref'));
+      else this._applyLayout();
+    }
+
+    _emit(kind, extra) {
+      var d = Object.assign({
+        region: this._active, regionName: this._active ? byId[this._active].name : null,
+        pref: this._pref, prefName: this._pref ? PREF_JA[this._pref] : null
+      }, extra || {});
+      this.dispatchEvent(new CustomEvent('japan-map:' + kind, { detail: d, bubbles: true, composed: true }));
+    }
+
+    _build() {
+      var self = this;
+      this._root.innerHTML =
+        '<style>' + CSS + '</style>' +
+        '<div class="shell">' +
+          '<aside class="rail"><div class="head">地方 / Regions</div><div class="rail-list"></div>' +
+            '<div class="rail-foot">地方をクリックすると拡大し、そのまま都道府県を選べます。<br>Esc で一段戻ります。</div></aside>' +
+          '<main class="stage"><svg role="img" aria-label="日本の地方地図" preserveAspectRatio="xMidYMid meet"></svg>' +
+            '<nav class="crumb" aria-label="階層"></nav>' +
+            '<button class="back" type="button">← 全体に戻る</button>' +
+            '<div class="cap">Mercator · 47 prefectures · 沖縄は別枠表示</div>' +
+            '<div class="loading">地図データを読み込み中…</div></main>' +
+          '<aside class="panel"><div class="head panel-head">地方情報 / Region</div>' +
+            '<div class="body"></div>' +
+            '<div class="hint">地方を選択すると、ここに詳細が表示されます。</div></aside>' +
+        '</div>';
+
+      var list = this._root.querySelector('.rail-list');
+      REGIONS.forEach(function (r, i) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'rail-item'; b.dataset.rail = r.id;
+        b.innerHTML = '<span class="rail-num">' + String(i + 1).padStart(2, '0') + '</span>' +
+          '<span class="rail-name">' + r.name + '</span><span class="rail-en">' + r.en + '</span>';
+        b.addEventListener('mouseenter', function () { self._hoverRegion(r.id, true); });
+        b.addEventListener('mouseleave', function () { self._hoverRegion(r.id, false); });
+        b.addEventListener('click', function (e) {
+          e.stopPropagation();
+          self.select(self._active === r.id && !self._pref ? null : r.id); self._emit('select');
+        });
+        list.appendChild(b);
+      });
+
+      this._root.querySelector('.stage').addEventListener('click', function () {
+        if (!self._active) return;
+        self.select(null); self._emit('select');
+      });
+      this._root.querySelector('.back').addEventListener('click', function (e) {
+        e.stopPropagation();
+        self._pref ? self.select(self._active, null) : self.select(null);
+        self._emit('select');
+      });
+      this._keys = function (e) {
+        if (e.key !== 'Escape' || !self._active) return;
+        self._pref ? self.select(self._active, null) : self.select(null);
+        self._emit('select');
+      };
+      document.addEventListener('keydown', this._keys);
+      this._applyLayout();
+    }
+
+    disconnectedCallback() { document.removeEventListener('keydown', this._keys); }
+
+    _applyLayout() {
+      var sh = this._root.querySelector('.shell');
+      var noRail = this.getAttribute('rail') === 'off';
+      var noPanel = this.getAttribute('panel') === 'off';
+      sh.classList.toggle('no-rail', noRail);
+      sh.classList.toggle('no-panel', noPanel);
+      this._root.querySelector('.rail').classList.toggle('off', noRail);
+      this._root.querySelector('.panel').classList.toggle('off', noPanel);
+      this._root.querySelector('.cap').classList.toggle('off', this.getAttribute('caption') === 'off');
+    }
+
+    _draw(d3, geo) {
+      var self = this, W = this.W, H = this.H, PAD = this.PAD, INSET = this.INSET;
+      var l = this._root.querySelector('.loading'); if (l) l.remove();
+
+      var feats = geo.features.filter(function (f) { return REGION_OF[f.properties.id]; });
+      this._main = feats.filter(function (f) { return f.properties.id !== 47; });
+      var okinawa = feats.filter(function (f) { return f.properties.id === 47; });
+      this._byPref = {};
+
+      var svg = d3.select(this._root.querySelector('svg'));
+      var proj = d3.geoMercator().fitExtent([[PAD, PAD], [W - PAD, H - PAD]],
+        { type: 'FeatureCollection', features: this._main });
+      var path = d3.geoPath(proj);
+      var pathOki = d3.geoPath(d3.geoMercator().fitExtent([[8, 8], [INSET.w - 8, INSET.h - 8]],
+        { type: 'FeatureCollection', features: okinawa }));
+
+      // 本土のみを投影基準に（伊豆・小笠原などの離島を除外）
+      function cores() {
+        feats.forEach(function (f) {
+          var polys = f.geometry.type === 'MultiPolygon'
+            ? f.geometry.coordinates.map(function (c) { return { type: 'Polygon', coordinates: c }; })
+            : [f.geometry];
+          var areas = polys.map(function (g) { return path.area({ type: 'Feature', geometry: g, properties: {} }) || 0; });
+          var max = Math.max.apply(null, areas.concat([0]));
+          var keep = polys.filter(function (g, i) { return areas[i] >= max * 0.06; });
+          f.core = { type: 'Feature', properties: f.properties,
+            geometry: keep.length > 1 ? { type: 'MultiPolygon', coordinates: keep.map(function (g) { return g.coordinates; }) } : (keep[0] || f.geometry) };
+        });
+      }
+      cores();
+      var coreFC = function () {
+        return { type: 'FeatureCollection', features: self._main.map(function (f) { return f.core; }) };
+      };
+      proj = d3.geoMercator().fitExtent([[PAD, PAD], [W - PAD, H - PAD]], coreFC());
+      path = d3.geoPath(proj);
+      cores();
+      this._path = path;
+      this._proj = proj;
+      this._d3 = d3;
+
+      var bb = path.bounds(coreFC());
+      this.VB = { x: bb[0][0] - PAD, y: bb[0][1] - PAD,
+        w: (bb[1][0] - bb[0][0]) + PAD * 2, h: (bb[1][1] - bb[0][1]) + PAD * 2 };
+      svg.attr('viewBox', this.VB.x + ' ' + this.VB.y + ' ' + this.VB.w + ' ' + this.VB.h);
+      INSET.x = this.VB.x + 14; INSET.y = this.VB.y + this.VB.h - INSET.h - 14;
+
+      var camera = svg.append('g').attr('id', 'camera').attr('transform', 'translate(0,0) scale(1)');
+      REGIONS.forEach(function (r) {
+        var g = camera.append('g').attr('class', 'region').attr('data-region', r.id);
+        g.selectAll('g')
+          .data(self._main.filter(function (f) { return REGION_OF[f.properties.id] === r.id; }))
+          .join('g').attr('class', 'pref').attr('data-pref', function (f) { return f.properties.id; })
+          .append('path').attr('class', 'land').attr('d', path);
+      });
+      this._main.forEach(function (f) { self._byPref[f.properties.id] = f; });
+
+      var pl = camera.append('g').attr('id', 'prefLabels');
+      this._main.forEach(function (f) {
+        var c = path.centroid(f.core);
+        if (!c || isNaN(c[0])) return;
+        pl.append('text').attr('class', 'plabel')
+          .attr('data-region', REGION_OF[f.properties.id]).attr('data-pref', f.properties.id)
+          .attr('data-cx', c[0]).attr('data-cy', c[1])
+          .attr('transform', 'translate(' + c[0] + ',' + c[1] + ')')
+          .text(f.properties.nam_ja);
+      });
+
+      var NUDGE = { kanto: [40, 20], kinki: [10, 10], chugoku: [-26, -14], shikoku: [2, 22],
+        kyushu: [-30, 26], chubu: [0, -8], tohoku: [8, 0], hokkaido: [0, -6] };
+      var rl = svg.append('g').attr('id', 'regionLabels');
+      REGIONS.forEach(function (r) {
+        var fs = self._main.filter(function (f) { return REGION_OF[f.properties.id] === r.id; });
+        if (!fs.length) return;
+        var c = path.centroid({ type: 'FeatureCollection', features: fs.map(function (f) { return f.core; }) });
+        var n = NUDGE[r.id] || [0, 0];
+        rl.append('text').attr('class', 'rlabel').attr('x', c[0] + n[0]).attr('y', c[1] + n[1]).text(r.name);
+      });
+
+      var ins = svg.append('g').attr('transform', 'translate(' + INSET.x + ',' + INSET.y + ')');
+      ins.append('rect').attr('class', 'inset-frame').attr('width', INSET.w).attr('height', INSET.h);
+      ins.append('g').attr('class', 'region').attr('data-region', 'kyushu')
+        .selectAll('g').data(okinawa).join('g').attr('class', 'pref').attr('data-pref', 47)
+        .append('path').attr('class', 'land').attr('d', pathOki);
+      ins.append('text').attr('class', 'inset-cap').attr('x', 4).attr('y', -8).text('沖縄県 / Okinawa');
+
+      svg.selectAll('.region')
+        .on('mouseenter', function () { self._hoverRegion(this.dataset.region, true); })
+        .on('mouseleave', function () { self._hoverRegion(this.dataset.region, false); })
+        .on('click', function (e) {
+          e.stopPropagation();
+          self.select(this.dataset.region); self._emit('select');
+        });
+      svg.selectAll('.pref')
+        .on('mouseenter', function () { self._hoverPref(this.dataset.pref, true); })
+        .on('mouseleave', function () { self._hoverPref(this.dataset.pref, false); })
+        .on('click', function (e) {
+          e.stopPropagation();
+          var id = +this.dataset.pref, reg = REGION_OF[id];
+          if (self._active !== reg) self.select(reg);
+          else self.select(reg, self._pref === id ? null : id);
+          self._emit('select');
+        });
+
+      this._pinsLayer = camera.append('g').attr('id', 'pinsLayer');
+      this._ready = true;
+      var r0 = this.getAttribute('region'), p0 = this.getAttribute('pref');
+      if (r0 || p0) this.select(r0 || REGION_OF[+p0], p0);
+      else this._render();
+      if (this._pinsPending) { this.pins = this._pinsPending; this._pinsPending = null; }
+      this._emit('ready');
+    }
+
+    set pins(arr) {
+      this._pins = arr || [];
+      if (!this._ready) { this._pinsPending = this._pins; return; }
+      this._renderPins();
+    }
+    get pins() { return this._pins || []; }
+
+    _renderPins() {
+      var self = this;
+      var layer = this._pinsLayer;
+      if (!layer) return;
+      var sel = layer.selectAll('g.jm-pin').data(this._pins, function (d) { return d.id; });
+      sel.exit().remove();
+      var enter = sel.enter().append('g').attr('class', function (d) { return 'jm-pin' + (d.cluster ? ' jm-pin-city' : ''); })
+        .attr('data-id', function (d) { return d.id; })
+        .style('cursor', 'pointer')
+        .on('click', function (e, d) {
+          e.stopPropagation();
+          if (d.cluster) { if (d.pageUrl) { window.location.href = d.pageUrl; return; } self.select(REGION_OF[d.prefId], d.prefId); self._emit('select'); }
+          self._emit('pin', { pin: d });
+        });
+      enter.append('circle').attr('class', 'jm-dot');
+      enter.append('text').attr('class', 'jm-label').attr('y', -12);
+      var merged = enter.merge(sel);
+      merged.each(function (d) {
+        var xy = self._proj([d.lon, d.lat]);
+        self._d3.select(this).attr('transform', 'translate(' + xy[0] + ',' + xy[1] + ')');
+      });
+      merged.select('.jm-label').text(function (d) { return d.cluster ? d.title : ''; });
+      this._updatePinVisibility();
+    }
+
+    _updatePinVisibility() {
+      var self = this;
+      if (!this._pinsLayer) return;
+      var scale = this._lastScale || 1;
+      var inv = 1 / scale;
+      this._pinsLayer.selectAll('g.jm-pin').each(function (d) {
+        var visible;
+        if (d.cluster) visible = self._pref !== d.prefId;
+        else if (d.clusterOf) visible = self._pref === d.clusterOf;
+        else visible = true;
+        var xy = self._proj([d.lon, d.lat]);
+        self._d3.select(this)
+          .style('display', (visible && d.__match !== false) ? '' : 'none')
+          .attr('transform', 'translate(' + xy[0] + ',' + xy[1] + ') scale(' + inv + ')');
+      });
+    }
+
+    setPinMatch(idSet) {
+      if (!this._pins) return;
+      var self = this;
+      this._pins.forEach(function (p) { p.__match = idSet ? idSet.has(p.id) : true; });
+      this._updatePinVisibility();
+    }
+
+    _hoverRegion(id, on) {
+      if (this._active) return;
+      this._root.querySelectorAll('.region[data-region="' + id + '"]').forEach(function (n) { n.classList.toggle('hov', on); });
+      var b = this._root.querySelector('.rail-item[data-rail="' + id + '"]');
+      if (b) b.style.background = on ? 'color-mix(in srgb, currentColor 6%, transparent)' : '';
+      if (on) this._emit('hover', { hoverRegion: id, hoverRegionName: byId[id].name });
+    }
+
+    _hoverPref(id, on) {
+      if (!this._active || REGION_OF[+id] !== this._active || this._pref) return;
+      this._root.querySelectorAll('.pref[data-pref="' + id + '"]').forEach(function (n) { n.classList.toggle('hov', on); });
+      if (on) this._emit('hover', { hoverPref: +id, hoverPrefName: PREF_JA[+id] });
+    }
+
+    _frame(features, fit) {
+      var b = this._path.bounds({ type: 'FeatureCollection', features: features });
+      var dx = Math.max(b[1][0] - b[0][0], 1), dy = Math.max(b[1][1] - b[0][1], 1);
+      var s = Math.min(22, fit * Math.min(this.VB.w / dx, this.VB.h / dy));
+      return [this.VB.x + this.VB.w / 2 - s * (b[0][0] + b[1][0]) / 2,
+              this.VB.y + this.VB.h / 2 - s * (b[0][1] + b[1][1]) / 2, s];
+    }
+
+    _render() {
+      var self = this, R = this._root, active = this._active, pref = this._pref;
+      clearTimeout(this._timer);
+      var pl = R.querySelector('#prefLabels');
+      if (pl) pl.style.opacity = 0;
+
+      R.querySelectorAll('.region').forEach(function (n) {
+        n.classList.remove('hov');
+        n.classList.toggle('on', !!active && !pref && n.dataset.region === active);
+        n.classList.toggle('mute', !!active && n.dataset.region !== active);
+      });
+      R.querySelectorAll('.pref').forEach(function (n) {
+        var id = +n.dataset.pref;
+        n.classList.remove('hov');
+        n.classList.toggle('pick', pref === id);
+        n.classList.toggle('dim', !!pref && REGION_OF[id] === active && pref !== id);
+      });
+      R.querySelectorAll('.rail-item').forEach(function (n) {
+        n.style.background = '';
+        n.classList.toggle('on', n.dataset.rail === active);
+      });
+      var rlg = R.querySelector('#regionLabels'); if (rlg) rlg.classList.toggle('hide', !!active);
+      var back = R.querySelector('.back');
+      back.classList.toggle('on', !!active);
+      back.textContent = pref ? '← 地方に戻る' : '← 全体に戻る';
+      this._crumb();
+
+      var cam = R.querySelector('#camera');
+      if (!active) { cam.setAttribute('transform', 'translate(0,0) scale(1)'); this._lastScale = 1; this._updatePinVisibility(); this._fillPanel(true); return; }
+
+      var inRegion = this._main.filter(function (f) { return REGION_OF[f.properties.id] === active; });
+      var offMap = !!pref && !this._byPref[pref];              // 沖縄県はインセットのみ
+      var target = (pref && !offMap) ? [this._byPref[pref]] : inRegion;
+      var t = this._frame(target.map(function (f) { return f.core; }), (pref && !offMap) ? 0.62 : 0.78);
+      cam.setAttribute('transform', 'translate(' + t[0] + ',' + t[1] + ') scale(' + t[2] + ')');
+      this._lastScale = t[2]; this._updatePinVisibility();
+      var fr = R.querySelector('.inset-frame'); if (fr) fr.classList.toggle('focus', offMap);
+
+      R.querySelectorAll('#prefLabels .plabel').forEach(function (n) {
+        var vis = n.dataset.region === active;
+        n.style.display = vis ? '' : 'none';
+        n.style.fontWeight = (+n.dataset.pref === pref) ? 800 : 600;
+        if (vis) n.setAttribute('transform',
+          'translate(' + n.dataset.cx + ',' + n.dataset.cy + ') scale(' + (1 / t[2]).toFixed(4) + ')');
+      });
+      this._timer = setTimeout(function () { if (pl) pl.style.opacity = 1; }, 720);
+      this._fillPanel();
+    }
+
+    _crumb() {
+      var self = this, c = this._root.querySelector('.crumb');
+      if (!this._active) { c.innerHTML = ''; return; }
+      var r = byId[this._active];
+      var html = '<button type="button" data-lvl="0">日本</button><span>/</span>' +
+        '<button type="button" data-lvl="1"' + (this._pref ? '' : ' disabled') + '>' + r.name + '</button>';
+      if (this._pref) html += '<span>/</span><button type="button" data-lvl="2" disabled>' + PREF_JA[this._pref] + '</button>';
+      c.innerHTML = html;
+      c.querySelectorAll('button').forEach(function (b) {
+        b.addEventListener('click', function (e) {
+          e.stopPropagation();
+          b.dataset.lvl === '0' ? self.select(null) : self.select(self._active, null);
+          self._emit('select');
+        });
+      });
+    }
+
+    _fillPanel(reset) {
+      var self = this, body = this._root.querySelector('.body'), hint = this._root.querySelector('.hint');
+      var head = this._root.querySelector('.panel-head');
+      if (reset) {
+        body.classList.remove('on'); hint.classList.remove('off');
+        head.textContent = '地方情報 / Region';
+        return;
+      }
+      var r = byId[this._active];
+      head.textContent = this._pref ? '都道府県 / Prefecture' : '地方情報 / Region';
+      body.innerHTML = this._pref ? this._prefHTML(this._pref, r) : this._regionHTML(r);
+      body.querySelectorAll('[data-jump]').forEach(function (t) {
+        t.addEventListener('click', function (e) {
+          e.stopPropagation();
+          self.select(self._active, +t.dataset.jump); self._emit('select');
+        });
+      });
+      body.classList.remove('on');
+      requestAnimationFrame(function () { body.classList.add('on'); hint.classList.add('off'); });
+    }
+
+    _tags(ids, current) {
+      return '<div class="tags">' + ids.map(function (i) {
+        return '<span class="tag' + (i === current ? ' on' : '') + '" tabindex="0" data-jump="' + i + '">' + PREF_JA[i] + '</span>';
+      }).join('') + '</div>';
+    }
+
+    _regionHTML(r) {
+      var n = REGIONS.indexOf(r) + 1;
+      return '<div class="kicker">Region ' + String(n).padStart(2, '0') + '</div>' +
+        '<h2 class="title">' + r.name + '</h2><div class="en">' + r.en + '</div><hr class="rule">' +
+        '<p class="lead">' + r.lead + '</p>' +
+        '<table><tr><th>都道府県</th><td>' + r.prefs + '</td></tr>' +
+        '<tr><th>面積</th><td>' + r.area + ' km²</td></tr>' +
+        '<tr><th>人口</th><td>' + r.pop + '</td></tr>' +
+        '<tr><th>中心都市</th><td>' + r.hub + '</td></tr></table>' +
+        '<div class="sec">都道府県を選ぶ</div>' + this._tags(r.ids) +
+        '<div class="sec">メモ</div><p class="lead">' + r.note + '</p>';
+    }
+
+    _prefHTML(id, r) {
+      var p = PREF[id], extra = this._extra[id] || this._extra[String(id)];
+      var rows = '<tr><th>県庁所在地</th><td>' + p[1] + '</td></tr>' +
+        '<tr><th>地方</th><td>' + r.name + '（' + r.en + '）</td></tr>' +
+        '<tr><th>コード</th><td>JIS ' + String(id).padStart(2, '0') + '</td></tr>';
+      if (extra) Object.keys(extra).forEach(function (k) {
+        rows += '<tr><th>' + esc(k) + '</th><td>' + esc(extra[k]) + '</td></tr>';
+      });
+      var inset = !this._byPref[id]
+        ? '<p class="lead" style="color:var(--_accent)">この県は地図左下の別枠（インセット）に表示されています。</p>' : '';
+      return '<div class="kicker">' + r.name + ' / Prefecture ' + String(id).padStart(2, '0') + '</div>' +
+        '<h2 class="title">' + PREF_JA[id] + '</h2><div class="en">' + p[0] + '</div><hr class="rule">' +
+        '<table>' + rows + '</table>' +
+        '<div class="sec">同じ地方の都道府県</div>' + this._tags(r.ids, id) +
+        '<div class="sec">メモ</div>' + inset + '<p class="lead">' + r.lead + '</p>';
+    }
+  }
+
+  JapanMap.REGIONS = REGIONS;
+  JapanMap.PREF_JA = PREF_JA;
+  if (!customElements.get('japan-map')) customElements.define('japan-map', JapanMap);
+  window.JapanMap = JapanMap;
+})();
+
+
+</script>
+<script>
+
+(function(){
+  // ---- production dataset (145 spots incl. 5 city clusters), researched content ----
+  var PINS = [
+  {
+    "id": "hk-odori",
+    "title": "Снежный фестиваль Саппоро",
+    "lon": 141.354,
+    "lat": 43.061,
+    "type": [
+      "festival"
+    ],
+    "blurb": "Ежегодный снежный фестиваль в центре Саппоро — ледяные скульптуры высотой с дом и каток на морозе.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-moiwa",
+    "title": "Ночной вид с горы Моива",
+    "lon": 141.324,
+    "lat": 43.038,
+    "type": [
+      "view",
+      "night"
+    ],
+    "blurb": "Один из «трёх новых лучших ночных видов Японии». Канатная дорога поднимает прямо из центра города.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-moere",
+    "title": "Парк Моэрэнума",
+    "lon": 141.398,
+    "lat": 43.146,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Парк-скульптура целиком спроектирован Исаму Ногучи — пирамида, фонтаны и поле в одном ландшафте.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-susukino",
+    "title": "Сусукино",
+    "lon": 141.356,
+    "lat": 43.055,
+    "type": [
+      "night",
+      "food"
+    ],
+    "blurb": "Крупнейший ночной квартал к северу от Токио: рамен, идзакая, неон Саппоро.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-hakodateyama",
+    "title": "Ночной вид с горы Хакодате",
+    "lon": 140.699,
+    "lat": 41.755,
+    "type": [
+      "view",
+      "night"
+    ],
+    "blurb": "Ещё один из трёх лучших ночных видов Японии — огни города между двух заливов одним взглядом.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-goryokaku",
+    "title": "Крепость Горёкаку",
+    "lon": 140.757,
+    "lat": 41.797,
+    "type": [
+      "history"
+    ],
+    "blurb": "Крепость в форме звезды — единственная такая в Японии, весной обрамлена сотнями сакур.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-otaru",
+    "title": "Канал Отару",
+    "lon": 141.0,
+    "lat": 43.19,
+    "type": [
+      "view",
+      "food"
+    ],
+    "blurb": "Каналы XIX века, стеклодувные мастерские и музыкальные шкатулки. Зимой вдоль воды зажигают снежные фонари.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-noboribetsu",
+    "title": "Онсэн Нобарибецу",
+    "lon": 141.166,
+    "lat": 42.499,
+    "type": [
+      "onsen"
+    ],
+    "blurb": "«Долина ада» — вулканическая долина с паром и серным запахом, один из сильнейших источников Хоккайдо.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-toya",
+    "title": "Озеро Тоя",
+    "lon": 140.827,
+    "lat": 42.581,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Круглое кальдерное озеро, летние фейерверки над водой каждый вечер в сезон.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-furano",
+    "title": "Лавандовые поля Фурано",
+    "lon": 142.464,
+    "lat": 43.267,
+    "type": [
+      "view"
+    ],
+    "blurb": "Фиолетовые ряды лаванды на холмах Фурано — открыточный летний Хоккайдо.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-biei",
+    "title": "Голубой пруд Биэй",
+    "lon": 142.649,
+    "lat": 43.523,
+    "type": [
+      "view"
+    ],
+    "blurb": "Пруд неестественно бирюзового цвета из-за минералов в воде, особенно эффектен на закате.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-asahiyama",
+    "title": "Зоопарк Асахияма",
+    "lon": 142.479,
+    "lat": 43.771,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Знаменит «прогулкой пингвинов» зимой и вольерами, спроектированными для естественного движения животных.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-niseko",
+    "title": "Ниseko",
+    "lon": 140.687,
+    "lat": 42.805,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Легендарный порошковый снег, международный горнолыжный курорт с мировым именем.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-shiretoko",
+    "title": "Сиретоко",
+    "lon": 145.0,
+    "lat": 44.1,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Объект ЮНЕСКО на краю Хоккайдо — киты, медведи, нетронутая природа полуострова.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-kushiro",
+    "title": "Журавли Куширо",
+    "lon": 144.383,
+    "lat": 43.038,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Крупнейшее болото Японии, зимовье краснохохлых журавлей — редкий кадр прямо на снегу.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-soup-curry",
+    "title": "Суп-карри Саппоро",
+    "lon": 141.35,
+    "lat": 43.06,
+    "type": [
+      "food"
+    ],
+    "blurb": "Фирменное блюдо Саппоро: острый бульон, крупные овощи, часто с куском курицы на кости.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-jingisukan",
+    "title": "Дзингисукан",
+    "lon": 141.35,
+    "lat": 43.06,
+    "type": [
+      "food"
+    ],
+    "blurb": "Баранина на выпуклой сковороде с овощами — застольное блюдо, придуманное на Хоккайдо.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-otaru-kaisen",
+    "title": "Морепродукты Отару",
+    "lon": 141.0,
+    "lat": 43.19,
+    "type": [
+      "food"
+    ],
+    "blurb": "Свежайшие морепродукты прямо с утреннего рынка — донбури с икрой, крабом и морским ежом.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-hakodate-ramen",
+    "title": "Соляной рамен Хакодате",
+    "lon": 140.729,
+    "lat": 41.769,
+    "type": [
+      "food"
+    ],
+    "blurb": "Прозрачный бульон на соли — визитная карточка Хакодате, в отличие от мисо-рамена Саппоро.",
+    "prefId": 1
+  },
+  {
+    "id": "hk-melon",
+    "title": "Дыня Фурано",
+    "lon": 142.383,
+    "lat": 43.352,
+    "type": [
+      "food"
+    ],
+    "blurb": "Один из самых сладких сортов дыни в Японии, сезон — с середины лета.",
+    "prefId": 1
+  },
+  {
+    "id": "th-nebuta",
+    "title": "Фестиваль Нэбута",
+    "lon": 140.74,
+    "lat": 40.824,
+    "type": [
+      "festival"
+    ],
+    "blurb": "Гигантские подсвеченные фигуры воинов и барабанный бой — главный летний праздник Аомори.",
+    "prefId": 2
+  },
+  {
+    "id": "th-hirosaki",
+    "title": "Замок Хиросаки",
+    "lon": 140.463,
+    "lat": 40.608,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Один из немногих замков Японии с оригинальной башней, весной утопает в сакуре.",
+    "prefId": 2
+  },
+  {
+    "id": "th-oirase",
+    "title": "Ущелье Ойрасэ и озеро Товада",
+    "lon": 140.887,
+    "lat": 40.459,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Горная река через девственный лес — особенно эффектна осенью.",
+    "prefId": 2
+  },
+  {
+    "id": "th-chusonji",
+    "title": "Тюсондзи (Хираидзуми)",
+    "lon": 141.113,
+    "lat": 38.995,
+    "type": [
+      "history"
+    ],
+    "blurb": "Золотой зал XII века, объект ЮНЕСКО — духовный центр древней Японии.",
+    "prefId": 3
+  },
+  {
+    "id": "th-geibikei",
+    "title": "Ущелье Гэйбикэй",
+    "lon": 141.221,
+    "lat": 38.984,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Сплав на плоскодонной лодке по узкому ущелью между отвесными скалами.",
+    "prefId": 3
+  },
+  {
+    "id": "th-matsushima",
+    "title": "Мацусима",
+    "lon": 141.068,
+    "lat": 38.368,
+    "type": [
+      "view"
+    ],
+    "blurb": "Одна из «трёх знаменитых пейзажных красот Японии» — сотни сосновых островов в заливе.",
+    "prefId": 4
+  },
+  {
+    "id": "th-tanabata",
+    "title": "Праздник Танабата в Сендае",
+    "lon": 140.872,
+    "lat": 38.268,
+    "type": [
+      "festival"
+    ],
+    "blurb": "Улицы под гигантскими бумажными украшениями — один из трёх главных праздников Тохоку.",
+    "prefId": 4
+  },
+  {
+    "id": "th-zaofox",
+    "title": "Деревня лис Дзао",
+    "lon": 140.601,
+    "lat": 38.126,
+    "type": [
+      "activity",
+      "nature"
+    ],
+    "blurb": "Более сотни лисиц свободно гуляют по территории — можно подойти совсем близко.",
+    "prefId": 4
+  },
+  {
+    "id": "th-kanto",
+    "title": "Фестиваль Кантō",
+    "lon": 140.1,
+    "lat": 39.72,
+    "type": [
+      "festival"
+    ],
+    "blurb": "Шесты с десятками бумажных фонарей, которые балансируют на ладони, лбу и плечах исполнителей.",
+    "prefId": 5
+  },
+  {
+    "id": "th-kakunodate",
+    "title": "Какунодатэ",
+    "lon": 140.567,
+    "lat": 39.596,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "«Маленькое Киото» Тохоку — улицы самурайских усадеб под сводом цветущей сакуры.",
+    "prefId": 5
+  },
+  {
+    "id": "th-ginzan",
+    "title": "Онсэн Гиндзан",
+    "lon": 140.542,
+    "lat": 38.577,
+    "type": [
+      "onsen"
+    ],
+    "blurb": "Онсэн-городок с деревянными гостиницами вдоль реки, особенно кинематографичен зимним вечером.",
+    "prefId": 6
+  },
+  {
+    "id": "th-yamadera",
+    "title": "Ямадэра",
+    "lon": 140.437,
+    "lat": 38.316,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Храмовый комплекс, вырубленный в скале — тысяча ступеней вверх и вид на долину.",
+    "prefId": 6
+  },
+  {
+    "id": "th-zaojuhyo",
+    "title": "Снежные монстры Дзао",
+    "lon": 140.446,
+    "lat": 38.145,
+    "type": [
+      "view"
+    ],
+    "blurb": "Деревья, покрытые толстым слоем инея, подсвечиваются вечером.",
+    "prefId": 6
+  },
+  {
+    "id": "th-tsurugajo",
+    "title": "Замок Цуругадзё",
+    "lon": 139.93,
+    "lat": 37.487,
+    "type": [
+      "history"
+    ],
+    "blurb": "Красный замок с белыми стенами — центр исторического региона Айдзу.",
+    "prefId": 7
+  },
+  {
+    "id": "th-ouchijuku",
+    "title": "Оути-дзюку",
+    "lon": 139.775,
+    "lat": 37.221,
+    "type": [
+      "history",
+      "food"
+    ],
+    "blurb": "Деревня с соломенными крышами вдоль старого тракта — зимой заносится снегом почти по окна.",
+    "prefId": 7
+  },
+  {
+    "id": "th-gyutan",
+    "title": "Говяжий язык Сендая",
+    "lon": 140.872,
+    "lat": 38.268,
+    "type": [
+      "food"
+    ],
+    "blurb": "Жареный говяжий язык толстыми ломтями — визитная карточка города.",
+    "prefId": 4
+  },
+  {
+    "id": "th-wanko",
+    "title": "Ванко-соба (Мориока)",
+    "lon": 141.152,
+    "lat": 39.703,
+    "type": [
+      "food"
+    ],
+    "blurb": "Соба, которую подают маленькими порциями без остановки — гостя считают победителем по числу мисок.",
+    "prefId": 3
+  },
+  {
+    "id": "th-kiritanpo",
+    "title": "Кисаки-мабэ Акита",
+    "lon": 140.1,
+    "lat": 39.72,
+    "type": [
+      "food"
+    ],
+    "blurb": "Рисовые палочки на углях в курином бульоне с овощами — зимнее блюдо региона Акита.",
+    "prefId": 5
+  },
+  {
+    "id": "th-kitakata",
+    "title": "Рамен Китаката",
+    "lon": 139.868,
+    "lat": 37.649,
+    "type": [
+      "food"
+    ],
+    "blurb": "Один из трёх главных региональных стилей рамена Японии — мягкая лапша в лёгком бульоне сёю.",
+    "prefId": 7
+  },
+  {
+    "id": "th-yonezawa",
+    "title": "Говядина Ёнэдзава",
+    "lon": 140.121,
+    "lat": 37.913,
+    "type": [
+      "food"
+    ],
+    "blurb": "Одна из трёх главных марок мраморной говядины Японии, наравне с Кобе и Мацусакой.",
+    "prefId": 6
+  },
+  {
+    "id": "kt-minatomirai",
+    "title": "Минато Мирай и Чайна-таун",
+    "lon": 139.631,
+    "lat": 35.456,
+    "type": [
+      "night",
+      "food"
+    ],
+    "blurb": "Ночная набережная и крупнейший Чайна-таун Японии в одном районе — ужин и вечерняя прогулка вдоль воды.",
+    "prefId": 14
+  },
+  {
+    "id": "kt-enoshima",
+    "title": "Эносима",
+    "lon": 139.48,
+    "lat": 35.3,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Остров-святилище с видом на Фудзи в ясную погоду, рядом с пляжами Камакуры.",
+    "prefId": 14
+  },
+  {
+    "id": "kt-kamakura",
+    "title": "Камакура",
+    "lon": 139.55,
+    "lat": 35.32,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Большой Будда и храмы в часе от Токио — бывшая столица сёгуната.",
+    "prefId": 14
+  },
+  {
+    "id": "kt-hakone",
+    "title": "Хаконэ",
+    "lon": 139.03,
+    "lat": 35.23,
+    "type": [
+      "onsen",
+      "view"
+    ],
+    "blurb": "Онсэн с видом на Фудзи, если повезёт с погодой.",
+    "prefId": 14
+  },
+  {
+    "id": "kt-kusatsu",
+    "title": "Онсэн Кусацу",
+    "lon": 138.597,
+    "lat": 36.622,
+    "type": [
+      "onsen"
+    ],
+    "blurb": "Юбатакэ — дымящийся «источник-поле» в центре одного из самых известных онсэн-городков Японии.",
+    "prefId": 10
+  },
+  {
+    "id": "kt-kawagoe",
+    "title": "Кавагоэ",
+    "lon": 139.485,
+    "lat": 35.925,
+    "type": [
+      "history"
+    ],
+    "blurb": "«Маленький Эдо» — улицы со складами-курадзукури и старой часовой башней в часе от Токио.",
+    "prefId": 11
+  },
+  {
+    "id": "kt-chichibu",
+    "title": "Ночной праздник Титибу",
+    "lon": 139.087,
+    "lat": 35.993,
+    "type": [
+      "festival"
+    ],
+    "blurb": "Один из трёх крупнейших праздников с деревянными колесницами в Японии, с фейерверками зимней ночью.",
+    "prefId": 11
+  },
+  {
+    "id": "kt-hitachi",
+    "title": "Парк Хитати Кайхин",
+    "lon": 140.601,
+    "lat": 36.398,
+    "type": [
+      "view"
+    ],
+    "blurb": "Голубой ковёр немофилы весной и багровые холмы кохии осенью — один из самых фотогеничных парков страны.",
+    "prefId": 8
+  },
+  {
+    "id": "kt-ashikaga",
+    "title": "Цветочный парк Асикага",
+    "lon": 139.428,
+    "lat": 36.337,
+    "type": [
+      "view"
+    ],
+    "blurb": "Столетняя глициния на гигантских шпалерах, зимой — одна из трёх главных иллюминаций Японии.",
+    "prefId": 9
+  },
+  {
+    "id": "kt-nikko",
+    "title": "Никко",
+    "lon": 139.6,
+    "lat": 36.75,
+    "type": [
+      "history",
+      "nature"
+    ],
+    "blurb": "Храмовый комплекс Тосёгу в кедровом лесу, особенно хорош осенью.",
+    "prefId": 9
+  },
+  {
+    "id": "kt-gyoza",
+    "title": "Гёдза Уцуномии",
+    "lon": 139.884,
+    "lat": 36.555,
+    "type": [
+      "food"
+    ],
+    "blurb": "Город, который официально считается столицей гёдза в Японии — десятки специализированных заведений.",
+    "prefId": 9
+  },
+  {
+    "id": "kt-mizusawa",
+    "title": "Удон Мидзусава",
+    "lon": 138.878,
+    "lat": 36.514,
+    "type": [
+      "food"
+    ],
+    "blurb": "Один из трёх главных стилей удона Японии — толстая упругая лапша у подножия горы Харуна.",
+    "prefId": 10
+  },
+  {
+    "id": "kt-disney",
+    "title": "Токио Диснейленд и DisneySea",
+    "lon": 139.881,
+    "lat": 35.633,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Формально находится не в Токио, а в Тибе — но по факту главный тематический парк региона на весь день.",
+    "prefId": 12
+  },
+  {
+    "id": "kt-choshi",
+    "title": "Рыбный порт Тёси",
+    "lon": 140.826,
+    "lat": 35.735,
+    "type": [
+      "food"
+    ],
+    "blurb": "Один из крупнейших рыболовных портов Японии — рынки со свежайшим тунцом и сардиной прямо у причала.",
+    "prefId": 12
+  },
+  {
+    "id": "cb-kamikochi",
+    "title": "Камикочи",
+    "lon": 137.633,
+    "lat": 36.251,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Горная долина на высоте 1500 м с видом на Северные Альпы — популярный старт для пеших маршрутов.",
+    "prefId": 20
+  },
+  {
+    "id": "cb-matsumoto",
+    "title": "Замок Мацумото",
+    "lon": 137.968,
+    "lat": 36.239,
+    "type": [
+      "history"
+    ],
+    "blurb": "Один из немногих сохранившихся оригинальных замков Японии — чёрный силуэт на фоне Альп.",
+    "prefId": 20
+  },
+  {
+    "id": "cb-karuizawa",
+    "title": "Каруидзава",
+    "lon": 138.635,
+    "lat": 36.348,
+    "type": [
+      "nature",
+      "food"
+    ],
+    "blurb": "Горный курорт в тени вулкана Асама — прохладное лето, кафе и прогулки в тени.",
+    "prefId": 20
+  },
+  {
+    "id": "cb-jigokudani",
+    "title": "Снежные обезьяны Дзигокудани",
+    "lon": 138.462,
+    "lat": 36.734,
+    "type": [
+      "activity",
+      "nature"
+    ],
+    "blurb": "Дикие макаки греются в горячих источниках прямо на снегу — уникальный зимний кадр.",
+    "prefId": 20
+  },
+  {
+    "id": "cb-kawaguchiko",
+    "title": "Озеро Кавагутико",
+    "lon": 138.768,
+    "lat": 35.5,
+    "type": [
+      "view"
+    ],
+    "blurb": "Классический вид на гору Фудзи, отражённую в озере — одно из пяти озёр Фудзи.",
+    "prefId": 19
+  },
+  {
+    "id": "cb-oshinohakkai",
+    "title": "Осино Хаккай",
+    "lon": 138.821,
+    "lat": 35.462,
+    "type": [
+      "view",
+      "nature"
+    ],
+    "blurb": "Восемь прудов с кристально чистой талой водой Фудзи посреди старой деревни.",
+    "prefId": 19
+  },
+  {
+    "id": "cb-tateyama",
+    "title": "Снежные стены Татэямы",
+    "lon": 137.577,
+    "lat": 36.575,
+    "type": [
+      "view",
+      "activity"
+    ],
+    "blurb": "Альпийский маршрут прорезает снежные стены высотой до 20 метров — открывается только весной.",
+    "prefId": 16
+  },
+  {
+    "id": "cb-amaharashi",
+    "title": "Побережье Амахараси",
+    "lon": 137.06,
+    "lat": 36.79,
+    "type": [
+      "view"
+    ],
+    "blurb": "Прибрежная дорога с видом на снежные Альпы прямо из-за моря — редкое сочетание гор и волн.",
+    "prefId": 16
+  },
+  {
+    "id": "cb-tojinbo",
+    "title": "Скалы Тодзинбо",
+    "lon": 136.126,
+    "lat": 36.238,
+    "type": [
+      "view"
+    ],
+    "blurb": "Базальтовые колонны, вырезанные морем за миллионы лет — один из самых драматичных берегов Японии.",
+    "prefId": 18
+  },
+  {
+    "id": "cb-dino",
+    "title": "Музей динозавров Фукуи",
+    "lon": 136.427,
+    "lat": 36.14,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Один из трёх крупнейших музеев динозавров мира — Фукуи славится палеонтологическими находками.",
+    "prefId": 18
+  },
+  {
+    "id": "cb-sado",
+    "title": "Золотые прииски Садо",
+    "lon": 138.25,
+    "lat": 38.05,
+    "type": [
+      "history"
+    ],
+    "blurb": "Остров с историей золотодобычи, идущей с XVII века — объект всемирного наследия.",
+    "prefId": 15
+  },
+  {
+    "id": "cb-kiyotsu",
+    "title": "Ущелье Киёцу",
+    "lon": 138.85,
+    "lat": 36.93,
+    "type": [
+      "view"
+    ],
+    "blurb": "Тоннель с зеркальными и цветными инсталляциями внутри узкого горного каньона.",
+    "prefId": 15
+  },
+  {
+    "id": "cb-atami",
+    "title": "Онсэн Атами",
+    "lon": 139.078,
+    "lat": 35.096,
+    "type": [
+      "onsen"
+    ],
+    "blurb": "Курортный город у моря в двух часах от Токио — горячие источники и вид на залив Сагами.",
+    "prefId": 22
+  },
+  {
+    "id": "cb-hamamatsu-unagi",
+    "title": "Угорь Хамамацу",
+    "lon": 137.735,
+    "lat": 34.706,
+    "type": [
+      "food"
+    ],
+    "blurb": "Озеро Хамана славится разведением угря — региональная фирменная кухня на его основе.",
+    "prefId": 22
+  },
+  {
+    "id": "cb-ise",
+    "title": "Святилище Исэ",
+    "lon": 136.725,
+    "lat": 34.455,
+    "type": [
+      "history"
+    ],
+    "blurb": "Главное синтоистское святилище Японии, духовный центр страны с многовековой историей.",
+    "prefId": 24
+  },
+  {
+    "id": "cb-toba",
+    "title": "Тоба и жемчуг",
+    "lon": 136.845,
+    "lat": 34.485,
+    "type": [
+      "food",
+      "view"
+    ],
+    "blurb": "Родина культивированного жемчуга Микимото — рыбацкий берег полуострова Сима.",
+    "prefId": 24
+  },
+  {
+    "id": "kn-biwako",
+    "title": "Озеро Бива",
+    "lon": 136.0,
+    "lat": 35.15,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Крупнейшее озеро Японии — пляжи, круизы и виды на горы вокруг.",
+    "prefId": 25
+  },
+  {
+    "id": "kn-hikone",
+    "title": "Замок Хиконэ",
+    "lon": 136.251,
+    "lat": 35.276,
+    "type": [
+      "history"
+    ],
+    "blurb": "Один из немногих оригинальных замков Японии, национальное сокровище на берегу Бивы.",
+    "prefId": 25
+  },
+  {
+    "id": "kn-kobebeef",
+    "title": "Говядина Кобе",
+    "lon": 135.183,
+    "lat": 34.69,
+    "type": [
+      "food"
+    ],
+    "blurb": "Одна из трёх главных марок мраморной говядины Японии — эталон японского вагю.",
+    "prefId": 28
+  },
+  {
+    "id": "kn-rokko",
+    "title": "Ночной вид с горы Роккō",
+    "lon": 135.233,
+    "lat": 34.744,
+    "type": [
+      "view",
+      "night"
+    ],
+    "blurb": "Один из трёх лучших ночных видов Японии — огни Кобе и залив Осака одним взглядом.",
+    "prefId": 28
+  },
+  {
+    "id": "kn-himeji",
+    "title": "Замок Химэдзи",
+    "lon": 134.694,
+    "lat": 34.839,
+    "type": [
+      "history"
+    ],
+    "blurb": "«Белая цапля» Японии — лучше всего сохранившийся замок страны, объект ЮНЕСКО.",
+    "prefId": 28
+  },
+  {
+    "id": "kn-arima",
+    "title": "Онсэн Арима",
+    "lon": 135.247,
+    "lat": 34.798,
+    "type": [
+      "onsen"
+    ],
+    "blurb": "Один из старейших онсэнов Японии с двумя видами воды — «золотой» и «серебряной».",
+    "prefId": 28
+  },
+  {
+    "id": "kn-narapark",
+    "title": "Парк Нара и олени",
+    "lon": 135.839,
+    "lat": 34.685,
+    "type": [
+      "nature",
+      "history"
+    ],
+    "blurb": "Сотни ручных оленей свободно гуляют среди храмов древней столицы.",
+    "prefId": 29
+  },
+  {
+    "id": "kn-todaiji",
+    "title": "Тодайдзи",
+    "lon": 135.84,
+    "lat": 34.689,
+    "type": [
+      "history"
+    ],
+    "blurb": "Крупнейшее деревянное строение в мире с гигантской статуей Будды внутри.",
+    "prefId": 29
+  },
+  {
+    "id": "kn-yoshino",
+    "title": "Сакура Ёсино",
+    "lon": 135.859,
+    "lat": 34.362,
+    "type": [
+      "view"
+    ],
+    "blurb": "Тысячи деревьев сакуры покрывают гору каскадом — одно из лучших мест страны для ханами.",
+    "prefId": 29
+  },
+  {
+    "id": "kn-kumano",
+    "title": "Тропа Кумано Кодо",
+    "lon": 135.77,
+    "lat": 33.85,
+    "type": [
+      "nature",
+      "history"
+    ],
+    "blurb": "Древний паломнический маршрут через горы полуострова Кии, объект ЮНЕСКО.",
+    "prefId": 30
+  },
+  {
+    "id": "kn-shirahama",
+    "title": "Онсэн и пляж Сирахама",
+    "lon": 135.337,
+    "lat": 33.686,
+    "type": [
+      "onsen",
+      "nature"
+    ],
+    "blurb": "Один из старейших онсэнов Японии прямо у песчаного пляжа южного побережья.",
+    "prefId": 30
+  },
+  {
+    "id": "kn-koyasan",
+    "title": "Коясан",
+    "lon": 135.585,
+    "lat": 34.213,
+    "type": [
+      "history"
+    ],
+    "blurb": "Горный монастырский комплекс с ночёвкой в буддийском храме — духовный центр региона.",
+    "prefId": 30
+  },
+  {
+    "id": "cs-tottori",
+    "title": "Дюны Тоттори",
+    "lon": 134.223,
+    "lat": 35.539,
+    "type": [
+      "view",
+      "activity"
+    ],
+    "blurb": "Крупнейшие песчаные дюны Японии — верблюды, катание на сэндбордах и вид на Японское море.",
+    "prefId": 31
+  },
+  {
+    "id": "cs-izumo",
+    "title": "Святилище Идзумо",
+    "lon": 132.685,
+    "lat": 35.402,
+    "type": [
+      "history"
+    ],
+    "blurb": "Одно из древнейших и самых почитаемых синтоистских святилищ Японии.",
+    "prefId": 32
+  },
+  {
+    "id": "cs-matsue",
+    "title": "Замок Мацуэ",
+    "lon": 133.05,
+    "lat": 35.469,
+    "type": [
+      "history"
+    ],
+    "blurb": "Один из немногих оригинальных замков Японии с чёрным силуэтом на фоне озера Синдзи.",
+    "prefId": 32
+  },
+  {
+    "id": "cs-kurashiki",
+    "title": "Квартал Курасики",
+    "lon": 133.772,
+    "lat": 34.585,
+    "type": [
+      "history"
+    ],
+    "blurb": "Старые склады вдоль канала эпохи Эдо — один из самых атмосферных исторических кварталов Японии.",
+    "prefId": 33
+  },
+  {
+    "id": "cs-korakuen",
+    "title": "Сад Корак-эн (Окаяма)",
+    "lon": 133.936,
+    "lat": 34.676,
+    "type": [
+      "view"
+    ],
+    "blurb": "Один из трёх знаменитых садов Японии — просторные лужайки в японском ландшафтном стиле.",
+    "prefId": 33
+  },
+  {
+    "id": "cs-peacepark",
+    "title": "Мемориальный парк мира Хиросимы",
+    "lon": 132.452,
+    "lat": 34.395,
+    "type": [
+      "history"
+    ],
+    "blurb": "Купол атомного взрыва и музей мира — место, обязательное для понимания истории города.",
+    "prefId": 34
+  },
+  {
+    "id": "cs-onomichi",
+    "title": "Ономити",
+    "lon": 133.205,
+    "lat": 34.409,
+    "type": [
+      "view",
+      "food"
+    ],
+    "blurb": "Портовый город на холмах с храмовой тропой и видом на архипелаг Сето.",
+    "prefId": 34
+  },
+  {
+    "id": "cs-okonomiyaki",
+    "title": "Окономияки по-хиросимски",
+    "lon": 132.459,
+    "lat": 34.397,
+    "type": [
+      "food"
+    ],
+    "blurb": "Слоёная версия окономияки с лапшой внутри — визитная карточка Хиросимы.",
+    "prefId": 34
+  },
+  {
+    "id": "cs-akiyoshido",
+    "title": "Пещера Акиёсидо",
+    "lon": 131.298,
+    "lat": 34.233,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Крупнейшая известняковая пещера Японии с подземной рекой.",
+    "prefId": 35
+  },
+  {
+    "id": "cs-kintaikyo",
+    "title": "Мост Кинтайкё",
+    "lon": 132.18,
+    "lat": 34.166,
+    "type": [
+      "view",
+      "history"
+    ],
+    "blurb": "Пятипролётный деревянный мост XVII века без единого гвоздя — символ города Ивакуни.",
+    "prefId": 35
+  },
+  {
+    "id": "cs-fugu",
+    "title": "Фугу Симоносэки",
+    "lon": 130.941,
+    "lat": 33.949,
+    "type": [
+      "food"
+    ],
+    "blurb": "Столица ядовитой рыбы фугу в Японии — деликатес, который готовят только лицензированные повара.",
+    "prefId": 35
+  },
+  {
+    "id": "cs-awaodori",
+    "title": "Ава-одори",
+    "lon": 134.559,
+    "lat": 34.07,
+    "type": [
+      "festival"
+    ],
+    "blurb": "Один из крупнейших фестивалей танца в Японии — улицы города танцуют четыре ночи подряд.",
+    "prefId": 36
+  },
+  {
+    "id": "cs-naruto",
+    "title": "Водовороты Наруто",
+    "lon": 134.639,
+    "lat": 34.239,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Одни из крупнейших приливных водоворотов в мире, наблюдают с моста или прогулочного катера.",
+    "prefId": 36
+  },
+  {
+    "id": "cs-kotohira",
+    "title": "Компира-сан",
+    "lon": 133.812,
+    "lat": 34.187,
+    "type": [
+      "history"
+    ],
+    "blurb": "Святилище на вершине холма — больше тысячи ступеней вверх, покровитель моряков.",
+    "prefId": 37
+  },
+  {
+    "id": "cs-udon",
+    "title": "Сануки удон",
+    "lon": 134.043,
+    "lat": 34.34,
+    "type": [
+      "food"
+    ],
+    "blurb": "Префектура, где удон — почти религия, с очередями к лапшичным по всему региону.",
+    "prefId": 37
+  },
+  {
+    "id": "cs-dogo",
+    "title": "Онсэн Дого",
+    "lon": 132.786,
+    "lat": 33.852,
+    "type": [
+      "onsen",
+      "history"
+    ],
+    "blurb": "Один из старейших онсэнов Японии, прообраз бань из «Унесённых призраками».",
+    "prefId": 38
+  },
+  {
+    "id": "cs-shimanami",
+    "title": "Велотрасса Симанами Кайдо",
+    "lon": 133.05,
+    "lat": 34.3,
+    "type": [
+      "activity"
+    ],
+    "blurb": "70 км велодороги через острова и мосты Внутреннего моря Сето.",
+    "prefId": 38
+  },
+  {
+    "id": "cs-katsuo",
+    "title": "Тataki из тунца-бонито (Коти)",
+    "lon": 133.531,
+    "lat": 33.559,
+    "type": [
+      "food"
+    ],
+    "blurb": "Обожжённое снаружи филе бонито с чесноком и солью — фирменное блюдо Коти.",
+    "prefId": 39
+  },
+  {
+    "id": "cs-shimanto",
+    "title": "Река Симанто",
+    "lon": 132.9,
+    "lat": 33.15,
+    "type": [
+      "nature"
+    ],
+    "blurb": "«Последняя чистая река Японии» — каноэ, подвесные мосты и рыбалка.",
+    "prefId": 39
+  },
+  {
+    "id": "ky-hausten",
+    "title": "Хаус Тен Бос",
+    "lon": 129.807,
+    "lat": 33.056,
+    "type": [
+      "activity",
+      "night"
+    ],
+    "blurb": "Тематический парк в стиле голландского города — одна из крупнейших иллюминаций Японии по вечерам.",
+    "prefId": 42
+  },
+  {
+    "id": "ky-champon",
+    "title": "Чампон Нагасаки",
+    "lon": 129.878,
+    "lat": 32.749,
+    "type": [
+      "food"
+    ],
+    "blurb": "Лапша в наваристом бульоне с морепродуктами и овощами — блюдо с китайскими корнями, рождённое в Нагасаки.",
+    "prefId": 42
+  },
+  {
+    "id": "ky-kurokawa",
+    "title": "Онсэн Куроками",
+    "lon": 131.078,
+    "lat": 33.07,
+    "type": [
+      "onsen"
+    ],
+    "blurb": "Один из самых атмосферных онсэн-городков Кюсю — деревянные гостиницы вдоль реки в горах.",
+    "prefId": 43
+  },
+  {
+    "id": "ky-aso",
+    "title": "Гора Асо",
+    "lon": 131.104,
+    "lat": 32.884,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Один из крупнейших действующих вулканов мира с гигантской кальдерой вокруг.",
+    "prefId": 43
+  },
+  {
+    "id": "ky-basashi",
+    "title": "Конина сырая (Кумамото)",
+    "lon": 130.706,
+    "lat": 32.806,
+    "type": [
+      "food"
+    ],
+    "blurb": "Тонко нарезанная сырая конина с соевым соусом и имбирём — фирменная закуска региона.",
+    "prefId": 43
+  },
+  {
+    "id": "ky-kuju",
+    "title": "Цветочный парк Кудзю",
+    "lon": 131.251,
+    "lat": 33.084,
+    "type": [
+      "view"
+    ],
+    "blurb": "Огромное поле с меняющимися по сезону цветами у подножия вулканических гор.",
+    "prefId": 44
+  },
+  {
+    "id": "ky-takachiho",
+    "title": "Ущелье Такатихо",
+    "lon": 131.31,
+    "lat": 32.706,
+    "type": [
+      "nature",
+      "history"
+    ],
+    "blurb": "Узкое ущелье с водопадом, которое японская мифология называет местом схождения богов на землю.",
+    "prefId": 45
+  },
+  {
+    "id": "ky-aoshima",
+    "title": "Остров Аосима",
+    "lon": 131.45,
+    "lat": 31.813,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Тропический островок в окружении «стиральной доски» — уникальных скальных пород волнового среза.",
+    "prefId": 45
+  },
+  {
+    "id": "ky-sakurajima",
+    "title": "Вулкан Сакурадзима",
+    "lon": 130.657,
+    "lat": 31.593,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Действующий вулкан прямо напротив города Кагосима — регулярно выбрасывает пепел на глазах у горожан.",
+    "prefId": 46
+  },
+  {
+    "id": "ky-kirishima",
+    "title": "Святилище Кирисима",
+    "lon": 130.868,
+    "lat": 31.833,
+    "type": [
+      "history"
+    ],
+    "blurb": "Одно из старейших синтоистских святилищ, связанное с мифом о схождении богов.",
+    "prefId": 46
+  },
+  {
+    "id": "ky-kurobuta",
+    "title": "Чёрная свинья Кагосимы",
+    "lon": 130.558,
+    "lat": 31.596,
+    "type": [
+      "food"
+    ],
+    "blurb": "Местная порода свиней с выраженным вкусом — тонкацу и сябу-сябу из чёрной свинины считаются деликатесом.",
+    "prefId": 46
+  },
+  {
+    "id": "ky-yakushima",
+    "title": "Якусима",
+    "lon": 130.529,
+    "lat": 30.336,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Древние криптомерии возрастом до 7000 лет — вдохновение «Принцессы Мононоке».",
+    "prefId": 46
+  },
+  {
+    "id": "ky-shurijo",
+    "title": "Замок Сюри",
+    "lon": 127.719,
+    "lat": 26.217,
+    "type": [
+      "history"
+    ],
+    "blurb": "Дворец королевства Рюкю — уникальная архитектура, отличная от материковой Японии.",
+    "prefId": 47
+  },
+  {
+    "id": "ky-churaumi",
+    "title": "Аквариум Тюраʼуми",
+    "lon": 127.877,
+    "lat": 26.694,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Один из крупнейших аквариумов мира, китовые акулы в главном танке Окинавы.",
+    "prefId": 47
+  },
+  {
+    "id": "ky-okisoba",
+    "title": "Окинавская соба",
+    "lon": 127.68,
+    "lat": 26.21,
+    "type": [
+      "food"
+    ],
+    "blurb": "Лапша из пшеничной муки в бульоне на основе свиных костей — совсем не похожа на материковую собу.",
+    "prefId": 47
+  },
+  {
+    "id": "ky-kerama",
+    "title": "Острова Керама",
+    "lon": 127.35,
+    "lat": 26.2,
+    "type": [
+      "activity",
+      "nature"
+    ],
+    "blurb": "Кристально чистая вода «керама-блю» — одно из лучших мест Японии для дайвинга и снорклинга.",
+    "prefId": 47
+  },
+  {
+    "id": "ky-ishigaki",
+    "title": "Исигаки",
+    "lon": 124.163,
+    "lat": 24.339,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Коралловые рифы Яэяма — дайвинг и пляжи южных островов.",
+    "prefId": 47
+  },
+  {
+    "id": "city-13",
+    "title": "Токио",
+    "lon": 139.767,
+    "lat": 35.681,
+    "type": [],
+    "blurb": "",
+    "prefId": 13,
+    "cluster": true,
+    "pageUrl": "tokyo.html"
+  },
+  {
+    "id": "tky-shibuya",
+    "title": "Ночная Сибуя",
+    "lon": 139.701,
+    "lat": 35.658,
+    "type": [
+      "night"
+    ],
+    "blurb": "Перекрёсток, неон, идзакая до утра — квинтэссенция токийской ночи.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "tky-ginza",
+    "title": "Гиндза",
+    "lon": 139.767,
+    "lat": 35.671,
+    "type": [
+      "view",
+      "food"
+    ],
+    "blurb": "Витрины, флагманские бутики, вечерний свет вывесок.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "tky-asakusa",
+    "title": "Асакуса",
+    "lon": 139.796,
+    "lat": 35.714,
+    "type": [
+      "history"
+    ],
+    "blurb": "Храм Сэнсодзи и улица Накамисэ — открыточный старый Токио.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "tky-akiba",
+    "title": "Акихабара",
+    "lon": 139.773,
+    "lat": 35.702,
+    "type": [
+      "night",
+      "activity"
+    ],
+    "blurb": "Электроника, аниме-культура, аркады на восемь этажей.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "tky-teamlab",
+    "title": "teamLab Planets",
+    "lon": 139.783,
+    "lat": 35.625,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Иммерсивные инсталляции, по которым буквально идёшь по воде.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "tky-tsukiji",
+    "title": "Рынок Тоёсу/Цукидзи",
+    "lon": 139.77,
+    "lat": 35.665,
+    "type": [
+      "food"
+    ],
+    "blurb": "Свежайшие суши и морепродукты с крупнейшего рыбного рынка страны — от завтрака до деликатесов.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "tky-shinjuku",
+    "title": "Синдзюку и Golden Gai",
+    "lon": 139.703,
+    "lat": 35.694,
+    "type": [
+      "night",
+      "food"
+    ],
+    "blurb": "Крошечные бары в несколько мест друг на друге — самый плотный ночной квартал Токио.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "city-27",
+    "title": "Осака",
+    "lon": 135.502,
+    "lat": 34.693,
+    "type": [],
+    "blurb": "",
+    "prefId": 27,
+    "cluster": true,
+    "pageUrl": "osaka.html"
+  },
+  {
+    "id": "osa-dotonbori",
+    "title": "Дотомбори",
+    "lon": 135.501,
+    "lat": 34.668,
+    "type": [
+      "food",
+      "night"
+    ],
+    "blurb": "Такояки, окономияки, неоновый краб — столица уличной еды.",
+    "prefId": 27,
+    "clusterOf": 27
+  },
+  {
+    "id": "osa-castle",
+    "title": "Замок Осака",
+    "lon": 135.526,
+    "lat": 34.687,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Сакура вокруг стен весной — один из символов города.",
+    "prefId": 27,
+    "clusterOf": 27
+  },
+  {
+    "id": "osa-usj",
+    "title": "Universal Studios Japan",
+    "lon": 135.432,
+    "lat": 34.665,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Парк развлечений на целый день, отдельная зона Super Nintendo World.",
+    "prefId": 27,
+    "clusterOf": 27
+  },
+  {
+    "id": "osa-kuromon",
+    "title": "Рынок Куромон",
+    "lon": 135.506,
+    "lat": 34.665,
+    "type": [
+      "food"
+    ],
+    "blurb": "Крытый рынок «кухня Осаки» — стрит-фуд и морепродукты на вынос.",
+    "prefId": 27,
+    "clusterOf": 27
+  },
+  {
+    "id": "osa-abeno",
+    "title": "Абэно Харукас",
+    "lon": 135.514,
+    "lat": 34.646,
+    "type": [
+      "view"
+    ],
+    "blurb": "Самый высокий небоскрёб Японии за пределами Токио — смотровая площадка на весь город.",
+    "prefId": 27,
+    "clusterOf": 27
+  },
+  {
+    "id": "city-26",
+    "title": "Киото",
+    "lon": 135.768,
+    "lat": 35.011,
+    "type": [],
+    "blurb": "",
+    "prefId": 26,
+    "cluster": true,
+    "pageUrl": "kyoto.html"
+  },
+  {
+    "id": "kyo-fushimi",
+    "title": "Фусими Инари",
+    "lon": 135.772,
+    "lat": 34.967,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Тысячи алых тории уходят вверх по склону горы — символ Киото.",
+    "prefId": 26,
+    "clusterOf": 26,
+    "url": "#"
+  },
+  {
+    "id": "kyo-arashiyama",
+    "title": "Арасияма",
+    "lon": 135.667,
+    "lat": 35.017,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Бамбуковая роща и клёны над рекой Кацура осенью.",
+    "prefId": 26,
+    "clusterOf": 26
+  },
+  {
+    "id": "kyo-gion",
+    "title": "Гион",
+    "lon": 135.775,
+    "lat": 35.003,
+    "type": [
+      "history",
+      "night"
+    ],
+    "blurb": "Квартал гейш и мачия — вечерняя прогулка по старому Киото.",
+    "prefId": 26,
+    "clusterOf": 26
+  },
+  {
+    "id": "kyo-kiyomizu",
+    "title": "Киёмидзу-дэра",
+    "lon": 135.785,
+    "lat": 34.995,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Деревянный храм на сваях с панорамой города — один из самых узнаваемых силуэтов Японии.",
+    "prefId": 26,
+    "clusterOf": 26
+  },
+  {
+    "id": "kyo-nishiki",
+    "title": "Рынок Нисики",
+    "lon": 135.765,
+    "lat": 35.005,
+    "type": [
+      "food"
+    ],
+    "blurb": "«Кухня Киото» — узкая крытая улица с сотней лавок традиционных деликатесов.",
+    "prefId": 26,
+    "clusterOf": 26
+  },
+  {
+    "id": "kyo-kaiseki",
+    "title": "Кайсэки Киото",
+    "lon": 135.76,
+    "lat": 35.01,
+    "type": [
+      "food"
+    ],
+    "blurb": "Многоблюдная сезонная кухня, доведённая до искусства — гастрономическая вершина японской кухни.",
+    "prefId": 26,
+    "clusterOf": 26
+  },
+  {
+    "id": "city-40",
+    "title": "Фукуока",
+    "lon": 130.402,
+    "lat": 33.59,
+    "type": [],
+    "blurb": "",
+    "prefId": 40,
+    "cluster": true,
+    "pageUrl": "fukuoka.html"
+  },
+  {
+    "id": "fuk-yatai",
+    "title": "Ятай Фукуоки",
+    "lon": 130.401,
+    "lat": 33.591,
+    "type": [
+      "food",
+      "night"
+    ],
+    "blurb": "Уличные ларьки вдоль реки, рамен тонкоцу и разговоры до полуночи.",
+    "prefId": 40,
+    "clusterOf": 40
+  },
+  {
+    "id": "fuk-dazaifu",
+    "title": "Дадзайфу Тэммангу",
+    "lon": 130.535,
+    "lat": 33.52,
+    "type": [
+      "history"
+    ],
+    "blurb": "Святилище учёности, сливовый сад в цвету ранней весной.",
+    "prefId": 40,
+    "clusterOf": 40
+  },
+  {
+    "id": "fuk-hakataramen",
+    "title": "Хаката-рамен",
+    "lon": 130.42,
+    "lat": 33.59,
+    "type": [
+      "food"
+    ],
+    "blurb": "Тонкий бульон тонкоцу и жёсткая лапша — стиль рамена, придуманный в Хакате.",
+    "prefId": 40,
+    "clusterOf": 40
+  },
+  {
+    "id": "fuk-ohori",
+    "title": "Парк Охори",
+    "lon": 130.383,
+    "lat": 33.586,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Городской парк вокруг озера в самом центре Фукуоки — прогулки и виды на закат.",
+    "prefId": 40,
+    "clusterOf": 40
+  },
+  {
+    "id": "hk2-sounkyo",
+    "title": "Ущелье Сounкё",
+    "lon": 142.867,
+    "lat": 43.681,
+    "type": [
+      "nature",
+      "onsen"
+    ],
+    "blurb": "Скалистое ущелье с водопадами и онсэном у входа в Дайсэцудзан — «крыша Хоккайдо».",
+    "prefId": 1,
+    "clusterOf": 1
+  },
+  {
+    "id": "hk2-daisetsuzan",
+    "title": "Национальный парк Дайсэцудзан",
+    "lon": 142.85,
+    "lat": 43.65,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Крупнейший национальный парк Японии — первые в стране осенние краски начинаются именно здесь.",
+    "prefId": 1,
+    "clusterOf": 1
+  },
+  {
+    "id": "hk2-abashiri",
+    "title": "Дрейфующий лёд Абасири",
+    "lon": 144.279,
+    "lat": 44.021,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Ледоколы возят туристов сквозь плавучий лёд Охотского моря зимой — уникальное для Японии зрелище.",
+    "prefId": 1,
+    "clusterOf": 1
+  },
+  {
+    "id": "hk2-shikaribetsu",
+    "title": "Ледяная деревня озера Сикарибэцу",
+    "lon": 143.207,
+    "lat": 43.316,
+    "type": [
+      "view",
+      "activity"
+    ],
+    "blurb": "Иглу и ледяные бары, построенные прямо на замёрзшем озере каждую зиму.",
+    "prefId": 1,
+    "clusterOf": 1
+  },
+  {
+    "id": "hk2-rebun",
+    "title": "Остров Ребун",
+    "lon": 141.038,
+    "lat": 45.416,
+    "type": [
+      "nature"
+    ],
+    "blurb": "«Плавучий остров цветов» на самом севере Японии — редкие альпийские растения у самого моря.",
+    "prefId": 1,
+    "clusterOf": 1
+  },
+  {
+    "id": "hk2-sapporobeer",
+    "title": "Пивоварня Саппоро",
+    "lon": 141.36,
+    "lat": 43.075,
+    "type": [
+      "food",
+      "history"
+    ],
+    "blurb": "Музей и бар старейшей пивоварни Японии в кирпичном здании конца XIX века.",
+    "prefId": 1,
+    "clusterOf": 1
+  },
+  {
+    "id": "hk2-hakodate-morning",
+    "title": "Утренний рынок Хакодате",
+    "lon": 140.723,
+    "lat": 41.773,
+    "type": [
+      "food"
+    ],
+    "blurb": "Крабы, морские ежи и донбури с утра пораньше — рынок работает с рассвета.",
+    "prefId": 1,
+    "clusterOf": 1
+  },
+  {
+    "id": "th2-towada-art",
+    "title": "Музей современного искусства Товады",
+    "lon": 141.007,
+    "lat": 40.612,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Небольшой, но заметный музей современного искусства среди рисовых полей — работы Яёи Кусамы прямо во дворе.",
+    "prefId": 3
+  },
+  {
+    "id": "th2-morioka-castle",
+    "title": "Замок Мориока",
+    "lon": 141.152,
+    "lat": 39.7,
+    "type": [
+      "history"
+    ],
+    "blurb": "Каменные стены замка среди сакур — символ города, воспетый поэтом Такубоку Исикавой.",
+    "prefId": 3
+  },
+  {
+    "id": "th2-naruko-onsen",
+    "title": "Онсэн Наруко",
+    "lon": 140.735,
+    "lat": 38.735,
+    "type": [
+      "onsen"
+    ],
+    "blurb": "Один из старейших онсэн-курортов Тохоку, знаменит кокэси — расписными деревянными куклами.",
+    "prefId": 4
+  },
+  {
+    "id": "th2-yamadera2",
+    "title": "Панорама с горы Ямадэра",
+    "lon": 140.437,
+    "lat": 38.316,
+    "type": [
+      "view"
+    ],
+    "blurb": "С верхней площадки храмового комплекса открывается вид на всю долину реки Тачия.",
+    "prefId": 6
+  },
+  {
+    "id": "th2-tsuruoka",
+    "title": "Сад Каменных стен Цуруока",
+    "lon": 139.827,
+    "lat": 38.726,
+    "type": [
+      "history",
+      "food"
+    ],
+    "blurb": "Старый замковый город региона Сёнай, известный ферментированной кухней и рисом.",
+    "prefId": 6
+  },
+  {
+    "id": "th2-oga",
+    "title": "Полуостров Ога",
+    "lon": 139.75,
+    "lat": 39.9,
+    "type": [
+      "nature",
+      "festival"
+    ],
+    "blurb": "Родина обряда Намахагэ — ряженых демонов, которые в канун Нового года пугают детей ради их же добра.",
+    "prefId": 5
+  },
+  {
+    "id": "th2-akita-inu",
+    "title": "Собаки акита-ину (Одатэ)",
+    "lon": 140.556,
+    "lat": 40.271,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Родина породы акита-ину — можно увидеть щенков и музей, посвящённый знаменитому Хатико.",
+    "prefId": 5
+  },
+  {
+    "id": "th2-bandai",
+    "title": "Гора Бандай и озеро Инавасиро",
+    "lon": 140.07,
+    "lat": 37.6,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Вулканическое озеро с видом на гору Бандай — купание летом, катание на коньках зимой.",
+    "prefId": 7
+  },
+  {
+    "id": "th2-shirakami",
+    "title": "Горы Сираками-Санти",
+    "lon": 140.15,
+    "lat": 40.47,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Крупнейший в мире нетронутый лес бука, объект ЮНЕСКО на границе Аомори и Акиты.",
+    "prefId": 2
+  },
+  {
+    "id": "kt2-yokohama-cup",
+    "title": "Музей рамена в Ёкогаме",
+    "lon": 139.636,
+    "lat": 35.466,
+    "type": [
+      "food",
+      "activity"
+    ],
+    "blurb": "Интерактивный музей, воссоздающий Японию 1958 года — родину рамена быстрого приготовления.",
+    "prefId": 14
+  },
+  {
+    "id": "kt2-sagamihara",
+    "title": "Сад роз Кэйо Ёмиуриленд",
+    "lon": 139.53,
+    "lat": 35.63,
+    "type": [
+      "view"
+    ],
+    "blurb": "Тысячи кустов роз и вечерняя иллюминация — популярное весеннее и осеннее направление у токийцев.",
+    "prefId": 14
+  },
+  {
+    "id": "kt2-mitosairakuen",
+    "title": "Сад Кайракуэн (Мито)",
+    "lon": 140.42,
+    "lat": 36.375,
+    "type": [
+      "view"
+    ],
+    "blurb": "Один из трёх знаменитых садов Японии, знаменит тысячами слив, цветущих в конце зимы.",
+    "prefId": 8
+  },
+  {
+    "id": "kt2-tsukuba",
+    "title": "Гора Цукуба",
+    "lon": 140.1,
+    "lat": 36.226,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Одна из «двух гор» классической японской поэзии — канатная дорога поднимает к двум вершинам.",
+    "prefId": 8
+  },
+  {
+    "id": "kt2-oarai",
+    "title": "Побережье Оараи",
+    "lon": 140.58,
+    "lat": 36.31,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Тории прямо в море — популярный кадр на скалистом берегу Ибараки.",
+    "prefId": 8
+  },
+  {
+    "id": "kt2-edowonderland",
+    "title": "Edo Wonderland Nikko",
+    "lon": 139.6,
+    "lat": 36.75,
+    "type": [
+      "activity",
+      "history"
+    ],
+    "blurb": "Тематический парк-реконструкция периода Эдо с самураями и ниндзя в живых представлениях.",
+    "prefId": 9
+  },
+  {
+    "id": "kt2-gunma-tomioka",
+    "title": "Томиока — шёлковая фабрика",
+    "lon": 138.891,
+    "lat": 36.256,
+    "type": [
+      "history"
+    ],
+    "blurb": "Первая современная шёлковая фабрика Японии, объект ЮНЕСКО, положившая начало индустриализации страны.",
+    "prefId": 10
+  },
+  {
+    "id": "kt2-saitama-railmuseum",
+    "title": "Железнодорожный музей (Сайтама)",
+    "lon": 139.63,
+    "lat": 35.917,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Один из крупнейших железнодорожных музеев мира — от паровозов до синкансэнов.",
+    "prefId": 11
+  },
+  {
+    "id": "kt2-narita",
+    "title": "Храм Наритасан",
+    "lon": 140.318,
+    "lat": 35.785,
+    "type": [
+      "history",
+      "food"
+    ],
+    "blurb": "Крупный буддийский храм рядом с аэропортом Нарита — удобная остановка перед вылетом или сразу по прилёту.",
+    "prefId": 12
+  },
+  {
+    "id": "kt2-chiba-mother-farm",
+    "title": "Ферма «Мазер Фарм»",
+    "lon": 140.03,
+    "lat": 35.15,
+    "type": [
+      "activity",
+      "nature"
+    ],
+    "blurb": "Семейная ферма с овцами, шоу стрижки и полями цветов на полуострове Босо.",
+    "prefId": 12
+  },
+  {
+    "id": "kt2-kamakura-hase",
+    "title": "Хасэ-дэра (Камакура)",
+    "lon": 139.535,
+    "lat": 35.311,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Храм на склоне холма со статуей одиннадцатиликой Каннон и видом на океан.",
+    "prefId": 14
+  },
+  {
+    "id": "kt2-yokohama-cosmoworld",
+    "title": "Ёкогама Космоворлд",
+    "lon": 139.637,
+    "lat": 35.455,
+    "type": [
+      "activity",
+      "night"
+    ],
+    "blurb": "Колесо обозрения с часами — один из символов ночной набережной Минато Мирай.",
+    "prefId": 14
+  },
+  {
+    "id": "cb2-fuji5th",
+    "title": "5-я станция Фудзи",
+    "lon": 138.735,
+    "lat": 35.397,
+    "type": [
+      "view",
+      "activity"
+    ],
+    "blurb": "Отправная точка для восхождения и просто самый доступный вид на гору Фудзи с высоты 2300 м.",
+    "prefId": 19
+  },
+  {
+    "id": "cb2-shosenkyo",
+    "title": "Ущелье Сёсэнкё",
+    "lon": 138.75,
+    "lat": 35.75,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Гранитное ущелье с водопадами — одно из красивейших мест региона Яманаси осенью.",
+    "prefId": 19
+  },
+  {
+    "id": "cb2-obuse",
+    "title": "Обусэ",
+    "lon": 138.35,
+    "lat": 36.68,
+    "type": [
+      "history",
+      "food"
+    ],
+    "blurb": "Городок, где провёл последние годы художник Хокусай — музей, храмы и каштановые сладости.",
+    "prefId": 20
+  },
+  {
+    "id": "cb2-suwa",
+    "title": "Озеро Сува и фестиваль Онбасира",
+    "lon": 138.11,
+    "lat": 36.05,
+    "type": [
+      "nature",
+      "festival"
+    ],
+    "blurb": "Одно из немногих горных озёр, полностью замерзающих зимой с эффектом «трещины богов».",
+    "prefId": 20
+  },
+  {
+    "id": "cb2-hida-furukawa",
+    "title": "Хида-Фурукава",
+    "lon": 137.19,
+    "lat": 36.233,
+    "type": [
+      "history"
+    ],
+    "blurb": "Тихий город-прообраз аниме «Твоё имя» — белые стены и карпы в каналах вдоль улиц.",
+    "prefId": 21
+  },
+  {
+    "id": "cb2-gujo-hachiman",
+    "title": "Гудзё-Хатиман",
+    "lon": 136.964,
+    "lat": 35.727,
+    "type": [
+      "history",
+      "festival"
+    ],
+    "blurb": "Городок, знаменитый ночными танцами Гудзё-одори летом и кристально чистой водой каналов.",
+    "prefId": 21
+  },
+  {
+    "id": "cb2-toyama-bay",
+    "title": "Залив Тояма и мираж",
+    "lon": 137.21,
+    "lat": 36.75,
+    "type": [
+      "nature",
+      "food"
+    ],
+    "blurb": "Один из «самых красивых заливов мира», знаменит светящимися кальмарами и весенними миражами.",
+    "prefId": 16
+  },
+  {
+    "id": "cb2-noto",
+    "title": "Полуостров Ното",
+    "lon": 137.0,
+    "lat": 37.35,
+    "type": [
+      "nature",
+      "food"
+    ],
+    "blurb": "Изрезанный скалистый берег и рыбацкие деревни — тихая альтернатива туристическому Канадзаве.",
+    "prefId": 17
+  },
+  {
+    "id": "cb2-eiheiji",
+    "title": "Храм Эйхэйдзи",
+    "lon": 136.35,
+    "lat": 36.05,
+    "type": [
+      "history"
+    ],
+    "blurb": "Главный храм школы дзэн Сото — можно остаться на ночь и попробовать монашескую практику.",
+    "prefId": 18
+  },
+  {
+    "id": "cb2-izu-onsen",
+    "title": "Онсэны полуострова Идзу",
+    "lon": 138.94,
+    "lat": 34.97,
+    "type": [
+      "onsen",
+      "nature"
+    ],
+    "blurb": "Вулканический полуостров с десятками курортных городков вдоль побережья Тихого океана.",
+    "prefId": 22
+  },
+  {
+    "id": "cb2-nagoya-castle2",
+    "title": "Замок Нагоя изнутри",
+    "lon": 136.899,
+    "lat": 35.185,
+    "type": [
+      "history"
+    ],
+    "blurb": "Золотые дельфины сятихоко на крыше — узнаваемый символ города Нагоя.",
+    "prefId": 23
+  },
+  {
+    "id": "cb2-inuyama",
+    "title": "Замок Инуяма",
+    "lon": 136.94,
+    "lat": 35.38,
+    "type": [
+      "history"
+    ],
+    "blurb": "Один из немногих оригинальных замков страны на скале над рекой Кисо.",
+    "prefId": 23
+  },
+  {
+    "id": "kn2-nagahama",
+    "title": "Нагахама (озеро Бива)",
+    "lon": 136.28,
+    "lat": 35.38,
+    "type": [
+      "history"
+    ],
+    "blurb": "Замковый город на северном берегу Бивы с сохранившимися купеческими кварталами.",
+    "prefId": 25
+  },
+  {
+    "id": "kn2-kobe-harborland",
+    "title": "Харборленд Кобе",
+    "lon": 135.183,
+    "lat": 34.685,
+    "type": [
+      "night",
+      "view"
+    ],
+    "blurb": "Вечерняя набережная с колесом обозрения и видом на мост Акаси-Кайкё.",
+    "prefId": 28
+  },
+  {
+    "id": "kn2-takarazuka",
+    "title": "Такарадзука",
+    "lon": 135.35,
+    "lat": 34.8,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Родной город знаменитой женской театральной труппы Такарадзука Ревю.",
+    "prefId": 28
+  },
+  {
+    "id": "kn2-nara-todaiji2",
+    "title": "Дайбуцу Нары изнутри",
+    "lon": 135.84,
+    "lat": 34.689,
+    "type": [
+      "history"
+    ],
+    "blurb": "Бронзовая статуя Будды высотой 15 метров — крупнейшая в Японии, внутри деревянного павильона.",
+    "prefId": 29
+  },
+  {
+    "id": "kn2-asuka",
+    "title": "Деревня Асука",
+    "lon": 135.82,
+    "lat": 34.47,
+    "type": [
+      "history"
+    ],
+    "blurb": "Курганы и каменные артефакты доисторической эпохи Ямато среди рисовых полей.",
+    "prefId": 29
+  },
+  {
+    "id": "kn2-nachi",
+    "title": "Водопад Начи",
+    "lon": 135.887,
+    "lat": 33.667,
+    "type": [
+      "nature",
+      "history"
+    ],
+    "blurb": "Самый высокий одноступенчатый водопад Японии рядом со святилищем Кумано Начи Тайся.",
+    "prefId": 30
+  },
+  {
+    "id": "cs2-matsue-sunset",
+    "title": "Закат над озером Синдзи",
+    "lon": 132.99,
+    "lat": 35.46,
+    "type": [
+      "view"
+    ],
+    "blurb": "Одно из самых снимаемых мест страны — солнце садится точно в озеро у Мацуэ.",
+    "prefId": 32
+  },
+  {
+    "id": "cs2-mimasaka",
+    "title": "Синие горы Бидзан (Окаяма)",
+    "lon": 134.0,
+    "lat": 35.0,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Тихие горные деревни региона Мимасака — васаби и старые почтовые тракты.",
+    "prefId": 33
+  },
+  {
+    "id": "cs2-tomonoura",
+    "title": "Томоноура",
+    "lon": 133.38,
+    "lat": 34.38,
+    "type": [
+      "view",
+      "history"
+    ],
+    "blurb": "Портовый городок, вдохновивший Хаяо Миядзаки на «Рыбку Поньо» — паромы и старые причалы.",
+    "prefId": 34
+  },
+  {
+    "id": "cs2-iwakuni-food",
+    "title": "Суши Ивакуни",
+    "lon": 132.18,
+    "lat": 34.17,
+    "type": [
+      "food"
+    ],
+    "blurb": "Прессованные суши в форме коробок, приготовленные слоями — местная традиция.",
+    "prefId": 35
+  },
+  {
+    "id": "cs2-tsuwano",
+    "title": "Цувано",
+    "lon": 131.77,
+    "lat": 34.45,
+    "type": [
+      "history"
+    ],
+    "blurb": "«Маленькое Киото Санъин» — карпы в каналах и красные тории на склоне холма.",
+    "prefId": 32
+  },
+  {
+    "id": "cs2-shodoshima",
+    "title": "Остров Сёдосима",
+    "lon": 134.19,
+    "lat": 34.48,
+    "type": [
+      "nature",
+      "food"
+    ],
+    "blurb": "Оливковые рощи (единственные промышленные в Японии) и ущелье Каннон Дōин.",
+    "prefId": 37
+  },
+  {
+    "id": "cs2-imabari-towels",
+    "title": "Полотенца Имабари",
+    "lon": 132.998,
+    "lat": 34.066,
+    "type": [
+      "food"
+    ],
+    "blurb": "Не еда, а знаменитые на всю Японию мягчайшие хлопковые полотенца — фабрики можно посетить.",
+    "prefId": 38
+  },
+  {
+    "id": "cs2-uwajima",
+    "title": "Увадзима",
+    "lon": 132.56,
+    "lat": 33.22,
+    "type": [
+      "history",
+      "food"
+    ],
+    "blurb": "Портовый город с единственным сохранившимся замком региона и традицией боёв быков.",
+    "prefId": 38
+  },
+  {
+    "id": "cs2-kochi-market",
+    "title": "Воскресный рынок Коти",
+    "lon": 133.53,
+    "lat": 33.56,
+    "type": [
+      "food"
+    ],
+    "blurb": "Один из старейших рынков Японии, работающий без перерыва с XVII века.",
+    "prefId": 39
+  },
+  {
+    "id": "ky2-karatsu",
+    "title": "Замок Карацу и Кункутё",
+    "lon": 129.97,
+    "lat": 33.45,
+    "type": [
+      "history",
+      "festival"
+    ],
+    "blurb": "Ноябрьский фестиваль с гигантскими лакированными платформами-хиккияма.",
+    "prefId": 41
+  },
+  {
+    "id": "ky2-arita",
+    "title": "Фарфор Арита",
+    "lon": 129.87,
+    "lat": 33.2,
+    "type": [
+      "history",
+      "activity"
+    ],
+    "blurb": "Родина японского фарфора — печи работают с начала XVII века, можно расписать свою тарелку.",
+    "prefId": 41
+  },
+  {
+    "id": "ky2-nagasaki-glover",
+    "title": "Сад Гловера",
+    "lon": 129.87,
+    "lat": 32.73,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Особняки европейских торговцев XIX века на холме с видом на гавань Нагасаки.",
+    "prefId": 42
+  },
+  {
+    "id": "ky2-shimabara",
+    "title": "Симабара",
+    "lon": 130.38,
+    "lat": 32.79,
+    "type": [
+      "history",
+      "nature"
+    ],
+    "blurb": "Городок с чистейшими каналами, где плавают карпы прямо посреди улиц.",
+    "prefId": 42
+  },
+  {
+    "id": "ky2-amakusa",
+    "title": "Острова Амакуса",
+    "lon": 130.2,
+    "lat": 32.45,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Дельфины в открытом море и мосты между рыбацкими островами.",
+    "prefId": 43
+  },
+  {
+    "id": "ky2-yufuin",
+    "title": "Юфуин",
+    "lon": 131.36,
+    "lat": 33.27,
+    "type": [
+      "onsen",
+      "view"
+    ],
+    "blurb": "Онсэн-городок у подножия горы Юфу — более утончённый и «бутиковый», чем шумный Беппу рядом.",
+    "prefId": 44
+  },
+  {
+    "id": "ky2-miyazaki-jingu",
+    "title": "Святилище Миядзаки",
+    "lon": 131.42,
+    "lat": 31.92,
+    "type": [
+      "history"
+    ],
+    "blurb": "Синтоистское святилище, посвящённое легендарному первому императору Японии Дзимму.",
+    "prefId": 45
+  },
+  {
+    "id": "ky2-obi",
+    "title": "Оби — «маленькое Киото Кюсю»",
+    "lon": 131.35,
+    "lat": 32.09,
+    "type": [
+      "history"
+    ],
+    "blurb": "Городок самурайских усадеб на юге Миядзаки, почти нетронутый туризмом.",
+    "prefId": 45
+  },
+  {
+    "id": "ky2-chiran",
+    "title": "Тиран (самурайский квартал)",
+    "lon": 130.43,
+    "lat": 31.37,
+    "type": [
+      "history"
+    ],
+    "blurb": "Улица садов самурайских резиденций эпохи Эдо в тихом городке Кагосимы.",
+    "prefId": 46
+  },
+  {
+    "id": "ky2-ibusuki",
+    "title": "Песчаные ванны Ибусуки",
+    "lon": 130.65,
+    "lat": 31.25,
+    "type": [
+      "onsen"
+    ],
+    "blurb": "Уникальная процедура: вас закапывают по шею в горячий вулканический песок на пляже.",
+    "prefId": 46
+  },
+  {
+    "id": "ky2-miyakojima",
+    "title": "Остров Мияко",
+    "lon": 125.28,
+    "lat": 24.8,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Один из красивейших пляжей Азии по версии международных рейтингов — бирюзовая вода и белый песок.",
+    "prefId": 47
+  },
+  {
+    "id": "ky2-manzamo",
+    "title": "Скала Манзамо",
+    "lon": 127.85,
+    "lat": 26.5,
+    "type": [
+      "view",
+      "nature"
+    ],
+    "blurb": "Утёс в форме расправленного веера над океаном — один из самых снимаемых видов Окинавы.",
+    "prefId": 47
+  },
+  {
+    "id": "hk3-nemuro",
+    "title": "Мыс Носаппу (Немуро)",
+    "lon": 145.82,
+    "lat": 43.38,
+    "type": [
+      "view",
+      "nature"
+    ],
+    "blurb": "Самая восточная точка обитаемой Японии — виден архипелаг, о статусе которого страна спорит с Россией.",
+    "prefId": 1,
+    "clusterOf": 1
+  },
+  {
+    "id": "hk3-tokachi",
+    "title": "Парк Роккатэй и цветы Токати",
+    "lon": 142.9,
+    "lat": 42.9,
+    "type": [
+      "view",
+      "food"
+    ],
+    "blurb": "Тюльпановые и лавандовые поля региона Токати, знаменитого молочными фермами и сладостями.",
+    "prefId": 1,
+    "clusterOf": 1
+  },
+  {
+    "id": "hk3-esashi",
+    "title": "Эсаси — старинный порт",
+    "lon": 140.13,
+    "lat": 41.87,
+    "type": [
+      "history",
+      "food"
+    ],
+    "blurb": "Город эпохи расцвета сельдевого промысла, сохранивший купеческие кварталы и народные песни.",
+    "prefId": 1
+  },
+  {
+    "id": "hk3-wakkanai",
+    "title": "Мыс Соя (Ваккaнай)",
+    "lon": 141.94,
+    "lat": 45.52,
+    "type": [
+      "view"
+    ],
+    "blurb": "Самая северная точка Японии — в ясный день виден остров Сахалин.",
+    "prefId": 1
+  },
+  {
+    "id": "th3-hachinohe",
+    "title": "Утренний рынок и морепродукты Хатинохэ",
+    "lon": 141.49,
+    "lat": 40.51,
+    "type": [
+      "food"
+    ],
+    "blurb": "Один из крупнейших утренних рынков Тохоку — сотни ларьков с рыбой и стрит-фудом.",
+    "prefId": 2
+  },
+  {
+    "id": "th3-tono",
+    "title": "Тоно — долина легенд",
+    "lon": 141.53,
+    "lat": 39.34,
+    "type": [
+      "history",
+      "nature"
+    ],
+    "blurb": "Регион, вдохновивший знаменитый сборник японского фольклора «Тоно моногатари» — водяные каппа и старые усадьбы.",
+    "prefId": 3
+  },
+  {
+    "id": "th3-naruko-gorge",
+    "title": "Ущелье Наруко",
+    "lon": 140.72,
+    "lat": 38.73,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Глубокое ущелье с мостом-обзорной площадкой, особенно эффектное во время осенних красок.",
+    "prefId": 4
+  },
+  {
+    "id": "th3-yamagata-hanagasa",
+    "title": "Фестиваль Ханагаса",
+    "lon": 140.36,
+    "lat": 38.24,
+    "type": [
+      "festival"
+    ],
+    "blurb": "Танцоры с соломенными шляпами, украшенными цветами сафлора — один из главных праздников Тохоку.",
+    "prefId": 6
+  },
+  {
+    "id": "th3-fukushima-goshikinuma",
+    "title": "Пять цветных озёр Гошикинума",
+    "lon": 140.07,
+    "lat": 37.62,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Вулканические озёра разных оттенков бирюзы у подножия горы Бандай.",
+    "prefId": 7
+  },
+  {
+    "id": "kt3-oedo-onsen",
+    "title": "Оэдо Онсэн Моногатари (Токийская зона)",
+    "lon": 139.78,
+    "lat": 35.62,
+    "type": [
+      "onsen",
+      "activity"
+    ],
+    "blurb": "Тематический онсэн-парк в стиле старого Эдо — юката и ярмарочная атмосфера прямо в черте города.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt3-yanaka",
+    "title": "Янака — старый квартал Токио",
+    "lon": 139.767,
+    "lat": 35.728,
+    "type": [
+      "history"
+    ],
+    "blurb": "Один из немногих районов Токио, переживших войну без разрушений — узкие улочки и храмы.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt3-kichijoji",
+    "title": "Кітидзёдзи и парк Иноkasira",
+    "lon": 139.58,
+    "lat": 35.7,
+    "type": [
+      "nature",
+      "food"
+    ],
+    "blurb": "Любимый район токийцев для жизни — парк с озером и оживлённые торговые улицы вокруг станции.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt3-shimokitazawa",
+    "title": "Симокитадзава",
+    "lon": 139.67,
+    "lat": 35.66,
+    "type": [
+      "night",
+      "food"
+    ],
+    "blurb": "Богемный квартал винтажных магазинов, маленьких театров и баров — альтернатива глянцевому центру.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt3-mitorquets",
+    "title": "Рыбный рынок Тоёсу изнутри",
+    "lon": 139.77,
+    "lat": 35.645,
+    "type": [
+      "food"
+    ],
+    "blurb": "Аукцион тунца ранним утром и суши-завтрак прямо на рынке — преемник легендарного Цукидзи.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt3-choshi-cape",
+    "title": "Мыс Инубō (Тиба)",
+    "lon": 140.87,
+    "lat": 35.7,
+    "type": [
+      "view",
+      "nature"
+    ],
+    "blurb": "Маяк на восточном мысе полуострова Босо — одно из первых мест Японии, где встречают рассвет.",
+    "prefId": 12
+  },
+  {
+    "id": "kt3-kawagoe-food",
+    "title": "Батат Кавагоэ",
+    "lon": 139.485,
+    "lat": 35.925,
+    "type": [
+      "food"
+    ],
+    "blurb": "Город знаменит десертами и уличной едой на основе сладкого картофеля — от чипсов до мороженого.",
+    "prefId": 11
+  },
+  {
+    "id": "cb3-nagano-zenkoji2",
+    "title": "Подземный тоннель Дзэнкодзи",
+    "lon": 138.187,
+    "lat": 36.661,
+    "type": [
+      "history"
+    ],
+    "blurb": "Полностью тёмный тоннель под главным залом храма — паломники ищут на ощупь «ключ к раю».",
+    "prefId": 20
+  },
+  {
+    "id": "cb3-hakuba",
+    "title": "Хакуба",
+    "lon": 137.86,
+    "lat": 36.7,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Один из крупнейших горнолыжных регионов Японии, принимавший Олимпиаду 1998 года.",
+    "prefId": 20
+  },
+  {
+    "id": "cb3-nagashima-spaland",
+    "title": "Nagashima Spa Land",
+    "lon": 136.75,
+    "lat": 35.06,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Один из крупнейших парков аттракционов Японии с рекордными американскими горками.",
+    "prefId": 24
+  },
+  {
+    "id": "cb3-toyohashi",
+    "title": "Фестиваль Тэнно-мацури (Тоёхаси)",
+    "lon": 137.39,
+    "lat": 34.77,
+    "type": [
+      "festival"
+    ],
+    "blurb": "Один из крупнейших фейерверочных фестивалей региона Токай.",
+    "prefId": 23
+  },
+  {
+    "id": "cb3-fuji-safari",
+    "title": "Сафари-парк Фудзи",
+    "lon": 138.75,
+    "lat": 35.3,
+    "type": [
+      "activity",
+      "nature"
+    ],
+    "blurb": "Львы и жирафы на фоне горы Фудзи — можно проехать через вольеры на собственной машине.",
+    "prefId": 22
+  },
+  {
+    "id": "kn3-osaka-shitennoji",
+    "title": "Ситэннодзи (Осака)",
+    "lon": 135.516,
+    "lat": 34.653,
+    "type": [
+      "history"
+    ],
+    "blurb": "Один из старейших буддийских храмов Японии, основанный в конце VI века.",
+    "prefId": 27,
+    "clusterOf": 27
+  },
+  {
+    "id": "kn3-osaka-tsutenkaku",
+    "title": "Башня Цутэнкaку и квартал Синсэкай",
+    "lon": 135.507,
+    "lat": 34.652,
+    "type": [
+      "night",
+      "food"
+    ],
+    "blurb": "Ретро-квартал начала XX века с башней-символом района и жареными шпажками кусикацу.",
+    "prefId": 27,
+    "clusterOf": 27
+  },
+  {
+    "id": "kn3-kyoto-nijo",
+    "title": "Замок Нидзё",
+    "lon": 135.748,
+    "lat": 35.014,
+    "type": [
+      "history"
+    ],
+    "blurb": "Резиденция сёгунов Токугава с «соловьиными полами», которые скрипят при каждом шаге незваного гостя.",
+    "prefId": 26,
+    "clusterOf": 26
+  },
+  {
+    "id": "kn3-kyoto-philosopherswalk",
+    "title": "Тропа философа",
+    "lon": 135.794,
+    "lat": 35.027,
+    "type": [
+      "view",
+      "nature"
+    ],
+    "blurb": "Канал, обсаженный сотнями сакур, вдоль которого любил гулять философ Нисида Китаро.",
+    "prefId": 26,
+    "clusterOf": 26
+  },
+  {
+    "id": "kn3-omihachiman",
+    "title": "Омихатиман",
+    "lon": 136.1,
+    "lat": 35.13,
+    "type": [
+      "history"
+    ],
+    "blurb": "Купеческий город на озере Бива с сохранившимися каналами, по которым и сейчас ходят лодки.",
+    "prefId": 25
+  },
+  {
+    "id": "kn3-kobe-kitano",
+    "title": "Китано-тё (Кобе)",
+    "lon": 135.19,
+    "lat": 34.7,
+    "type": [
+      "history"
+    ],
+    "blurb": "Квартал особняков иностранных резидентов конца XIX века на холме над городом.",
+    "prefId": 28
+  },
+  {
+    "id": "cs3-hagi",
+    "title": "Хаги",
+    "lon": 131.4,
+    "lat": 34.41,
+    "type": [
+      "history"
+    ],
+    "blurb": "Город-колыбель реставрации Мэйдзи, сохранивший кварталы самурайских усадеб за белыми стенами.",
+    "prefId": 35
+  },
+  {
+    "id": "cs3-bicchu-matsuyama",
+    "title": "Замок Бингу-Мацуяма",
+    "lon": 133.53,
+    "lat": 34.87,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Единственный оригинальный «горный замок» Японии — часто парит над облаками осенним утром.",
+    "prefId": 33
+  },
+  {
+    "id": "cs3-iya-valley",
+    "title": "Долина Ия",
+    "lon": 133.8,
+    "lat": 33.87,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Одна из «трёх сокровенных долин Японии» — подвесные мосты из виноградной лозы над ущельем.",
+    "prefId": 36
+  },
+  {
+    "id": "cs3-ritsurin",
+    "title": "Сад Рицурин (Такамацу)",
+    "lon": 134.05,
+    "lat": 34.33,
+    "type": [
+      "view"
+    ],
+    "blurb": "Один из красивейших ландшафтных садов страны — сосны, пруды и павильоны у подножия горы.",
+    "prefId": 37
+  },
+  {
+    "id": "cs3-uchiko",
+    "title": "Утико",
+    "lon": 132.65,
+    "lat": 33.55,
+    "type": [
+      "history"
+    ],
+    "blurb": "Городок эпохи расцвета торговли восковыми свечами — старые купеческие дома вдоль главной улицы.",
+    "prefId": 38
+  },
+  {
+    "id": "ky3-fukuoka-canal",
+    "title": "Canal City Hakata",
+    "lon": 130.412,
+    "lat": 33.59,
+    "type": [
+      "activity",
+      "night"
+    ],
+    "blurb": "Торгово-развлекательный комплекс с каналом внутри и фонтанным шоу по вечерам.",
+    "prefId": 40,
+    "clusterOf": 40
+  },
+  {
+    "id": "ky3-fukuoka-tower",
+    "title": "Башня Фукуоки",
+    "lon": 130.35,
+    "lat": 33.59,
+    "type": [
+      "view",
+      "night"
+    ],
+    "blurb": "Самая высокая прибрежная башня Японии — панорама залива Хаката на закате.",
+    "prefId": 40,
+    "clusterOf": 40
+  },
+  {
+    "id": "ky3-nokonoshima",
+    "title": "Остров Ноконосима",
+    "lon": 130.28,
+    "lat": 33.6,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Островной цветочный парк в заливе Хаката, куда можно доплыть на пароме за 10 минут.",
+    "prefId": 40,
+    "clusterOf": 40
+  },
+  {
+    "id": "ky3-yanagawa",
+    "title": "Янагава — «японская Венеция»",
+    "lon": 130.4,
+    "lat": 33.16,
+    "type": [
+      "view",
+      "activity"
+    ],
+    "blurb": "Прогулки на лодках по каналам эпохи Эдо через центр небольшого города.",
+    "prefId": 40
+  },
+  {
+    "id": "ky3-sasebo",
+    "title": "Залив Сасебо (99 островов)",
+    "lon": 129.72,
+    "lat": 33.16,
+    "type": [
+      "view",
+      "nature"
+    ],
+    "blurb": "Архипелаг из десятков крошечных островов, лучше всего виден с обзорных площадок на закате.",
+    "prefId": 42
+  },
+  {
+    "id": "ky3-nagasaki-peace",
+    "title": "Атомный музей Нагасаки",
+    "lon": 129.86,
+    "lat": 32.77,
+    "type": [
+      "history"
+    ],
+    "blurb": "Музей и памятник эпицентру второй атомной бомбардировки — важная часть истории города.",
+    "prefId": 42
+  },
+  {
+    "id": "ky3-usuki",
+    "title": "Каменные Будды Усуки",
+    "lon": 131.8,
+    "lat": 33.13,
+    "type": [
+      "history"
+    ],
+    "blurb": "Более 60 статуй Будды, вырезанных прямо в скале в период Хэйан.",
+    "prefId": 44
+  },
+  {
+    "id": "ky3-nichinan",
+    "title": "Прибрежная дорога Ничинан",
+    "lon": 131.4,
+    "lat": 31.6,
+    "type": [
+      "view",
+      "nature"
+    ],
+    "blurb": "Тропическая прибрежная трасса юга Кюсю с пальмами и скальными храмами Удо.",
+    "prefId": 45
+  },
+  {
+    "id": "ky3-satsuma",
+    "title": "Сад Сэнганъэн (Кагосима)",
+    "lon": 130.56,
+    "lat": 31.62,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Сад князей Симадзу с видом на вулкан Сакурадзима как «заимствованный пейзаж».",
+    "prefId": 46
+  },
+  {
+    "id": "ky3-naha-market",
+    "title": "Рынок Макиси (Наха)",
+    "lon": 127.68,
+    "lat": 26.21,
+    "type": [
+      "food"
+    ],
+    "blurb": "Крытый рынок в центре Нахи — тропические фрукты, свинина и морепродукты Окинавы.",
+    "prefId": 47
+  },
+  {
+    "id": "hk4-furepe",
+    "title": "Мыс Фурэпэ (Сиретоко)",
+    "lon": 144.9,
+    "lat": 44.075,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Обрывистый мыс с водопадом слёз, стекающим прямо со скалы в море Охотское.",
+    "prefId": 1
+  },
+  {
+    "id": "hk4-lake-akan",
+    "title": "Озеро Акан и марimo",
+    "lon": 144.08,
+    "lat": 43.45,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Дом уникальных водорослевых шаров маримо и вулканических пейзажей ainu-культуры.",
+    "prefId": 1
+  },
+  {
+    "id": "hk4-shiroikoibito",
+    "title": "Парк «Белый влюблённый» изнутри",
+    "lon": 141.29,
+    "lat": 43.09,
+    "type": [
+      "food",
+      "activity"
+    ],
+    "blurb": "Замок-фабрика знаменитого печенья, семейный аттракцион и музей шоколада в одном месте.",
+    "prefId": 1
+  },
+  {
+    "id": "hk4-sapporo-ramen-alley",
+    "title": "Рамен Ёкочо (Саппоро)",
+    "lon": 141.356,
+    "lat": 43.058,
+    "type": [
+      "food"
+    ],
+    "blurb": "Крошечный переулок с десятком рамен-лавок бок о бок — можно пробовать разные стили за один вечер.",
+    "prefId": 1,
+    "clusterOf": 1
+  },
+  {
+    "id": "th4-dewasanzan",
+    "title": "Три горы Дэва",
+    "lon": 139.98,
+    "lat": 38.71,
+    "type": [
+      "history",
+      "nature"
+    ],
+    "blurb": "Священная гора Ямабуси-аскетов — паломничество, символизирующее рождение, смерть и возрождение.",
+    "prefId": 6
+  },
+  {
+    "id": "th4-aizu-sazaedo",
+    "title": "Сазаэдо (Айдзу)",
+    "lon": 139.928,
+    "lat": 37.492,
+    "type": [
+      "history"
+    ],
+    "blurb": "Уникальная деревянная пагода с двойной спиральной лестницей, не пересекающейся друг с другом.",
+    "prefId": 7
+  },
+  {
+    "id": "th4-hiraizumi-motsuji",
+    "title": "Сад Мōцудзи (Хираидзуми)",
+    "lon": 141.1,
+    "lat": 38.99,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Пейзажный сад периода Хэйан с прудом, сохранившим первоначальную планировку тысячелетней давности.",
+    "prefId": 3
+  },
+  {
+    "id": "kt4-odaiba",
+    "title": "Одайба",
+    "lon": 139.78,
+    "lat": 35.63,
+    "type": [
+      "night",
+      "activity"
+    ],
+    "blurb": "Искусственный остров с видом на радужный мост и статую Гандама в полный рост.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt4-roppongi",
+    "title": "Роппонги Хиллз",
+    "lon": 139.729,
+    "lat": 35.66,
+    "type": [
+      "view",
+      "night"
+    ],
+    "blurb": "Небоскрёбный квартал с музеем современного искусства и панорамной площадкой Токио-Сити-Вью.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt4-yanesen",
+    "title": "Улица Юяkэ Данданн",
+    "lon": 139.767,
+    "lat": 35.728,
+    "type": [
+      "view"
+    ],
+    "blurb": "Лестница заката в квартале Янака — культовая точка для фото токийского вечернего неба.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt4-meijishrine",
+    "title": "Святилище Мэйдзи",
+    "lon": 139.699,
+    "lat": 35.676,
+    "type": [
+      "history",
+      "nature"
+    ],
+    "blurb": "Лесное святилище в самом центре Токио, посвящённое императору Мэйдзи, среди 100 000 деревьев.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt4-oyama",
+    "title": "Гора Ояма (Канагава)",
+    "lon": 139.25,
+    "lat": 35.43,
+    "type": [
+      "nature",
+      "history"
+    ],
+    "blurb": "Гора-святилище с канатной дорогой, всего в часе от Токио — один из старейших маршрутов паломничества.",
+    "prefId": 14
+  },
+  {
+    "id": "kt4-boso-strawberry",
+    "title": "Клубничные фермы Босо",
+    "lon": 140.1,
+    "lat": 35.25,
+    "type": [
+      "food"
+    ],
+    "blurb": "Сбор клубники прямо с куста — популярный зимне-весенний семейный выезд из Токио.",
+    "prefId": 12
+  },
+  {
+    "id": "cb4-nagoya-atsuta",
+    "title": "Святилище Ацута",
+    "lon": 136.91,
+    "lat": 35.13,
+    "type": [
+      "history"
+    ],
+    "blurb": "Одно из важнейших синтоистских святилищ Японии, хранящее один из трёх императорских регалий.",
+    "prefId": 23
+  },
+  {
+    "id": "cb4-echizen-crab",
+    "title": "Краб эчидзен (Фукуи)",
+    "lon": 136.0,
+    "lat": 35.9,
+    "type": [
+      "food"
+    ],
+    "blurb": "Премиальный зимний краб-снежок с побережья Фукуи — деликатес, на который специально едут зимой.",
+    "prefId": 18
+  },
+  {
+    "id": "cb4-hida-beef",
+    "title": "Говядина Хида",
+    "lon": 137.25,
+    "lat": 36.15,
+    "type": [
+      "food"
+    ],
+    "blurb": "Мраморная говядина региона Хида, наравне с Кобе и Мацусакой — подают в Такаяме прямо на гриле.",
+    "prefId": 21
+  },
+  {
+    "id": "cb4-nagano-oyaki",
+    "title": "Ояки (Нагано)",
+    "lon": 138.18,
+    "lat": 36.65,
+    "type": [
+      "food"
+    ],
+    "blurb": "Пирожки с начинкой из овощей на пару или гриле — крестьянская кухня горного региона.",
+    "prefId": 20
+  },
+  {
+    "id": "kn4-kyoto-nishijin",
+    "title": "Нисидзин — квартал ткачей",
+    "lon": 135.74,
+    "lat": 35.03,
+    "type": [
+      "history",
+      "food"
+    ],
+    "blurb": "Исторический квартал шёлкового ткачества, где всё ещё работают семейные мастерские кимоно.",
+    "prefId": 26,
+    "clusterOf": 26
+  },
+  {
+    "id": "kn4-kyoto-nightdinner",
+    "title": "Кайсэки с видом на реку Камо",
+    "lon": 135.77,
+    "lat": 35.01,
+    "type": [
+      "food",
+      "night"
+    ],
+    "blurb": "Летние деревянные террасы кавадоко над рекой Камо — ужин под открытым небом.",
+    "prefId": 26,
+    "clusterOf": 26
+  },
+  {
+    "id": "kn4-osaka-shinsaibashi",
+    "title": "Шоппинг Синсайбаси",
+    "lon": 135.501,
+    "lat": 34.674,
+    "type": [
+      "food"
+    ],
+    "blurb": "Крытая торговая улица в самом центре Осаки, соединяющая Дотомбори с районом Амэмура.",
+    "prefId": 27,
+    "clusterOf": 27
+  },
+  {
+    "id": "kn4-himeji-food",
+    "title": "Анагодон Химэдзи",
+    "lon": 134.69,
+    "lat": 34.82,
+    "type": [
+      "food"
+    ],
+    "blurb": "Донбури с жареным морским угрем — фирменное блюдо портового региона Химэдзи.",
+    "prefId": 28
+  },
+  {
+    "id": "cs4-innoshima",
+    "title": "Остров Инношима (Симанами Кайдо)",
+    "lon": 133.19,
+    "lat": 34.3,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Один из островов велотрассы Симанами Кайдо, родина цитрусовых садов над морем.",
+    "prefId": 34
+  },
+  {
+    "id": "cs4-tottori-hanakairo",
+    "title": "Цветочный парк Тоттори Ханакайро",
+    "lon": 133.99,
+    "lat": 35.44,
+    "type": [
+      "view"
+    ],
+    "blurb": "Один из крупнейших цветочных парков Японии на берегу озера Тогo.",
+    "prefId": 31
+  },
+  {
+    "id": "cs4-kochi-castle",
+    "title": "Замок Коти",
+    "lon": 133.53,
+    "lat": 33.56,
+    "type": [
+      "history"
+    ],
+    "blurb": "Один из немногих замков Японии с полностью сохранившимися оригинальными постройками донжона и дворца.",
+    "prefId": 39
+  },
+  {
+    "id": "ky4-fukuoka-momochi",
+    "title": "Пляж Момочи и башня Фукуока Тауэр",
+    "lon": 130.35,
+    "lat": 33.59,
+    "type": [
+      "view",
+      "activity"
+    ],
+    "blurb": "Искусственный городской пляж рядом с куполом Marizon и Yahoo! Dome.",
+    "prefId": 40,
+    "clusterOf": 40
+  },
+  {
+    "id": "ky4-kagoshima-food",
+    "title": "Сацума-агэ",
+    "lon": 130.56,
+    "lat": 31.6,
+    "type": [
+      "food"
+    ],
+    "blurb": "Жареные рыбные котлеты — уличная закуска, придуманная в регионе Кагосима.",
+    "prefId": 46
+  },
+  {
+    "id": "ky4-zamami",
+    "title": "Остров Дзамами (Керама)",
+    "lon": 127.3,
+    "lat": 26.22,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Лучшие пляжи для дайвинга у Окинавы — черепахи и коралловые сады прямо у берега.",
+    "prefId": 47
+  },
+  {
+    "id": "ky4-taketomi",
+    "title": "Остров Такэтоми",
+    "lon": 124.09,
+    "lat": 24.33,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Деревня с традиционными домами под красной черепицей и заборами из кораллового известняка.",
+    "prefId": 47
+  },
+  {
+    "id": "cb5-niigata-sake",
+    "title": "Сакэ региона Ниигата",
+    "lon": 139.02,
+    "lat": 37.9,
+    "type": [
+      "food"
+    ],
+    "blurb": "Мягкая вода горных рек делает Ниигату одним из лучших регионов Японии для производства сакэ.",
+    "prefId": 15
+  },
+  {
+    "id": "cb5-niigata-echigo",
+    "title": "Триеннале Этиго-Цумари",
+    "lon": 138.85,
+    "lat": 37.05,
+    "type": [
+      "activity",
+      "nature"
+    ],
+    "blurb": "Один из крупнейших фестивалей современного искусства под открытым небом — инсталляции прямо в рисовых полях.",
+    "prefId": 15
+  },
+  {
+    "id": "cb5-kanazawa-higashi",
+    "title": "Квартал гейш Хигаси Тяяй",
+    "lon": 136.665,
+    "lat": 36.572,
+    "type": [
+      "history"
+    ],
+    "blurb": "Деревянные фасады чайных домов XIX века — старейший из трёх сохранившихся кварталов гейш Канадзавы.",
+    "prefId": 17
+  },
+  {
+    "id": "cb5-kanazawa-omicho",
+    "title": "Рынок Оми-тё (Канадзава)",
+    "lon": 136.657,
+    "lat": 36.567,
+    "type": [
+      "food"
+    ],
+    "blurb": "«Кухня Канадзавы» — крытый рынок с крабами, креветками и морскими ежами региона Хокурику.",
+    "prefId": 17
+  },
+  {
+    "id": "cb5-noto-senmaida",
+    "title": "Рисовые террасы Сэнмайда",
+    "lon": 137.3,
+    "lat": 37.45,
+    "type": [
+      "view"
+    ],
+    "blurb": "Тысяча крошечных рисовых чеков спускаются прямо к морю — вечером их подсвечивают гирляндами.",
+    "prefId": 17
+  },
+  {
+    "id": "kt5-gunma-onsen2",
+    "title": "Икахо Онсэн",
+    "lon": 138.87,
+    "lat": 36.47,
+    "type": [
+      "onsen"
+    ],
+    "blurb": "365 каменных ступеней с онсэн-гостиницами по обе стороны — один из символических онсэн-городков Гумма.",
+    "prefId": 10
+  },
+  {
+    "id": "kt5-gunma-tanigawa",
+    "title": "Гора Танигава",
+    "lon": 138.93,
+    "lat": 36.8,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Популярная среди альпинистов гора на границе снежных регионов — канатная дорога и смотровые площадки.",
+    "prefId": 10
+  },
+  {
+    "id": "kt5-ibaraki-ushiku",
+    "title": "Дайбуцу Усику",
+    "lon": 140.15,
+    "lat": 35.98,
+    "type": [
+      "history"
+    ],
+    "blurb": "Одна из самых высоких статуй Будды в мире — 120 метров вместе с постаментом.",
+    "prefId": 8
+  },
+  {
+    "id": "kt5-tochigi-oya",
+    "title": "Каменоломни Ōя",
+    "lon": 139.83,
+    "lat": 36.57,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Подземный лабиринт каменоломен, превращённый в музей и съёмочную площадку — гигантские залы под землёй.",
+    "prefId": 9
+  },
+  {
+    "id": "kt5-saitama-moroyama",
+    "title": "Осенние клёны Тидорибути (Сайтама)",
+    "lon": 139.28,
+    "lat": 35.95,
+    "type": [
+      "view"
+    ],
+    "blurb": "Долина реки Косигая, окрашенная в багрянец — один из ближайших к Токио маршрутов для любования кленами.",
+    "prefId": 11
+  },
+  {
+    "id": "kt5-saitama-nagatoro",
+    "title": "Нагаторо",
+    "lon": 139.11,
+    "lat": 36.1,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Сплав на лодках по каменистому ущелью реки Ара — «японский Рейн» в часе от Токио.",
+    "prefId": 11
+  },
+  {
+    "id": "cs5-saga-yutoku",
+    "title": "Святилище Ютоку Инари",
+    "lon": 130.24,
+    "lat": 33.24,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Одно из трёх крупнейших святилищ Инари страны — ярко-красный павильон на сваях среди гор.",
+    "prefId": 41
+  },
+  {
+    "id": "cs5-saga-balloon",
+    "title": "Международный фестиваль воздушных шаров (Сага)",
+    "lon": 130.3,
+    "lat": 33.25,
+    "type": [
+      "festival"
+    ],
+    "blurb": "Крупнейший в Азии фестиваль воздушных шаров — сотни разноцветных шаров над рекой каждую осень.",
+    "prefId": 41
+  },
+  {
+    "id": "cs6-tottori-mizuki",
+    "title": "Аллея Мидзуки Сигэру",
+    "lon": 133.33,
+    "lat": 35.55,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Улица, украшенная бронзовыми статуями йокай — духов из манги мастера Сигэру Мидзуки.",
+    "prefId": 31
+  },
+  {
+    "id": "cs6-tottori-uradome",
+    "title": "Побережье Урадомэ",
+    "lon": 134.35,
+    "lat": 35.62,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Скалистый берег с гротами и прозрачной водой — экскурсии на лодках со стеклянным дном.",
+    "prefId": 31
+  },
+  {
+    "id": "cb6-toyama-gokayama",
+    "title": "Гокаяма",
+    "lon": 136.93,
+    "lat": 36.36,
+    "type": [
+      "history"
+    ],
+    "blurb": "Соседняя деревня Сиракава-го с домами гассё — та же архитектура, но заметно меньше туристов.",
+    "prefId": 16
+  },
+  {
+    "id": "kn5-shiga-hieizan",
+    "title": "Гора Хиэй",
+    "lon": 135.84,
+    "lat": 35.07,
+    "type": [
+      "history",
+      "nature"
+    ],
+    "blurb": "Главный монастырский комплекс школы Тэндай, у истоков японского буддизма, на границе Киото и Сиги.",
+    "prefId": 25
+  },
+  {
+    "id": "kn5-wakayama-castle",
+    "title": "Замок Вакаяма",
+    "lon": 135.17,
+    "lat": 34.23,
+    "type": [
+      "history"
+    ],
+    "blurb": "Замок клана Токугава, одна из трёх ветвей семьи, правившей Японией в период Эдо.",
+    "prefId": 30
+  },
+  {
+    "id": "kt6-tokyo-sumida",
+    "title": "Небоскрёб Токио Скайтри",
+    "lon": 139.81,
+    "lat": 35.71,
+    "type": [
+      "view",
+      "night"
+    ],
+    "blurb": "Самая высокая башня Японии — панорама всего мегаполиса с высоты 350 и 450 метров.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt6-tokyo-todaiji",
+    "title": "Императорский дворец и парк Кокё",
+    "lon": 139.753,
+    "lat": 35.685,
+    "type": [
+      "history"
+    ],
+    "blurb": "Резиденция императорской семьи в центре Токио — рвы, стены и сады эпохи Эдо посреди небоскрёбов.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "hk5-lavender-farms",
+    "title": "Ферма цветов Сикисай-но-Ока",
+    "lon": 142.46,
+    "lat": 43.36,
+    "type": [
+      "view"
+    ],
+    "blurb": "Разноцветные полосы цветов на холмах Биэй — открыточный вид с воздушными шарами над полем.",
+    "prefId": 1
+  },
+  {
+    "id": "hk5-hokkaido-jingu",
+    "title": "Святилище Хоккайдо-дзингу",
+    "lon": 141.32,
+    "lat": 43.06,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Главное синтоистское святилище острова в парке Маруяма — сакура и белки в дикой природе прямо в черте города.",
+    "prefId": 1,
+    "clusterOf": 1
+  },
+  {
+    "id": "hk5-utoro",
+    "title": "Утoro (ворота в Сиретоко)",
+    "lon": 144.98,
+    "lat": 44.06,
+    "type": [
+      "nature",
+      "onsen"
+    ],
+    "blurb": "Рыбацкий посёлок у входа в национальный парк — круизы вдоль скал и дикий онсэн на берегу моря.",
+    "prefId": 1
+  },
+  {
+    "id": "th5-aomori-apple",
+    "title": "Яблоки Аомори",
+    "lon": 140.74,
+    "lat": 40.82,
+    "type": [
+      "food"
+    ],
+    "blurb": "Более половины всех яблок Японии выращивают именно здесь — осенние сады открыты для сбора урожая.",
+    "prefId": 2
+  },
+  {
+    "id": "th5-miyagi-oshika",
+    "title": "Полуостров Осика",
+    "lon": 141.44,
+    "lat": 38.3,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Дикий скалистый полуостров, куда почти не добираются туристы — олени и виды на Тихий океан.",
+    "prefId": 4
+  },
+  {
+    "id": "th5-fukushima-abukuma",
+    "title": "Пещеры Абукума",
+    "lon": 140.68,
+    "lat": 37.53,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Крупнейшая известняковая пещерная система Тохоку с подсвеченными залами сталактитов.",
+    "prefId": 7
+  },
+  {
+    "id": "kt7-kanagawa-odawara",
+    "title": "Замок Одавара",
+    "lon": 139.15,
+    "lat": 35.25,
+    "type": [
+      "history"
+    ],
+    "blurb": "Замок клана Ходзё у подножия Хаконэ — стратегические ворота в регион Канто в средневековье.",
+    "prefId": 14
+  },
+  {
+    "id": "kt7-chiba-nokogiriyama",
+    "title": "Гора Нокогиriяма",
+    "lon": 139.86,
+    "lat": 35.19,
+    "type": [
+      "view",
+      "history"
+    ],
+    "blurb": "«Пила-гора» с гигантским Буддой, вырезанным в скале, и обзорной площадкой «Ад-край».",
+    "prefId": 12
+  },
+  {
+    "id": "kt7-saitama-hitsujiyama",
+    "title": "Холм Хицудзияма (Читибу)",
+    "lon": 139.08,
+    "lat": 35.98,
+    "type": [
+      "view"
+    ],
+    "blurb": "Розовые ковры мохлы (шибазакура) весной на фоне гор Титибу.",
+    "prefId": 11
+  },
+  {
+    "id": "cb7-yamanashi-shosenkyo2",
+    "title": "Виноградники Кацунумы",
+    "lon": 138.72,
+    "lat": 35.66,
+    "type": [
+      "food"
+    ],
+    "blurb": "Крупнейший винодельческий регион Японии — десятки семейных виноделен с дегустациями.",
+    "prefId": 19
+  },
+  {
+    "id": "cb7-shizuoka-nihondaira",
+    "title": "Нихондайра и Кунодзан",
+    "lon": 138.45,
+    "lat": 34.97,
+    "type": [
+      "view",
+      "history"
+    ],
+    "blurb": "Смотровая площадка с видом на Фудзи и залив Суруга, канатная дорога к святилищу Токугавы Иэясу.",
+    "prefId": 22
+  },
+  {
+    "id": "cb7-aichi-toyokawa",
+    "title": "Инари Тоёкава",
+    "lon": 137.37,
+    "lat": 34.82,
+    "type": [
+      "history"
+    ],
+    "blurb": "Одно из трёх главных святилищ Инари Японии наряду с Фусими и Ютоку.",
+    "prefId": 23
+  },
+  {
+    "id": "cb7-mie-nabana",
+    "title": "Сад огней Набана-но-сато",
+    "lon": 136.72,
+    "lat": 35.07,
+    "type": [
+      "view",
+      "activity"
+    ],
+    "blurb": "Одна из крупнейших зимних иллюминаций Японии — миллионы светодиодов среди цветников.",
+    "prefId": 24
+  },
+  {
+    "id": "kn6-kyoto-kifune",
+    "title": "Кибунэ и Кураma",
+    "lon": 135.76,
+    "lat": 35.12,
+    "type": [
+      "nature",
+      "onsen"
+    ],
+    "blurb": "Горная деревня с ужином на помостах над рекой летом — популярный способ спастись от жары Киото.",
+    "prefId": 26,
+    "clusterOf": 26
+  },
+  {
+    "id": "kn6-kyoto-uji",
+    "title": "Удзи",
+    "lon": 135.8,
+    "lat": 34.89,
+    "type": [
+      "food",
+      "history"
+    ],
+    "blurb": "Столица японского чая матча и храм Бёдоин, изображённый на монете в 10 йен.",
+    "prefId": 26
+  },
+  {
+    "id": "kn6-osaka-minoo",
+    "title": "Водопад Мино",
+    "lon": 135.47,
+    "lat": 34.85,
+    "type": [
+      "nature",
+      "food"
+    ],
+    "blurb": "Ближайший к Осаке водопад в национальном парке — осенью продают жареные кленовые листья темпура.",
+    "prefId": 27
+  },
+  {
+    "id": "kn6-hyogo-takeda",
+    "title": "Замок Такэда — «японский Мачу-Пикчу»",
+    "lon": 134.82,
+    "lat": 35.3,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Руины горного замка, парящие над облаками осенним утром — один из самых фотогеничных видов страны.",
+    "prefId": 28
+  },
+  {
+    "id": "cs7-okayama-bizen",
+    "title": "Керамика Бидзэн",
+    "lon": 134.16,
+    "lat": 34.75,
+    "type": [
+      "history"
+    ],
+    "blurb": "Один из шести древнейших керамических центров Японии — обжиг без глазури, только огонь и глина.",
+    "prefId": 33
+  },
+  {
+    "id": "cs7-hiroshima-tomonoura2",
+    "title": "Сакэ Ономити и Тайсяку-кё",
+    "lon": 133.0,
+    "lat": 34.75,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Известняковое ущелье с висячим мостом в глубине острова Хонсю.",
+    "prefId": 34
+  },
+  {
+    "id": "cs7-yamaguchi-motonosumi",
+    "title": "Святилище Мотоносуми Инари",
+    "lon": 131.29,
+    "lat": 34.52,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "123 красных тории каскадом спускаются к самому обрыву над морем — попало в топ CNN самых красивых мест Японии.",
+    "prefId": 35
+  },
+  {
+    "id": "cs7-tokushima-oboke",
+    "title": "Ущелье Обоке-Кобокэ",
+    "lon": 133.8,
+    "lat": 33.9,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Сплав на лодках по узкому скалистому каньону реки Ёсино в горах Ия.",
+    "prefId": 36
+  },
+  {
+    "id": "cs7-ehime-matsuyama-food",
+    "title": "Мандарины Эхимэ",
+    "lon": 132.77,
+    "lat": 33.84,
+    "type": [
+      "food"
+    ],
+    "blurb": "Регион даёт больше цитрусовых, чем любой другой в Японии — десятки местных сортов.",
+    "prefId": 38
+  },
+  {
+    "id": "ky5-saga-arita2",
+    "title": "Керамические печи Имари",
+    "lon": 129.87,
+    "lat": 33.26,
+    "type": [
+      "history"
+    ],
+    "blurb": "Портовый город, откуда фарфор Арита веками экспортировали в Европу через голландскую Ост-Индскую компанию.",
+    "prefId": 41
+  },
+  {
+    "id": "ky5-nagasaki-hashima",
+    "title": "Остров Хасима (Гункандзима)",
+    "lon": 129.74,
+    "lat": 32.63,
+    "type": [
+      "history"
+    ],
+    "blurb": "Заброшенный остров-шахта, прообраз логова злодея в фильме о Джеймсе Бонде — экскурсии на катере.",
+    "prefId": 42
+  },
+  {
+    "id": "ky5-kumamoto-suizenji",
+    "title": "Сад Суйдзэндзи",
+    "lon": 130.73,
+    "lat": 32.79,
+    "type": [
+      "view"
+    ],
+    "blurb": "Ландшафтный сад, миниатюрно воссоздающий 53 станции старого тракта Токайдо, включая гору Фудзи.",
+    "prefId": 43
+  },
+  {
+    "id": "ky5-oita-usa",
+    "title": "Святилище Уса Хатимангу",
+    "lon": 131.38,
+    "lat": 33.53,
+    "type": [
+      "history"
+    ],
+    "blurb": "Главное из более чем 40 000 святилищ Хатимана по всей Японии.",
+    "prefId": 44
+  },
+  {
+    "id": "ky5-kagoshima-fukiagehama",
+    "title": "Пляж Фукиагехама",
+    "lon": 130.3,
+    "lat": 31.35,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Один из крупнейших песчаных пляжей Японии, известный ежегодным фестивалем песчаных скульптур.",
+    "prefId": 46
+  },
+  {
+    "id": "ky5-yonaguni",
+    "title": "Остров Йонагуни",
+    "lon": 122.98,
+    "lat": 24.45,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Самая западная точка Японии, знаменита загадочными подводными «руинами» для дайверов.",
+    "prefId": 47
+  },
+  {
+    "id": "hk6-shakotan",
+    "title": "Полуостров Сяkotan",
+    "lon": 140.47,
+    "lat": 43.25,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Скалистый мыс с водой настолько прозрачной, что её называют «синий Сяkotan».",
+    "prefId": 1
+  },
+  {
+    "id": "hk6-onneyu",
+    "title": "Онneю Онсэн и парк белок",
+    "lon": 143.65,
+    "lat": 43.85,
+    "type": [
+      "onsen",
+      "activity"
+    ],
+    "blurb": "Онсэн-городок с парком, где можно покормить летяг и белок прямо с руки.",
+    "prefId": 1
+  },
+  {
+    "id": "th6-yamagata-mogami",
+    "title": "Сплав по реке Могами",
+    "lon": 140.15,
+    "lat": 38.75,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Одна из трёх самых бурных рек Японии, воспетая поэтом Басё в «Тропках на север».",
+    "prefId": 6
+  },
+  {
+    "id": "th6-iwate-geibikei2",
+    "title": "Хираидзуми — весь комплекс",
+    "lon": 141.11,
+    "lat": 38.99,
+    "type": [
+      "history"
+    ],
+    "blurb": "Объект ЮНЕСКО целиком — пять храмовых и садовых ансамблей золотого века Северной Японии.",
+    "prefId": 3
+  },
+  {
+    "id": "th6-akita-samurai",
+    "title": "Самурайский квартал Какунодатэ",
+    "lon": 140.567,
+    "lat": 39.596,
+    "type": [
+      "history"
+    ],
+    "blurb": "Шесть сохранившихся усадеб самураев среднего ранга, открытых для посещения.",
+    "prefId": 5
+  },
+  {
+    "id": "kt8-tokyo-jindaiji",
+    "title": "Дзиндайдзи",
+    "lon": 139.55,
+    "lat": 35.67,
+    "type": [
+      "history",
+      "food"
+    ],
+    "blurb": "Второй по древности храм Токио, знаменит лапшой соба, которую подают в округе веками.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt8-tokyo-kagurazaka",
+    "title": "Кагурадзака",
+    "lon": 139.74,
+    "lat": 35.7,
+    "type": [
+      "history",
+      "food"
+    ],
+    "blurb": "Бывший квартал гейш с французским влиянием — мощёные переулки и рестораны французской кухни.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt8-kanagawa-yugawara",
+    "title": "Югавара Онсэн",
+    "lon": 139.1,
+    "lat": 35.15,
+    "type": [
+      "onsen"
+    ],
+    "blurb": "Тихий приморский онсэн-городок с видом на залив Сагами, любимый японскими писателями.",
+    "prefId": 14
+  },
+  {
+    "id": "kt8-ibaraki-fukuroda",
+    "title": "Водопад Фукурода",
+    "lon": 140.49,
+    "lat": 36.73,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Один из трёх знаменитых водопадов Японии — зимой частично замерзает ледяными колоннами.",
+    "prefId": 8
+  },
+  {
+    "id": "cb8-niigata-yuzawa",
+    "title": "Юдзава Онсэн",
+    "lon": 138.81,
+    "lat": 36.93,
+    "type": [
+      "onsen",
+      "activity"
+    ],
+    "blurb": "Горнолыжный и онсэн-курорт, воспетый в романе Кавабаты «Снежная страна».",
+    "prefId": 15
+  },
+  {
+    "id": "cb8-fukui-tojinbo2",
+    "title": "Морепродукты Фукуи",
+    "lon": 136.0,
+    "lat": 36.06,
+    "type": [
+      "food"
+    ],
+    "blurb": "Снежный краб и морской ёж побережья Японского моря — сезонный деликатес региона.",
+    "prefId": 18
+  },
+  {
+    "id": "cb8-gifu-nagaragawa",
+    "title": "Рыбалка с бакланами на реке Нагара",
+    "lon": 136.76,
+    "lat": 35.43,
+    "type": [
+      "activity",
+      "nature"
+    ],
+    "blurb": "Традиционная рыбалка укай с прирученными бакланами — практикуется больше 1300 лет.",
+    "prefId": 21
+  },
+  {
+    "id": "cb8-shizuoka-sumatakyo",
+    "title": "Ущелье Суматакё",
+    "lon": 138.13,
+    "lat": 35.15,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Ярко-бирюзовый подвесной мост «Мост мечты» над рекой посреди гор.",
+    "prefId": 22
+  },
+  {
+    "id": "kn7-kyoto-ohara",
+    "title": "Охара",
+    "lon": 135.83,
+    "lat": 35.12,
+    "type": [
+      "history",
+      "nature"
+    ],
+    "blurb": "Тихая горная деревня с монастырями, воспетая в классической японской литературе за свой покой.",
+    "prefId": 26,
+    "clusterOf": 26
+  },
+  {
+    "id": "kn7-osaka-nakanoshima",
+    "title": "Остров Наканосима",
+    "lon": 135.5,
+    "lat": 34.69,
+    "type": [
+      "view",
+      "history"
+    ],
+    "blurb": "Исторический центр деловой Осаки на острове между двумя реками — здания начала XX века.",
+    "prefId": 27,
+    "clusterOf": 27
+  },
+  {
+    "id": "kn7-nara-horyuji",
+    "title": "Хорюдзи",
+    "lon": 135.73,
+    "lat": 34.61,
+    "type": [
+      "history"
+    ],
+    "blurb": "Старейшие деревянные постройки в мире — храмовый комплекс VII века, объект ЮНЕСКО.",
+    "prefId": 29
+  },
+  {
+    "id": "kn7-shiga-miho",
+    "title": "Музей Michu",
+    "lon": 136.0,
+    "lat": 34.9,
+    "type": [
+      "activity",
+      "view"
+    ],
+    "blurb": "Музей архитектора И. М. Пея, спрятанный в горах — здание видно только через тоннель.",
+    "prefId": 25
+  },
+  {
+    "id": "cs8-shimane-adachi",
+    "title": "Сад музея Адати",
+    "lon": 133.07,
+    "lat": 35.42,
+    "type": [
+      "view"
+    ],
+    "blurb": "Считается лучшим японским садом страны 20 лет подряд по версии профильных изданий.",
+    "prefId": 32
+  },
+  {
+    "id": "cs8-okayama-washuzan",
+    "title": "Смотровая Васюдзан",
+    "lon": 133.8,
+    "lat": 34.47,
+    "type": [
+      "view"
+    ],
+    "blurb": "Панорама архипелага Внутреннего моря Сето и моста Сето-Охаси с высоты холма.",
+    "prefId": 33
+  },
+  {
+    "id": "cs8-kagawa-shodoshima2",
+    "title": "Ущелье Каннон-дōин (Сёдосима)",
+    "lon": 134.19,
+    "lat": 34.5,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Одно из трёх крупнейших ущелий Японии — канатная дорога через скальные разломы острова.",
+    "prefId": 37
+  },
+  {
+    "id": "cs8-kochi-cape",
+    "title": "Мыс Асидзури",
+    "lon": 133.02,
+    "lat": 32.72,
+    "type": [
+      "view",
+      "nature"
+    ],
+    "blurb": "Скалистый мыс с маяком на самой южной точке Сикоку — пункт паломнического маршрута.",
+    "prefId": 39
+  },
+  {
+    "id": "ky6-nagasaki-sasebo2",
+    "title": "База ВМС и порт Сасебо",
+    "lon": 129.72,
+    "lat": 33.16,
+    "type": [
+      "view"
+    ],
+    "blurb": "Портовый город с уникальным смешением военно-морской и рыбацкой культуры.",
+    "prefId": 42
+  },
+  {
+    "id": "ky6-kumamoto-amakusa",
+    "title": "Христианская история Амакуса",
+    "lon": 130.2,
+    "lat": 32.47,
+    "type": [
+      "history"
+    ],
+    "blurb": "Церкви и музеи, посвящённые скрытым христианам эпохи Эдо — объект ЮНЕСКО.",
+    "prefId": 43
+  },
+  {
+    "id": "ky6-miyazaki-umagase",
+    "title": "Уманосэ (Такатихо)",
+    "lon": 131.31,
+    "lat": 32.71,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Каменное ложе реки в форме конской спины у подножия водопада Такатихо.",
+    "prefId": 45
+  },
+  {
+    "id": "ky6-okinawa-kokusai",
+    "title": "Улица Кокусай-дори (Наха)",
+    "lon": 127.68,
+    "lat": 26.21,
+    "type": [
+      "food",
+      "night"
+    ],
+    "blurb": "Главная торговая и ресторанная улица Нахи — сувениры, авасамори и уличная еда.",
+    "prefId": 47
+  },
+  {
+    "id": "hk7-noboribetsu-jigoku",
+    "title": "Прогулка по Долине ада",
+    "lon": 141.166,
+    "lat": 42.503,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Дымящийся кратер с десятками горячих источников, откуда и питается онсэн Нобарибецу.",
+    "prefId": 1,
+    "clusterOf": 1
+  },
+  {
+    "id": "th7-sendai-zuihoden",
+    "title": "Мавзолей Дзуйходэн",
+    "lon": 140.855,
+    "lat": 38.245,
+    "type": [
+      "history"
+    ],
+    "blurb": "Богато украшенная усыпальница даймё Датэ Масамунэ, основателя Сендая.",
+    "prefId": 4
+  },
+  {
+    "id": "th7-fukushima-oze",
+    "title": "Болото Одзе",
+    "lon": 139.28,
+    "lat": 36.93,
+    "type": [
+      "nature"
+    ],
+    "blurb": "Высокогорное болото на границе четырёх префектур — редчайшая экосистема, покрытая цветами летом.",
+    "prefId": 7
+  },
+  {
+    "id": "kt9-tokyo-ghibli",
+    "title": "Музей Гибли",
+    "lon": 139.57,
+    "lat": 35.7,
+    "type": [
+      "activity"
+    ],
+    "blurb": "Музей студии Миядзаки в парке Иноkasira — попасть можно только по билетам, раскупаемым заранее.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt9-tokyo-sensoji2",
+    "title": "Накамисэ-дōри (Асакуса)",
+    "lon": 139.796,
+    "lat": 35.714,
+    "type": [
+      "food",
+      "history"
+    ],
+    "blurb": "Торговая улица к храму Сэнсодзи с традиционными сладостями и сувенирами — существует четыре века.",
+    "prefId": 13,
+    "clusterOf": 13
+  },
+  {
+    "id": "kt9-kanagawa-enoshima2",
+    "title": "Аквариум Эносима",
+    "lon": 139.48,
+    "lat": 35.31,
+    "type": [
+      "nature",
+      "activity"
+    ],
+    "blurb": "Один из известнейших аквариумов Японии прямо на берегу залива Сагами.",
+    "prefId": 14
+  },
+  {
+    "id": "cb9-nagano-togakushi",
+    "title": "Тогакуси и соба",
+    "lon": 138.12,
+    "lat": 36.77,
+    "type": [
+      "food",
+      "nature"
+    ],
+    "blurb": "Горное святилище в кедровом лесу, знаменитое лучшей собой региона Нагано.",
+    "prefId": 20
+  },
+  {
+    "id": "cb9-yamanashi-koshu",
+    "title": "Персики и виноград Кофу",
+    "lon": 138.57,
+    "lat": 35.66,
+    "type": [
+      "food"
+    ],
+    "blurb": "Долина Кофу — крупнейший производитель фруктов Японии, сады открыты для сбора урожая летом.",
+    "prefId": 19
+  },
+  {
+    "id": "kn8-kyoto-sagano",
+    "title": "Бамбуковая тропа Сагано ночью",
+    "lon": 135.67,
+    "lat": 35.02,
+    "type": [
+      "view",
+      "night"
+    ],
+    "blurb": "Та же бамбуковая роща Арасиямы, но с вечерней подсветкой во время осеннего фестиваля.",
+    "prefId": 26,
+    "clusterOf": 26
+  },
+  {
+    "id": "kn8-nara-todaiji-lantern",
+    "title": "Праздник фонарей Тодайдзи",
+    "lon": 135.84,
+    "lat": 34.69,
+    "type": [
+      "festival"
+    ],
+    "blurb": "Тысячи бронзовых и каменных фонарей зажигают одновременно дважды в год.",
+    "prefId": 29
+  },
+  {
+    "id": "cs9-hiroshima-shukkeien",
+    "title": "Сад Сюккэйэн",
+    "lon": 132.46,
+    "lat": 34.4,
+    "type": [
+      "view"
+    ],
+    "blurb": "Компактный ландшафтный сад в центре Хиросимы, воссоздающий пейзаж озера Сиху в миниатюре.",
+    "prefId": 34
+  },
+  {
+    "id": "cs9-ehime-shimanami2",
+    "title": "Мост Курусима-Кайкё",
+    "lon": 132.99,
+    "lat": 34.15,
+    "type": [
+      "view"
+    ],
+    "blurb": "Крупнейший в мире трёхпролётный подвесной мост — часть велотрассы Симанами Кайдо.",
+    "prefId": 38
+  },
+  {
+    "id": "ky7-fukuoka-hakata-gion",
+    "title": "Хаката Гион Ямакаса",
+    "lon": 130.42,
+    "lat": 33.6,
+    "type": [
+      "festival"
+    ],
+    "blurb": "Мужчины несут гигантские деревянные платформы на бегу по улицам Хакаты на рассвете.",
+    "prefId": 40,
+    "clusterOf": 40
+  },
+  {
+    "id": "ky7-kagoshima-ibusuki2",
+    "title": "Мыс Нагасакибана",
+    "lon": 130.6,
+    "lat": 31.2,
+    "type": [
+      "view"
+    ],
+    "blurb": "Самая южная точка полуострова Сацума с видом на вулкан Кайimondake.",
+    "prefId": 46
+  },
+  {
+    "id": "ky7-okinawa-cape-hedo",
+    "title": "Мыс Хэдо",
+    "lon": 128.25,
+    "lat": 26.87,
+    "type": [
+      "view",
+      "nature"
+    ],
+    "blurb": "Самая северная точка главного острова Окинавы — где встречаются Восточно-Китайское море и Тихий океан.",
+    "prefId": 47
+  },
+  {
+    "id": "city-1",
+    "title": "Хоккайдо",
+    "lon": 141.354,
+    "lat": 43.061,
+    "type": [],
+    "blurb": "",
+    "prefId": 1,
+    "cluster": true,
+    "pageUrl": "hokkaido.html"
+  }
+];
+
+  var TOTAL = PINS.filter(function(p){return !p.cluster;}).length;
+
+  var map = document.getElementById('map');
+  var pop = document.getElementById('pop');
+  var countEl = document.getElementById('count');
+
+  map.addEventListener('japan-map:ready', function(){
+    map.pins = PINS;
+    applyFilters();
+  });
+
+  // ---- filters state (single axis: type) ----
+  var state = { type:new Set() };
+  var mode = 'or';
+
+  document.querySelectorAll('.chips[data-axis] .chip').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var axis = btn.parentElement.dataset.axis, val = btn.dataset.val;
+      btn.classList.toggle('on');
+      if (state[axis].has(val)) state[axis].delete(val); else state[axis].add(val);
+      applyFilters();
+    });
+  });
+
+  document.getElementById('modeOr').addEventListener('click', function(){ setMode('or'); });
+  document.getElementById('modeAnd').addEventListener('click', function(){ setMode('and'); });
+  function setMode(m){
+    mode = m;
+    document.getElementById('modeOr').classList.toggle('on', m==='or');
+    document.getElementById('modeAnd').classList.toggle('on', m==='and');
+    applyFilters();
+  }
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    state = { type:new Set() };
+    document.querySelectorAll('.chip.on').forEach(function(b){ b.classList.remove('on'); });
+    applyFilters();
+  });
+
+  document.getElementById('filtersHead').addEventListener('click', function(){
+    document.getElementById('filters').classList.toggle('collapsed');
+  });
+
+  function pinMatches(p){
+    var tags = p.type || [];
+    if (!state.type.size) return true;
+    if (mode === 'and') {
+      // single-axis AND behaves like OR here (a pin can't hold every selected type
+      // unless it genuinely has all of them) — kept for consistency with the toggle.
+      return Array.from(state.type).every(function(t){ return tags.indexOf(t) !== -1; });
+    }
+    return tags.some(function(t){ return state.type.has(t); });
+  }
+
+
+  function applyFilters(){
+    var matched = new Set();
+    var shown = 0;
+    PINS.forEach(function(p){
+      if (p.cluster) { matched.add(p.id); return; } // city markers always visible
+      if (pinMatches(p)) { matched.add(p.id); shown++; }
+    });
+    if (typeof map.setPinMatch === 'function') map.setPinMatch(matched);
+    countEl.textContent = shown + ' из ' + TOTAL + ' точек';
+    hidePop();
+  }
+
+  // ---- popover ----
+  map.addEventListener('japan-map:pin', function(e){
+    var d = e.detail.pin;
+    if (d.cluster) return; // click already triggers zoom
+    showPop(d, e);
+  });
+
+  function showPop(d, evt){
+    var kj = d.kj ? '<span class="kj" aria-hidden="true">' + d.kj + '</span>' : '';
+    var link = d.url ? '<a class="go" href="' + d.url + '">Читать статью →</a>'
+                      : '<span class="tagline">Статья появится позже</span>';
+    pop.innerHTML = '<button class="close" aria-label="Закрыть">✕</button>' + kj +
+      '<h3>' + d.title + '</h3><p>' + d.blurb + '</p>' + link;
+    var board = document.querySelector('.board').getBoundingClientRect();
+    var x = evt.clientX - board.left, y = evt.clientY - board.top;
+    var w = 260;
+    var left = Math.min(Math.max(8, x + 14), board.width - w - 8);
+    var top = Math.min(Math.max(8, y - 10), board.height - 160);
+    pop.style.left = left + 'px'; pop.style.top = top + 'px';
+    pop.classList.add('show');
+    pop.querySelector('.close').addEventListener('click', hidePop);
+  }
+  function hidePop(){ pop.classList.remove('show'); }
+  document.querySelector('.board').addEventListener('click', function(e){
+    if (!pop.contains(e.target) && !e.target.closest('.jm-pin')) hidePop();
+  });
+})();
+
+</script>
 </body>
 </html>
