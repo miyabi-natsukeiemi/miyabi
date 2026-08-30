@@ -891,6 +891,8 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
     46:['Kagoshima','鹿児島市'],47:['Okinawa','那覇市']
   };
   var PREF_JA = {1:'北海道',2:'青森県',3:'岩手県',4:'宮城県',5:'秋田県',6:'山形県',7:'福島県',8:'茨城県',9:'栃木県',10:'群馬県',11:'埼玉県',12:'千葉県',13:'東京都',14:'神奈川県',15:'新潟県',16:'富山県',17:'石川県',18:'福井県',19:'山梨県',20:'長野県',21:'岐阜県',22:'静岡県',23:'愛知県',24:'三重県',25:'滋賀県',26:'京都府',27:'大阪府',28:'兵庫県',29:'奈良県',30:'和歌山県',31:'鳥取県',32:'島根県',33:'岡山県',34:'広島県',35:'山口県',36:'徳島県',37:'香川県',38:'愛媛県',39:'高知県',40:'福岡県',41:'佐賀県',42:'長崎県',43:'熊本県',44:'大分県',45:'宮崎県',46:'鹿児島県',47:'沖縄県'};
+  var PREF_RU = {1:'Хоккайдо',2:'Аомори',3:'Иватэ',4:'Мияги',5:'Акита',6:'Ямагата',7:'Фукусима',8:'Ибараки',9:'Тотиги',10:'Гумма',11:'Сайтама',12:'Тиба',13:'Токио',14:'Канагава',15:'Ниигата',16:'Тояма',17:'Исикава',18:'Фукуи',19:'Яманаси',20:'Нагано',21:'Гифу',22:'Сидзуока',23:'Айти',24:'Миэ',25:'Сига',26:'Киото',27:'Осака',28:'Хёго',29:'Нара',30:'Вакаяма',31:'Тоттори',32:'Симанэ',33:'Окаяма',34:'Хиросима',35:'Ямагути',36:'Токусима',37:'Кагава',38:'Эхимэ',39:'Коти',40:'Фукуока',41:'Сага',42:'Нагасаки',43:'Кумамото',44:'Оита',45:'Миядзаки',46:'Кагосима',47:'Окинава'};
+  var REGION_RU = {hokkaido:'Хоккайдо', tohoku:'Тохоку', kanto:'Канто', chubu:'Тюбу', kinki:'Кинки', chugoku:'Тюгоку', shikoku:'Сикоку', kyushu:'Кюсю и Окинава'};
 
   var REGION_OF = {}; REGIONS.forEach(function (r) { r.ids.forEach(function (i) { REGION_OF[i] = r.id; }); });
   var byId = {}; REGIONS.forEach(function (r) { byId[r.id] = r; });
@@ -1101,7 +1103,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
         .then(function (r) { self._draw(r[0], r[1]); })
         .catch(function (e) {
           var l = self._root.querySelector('.loading');
-          if (l) l.textContent = '地図データを読み込めませんでした';
+          if (l) l.textContent = 'Не удалось загрузить карту';
           console.error('[japan-map]', e);
         });
     }
@@ -1127,11 +1129,11 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
         '<div class="shell">' +
           '<aside class="rail"><div class="head">地方 / Regions</div><div class="rail-list"></div>' +
             '<div class="rail-foot">地方をクリックすると拡大し、そのまま都道府県を選べます。<br>Esc で一段戻ります。</div></aside>' +
-          '<main class="stage"><svg role="img" aria-label="日本の地方地図" preserveAspectRatio="xMidYMid meet"></svg>' +
-            '<nav class="crumb" aria-label="階層"></nav>' +
-            '<button class="back" type="button">← 全体に戻る</button>' +
+          '<main class="stage"><svg role="img" aria-label="Карта регионов Японии" preserveAspectRatio="xMidYMid meet"></svg>' +
+            '<nav class="crumb" aria-label="Навигация"></nav>' +
+            '<button class="back" type="button">← Ко всей карте</button>' +
             '<div class="cap">Mercator · 47 prefectures · 沖縄は別枠表示</div>' +
-            '<div class="loading">地図データを読み込み中…</div></main>' +
+            '<div class="loading">Загрузка карты…</div></main>' +
           '<aside class="panel"><div class="head panel-head">地方情報 / Region</div>' +
             '<div class="body"></div>' +
             '<div class="hint">地方を選択すると、ここに詳細が表示されます。</div></aside>' +
@@ -1196,8 +1198,9 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       var proj = d3.geoMercator().fitExtent([[PAD, PAD], [W - PAD, H - PAD]],
         { type: 'FeatureCollection', features: this._main });
       var path = d3.geoPath(proj);
-      var pathOki = d3.geoPath(d3.geoMercator().fitExtent([[8, 8], [INSET.w - 8, INSET.h - 8]],
-        { type: 'FeatureCollection', features: okinawa }));
+      var pathOkiProj = d3.geoMercator().fitExtent([[8, 8], [INSET.w - 8, INSET.h - 8]],
+        { type: 'FeatureCollection', features: okinawa });
+      var pathOki = d3.geoPath(pathOkiProj);
 
       // 本土のみを投影基準に（伊豆・小笠原などの離島を除外）
       function cores() {
@@ -1247,7 +1250,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
           .attr('data-region', REGION_OF[f.properties.id]).attr('data-pref', f.properties.id)
           .attr('data-cx', c[0]).attr('data-cy', c[1])
           .attr('transform', 'translate(' + c[0] + ',' + c[1] + ')')
-          .text(f.properties.nam_ja);
+          .text(PREF_RU[f.properties.id]);
       });
 
       var NUDGE = { kanto: [40, 20], kinki: [10, 10], chugoku: [-26, -14], shikoku: [2, 22],
@@ -1258,7 +1261,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
         if (!fs.length) return;
         var c = path.centroid({ type: 'FeatureCollection', features: fs.map(function (f) { return f.core; }) });
         var n = NUDGE[r.id] || [0, 0];
-        rl.append('text').attr('class', 'rlabel').attr('x', c[0] + n[0]).attr('y', c[1] + n[1]).text(r.name);
+        rl.append('text').attr('class', 'rlabel').attr('x', c[0] + n[0]).attr('y', c[1] + n[1]).text(REGION_RU[r.id]);
       });
 
       var ins = svg.append('g').attr('transform', 'translate(' + INSET.x + ',' + INSET.y + ')');
@@ -1266,7 +1269,9 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       ins.append('g').attr('class', 'region').attr('data-region', 'kyushu')
         .selectAll('g').data(okinawa).join('g').attr('class', 'pref').attr('data-pref', 47)
         .append('path').attr('class', 'land').attr('d', pathOki);
-      ins.append('text').attr('class', 'inset-cap').attr('x', 4).attr('y', -8).text('沖縄県 / Okinawa');
+      ins.append('text').attr('class', 'inset-cap').attr('x', 4).attr('y', -8).text('Окинава');
+      this._projOki = pathOkiProj;
+      this._pinsLayerOki = ins.append('g').attr('id', 'pinsLayerOki');
 
       svg.selectAll('.region')
         .on('mouseenter', function () { self._hoverRegion(this.dataset.region, true); })
@@ -1304,9 +1309,18 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
 
     _renderPins() {
       var self = this;
-      var layer = this._pinsLayer;
-      if (!layer) return;
-      var sel = layer.selectAll('g.jm-pin').data(this._pins, function (d) { return d.id; });
+      if (!this._pinsLayer || !this._pinsLayerOki) return;
+      var isOki = function (d) { return d.prefId === 47; };
+      var main = this._pins.filter(function (d) { return !isOki(d); });
+      var oki = this._pins.filter(isOki);
+      this._renderPinGroup(this._pinsLayer, main, this._proj);
+      this._renderPinGroup(this._pinsLayerOki, oki, this._projOki);
+      this._updatePinVisibility();
+    }
+
+    _renderPinGroup(layer, data, proj) {
+      var self = this;
+      var sel = layer.selectAll('g.jm-pin').data(data, function (d) { return d.id; });
       sel.exit().remove();
       var enter = sel.enter().append('g').attr('class', function (d) { return 'jm-pin' + (d.cluster ? ' jm-pin-city' : ''); })
         .attr('data-id', function (d) { return d.id; })
@@ -1320,16 +1334,15 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       enter.append('text').attr('class', 'jm-label').attr('y', -12);
       var merged = enter.merge(sel);
       merged.each(function (d) {
-        var xy = self._proj([d.lon, d.lat]);
+        var xy = proj([d.lon, d.lat]);
         self._d3.select(this).attr('transform', 'translate(' + xy[0] + ',' + xy[1] + ')');
       });
       merged.select('.jm-label').text(function (d) { return d.cluster ? d.title : ''; });
-      this._updatePinVisibility();
     }
 
     _updatePinVisibility() {
       var self = this;
-      if (!this._pinsLayer) return;
+      if (!this._pinsLayer || !this._pinsLayerOki) return;
       var scale = this._lastScale || 1;
       var inv = 1 / scale;
       this._pinsLayer.selectAll('g.jm-pin').each(function (d) {
@@ -1342,7 +1355,15 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
           .style('display', (visible && d.__match !== false) ? '' : 'none')
           .attr('transform', 'translate(' + xy[0] + ',' + xy[1] + ') scale(' + inv + ')');
       });
+      // Okinawa's inset is fixed (never zoomed by the main camera), so its pins keep a constant scale
+      this._pinsLayerOki.selectAll('g.jm-pin').each(function (d) {
+        var xy = self._projOki([d.lon, d.lat]);
+        self._d3.select(this)
+          .style('display', (d.__match !== false) ? '' : 'none')
+          .attr('transform', 'translate(' + xy[0] + ',' + xy[1] + ') scale(0.6)');
+      });
     }
+
 
     setPinMatch(idSet) {
       if (!this._pins) return;
@@ -1397,7 +1418,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       var rlg = R.querySelector('#regionLabels'); if (rlg) rlg.classList.toggle('hide', !!active);
       var back = R.querySelector('.back');
       back.classList.toggle('on', !!active);
-      back.textContent = pref ? '← 地方に戻る' : '← 全体に戻る';
+      back.textContent = pref ? '← Назад к региону' : '← Ко всей карте';
       this._crumb();
 
       var cam = R.querySelector('#camera');
@@ -1426,9 +1447,9 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       var self = this, c = this._root.querySelector('.crumb');
       if (!this._active) { c.innerHTML = ''; return; }
       var r = byId[this._active];
-      var html = '<button type="button" data-lvl="0">日本</button><span>/</span>' +
-        '<button type="button" data-lvl="1"' + (this._pref ? '' : ' disabled') + '>' + r.name + '</button>';
-      if (this._pref) html += '<span>/</span><button type="button" data-lvl="2" disabled>' + PREF_JA[this._pref] + '</button>';
+      var html = '<button type="button" data-lvl="0">Япония</button><span>/</span>' +
+        '<button type="button" data-lvl="1"' + (this._pref ? '' : ' disabled') + '>' + REGION_RU[r.id] + '</button>';
+      if (this._pref) html += '<span>/</span><button type="button" data-lvl="2" disabled>' + PREF_RU[this._pref] + '</button>';
       c.innerHTML = html;
       c.querySelectorAll('button').forEach(function (b) {
         b.addEventListener('click', function (e) {
