@@ -1065,10 +1065,10 @@ td{padding:9px 0; font-size:14px; font-variant-numeric:tabular-nums;
 .loading{position:absolute; inset:0; display:grid; place-items:center; font-size:12px; letter-spacing:.12em;
   text-transform:uppercase; color:color-mix(in srgb,var(--_ink) 45%,transparent)}
 .jm-pin{transition:opacity .25s linear}
-.jm-pin .jm-hit{r:15; fill:transparent; stroke:none}
+.jm-pin .jm-hit{r:20; fill:transparent; stroke:none}
 .jm-pin .jm-dot{r:5; fill:var(--_accent); stroke:var(--_bg); stroke-width:2; transition:r .15s linear}
 .jm-pin:hover .jm-dot{r:7}
-.jm-pin-city .jm-hit{r:22}
+.jm-pin-city .jm-hit{r:28}
 .jm-pin-city .jm-halo{r:17; fill:var(--jm-city-color, #1E3050); opacity:.16}
 .jm-pin-city .jm-dot{r:12; fill:var(--jm-city-color, #1E3050); stroke:var(--_bg); stroke-width:3}
 .jm-pin-city:hover .jm-dot{r:14}
@@ -1425,7 +1425,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       var inv = 1 / scale;
       this._pinsLayer.selectAll('g.jm-pin').each(function (d) {
         var visible;
-        if (d.cluster) visible = self._pref !== d.prefId;
+        if (d.cluster) visible = !!self._active && self._pref !== d.prefId;
         else if (d.clusterOf) visible = self._pref === d.clusterOf;
         else if (!self._active) visible = false; // whole-Japan view: only region shapes + cluster markers are grabbable
         else if (self._pref) visible = d.prefId === self._pref;
