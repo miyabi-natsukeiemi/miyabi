@@ -59,6 +59,16 @@ header{
 .nav-links{display:flex;gap:28px;align-items:center}
 .nav-links a{font-size:14px;text-decoration:none;color:var(--ink)}
 .nav-links a:hover{color:var(--seal)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.hamburger{display:none;width:40px;height:40px;border:1px solid var(--line);background:none;border-radius:4px;
+  cursor:pointer;position:relative;flex-shrink:0}
+.hamburger span{position:absolute;left:9px;right:9px;height:2px;background:var(--ink);transition:.2s}
+.hamburger span:nth-child(1){top:14px}
+.hamburger span:nth-child(2){top:19px}
+.hamburger span:nth-child(3){top:24px}
+.hamburger.open span:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
 .btn{
   display:inline-block;background:var(--indigo);color:#fff;text-decoration:none;
   padding:13px 26px;border-radius:4px;font-size:15px;font-weight:500;border:none;cursor:pointer;-webkit-text-fill-color:#fff;
@@ -68,7 +78,18 @@ header{
 .btn-seal{background:var(--seal)}
 .btn-seal:hover{background:#9E2F28}
 .btn-sm{padding:9px 18px;font-size:14px}
-@media(max-width:760px){.nav-links a:not(.btn){display:none}}
+@media(max-width:760px){
+  .hamburger{display:block}
+  .nav-right .btn{padding:9px 14px; font-size:12.5px}
+  .nav-links{position:fixed; top:0; right:0; height:100vh; width:min(78vw,320px); background:var(--bg);
+    flex-direction:column; align-items:flex-start; gap:0; padding:88px 28px 28px;
+    box-shadow:-8px 0 30px rgba(0,0,0,.12); transform:translateX(100%); transition:transform .25s ease; z-index:60}
+  .nav-links.open{transform:translateX(0)}
+  .nav-links a{display:block; width:100%; padding:14px 0; border-bottom:1px solid var(--line); font-size:16px}
+  .nav-links a.btn{margin-top:20px; text-align:center; border-bottom:none}
+  .nav-overlay{display:none; position:fixed; inset:0; background:rgba(22,24,26,.35); z-index:55}
+  .nav-overlay.open{display:block}
+}
 
 /* ── Hero ── */
 .hero{position:relative;padding:96px 0 88px;overflow:hidden}
@@ -117,6 +138,12 @@ section{padding:88px 0;border-top:1px solid var(--line)}
 
 /* Plans */
 .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:28px}
+@media(max-width:760px){
+  .plans{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:16px; padding:4px 24px 14px;
+    margin:0 -24px; -webkit-overflow-scrolling:touch}
+  .plans::-webkit-scrollbar{display:none}
+  .plan{flex:0 0 84%; scroll-snap-align:center}
+}
 .plan{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:34px 30px;display:flex;flex-direction:column}
 .plan.feature{border-color:var(--indigo);box-shadow:0 8px 28px rgba(36,54,79,.10)}
 .plan .mono{margin-bottom:6px}
@@ -216,6 +243,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
   section{padding:64px 0}
 }
 #map-section .board{position:relative; border:1px solid var(--line); background:#fff}
+#map-section .map-mobile-alt{display:none}
 #map-section japan-map{height:620px; display:block}
 
 #map-section .filters{position:absolute; top:16px; right:16px; width:280px; background:rgba(252,252,250,.97);
@@ -253,9 +281,16 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
 #map-section .pop .tagline{font-family:'PT Mono',monospace; font-size:10px; color:var(--indigo-soft); text-transform:uppercase; letter-spacing:.08em}
 
 @media(max-width:760px){
-  #map-section japan-map{height:520px}
-  #map-section .filters{width:calc(100% - 32px); right:16px; left:16px}
-  #map-section .pop{width:calc(100% - 48px)}
+  #map-section .board{display:none}
+  #map-section .map-mobile-alt{display:block}
+  #map-section .city-cards{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:14px;
+    padding:4px 24px 14px; margin:0 -24px; -webkit-overflow-scrolling:touch}
+  #map-section .city-cards::-webkit-scrollbar{display:none}
+  #map-section .city-card{flex:0 0 62%; scroll-snap-align:center; background:var(--card); border:1px solid var(--line);
+    border-radius:8px; padding:26px 22px; text-decoration:none; display:block; color:var(--ink)}
+  #map-section .city-card h3{font-size:24px; margin-top:8px}
+  #map-section .city-card.soon{opacity:.6}
+  #map-section .city-card.soon p{font-size:13px; color:var(--body2); margin-top:6px}
 }
 
 </style>
@@ -274,10 +309,32 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
       <a href="#plans">Форматы</a>
       <a href="#how">Как это работает</a>
       <a href="#faq">Вопросы</a>
-      <a class="btn btn-sm" href="#assess">Бесплатная оценка</a>
     </nav>
+    <div class="nav-right">
+      <a class="btn btn-sm" href="#assess">Бесплатная оценка</a>
+      <button class="hamburger" id="navToggle" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </div>
+  <div class="nav-overlay" id="navOverlay"></div>
 </header>
+
+<script>
+(function(){
+  var btn = document.getElementById('navToggle');
+  var nav = document.querySelector('.nav-links');
+  var overlay = document.getElementById('navOverlay');
+  function close(){ btn.classList.remove('open'); nav.classList.remove('open'); overlay.classList.remove('open'); btn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  function toggle(){
+    var open = !nav.classList.contains('open');
+    btn.classList.toggle('open', open); nav.classList.toggle('open', open); overlay.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  btn.addEventListener('click', toggle);
+  overlay.addEventListener('click', close);
+  nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+})();
+</script>
 
 <main id="top">
 
@@ -346,8 +403,18 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
         </div>
       </div>
 
-      <div class="count" id="count">40 из 40 точек</div>
       <div class="pop" id="pop"></div>
+    </div>
+
+    <div class="map-mobile-alt">
+      <div class="city-cards">
+        <a class="city-card" href="tokyo.html"><span class="mono">Направление</span><h3>Токио</h3></a>
+        <a class="city-card" href="osaka.html"><span class="mono">Направление</span><h3>Осака</h3></a>
+        <a class="city-card" href="kyoto.html"><span class="mono">Направление</span><h3>Киото</h3></a>
+        <a class="city-card" href="fukuoka.html"><span class="mono">Направление</span><h3>Фукуока</h3></a>
+        <a class="city-card" href="hokkaido.html"><span class="mono">Направление</span><h3>Хоккайдо</h3></a>
+        <div class="city-card soon"><span class="mono">Скоро</span><h3>Остальные 42 региона</h3><p>Гиды готовятся</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -998,8 +1065,11 @@ td{padding:9px 0; font-size:14px; font-variant-numeric:tabular-nums;
 .loading{position:absolute; inset:0; display:grid; place-items:center; font-size:12px; letter-spacing:.12em;
   text-transform:uppercase; color:color-mix(in srgb,var(--_ink) 45%,transparent)}
 .jm-pin{transition:opacity .25s linear}
+.jm-pin .jm-hit{r:15; fill:transparent; stroke:none}
 .jm-pin .jm-dot{r:5; fill:var(--_accent); stroke:var(--_bg); stroke-width:2; transition:r .15s linear}
 .jm-pin:hover .jm-dot{r:7}
+.jm-pin-city .jm-hit{r:22}
+.jm-pin-city .jm-halo{r:17; fill:var(--jm-city-color, #1E3050); opacity:.16}
 .jm-pin-city .jm-dot{r:12; fill:var(--jm-city-color, #1E3050); stroke:var(--_bg); stroke-width:3}
 .jm-pin-city:hover .jm-dot{r:14}
 .jm-pin-city .jm-label{font-size:13px; font-weight:800}
@@ -1131,7 +1201,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
             '<div class="rail-foot">地方をクリックすると拡大し、そのまま都道府県を選べます。<br>Esc で一段戻ります。</div></aside>' +
           '<main class="stage"><svg role="img" aria-label="Карта регионов Японии" preserveAspectRatio="xMidYMid meet"></svg>' +
             '<nav class="crumb" aria-label="Навигация"></nav>' +
-            '<button class="back" type="button">← Ко всей карте</button>' +
+            '<button class="back" type="button">← 全体に戻る</button>' +
             '<div class="cap">Mercator · 47 prefectures · 沖縄は別枠表示</div>' +
             '<div class="loading">Загрузка карты…</div></main>' +
           '<aside class="panel"><div class="head panel-head">地方情報 / Region</div>' +
@@ -1328,8 +1398,16 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
         .on('click', function (e, d) {
           e.stopPropagation();
           if (d.cluster) { if (d.pageUrl) { window.location.href = d.pageUrl; return; } self.select(REGION_OF[d.prefId], d.prefId); self._emit('select'); }
-          self._emit('pin', { pin: d });
+          self._emit('pin', { pin: d, trigger: 'click', node: this });
+        })
+        .on('mouseenter', function (e, d) {
+          if (!d.cluster) self._emit('pin', { pin: d, trigger: 'hover', node: this });
+        })
+        .on('mouseleave', function (e, d) {
+          if (!d.cluster) self._emit('pinout', { pin: d });
         });
+      enter.filter(function (d) { return d.cluster; }).append('circle').attr('class', 'jm-halo');
+      enter.append('circle').attr('class', 'jm-hit');
       enter.append('circle').attr('class', 'jm-dot');
       enter.append('text').attr('class', 'jm-label').attr('y', -12);
       var merged = enter.merge(sel);
@@ -1349,13 +1427,17 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
         var visible;
         if (d.cluster) visible = self._pref !== d.prefId;
         else if (d.clusterOf) visible = self._pref === d.clusterOf;
-        else visible = true;
+        else if (!self._active) visible = false; // whole-Japan view: only region shapes + cluster markers are grabbable
+        else if (self._pref) visible = d.prefId === self._pref;
+        else visible = REGION_OF[d.prefId] === self._active;
         var xy = self._proj([d.lon, d.lat]);
         self._d3.select(this)
           .style('display', (visible && d.__match !== false) ? '' : 'none')
           .attr('transform', 'translate(' + xy[0] + ',' + xy[1] + ') scale(' + inv + ')');
       });
-      // Okinawa's inset is fixed (never zoomed by the main camera), so its pins keep a constant scale
+      // Okinawa's inset is fixed (never zoomed by the main camera), so its pins keep a constant scale.
+      // Always shown regardless of drill-down level — the inset is a small side panel, not part of
+      // the crowded main landmass, so it doesn't cause the same accidental-click problem.
       this._pinsLayerOki.selectAll('g.jm-pin').each(function (d) {
         var xy = self._projOki([d.lon, d.lat]);
         self._d3.select(this)
@@ -5834,7 +5916,6 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
 
   var map = document.getElementById('map');
   var pop = document.getElementById('pop');
-  var countEl = document.getElementById('count');
 
   map.addEventListener('japan-map:ready', function(){
     map.pins = PINS;
@@ -5893,28 +5974,38 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       if (pinMatches(p)) { matched.add(p.id); shown++; }
     });
     if (typeof map.setPinMatch === 'function') map.setPinMatch(matched);
-    countEl.textContent = shown + ' из ' + TOTAL + ' точек';
     hidePop();
   }
 
   // ---- popover ----
+  var hideTimer = null;
   map.addEventListener('japan-map:pin', function(e){
     var d = e.detail.pin;
-    if (d.cluster) return; // click already triggers zoom
-    showPop(d, e);
+    if (d.cluster) return; // click already triggers zoom/navigation
+    clearTimeout(hideTimer);
+    showPop(d, e.detail.node);
   });
+  map.addEventListener('japan-map:pinout', function(){
+    hideTimer = setTimeout(hidePop, 180);
+  });
+  pop.addEventListener('mouseenter', function(){ clearTimeout(hideTimer); });
+  pop.addEventListener('mouseleave', function(){ hideTimer = setTimeout(hidePop, 180); });
 
-  function showPop(d, evt){
+  function showPop(d, node){
     var kj = d.kj ? '<span class="kj" aria-hidden="true">' + d.kj + '</span>' : '';
     var link = d.url ? '<a class="go" href="' + d.url + '">Читать статью →</a>'
                       : '<span class="tagline">Статья появится позже</span>';
     pop.innerHTML = '<button class="close" aria-label="Закрыть">✕</button>' + kj +
       '<h3>' + d.title + '</h3><p>' + d.blurb + '</p>' + link;
     var board = document.querySelector('.board').getBoundingClientRect();
-    var x = evt.clientX - board.left, y = evt.clientY - board.top;
+    var pinRect = node ? node.getBoundingClientRect() : board;
+    var x = (pinRect.left + pinRect.right) / 2 - board.left;
+    var y = pinRect.top - board.top;
     var w = 260;
-    var left = Math.min(Math.max(8, x + 14), board.width - w - 8);
-    var top = Math.min(Math.max(8, y - 10), board.height - 160);
+    var left = Math.min(Math.max(8, x - w / 2), board.width - w - 8);
+    var top = y - 16 - 150; // prefer showing above the pin
+    if (top < 8) top = pinRect.bottom - board.top + 14; // not enough room above, show below instead
+    top = Math.min(Math.max(8, top), board.height - 160);
     pop.style.left = left + 'px'; pop.style.top = top + 'px';
     pop.classList.add('show');
     pop.querySelector('.close').addEventListener('click', hidePop);
