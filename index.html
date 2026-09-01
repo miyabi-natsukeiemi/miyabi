@@ -137,22 +137,22 @@ section{padding:88px 0;border-top:1px solid var(--line)}
 .case p{font-size:14.5px;color:var(--body2);max-width:70ch}
 
 /* Plans */
-.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:28px}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;align-items:start}
 @media(max-width:760px){
   .plans{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:16px; padding:4px 24px 14px;
     margin:0 -24px; -webkit-overflow-scrolling:touch}
   .plans::-webkit-scrollbar{display:none}
   .plan{flex:0 0 84%; scroll-snap-align:center}
 }
-.plan{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:34px 30px;display:flex;flex-direction:column}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:24px 24px;display:flex;flex-direction:column}
 .plan.feature{border-color:var(--indigo);box-shadow:0 8px 28px rgba(36,54,79,.10)}
-.plan .mono{margin-bottom:6px}
-.plan h3{font-size:26px;margin-bottom:6px}
-.plan .for{font-size:14.5px;color:var(--body2);margin-bottom:20px;min-height:42px}
-.plan ul{list-style:none;margin-bottom:26px;flex:1}
-.plan li{font-size:14.5px;padding:9px 0;border-bottom:1px dashed var(--line);color:#33373C}
-.plan li::before{content:"·";color:var(--seal);font-weight:700;margin-right:10px}
-.plan .price{font-size:13.5px;color:var(--indigo-soft);font-weight:500;margin-bottom:18px}
+.plan .mono{margin-bottom:4px}
+.plan h3{font-size:21px;margin-bottom:4px}
+.plan .for{font-size:13.5px;color:var(--body2);margin-bottom:14px}
+.plan ul{list-style:none;margin-bottom:16px}
+.plan li{font-size:13.5px;padding:6px 0;border-bottom:1px dashed var(--line);color:#33373C;line-height:1.4}
+.plan li::before{content:"·";color:var(--seal);font-weight:700;margin-right:8px}
+.plan .price{font-size:12.5px;color:var(--indigo-soft);font-weight:500;margin-bottom:14px}
 
 /* How it works */
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0;counter-reset:step}
@@ -1423,25 +1423,34 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       if (!this._pinsLayer || !this._pinsLayerOki) return;
       var scale = this._lastScale || 1;
       var inv = 1 / scale;
+      var topLevel = !self._active;
       this._pinsLayer.selectAll('g.jm-pin').each(function (d) {
         var visible;
-        if (d.cluster) visible = !!self._active && self._pref !== d.prefId;
+        if (d.cluster) visible = self._pref !== d.prefId;
         else if (d.clusterOf) visible = self._pref === d.clusterOf;
-        else if (!self._active) visible = false; // whole-Japan view: only region shapes + cluster markers are grabbable
         else if (self._pref) visible = d.prefId === self._pref;
-        else visible = REGION_OF[d.prefId] === self._active;
+        else if (self._active) visible = REGION_OF[d.prefId] === self._active;
+        else visible = true; // whole-Japan view: shown so filters stay visible, but made non-interactive below
         var xy = self._proj([d.lon, d.lat]);
         self._d3.select(this)
           .style('display', (visible && d.__match !== false) ? '' : 'none')
+          .style('pointer-events', topLevel ? 'none' : null)
+          .style('cursor', topLevel ? 'default' : null)
+          .style('opacity', topLevel ? 0.55 : null)
           .attr('transform', 'translate(' + xy[0] + ',' + xy[1] + ') scale(' + inv + ')');
       });
-      // Okinawa's inset is fixed (never zoomed by the main camera), so its pins keep a constant scale.
-      // Always shown regardless of drill-down level — the inset is a small side panel, not part of
-      // the crowded main landmass, so it doesn't cause the same accidental-click problem.
+      // Okinawa's inset is fixed (never zoomed by the main camera) and has no click-to-zoom behavior
+      // of its own, so it follows the same top-level rule as the main map: visible always (so filters
+      // stay visible), but only clickable once the Kyūshū & Okinawa region has been drilled into
+      // (Okinawa belongs to that group, so it shouldn't unlock just because some other region is zoomed).
+      var okiInteractive = self._active === 'kyushu';
       this._pinsLayerOki.selectAll('g.jm-pin').each(function (d) {
         var xy = self._projOki([d.lon, d.lat]);
         self._d3.select(this)
           .style('display', (d.__match !== false) ? '' : 'none')
+          .style('pointer-events', okiInteractive ? null : 'none')
+          .style('cursor', okiInteractive ? null : 'default')
+          .style('opacity', okiInteractive ? null : 0.55)
           .attr('transform', 'translate(' + xy[0] + ',' + xy[1] + ') scale(0.6)');
       });
     }
@@ -5909,6 +5918,539 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
     "prefId": 1,
     "cluster": true,
     "pageUrl": "hokkaido.html"
+  },
+  {
+    "id": "r2-zuiganji",
+    "title": "Дзуйгандзи",
+    "lon": 141.045,
+    "lat": 38.368,
+    "type": [
+      "history"
+    ],
+    "blurb": "Главный дзэн-храм Мацусимы, перестроенный даймё Датэ Масамунэ — вырубленные в скале кельи и золотые фусума.",
+    "prefId": 4
+  },
+  {
+    "id": "r2-kasama-inari",
+    "title": "Касама Инари",
+    "lon": 140.263,
+    "lat": 36.354,
+    "type": [
+      "history"
+    ],
+    "blurb": "Одно из трёх главных святилищ Инари Японии наряду с Фусими и Ютоку — почти 1300-летняя история.",
+    "prefId": 8
+  },
+  {
+    "id": "r2-ashikaga-gakko",
+    "title": "Асикага Гакко",
+    "lon": 139.449,
+    "lat": 36.34,
+    "type": [
+      "history"
+    ],
+    "blurb": "Старейшая школа Японии, действовавшая с периода Хэйан — тихий кампус с прудом в центре города.",
+    "prefId": 9
+  },
+  {
+    "id": "r2-morinji",
+    "title": "Морин-дзи",
+    "lon": 139.67,
+    "lat": 36.24,
+    "type": [
+      "history"
+    ],
+    "blurb": "Храм легенды о чайнике-оборотне тануки «Бунбуку тягама» — во дворе десятки статуй енотовидных собак.",
+    "prefId": 10
+  },
+  {
+    "id": "r2-saitama-kofun",
+    "title": "Курганы Сайтама",
+    "lon": 139.47,
+    "lat": 36.13,
+    "type": [
+      "history"
+    ],
+    "blurb": "Группа древних курганов-кофунов V–VII веков, включая крупнейший в регионе Канто.",
+    "prefId": 11
+  },
+  {
+    "id": "r2-katori-jingu",
+    "title": "Катори Дзингу",
+    "lon": 140.5,
+    "lat": 35.887,
+    "type": [
+      "history"
+    ],
+    "blurb": "Одно из древнейших и самых почитаемых синтоистских святилищ Японии, покровитель боевых искусств.",
+    "prefId": 12
+  },
+  {
+    "id": "r2-tsurugaoka",
+    "title": "Цуругаока Хатимангу",
+    "lon": 139.556,
+    "lat": 35.325,
+    "type": [
+      "history"
+    ],
+    "blurb": "Главное святилище Камакуры, основанное родом Минамото — широкая лестница и пруды с лотосами.",
+    "prefId": 14
+  },
+  {
+    "id": "r2-zuiryuji",
+    "title": "Дзуйрюдзи",
+    "lon": 137.017,
+    "lat": 36.744,
+    "type": [
+      "history"
+    ],
+    "blurb": "Дзэн-храм Такаоки, признанный национальным сокровищем — образец архитектуры школы Сото.",
+    "prefId": 16
+  },
+  {
+    "id": "r2-takaoka-mikuruma",
+    "title": "Фестиваль Такаока Микурумаяма",
+    "lon": 137.02,
+    "lat": 36.75,
+    "type": [
+      "festival"
+    ],
+    "blurb": "Процессия резных позолоченных колесниц XVII века — нематериальное наследие ЮНЕСКО.",
+    "prefId": 16
+  },
+  {
+    "id": "r2-natadera",
+    "title": "Натадэра",
+    "lon": 136.31,
+    "lat": 36.28,
+    "type": [
+      "history",
+      "nature"
+    ],
+    "blurb": "Храм среди выветренных скальных пещер и мохового сада — один из красивейших храмовых пейзажей Хокурику.",
+    "prefId": 17
+  },
+  {
+    "id": "r2-abare-matsuri",
+    "title": "Фестиваль Абарэ",
+    "lon": 137.15,
+    "lat": 37.32,
+    "type": [
+      "festival"
+    ],
+    "blurb": "«Буйный фестиваль» полуострова Ното — портативные святилища швыряют в огонь и реку.",
+    "prefId": 17
+  },
+  {
+    "id": "r2-ichijodani",
+    "title": "Итидзётани",
+    "lon": 136.28,
+    "lat": 35.98,
+    "type": [
+      "history"
+    ],
+    "blurb": "Руины столицы клана Асакура XVI века — «японские Помпеи», законсервированные под слоем земли.",
+    "prefId": 18
+  },
+  {
+    "id": "r2-mikatagoko",
+    "title": "Озёра Микатагоко",
+    "lon": 135.9,
+    "lat": 35.57,
+    "type": [
+      "nature",
+      "view"
+    ],
+    "blurb": "Пять озёр разных оттенков воды — от пресной до солёной — с обзорной площадкой на хребте Ваши.",
+    "prefId": 18
+  },
+  {
+    "id": "r2-daizenji",
+    "title": "Дайдзэн-дзи",
+    "lon": 138.75,
+    "lat": 35.66,
+    "type": [
+      "history"
+    ],
+    "blurb": "«Виноградный храм» VIII века — по легенде, монах научил местных жителей выращивать виноград.",
+    "prefId": 19
+  },
+  {
+    "id": "r2-tsumagojuku",
+    "title": "Цумаго-дзюку",
+    "lon": 137.6,
+    "lat": 35.58,
+    "type": [
+      "history"
+    ],
+    "blurb": "Образцово сохранённый почтовый городок тракта Накасэндо — ни проводов, ни машин на главной улице.",
+    "prefId": 20
+  },
+  {
+    "id": "r2-naraijuku",
+    "title": "Нараи-дзюку",
+    "lon": 137.79,
+    "lat": 35.98,
+    "type": [
+      "history"
+    ],
+    "blurb": "Самый длинный из почтовых городков Кисо — деревянные дома торговцев лаком и гребнями.",
+    "prefId": 20
+  },
+  {
+    "id": "r2-obasute",
+    "title": "Рисовые террасы Обасутэ",
+    "lon": 138.16,
+    "lat": 36.52,
+    "type": [
+      "view",
+      "nature"
+    ],
+    "blurb": "Одно из «трёх лучших мест для любования луной» в Японии — терраса отражает полную луну в каждой чаше.",
+    "prefId": 20
+  },
+  {
+    "id": "r2-gifucastle",
+    "title": "Замок Гифу",
+    "lon": 136.786,
+    "lat": 35.434,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Крепость Оды Нобунаги на вершине горы Канадзан — канатная дорога и вид на реку Нагара.",
+    "prefId": 21
+  },
+  {
+    "id": "r2-takayama-matsuri",
+    "title": "Фестиваль Такаяма",
+    "lon": 137.25,
+    "lat": 36.14,
+    "type": [
+      "festival"
+    ],
+    "blurb": "Механические колесницы-каракури с марионетками — один из трёх красивейших фестивалей Японии.",
+    "prefId": 21
+  },
+  {
+    "id": "r2-mihonomatsubara",
+    "title": "Михо-но-Мацубара",
+    "lon": 138.52,
+    "lat": 35.02,
+    "type": [
+      "view",
+      "nature"
+    ],
+    "blurb": "Сосновая коса с классическим видом на Фудзи, объект ЮНЕСКО — место легенды о крылатой деве.",
+    "prefId": 22
+  },
+  {
+    "id": "r2-arimatsu",
+    "title": "Аримацу-Наруми Сибори",
+    "lon": 136.97,
+    "lat": 35.08,
+    "type": [
+      "history"
+    ],
+    "blurb": "Городок традиционного узелкового окрашивания сибори — склады эпохи Эдо вдоль старого тракта Токайдо.",
+    "prefId": 23
+  },
+  {
+    "id": "r2-seto",
+    "title": "Сэто — родина керамики",
+    "lon": 137.08,
+    "lat": 35.22,
+    "type": [
+      "history"
+    ],
+    "blurb": "Город настолько знаменит гончарным делом, что слово «сэтомоно» стало общим словом для керамики в японском.",
+    "prefId": 23
+  },
+  {
+    "id": "r2-toba-ama",
+    "title": "Ныряльщицы ама Тоба",
+    "lon": 136.85,
+    "lat": 34.48,
+    "type": [
+      "activity",
+      "food"
+    ],
+    "blurb": "Женщины веками ныряют за морскими ушками и жемчугом без акваланга — можно посмотреть лов и попробовать улов.",
+    "prefId": 24
+  },
+  {
+    "id": "r2-iga-ninja",
+    "title": "Ига — родина ниндзя",
+    "lon": 136.13,
+    "lat": 34.77,
+    "type": [
+      "history",
+      "activity"
+    ],
+    "blurb": "Замковый город клана Ига, откуда вышла школа ниндзюцу — музей, наряд ниндзя и метательные звёзды.",
+    "prefId": 24
+  },
+  {
+    "id": "r2-chikubushima",
+    "title": "Тикубусима",
+    "lon": 136.15,
+    "lat": 35.42,
+    "type": [
+      "history",
+      "nature"
+    ],
+    "blurb": "Священный остров на озере Бива с храмом на скале — добраться можно только на кораблике.",
+    "prefId": 25
+  },
+  {
+    "id": "r2-miidera",
+    "title": "Миидэра (Ондзёдзи)",
+    "lon": 135.85,
+    "lat": 35.01,
+    "type": [
+      "history"
+    ],
+    "blurb": "Один из четырёх великих храмов Японии на берегу Бивы, известен вечерним звоном «колокола Миидэра».",
+    "prefId": 25
+  },
+  {
+    "id": "r2-sasayama",
+    "title": "Замковый город Сасаяма",
+    "lon": 135.22,
+    "lat": 35.07,
+    "type": [
+      "history"
+    ],
+    "blurb": "Хорошо сохранившийся замковый город с чёрной черепицей и рвом, окружённым каштановыми садами.",
+    "prefId": 28
+  },
+  {
+    "id": "r2-muroji",
+    "title": "Муродзи",
+    "lon": 136.03,
+    "lat": 34.52,
+    "type": [
+      "history",
+      "nature"
+    ],
+    "blurb": "«Женская Коясан» — горный храм, куда, в отличие от Коясан, веками пускали женщин-паломниц.",
+    "prefId": 29
+  },
+  {
+    "id": "r2-takamatsuzuka",
+    "title": "Курган Такамацузука",
+    "lon": 135.8,
+    "lat": 34.45,
+    "type": [
+      "history"
+    ],
+    "blurb": "Знаменитая фреска звёздного неба и придворных дам VII века внутри кургана периода Асука.",
+    "prefId": 29
+  },
+  {
+    "id": "r2-nageiredo",
+    "title": "Сандзёдзи Нагэирэдо",
+    "lon": 133.98,
+    "lat": 35.38,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Храм, прилепленный к отвесной скале без единого гвоздя — один из самых труднодоступных в Японии.",
+    "prefId": 31
+  },
+  {
+    "id": "r2-daisen",
+    "title": "Гора Дайсэн",
+    "lon": 133.55,
+    "lat": 35.37,
+    "type": [
+      "nature"
+    ],
+    "blurb": "«Фудзи региона Хоки» — священная гора и популярный маршрут для треккинга в Тоттори.",
+    "prefId": 31
+  },
+  {
+    "id": "r2-yunotsu",
+    "title": "Онсэн Юноцу",
+    "lon": 132.22,
+    "lat": 35.1,
+    "type": [
+      "onsen",
+      "history"
+    ],
+    "blurb": "Портовый онсэн-городок серебряного рудника Ивами-Гиндзан, объект ЮНЕСКО.",
+    "prefId": 32
+  },
+  {
+    "id": "r2-hinomisaki",
+    "title": "Хиномисаки",
+    "lon": 132.62,
+    "lat": 35.44,
+    "type": [
+      "view",
+      "nature"
+    ],
+    "blurb": "Маяк и святилище на драматичном скалистом мысе — один из самых красивых закатов региона Санъин.",
+    "prefId": 32
+  },
+  {
+    "id": "r2-kibitsu",
+    "title": "Кибицу Дзиндзя",
+    "lon": 133.83,
+    "lat": 34.68,
+    "type": [
+      "history"
+    ],
+    "blurb": "Святилище, связанное с легендой о Момотаро — уникальная двойная крыша архитектуры Кибицу-дзукури.",
+    "prefId": 33
+  },
+  {
+    "id": "r2-takehara",
+    "title": "Такэхара",
+    "lon": 132.92,
+    "lat": 34.34,
+    "type": [
+      "history"
+    ],
+    "blurb": "«Маленький Киото региона Аки» — купеческий квартал, разбогатевший на солеварении и сакэ.",
+    "prefId": 34
+  },
+  {
+    "id": "r2-rurikoji",
+    "title": "Пагода Рурикодзи",
+    "lon": 131.47,
+    "lat": 34.19,
+    "type": [
+      "history",
+      "view"
+    ],
+    "blurb": "Пятиярусная пагода XV века — одна из трёх самых красивых в Японии, особенно хороша при подсветке.",
+    "prefId": 35
+  },
+  {
+    "id": "r2-kankakei",
+    "title": "Ущелье Канкакэй",
+    "lon": 134.2,
+    "lat": 34.5,
+    "type": [
+      "view",
+      "nature"
+    ],
+    "blurb": "Одно из трёх красивейших ущелий Японии на острове Сёдосима — канатная дорога через осенние клёны.",
+    "prefId": 37
+  },
+  {
+    "id": "r2-oyamazumi",
+    "title": "Святилище Оямадзуми",
+    "lon": 133.0,
+    "lat": 34.25,
+    "type": [
+      "history"
+    ],
+    "blurb": "Хранит крупнейшую в Японии коллекцию самурайских доспехов, посвящённых божеству войны.",
+    "prefId": 38
+  },
+  {
+    "id": "r2-okawachiyama",
+    "title": "Окавати-яма",
+    "lon": 129.87,
+    "lat": 33.28,
+    "type": [
+      "history"
+    ],
+    "blurb": "«Секретная деревня» кланового фарфора Набэсима — гончарни были скрыты в горах от посторонних глаз.",
+    "prefId": 41
+  },
+  {
+    "id": "r2-kanedajo",
+    "title": "Крепость Канэда (Цусима)",
+    "lon": 129.33,
+    "lat": 34.45,
+    "type": [
+      "history"
+    ],
+    "blurb": "Древнее укрепление VII века на острове Цусима — построено против вторжения после битвы при Пэкчхоне.",
+    "prefId": 42
+  },
+  {
+    "id": "r2-aoiaso",
+    "title": "Святилище Аои Асо",
+    "lon": 130.76,
+    "lat": 32.21,
+    "type": [
+      "history"
+    ],
+    "blurb": "Национальное сокровище с уникальной соломенной крышей архитектуры кают эпохи Момояма.",
+    "prefId": 43
+  },
+  {
+    "id": "r2-rakanji",
+    "title": "Раканji",
+    "lon": 131.1,
+    "lat": 33.31,
+    "type": [
+      "history",
+      "nature"
+    ],
+    "blurb": "Храм в скальной нише с сотнями статуй архатов — подъём по крутой лестнице среди леса.",
+    "prefId": 44
+  },
+  {
+    "id": "r2-saitobaru",
+    "title": "Курганы Сайтобару",
+    "lon": 131.36,
+    "lat": 32.11,
+    "type": [
+      "history"
+    ],
+    "blurb": "Крупнейший комплекс древних курганов Кюсю — более 300 захоронений среди сосновых рощ.",
+    "prefId": 45
+  },
+  {
+    "id": "r2-shikinaen",
+    "title": "Сикинаэн",
+    "lon": 127.72,
+    "lat": 26.2,
+    "type": [
+      "history",
+      "nature"
+    ],
+    "blurb": "Королевский сад династии Рюкю в китайском стиле — пруд, мостики и павильон для чайных церемоний.",
+    "prefId": 47
+  },
+  {
+    "id": "r2-urasoe",
+    "title": "Замок Урасоэ и Ёдорэ",
+    "lon": 127.72,
+    "lat": 26.24,
+    "type": [
+      "history"
+    ],
+    "blurb": "Руины столицы Рюкю до переноса в Сюри и королевская усыпальница, вырубленная в скале.",
+    "prefId": 47
+  },
+  {
+    "id": "r2-kenchoji",
+    "title": "Кэнтёдзи",
+    "lon": 139.55,
+    "lat": 35.34,
+    "type": [
+      "history"
+    ],
+    "blurb": "Старейший дзэн-монастырь Японии, основанный в 1253 году — главный храм Камакуры.",
+    "prefId": 14
+  },
+  {
+    "id": "r2-engakuji",
+    "title": "Энгакудзи",
+    "lon": 139.55,
+    "lat": 35.34,
+    "type": [
+      "history"
+    ],
+    "blurb": "Дзэн-храм с колокольней-национальным сокровищем — место действия множества литературных сюжетов Камакуры.",
+    "prefId": 14
   }
 ];
 
@@ -5993,8 +6535,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
 
   function showPop(d, node){
     var kj = d.kj ? '<span class="kj" aria-hidden="true">' + d.kj + '</span>' : '';
-    var link = d.url ? '<a class="go" href="' + d.url + '">Читать статью →</a>'
-                      : '<span class="tagline">Статья появится позже</span>';
+    var link = d.url ? '<a class="go" href="' + d.url + '">Читать статью →</a>' : '';
     pop.innerHTML = '<button class="close" aria-label="Закрыть">✕</button>' + kj +
       '<h3>' + d.title + '</h3><p>' + d.blurb + '</p>' + link;
     pop.classList.add('show'); // fixed position (bottom-left of the board, set in CSS) — stays clear of the pins
