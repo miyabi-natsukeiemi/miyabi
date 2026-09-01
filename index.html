@@ -5997,17 +5997,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
                       : '<span class="tagline">Статья появится позже</span>';
     pop.innerHTML = '<button class="close" aria-label="Закрыть">✕</button>' + kj +
       '<h3>' + d.title + '</h3><p>' + d.blurb + '</p>' + link;
-    var board = document.querySelector('.board').getBoundingClientRect();
-    var pinRect = node ? node.getBoundingClientRect() : board;
-    var x = (pinRect.left + pinRect.right) / 2 - board.left;
-    var y = pinRect.top - board.top;
-    var w = 260;
-    var left = Math.min(Math.max(8, x - w / 2), board.width - w - 8);
-    var top = y - 16 - 150; // prefer showing above the pin
-    if (top < 8) top = pinRect.bottom - board.top + 14; // not enough room above, show below instead
-    top = Math.min(Math.max(8, top), board.height - 160);
-    pop.style.left = left + 'px'; pop.style.top = top + 'px';
-    pop.classList.add('show');
+    pop.classList.add('show'); // fixed position (bottom-left of the board, set in CSS) — stays clear of the pins
     pop.querySelector('.close').addEventListener('click', hidePop);
   }
   function hidePop(){ pop.classList.remove('show'); }
