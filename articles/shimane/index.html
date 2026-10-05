@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Симанэ: земля, куда приходят все боги</title>
+</head>
+<body style="margin:0;background:#fff">
+<!-- site-bar -->
+<style>.site-bar{position:sticky;top:0;z-index:50;background:rgba(252,252,250,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(22,24,26,.14);font-family:Inter,system-ui,sans-serif}
+.site-bar .in{max-width:1180px;margin:0 auto;padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.site-bar a{text-decoration:none;color:#16181A;font-size:14px}.site-bar .brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;font-weight:600}
+.site-bar .back{color:#1E3050}.site-bar .back:hover{color:#B3352D}</style>
+<div class="site-bar"><div class="in"><a class="brand" href="../../index.html">Omamori Concierge</a><a class="back" href="../../index.html#map-section">&larr; К карте Японии</a></div></div>
+<!-- /site-bar -->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Журнальный стиль: все правила ограничены .mj-article, чтобы не задевать остальной сайт */
+.mj-article{--ink:#141414;--muted:#5C5C5C;--line:#DADADA;--red:#B3261E;--paper:#FFFFFF;
+  background:var(--paper);color:var(--ink);font-family:"PT Serif",Georgia,"Times New Roman",serif;font-size:19px;line-height:1.7;padding-block:0 96px}
+.mj-article *{box-sizing:border-box}
+.mj-article img{display:block;max-width:100%}
+.mj-article a{color:var(--red);text-underline-offset:3px}
+.mj-article a:focus-visible,.mj-article summary:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+.mj-head{max-width:980px;margin:0 auto;padding:64px 16px 40px;text-align:center}
+.mj-eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 18px}
+.mj-article h1{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:clamp(36px,6vw,68px);line-height:1.05;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.mj-hero{max-width:1280px;margin:0 auto}
+.mj-article .mj-hero img{width:100%;aspect-ratio:16/7;object-fit:cover}
+.mj-article .mj-hero p{margin:0;padding:10px 16px 0;font-size:14px;font-style:italic;color:var(--muted)}
+
+.mj-body{max-width:712px;margin:0 auto;padding:56px 16px 0}
+.mj-article .lede{font-size:23px;line-height:1.55;margin:0 0 14px}
+.mj-article .lede::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:92px;line-height:.8;padding:8px 10px 0 0;color:var(--red)}
+.mj-article .byline{font-size:14px;color:var(--muted);font-style:italic;padding-bottom:28px;border-bottom:1px solid var(--line);margin:0}
+
+.mj-article .kicker{margin:72px 0 0;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);text-align:center;scroll-margin-top:24px}
+.mj-article h2{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-style:italic;font-size:clamp(28px,4vw,40px);line-height:1.15;text-align:center;margin:12px 0 28px;text-wrap:balance}
+.mj-article h3{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:24px;line-height:1.3;margin:32px 0 8px}
+.mj-article p{margin:0 0 16px}
+
+.mj-article figure{margin:36px -110px}
+.mj-article figure img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.mj-article figure.obj img{object-fit:contain;background:#fff;padding:24px;border:1px solid var(--line)}
+.mj-article figcaption{font-size:14px;font-style:italic;color:var(--muted);margin:10px 110px 0}
+@media (max-width:960px){.mj-article figure{margin:28px 0}.mj-article figcaption{margin:10px 0 0}}
+
+.mj-article .info{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:12px 0;margin:24px 0;font-size:16px;display:grid;gap:4px}
+.mj-article .info div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px}
+.mj-article .info dt{font-weight:700}
+.mj-article .info dd{margin:0;overflow-wrap:anywhere}
+@media (max-width:480px){.mj-article .info div{grid-template-columns:1fr;gap:0}}
+
+.mj-article .more{margin:28px 0}
+.mj-article .more h4{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:21px;font-weight:600;margin:0 0 6px}
+.mj-article .more ul{margin:0;padding-left:20px}
+.mj-article .more li{margin:6px 0}
+.mj-article .more li::marker{color:var(--red)}
+
+.mj-article .dialect{list-style:none;padding:0;margin:16px 0;border-top:2px solid var(--ink)}
+.mj-article .dialect li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.mj-article .dialect b{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:600;font-size:21px}
+.mj-article .dialect span{color:var(--muted);align-self:center}
+@media (max-width:520px){.mj-article .dialect li{grid-template-columns:1fr;gap:2px}}
+
+.mj-article .records{list-style:none;padding:0;margin:16px 0;display:grid;gap:14px}
+.mj-article .records li{display:flex;gap:16px;align-items:baseline}
+.mj-article .records strong{flex:none;font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:34px;line-height:1;color:var(--red)}
+
+.mj-article details{border-bottom:1px solid var(--line)}
+.mj-article details:first-of-type{border-top:2px solid var(--ink)}
+.mj-article summary{cursor:pointer;list-style:none;position:relative;padding:14px 32px 14px 0;font-weight:700}
+.mj-article summary::-webkit-details-marker{display:none}
+.mj-article summary::after{content:"+";position:absolute;right:4px;top:8px;font-family:"Playfair Display",Georgia,serif;font-size:26px;color:var(--red)}
+.mj-article details[open] summary::after{content:"−"}
+.mj-article details p{margin:0 0 16px}
+
+.mj-article .tbl{overflow-x:auto}
+.mj-article table{width:100%;border-collapse:collapse;font-size:16px;font-variant-numeric:tabular-nums;border-top:2px solid var(--ink)}
+.mj-article td{padding:8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.mj-article td:first-child{color:var(--muted);width:50%;padding-right:16px}
+</style>
+
+<article class="mj-article">
+  <header class="mj-head">
+    <p class="mj-eyebrow">Префектура Симанэ</p>
+    <h1>Симанэ: земля, куда приходят все боги</h1>
+  </header>
+  <figure class="mj-hero" style="margin:0">
+    <img src="img/izumo-taisha-torii.jpg" alt="Каменные ворота-тории и столб с названием святилища Идзумо-тайся">
+    <p>Каменные ворота-тории и столб с названием святилища Идзумо-тайся</p>
+  </figure>
+  <div class="mj-body">
+<p class="lede">Земля, где собираются все боги, серебряный рудник, ставший всемирным наследием, синяя керамика и ужин в доме самурая. Рассказываем, за чем ехать в префектуру Симанэ.</p>
+<p class="byline">Префектура Симанэ · 8 минут чтения · цены указаны на 2020 год</p>
+
+<p class="kicker" id="about">О префектуре</p>
+<h2>Место, куда раз в год приходят все боги</h2>
+<p>Симанэ лежит в западной части региона Санъин, и по форме префектура вытянута с востока на запад. Эти места знамениты как сцена мифов об Идзумо: здесь и сегодня стоят великое святилище Идзумо-тайся и множество древних храмов. В эпоху воюющих провинций наместник Амаго Цунэхиса сам стал владетельным князем, но в итоге верх взял род Мори, а после утверждения сёгуната Токугава земли перешли под прямое управление сёгунов. Нынешняя префектура появилась в 1881 году, то есть на 14-й год эпохи Мэйдзи.</p>
+<p>Согласно «Идзумо-но куни фудоки», древнему описанию этих земель, название им дал бог Яцукамидзу-омицуну-но микото, герой мифа о том, как землю притягивали к острову и создавали страну. А по старому календарю в десятый месяц со всей страны сюда собираются восемь миллионов богов. В остальной Японии этот месяц называют «месяцем без богов», и только здесь, в Идзумо, «месяцем с богами»: в это время проходит множество обрядов.</p>
+<p>Еды здесь тоже хватает: девять десятых улова на озере Синдзи приходится на моллюска ямато-сидзими, лапша идзумо-соба входит в тройку самых известных в Японии, а из мелкой рыбы делают аго-но яки. В 2007 году серебряный рудник Ивами внесли в список всемирного наследия, и туристов здесь с тех пор меньше не становится.</p>
+
+<p class="kicker" id="see">Что посмотреть</p>
+<h2>Танец в маске из глубины мифов</h2>
+<h3>Ивами кагура</h3>
+<p>Это традиционное искусство, в котором танцуют в роскошных костюмах и выразительных масках, разыгрывая сюжеты японских мифов. В области Ивами такие представления дают по выходным и по праздникам в разных местах.</p>
+<figure>
+  <img src="img/iwami-kagura.jpg" alt="Танцоры в ярких костюмах и масках выступают на затемнённой сцене" loading="lazy">
+  <figcaption>Танцоры выступают в масках и пышных костюмах, а свет падает так, что фигуры выступают из темноты</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Справки</dt><dd>ассоциация туризма области Ивами</dd></div>
+  <div><dt>Телефон</dt><dd>+81 855-29-5647</dd></div>
+</dl>
+<div class="more">
+  <h4>Что ещё посмотреть</h4>
+  <ul>
+    <li><b>Святилище Идзумо-тайся</b>, одно из главных мест поклонения в стране</li>
+    <li><b>Серебряный рудник Ивами</b> со штольнями и старым городком</li>
+    <li><b>Утёс Матэнгай</b> над Японским морем</li>
+  </ul>
+</div>
+
+<p class="kicker" id="fest">Праздники</p>
+<h2>Осенний вечер, когда вокруг замка зажигают огни</h2>
+<h3>Мидзуторо в Мацуэ</h3>
+<p>Каждую осень улицы вокруг замка Мацуэ украшают светом: фонарики и огни расставляют вдоль рвов и дорожек, и получается игра света и тени. На время праздника здесь работают ларьки и проходит много других событий.</p>
+<figure>
+  <img src="img/matsue-suitoro.jpg" alt="Бумажные фонарики светятся вдоль берега воды в темноте" loading="lazy">
+  <figcaption>Бумажные фонарики расставляют вдоль воды, и в темноте видно только их свет и отражение на поверхности</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Когда</dt><dd>ежегодно с начала до конца октября</dd></div>
+  <div><dt>Место</dt><dd>окрестности замка Мацуэ, город Мацуэ, префектура Симанэ</dd></div>
+</dl>
+<div class="more">
+  <h4>Другие праздники</h4>
+  <ul>
+    <li><b>Бой быков на празднике Хассаку</b>, местная традиция, которой много веков</li>
+    <li><b>Летний праздник Сэкисю хаммакко</b></li>
+    <li><b>Обряд святилища Идзумо-тайся</b></li>
+  </ul>
+</div>
+
+<p class="kicker" id="arch">Музеи и архитектура</p>
+<h2>Музей и театр под одной красной крышей</h2>
+<h3>Центр искусств «Гранд Той»</h3>
+<p>Это редкий для Японии комплекс, где музей соединён с театральным залом. Крышу и стены облицевали сэкисю-гавара, красной черепицей, которую делают в западной части префектуры, поэтому здание считают одним из самых заметных в Симанэ.</p>
+<figure>
+  <img src="img/grand-toit.jpg" alt="Длинное здание с красной черепичной крышей отражается в воде перед ним" loading="lazy">
+  <figcaption>Красная черепица на крыше блестит на солнце, а перед зданием устроен водоём, в котором оно отражается</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Адрес</dt><dd>5-15 Ariake-cho, Masuda, Shimane</dd></div>
+  <div><dt>Телефон</dt><dd>+81 856-31-1860</dd></div>
+  <div><dt>Сайт</dt><dd><a href="http://www.grandtoit.jp" target="_blank" rel="noopener">grandtoit.jp</a></dd></div>
+</dl>
+<div class="more">
+  <h4>Что ещё посмотреть</h4>
+  <ul>
+    <li><b>Художественный музей префектуры Симанэ</b></li>
+    <li><b>Природный музей горы Санбэ «Сахимэру»</b></li>
+    <li><b>Маяк на мысе Хиномисаки</b>, один из самых высоких в стране</li>
+  </ul>
+</div>
+
+<p class="kicker" id="food">Местная кухня</p>
+<h2>Лапша, которая не терпит вилки</h2>
+<h3>Соба с островов Оки</h3>
+<p>Это традиционная лапша архипелага Оки, что лежит примерно в 50 километрах к северу от полуострова Симанэ. Тесто делают только из гречневой муки, без связующей добавки, поэтому лапша получается настолько ломкой, что поддеть её палочками и не порвать удаётся не сразу.</p>
+<figure>
+  <img src="img/izumo-soba.jpg" alt="Чаша гречневой лапши с приправами на красной поверхности стола" loading="lazy">
+  <figcaption>Лапшу подают в глубокой чаше с приправами, и едят её, макая в соус</figcaption>
+</figure>
+<div class="more">
+  <h4>Что ещё попробовать</h4>
+  <ul>
+    <li><b>Соба из Идзумо</b>, которую подают слоями в нескольких чашках</li>
+    <li><b>Хэка-яки</b>, блюдо из рыбы, похожее на сукияки, то есть жаркое в котле, названное в честь лемеха плуга</li>
+    <li><b>Суп из моллюсков сидзими</b> с озера Синдзи</li>
+  </ul>
+</div>
+
+<p class="kicker" id="eat">Где поесть</p>
+<h2>Итальянская кухня в старом складе</h2>
+<h3>AJIKURA</h3>
+<p class="lead-in" style="margin:0 0 8px">AJIKURA это ресторан итальянской кухни в стиле сатояма, то есть деревенского склона: название соединяет кухню с местностью, в которой он стоит.</p>
+<p>Ресторан стоит среди гор Тюгоку, а внутри это переделанный старый склад, где сохранили дух постройки. Готовят здесь по-итальянски, но из местного: рыба Японского моря, овощи с высокогорных полей и дичь.</p>
+<figure class="obj">
+  <img src="img/ajikura-dish.jpg" alt="Блюдо из обжаренного мяса с овощами на тёмной тарелке, снято на белом фоне" loading="lazy">
+  <figcaption>Мясо обжаривают и подают с овощами на тёмной тарелке: так здесь готовят блюда из местной дичи</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Адрес</dt><dd>3123-4 Yagami, Onan-cho, Ochi, Shimane</dd></div>
+  <div><dt>Телефон</dt><dd>+81 855-95-2093</dd></div>
+  <div><dt>Часы</dt><dd>с 11:00 до 15:00 (последний заказ в 14:00) и с 17:30 до 22:00 (последний заказ в 20:00)</dd></div>
+  <div><dt>Бронь</dt><dd>на ужин нужно записаться не позднее чем за день, на обед тоже рекомендуют бронировать</dd></div>
+  <div><dt>Выходной</dt><dd>среда</dd></div>
+  <div><dt>Сайт</dt><dd><a href="http://si-ajikura.com" target="_blank" rel="noopener">si-ajikura.com</a></dd></div>
+</dl>
+
+<p class="kicker" id="craft">Ремёсла</p>
+<h2>Синяя посуда с собственного месторождения</h2>
+<h3>Посуда мастерской Сюссай</h3>
+<p>Мастерская делает посуду с глазурью, которую здесь называют синим Сюссай. Глину, глазурь и даже дрова для печи берут только в префектуре, а большие тарелки размером хассун, то есть около 24 сантиметров, стали визитной карточкой Сюссай.</p>
+<figure class="obj">
+  <img src="img/shussai-pottery.jpg" alt="Широкая плоская керамическая тарелка синего цвета на белом фоне" loading="lazy">
+  <figcaption>Тарелка широкая и неглубокая, а глазурь ложится синим с травянистым отливом</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Телефон</dt><dd>+81 853-72-0239</dd></div>
+  <div><dt>Сайт</dt><dd><a href="http://www.shussai.jp" target="_blank" rel="noopener">shussai.jp</a></dd></div>
+</dl>
+
+<p class="kicker" id="buy">Что привезти</p>
+<h2>Сакэ из старинного склада и сладость из Мацуэ</h2>
+<h3>Дзюммай дайгиндзё «Кокки»</h3>
+<p>Сакеварня использует как цех старый склад, который когда-то принадлежал князьям Мацуэ, и продолжает традицию мастеров-сакеделов Идзумо. Это дзюммай дайгиндзё, то есть сакэ высшей категории, которое делают только из риса, воды и закваски.</p>
+<figure class="obj">
+  <img src="img/kokki-sake.jpg" alt="Зелёная бутылка сакэ с этикеткой на белом фоне" loading="lazy">
+  <figcaption>Бутылку выпускают в тёмно-зелёном стекле, а на этикетке стоит имя сакеварни и категория</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Цена</dt><dd>2750 иен за 720 мл</dd></div>
+  <div><dt>Телефон</dt><dd>+81 852-25-0123</dd></div>
+  <div><dt>Сайт</dt><dd><a href="http://www.kokki.jp" target="_blank" rel="noopener">kokki.jp</a></dd></div>
+</dl>
+<h3>Сладость «Вакакуса» от «Сайундо»</h3>
+<p>Мягкую рисовую массу моти обваливают в светлой муке из цветов сливы, и получается известная сладость Мацуэ. В магазине она продаётся наборами по три штуки.</p>
+<dl class="info">
+  <div><dt>Цена</dt><dd>648 иен за набор из трёх штук</dd></div>
+  <div><dt>Телефон</dt><dd>+81 852-27-2701</dd></div>
+  <div><dt>Сайт</dt><dd><a href="http://www.saiundo.co.jp" target="_blank" rel="noopener">saiundo.co.jp</a></dd></div>
+</dl>
+
+<p class="kicker" id="stay">Где остановиться</p>
+<h2>Дом самурая, где живут как дома</h2>
+<h3>Такё Абэкэ</h3>
+<p>Это небольшой дом в мировом наследии, у серебряного рудника Ивами. Зданию самурайской усадьбы 230 лет, и его восстановили так, чтобы гости не останавливались в отеле, а как будто просто жили: дом сдают целиком одной группе, поэтому здесь и правда чувствуешь себя как дома.</p>
+<dl class="info">
+  <div><dt>Адрес</dt><dd>159-1 Ha, Omori-cho, Oda, Shimane</dd></div>
+  <div><dt>Телефон</dt><dd>+81 854-89-0022</dd></div>
+  <div><dt>Номеров</dt><dd>один дом, только для одной группы</dd></div>
+  <div><dt>Цена</dt><dd>100 000 иен за сутки с завтраком и ужином (цена за двух гостей, налог отдельно, сервисный сбор включён)</dd></div>
+  <div><dt>Выходные</dt><dd>с понедельника по среду</dd></div>
+  <div><dt>Сайт</dt><dd><a href="https://kurasuyado.jp/takyo-abeke" target="_blank" rel="noopener">kurasuyado.jp/takyo-abeke</a></dd></div>
+</dl>
+
+<p class="kicker" id="talk">Местный диалект</p>
+<h2>Как здесь хвалят еду и желают не перетруждаться</h2>
+<ul class="dialect">
+  <li><b>Умай ган</b><span>Очень вкусно</span></li>
+  <li><b>Мури сэнко оринсай</b><span>Не берите на себя лишнего</span></li>
+  <li><b>Нанги конги сита</b><span>Тяжело пришлось, намучился</span></li>
+  <li><b>Согэсу гáэ!</b><span>Вот так и надо, так лучше всего</span></li>
+</ul>
+
+<p class="kicker" id="records">Рекорды</p>
+<h2>Первые в стране по угрям, бронзовым мечам и налогам</h2>
+<ul class="records">
+  <li><strong>№1</strong> по вылову морского угря анаго</li>
+  <li><strong>№1</strong> по числу бронзовых мечей, найденных при раскопках: это городище Кодзиндани</li>
+  <li><strong>№1</strong> по доле своевременно уплаченных налогов</li>
+</ul>
+
+<p class="kicker" id="qa">Вопросы и ответы</p>
+<h2>Два вопроса о Симанэ</h2>
+<details open>
+  <summary>Какой древний курорт упоминается в «Идзумо-но куни фудоки»?</summary>
+  <p>Идзумо-Юмура-онсэн. Он стоит в верховьях реки Хи, с которой связана легенда о восьмиглавом змее Ямата-но Ороти, а в древнем описании земель источник назван целебной водой у берега реки. Сегодня здесь есть и купальни для приезжающих на день, и гостиницы, и место, где можно просто опустить ноги в горячую воду.</p>
+</details>
+<details>
+  <summary>Как называется блюдо из рыбы, похожее на сукияки?</summary>
+  <p>Хэка-яки. Словом «хэка» здесь зовут металлическую часть лемеха плуга: когда-то её использовали вместо сковороды, отсюда и название. Это старинное рыбацкое блюдо из города Ода, куда крупными кусками кладут рыбу разного сезона.</p>
+</details>
+
+<p class="kicker" id="data">Справочник</p>
+<h2>Симанэ в цифрах</h2>
+<h3>Общие данные</h3>
+<div class="tbl"><table><tbody>
+  <tr><td>Административный центр</td><td>Мацуэ</td></tr>
+  <tr><td>Муниципалитеты</td><td>8 городов, 10 посёлков и 1 село</td></tr>
+  <tr><td>Площадь</td><td>6708 км²</td></tr>
+  <tr><td>Население</td><td>680 тыс. человек</td></tr>
+  <tr><td>Плотность населения</td><td>101,4 чел./км²</td></tr>
+  <tr><td>Туристов в год</td><td>7,3 млн</td></tr>
+  <tr><td>Символ-дерево</td><td>чёрная сосна</td></tr>
+  <tr><td>Символ-цветок</td><td>пион</td></tr>
+  <tr><td>Символ-птица</td><td>лебедь</td></tr>
+</tbody></table></div>
+<h3>Климат</h3>
+<div class="tbl"><table><tbody>
+  <tr><td>Средняя годовая температура</td><td>15,6 °C</td></tr>
+  <tr><td>Средний максимум</td><td>33,7 °C</td></tr>
+  <tr><td>Средний минимум</td><td>-0,7 °C</td></tr>
+  <tr><td>Осадки</td><td>1977 мм в год</td></tr>
+  <tr><td>Ясных дней</td><td>23</td></tr>
+  <tr><td>Дней с осадками</td><td>148</td></tr>
+  <tr><td>Дней со снегом</td><td>43</td></tr>
+</tbody></table></div>
+<h3>Для путешественника</h3>
+<div class="tbl"><table><tbody>
+  <tr><td>Горячих источников</td><td>40</td></tr>
+  <tr><td>Отелей и рёканов</td><td>245</td></tr>
+  <tr><td>Художественных музеев</td><td>18</td></tr>
+  <tr><td>Музеев</td><td>81</td></tr>
+  <tr><td>Придорожных станций митиноэки</td><td>28</td></tr>
+  <tr><td>Объектов культурного наследия</td><td>91, из них 7 национальных сокровищ</td></tr>
+  <tr><td>Национальные сокровища</td><td>главный зал святилища Идзумо-тайся и другие</td></tr>
+  <tr><td>Исторических памятников</td><td>59</td></tr>
+  <tr><td>Живописных мест</td><td>2</td></tr>
+  <tr><td>Памятников природы</td><td>38</td></tr>
+  <tr><td>Всемирное наследие</td><td>серебряный рудник Ивами и его культурный ландшафт</td></tr>
+  <tr><td>Национальные и квазинациональные парки</td><td>Дайсэн-Оки, Хиба Дого Тайсяку и горы западного Тюгоку, всего 3</td></tr>
+</tbody></table></div>
+<h3>Природные памятники</h3>
+<p>Лавовый тоннель на острове Дайкон, грот Кага-но кукэдо, куры породы кокухаку, ущелье Они-но ситабурэ, скалы Ивами татамигаура, разрез перед храмом Ивая-дзи и другие.</p>
+<p>Жить здесь удобно и спокойно: по доле детей, которые ходят в детский сад и ясли, префектура первая в стране, а по числу жителей старше 65 лет, чьи дома приспособлены для них, вторая. По площади парков на человека Симанэ входит в первую пятёрку, так что место это доброе и к детям, и к пожилым.</p>
+  </div>
+</article>
+</body>
+</html>

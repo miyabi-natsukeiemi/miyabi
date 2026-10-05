@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Нагано: крыша Японии и вода с её гор</title>
+</head>
+<body style="margin:0;background:#fff">
+<!-- site-bar -->
+<style>.site-bar{position:sticky;top:0;z-index:50;background:rgba(252,252,250,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(22,24,26,.14);font-family:Inter,system-ui,sans-serif}
+.site-bar .in{max-width:1180px;margin:0 auto;padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.site-bar a{text-decoration:none;color:#16181A;font-size:14px}.site-bar .brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;font-weight:600}
+.site-bar .back{color:#1E3050}.site-bar .back:hover{color:#B3352D}</style>
+<div class="site-bar"><div class="in"><a class="brand" href="../../index.html">Omamori Concierge</a><a class="back" href="../../index.html#map-section">&larr; К карте Японии</a></div></div>
+<!-- /site-bar -->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Журнальный стиль: все правила ограничены .mj-article, чтобы не задевать остальной сайт */
+.mj-article{--ink:#141414;--muted:#5C5C5C;--line:#DADADA;--red:#B3261E;--paper:#FFFFFF;
+  background:var(--paper);color:var(--ink);font-family:"PT Serif",Georgia,"Times New Roman",serif;font-size:19px;line-height:1.7;padding-block:0 96px}
+.mj-article *{box-sizing:border-box}
+.mj-article img{display:block;max-width:100%}
+.mj-article a{color:var(--red);text-underline-offset:3px}
+.mj-article a:focus-visible,.mj-article summary:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+.mj-head{max-width:980px;margin:0 auto;padding:64px 16px 40px;text-align:center}
+.mj-eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 18px}
+.mj-article h1{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:clamp(36px,6vw,68px);line-height:1.05;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.mj-hero{max-width:1280px;margin:0 auto}
+.mj-article .mj-hero img{width:100%;aspect-ratio:16/7;object-fit:cover}
+.mj-article .mj-hero p{margin:0;padding:10px 16px 0;font-size:14px;font-style:italic;color:var(--muted)}
+
+.mj-body{max-width:712px;margin:0 auto;padding:56px 16px 0}
+.mj-article .lede{font-size:23px;line-height:1.55;margin:0 0 14px}
+.mj-article .lede::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:92px;line-height:.8;padding:8px 10px 0 0;color:var(--red)}
+.mj-article .byline{font-size:14px;color:var(--muted);font-style:italic;padding-bottom:28px;border-bottom:1px solid var(--line);margin:0}
+
+.mj-article .kicker{margin:72px 0 0;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);text-align:center;scroll-margin-top:24px}
+.mj-article h2{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-style:italic;font-size:clamp(28px,4vw,40px);line-height:1.15;text-align:center;margin:12px 0 28px;text-wrap:balance}
+.mj-article h3{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:24px;line-height:1.3;margin:32px 0 8px}
+.mj-article p{margin:0 0 16px}
+
+.mj-article figure{margin:36px -110px}
+.mj-article figure img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.mj-article figure.obj img{object-fit:contain;background:#fff;padding:24px;border:1px solid var(--line)}
+.mj-article figcaption{font-size:14px;font-style:italic;color:var(--muted);margin:10px 110px 0}
+@media (max-width:960px){.mj-article figure{margin:28px 0}.mj-article figcaption{margin:10px 0 0}}
+
+.mj-article .info{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:12px 0;margin:24px 0;font-size:16px;display:grid;gap:4px}
+.mj-article .info div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px}
+.mj-article .info dt{font-weight:700}
+.mj-article .info dd{margin:0;overflow-wrap:anywhere}
+@media (max-width:480px){.mj-article .info div{grid-template-columns:1fr;gap:0}}
+
+.mj-article .more{margin:28px 0}
+.mj-article .more h4{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:21px;font-weight:600;margin:0 0 6px}
+.mj-article .more ul{margin:0;padding-left:20px}
+.mj-article .more li{margin:6px 0}
+.mj-article .more li::marker{color:var(--red)}
+
+.mj-article .dialect{list-style:none;padding:0;margin:16px 0;border-top:2px solid var(--ink)}
+.mj-article .dialect li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.mj-article .dialect b{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:600;font-size:21px}
+.mj-article .dialect span{color:var(--muted);align-self:center}
+@media (max-width:520px){.mj-article .dialect li{grid-template-columns:1fr;gap:2px}}
+
+.mj-article .records{list-style:none;padding:0;margin:16px 0;display:grid;gap:14px}
+.mj-article .records li{display:flex;gap:16px;align-items:baseline}
+.mj-article .records strong{flex:none;font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:34px;line-height:1;color:var(--red)}
+
+.mj-article details{border-bottom:1px solid var(--line)}
+.mj-article details:first-of-type{border-top:2px solid var(--ink)}
+.mj-article summary{cursor:pointer;list-style:none;position:relative;padding:14px 32px 14px 0;font-weight:700}
+.mj-article summary::-webkit-details-marker{display:none}
+.mj-article summary::after{content:"+";position:absolute;right:4px;top:8px;font-family:"Playfair Display",Georgia,serif;font-size:26px;color:var(--red)}
+.mj-article details[open] summary::after{content:"−"}
+.mj-article details p{margin:0 0 16px}
+
+.mj-article .tbl{overflow-x:auto}
+.mj-article table{width:100%;border-collapse:collapse;font-size:16px;font-variant-numeric:tabular-nums;border-top:2px solid var(--ink)}
+.mj-article td{padding:8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.mj-article td:first-child{color:var(--muted);width:50%;padding-right:16px}
+</style>
+
+<article class="mj-article">
+  <header class="mj-head">
+    <p class="mj-eyebrow">Префектура Нагано</p>
+    <h1>Нагано: крыша Японии и вода с её гор</h1>
+  </header>
+  <figure class="mj-hero" style="margin:0">
+    <img src="img/kamikochi-lake.jpg" alt="Горное озеро в долине, в воде отражаются хребты со снежниками, вокруг леса">
+    <p>Горное озеро в долине, в воде отражаются хребты со снежниками, вокруг леса</p>
+  </figure>
+  <div class="mj-body">
+<p class="lede">Горы выше трёх тысяч метров, восемь крупных рек, которые начинаются у подножия вершин, снежные курорты зимой и прохлада летом. Рассказываем, за чем ехать в префектуру Нагано, которую в Японии зовут крышей страны.</p>
+<p class="byline">Префектура Нагано · 7 минут чтения · цены указаны на 2020 год</p>
+
+<p class="kicker" id="about">О префектуре</p>
+<h2>Край, который называют крышей Японии</h2>
+<p>Нагано лежит почти в самом центре острова Хонсю. Когда-то здесь была провинция Синано, которую до сих пор называют Синсю, и делится она на четыре части: северную, восточную, центральную и южную. Со всех сторон префектуру окружают горы: по числу вершин выше трёх тысяч метров и по числу гор из списка ста знаменитых гор Японии Нагано первая в стране. Земля здесь поднята высоко: город Нагано стоит на высоте 362 метра, а Мацумото на 592 метрах. Между хребтами пробивают себе дорогу Тэнгю, Кисо и Тикума, реки первой категории, то есть главные водные артерии страны, а снег с вершин даёт префектуре много чистой воды. Хорошей воды здесь столько, что её источники так и называют: знаменитая вода.</p>
+<p>Прохладный климат и большие перепады температур между днём и ночью определили, чем здесь занимаются. В эпоху Мэйдзи и Тайсё, то есть с конца XIX века, префектура жила шелкопрядением, а сегодня её промышленность держится на точном машиностроении. Хорошо идут земледелие и садоводство: здесь собирают много овощей и фруктов, а ещё делают сакэ, вино и пасту мисо, то есть продукты брожения.</p>
+<p>Эмблему префектуры сложили из первого слога её названия, и в круглом знаке читаются летящая птица, гора и озеро, в котором эта гора отражается.</p>
+
+<p class="kicker" id="see">Что посмотреть</p>
+<h2>Храм, которому почти полторы тысячи лет</h2>
+<h3>Дзэнкодзи</h3>
+<p>История храма Дзэнкодзи насчитывает почти 1400 лет, и это одна из самых старых буддийских обителей страны. Главный образ храма, Амида, по преданию самый древний в Японии, а на территории стоят главный зал, признанный национальным сокровищем, то есть особо ценной реликвией, и множество других памятников.</p>
+<figure>
+  <img src="img/zenkoji-temple.jpg" alt="Главный зал старинного буддийского храма с широкой черепичной крышей" loading="lazy">
+  <figcaption>Перед главным залом храма стоит широкая черепичная кровля, а к входу ведут каменные ступени</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Адрес</dt><dd>491-i Motoyoshi-machi, Nagano, Nagano</dd></div>
+  <div><dt>Справки</dt><dd>канцелярия храма Дзэнкодзи</dd></div>
+  <div><dt>Телефон</dt><dd>+81 26-234-3591</dd></div>
+</dl>
+<div class="more">
+  <h4>Что ещё посмотреть</h4>
+  <ul>
+    <li><b>Ущелье Тэнрю-кё</b> на реке Тэнрю</li>
+    <li><b>Замок Мацумото</b>, чей донжон тоже признан национальным сокровищем</li>
+    <li><b>Парк диких обезьян в Дзигокудани</b></li>
+  </ul>
+</div>
+
+<p class="kicker" id="fest">Праздники</p>
+<h2>Сорок тысяч залпов над озером Сува</h2>
+<h3>Праздник на озере Сува с фейерверком</h3>
+<p>Каждый год 15 августа над озером Сува запускают около 40 000 залпов: это один из самых больших фейерверков страны. Над водой раскрываются огненные каскады, а одна из фигур, «Ниагара», растягивается почти на два километра.</p>
+<figure>
+  <img src="img/lake-suwa-fireworks.jpg" alt="Фейерверк над озером ночью, вспышки отражаются в воде" loading="lazy">
+  <figcaption>Над озером Сува разом раскрываются десятки огненных фигур, и залпы отражаются в воде</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Когда</dt><dd>ежегодно 15 августа (в 2020 году отменён)</dd></div>
+  <div><dt>Место</dt><dd>озеро Сува, город Сува, префектура Нагано</dd></div>
+</dl>
+<div class="more">
+  <h4>Другие праздники</h4>
+  <ul>
+    <li><b>Праздник сакуры в Такато</b>, когда цветение вишни смотрят на фоне гор</li>
+    <li><b>Фестиваль воздушных шаров в Саку</b></li>
+    <li><b>Летний фейерверк на озере Сиракаба</b></li>
+  </ul>
+</div>
+
+<p class="kicker" id="arch">Музеи и архитектура</p>
+<h2>Музей, где всё в горошек</h2>
+<h3>Городской музей искусств Мацумото</h3>
+<p>Здесь показывают работы художников, связанных с Мацумото, и прежде всего Яёи Кусамы, уроженки города, чьи вещи легко узнать по горошинам. У входа стоит её большая скульптура под открытым небом.</p>
+<figure>
+  <img src="img/matsumoto-art-museum.jpg" alt="Здание музея и большая скульптура в горошек перед входом" loading="lazy">
+  <figcaption>Перед входом в музей стоит огромный цветок в горошек, а само здание расписано такими же пятнами</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Адрес</dt><dd>4-2-22 Chuo, Matsumoto, Nagano</dd></div>
+  <div><dt>Телефон</dt><dd>+81 263-39-7400</dd></div>
+  <div><dt>Сайт</dt><dd><a href="http://matsumoto-artmuse.jp" target="_blank" rel="noopener">matsumoto-artmuse.jp</a></dd></div>
+</dl>
+<div class="more">
+  <h4>Что ещё посмотреть</h4>
+  <ul>
+    <li><b>Художественный музей на плато Уцукусигахара</b>, где скульптуры стоят прямо среди лугов</li>
+    <li><b>Музей, посвящённый эпохе Дзёмон</b>, древнейшему периоду истории Японии</li>
+    <li><b>Музей художника Сэндзю Хироси в Каруидзаве</b></li>
+  </ul>
+</div>
+
+<p class="kicker" id="food">Местная кухня</p>
+<h2>Пирожок с начинкой из местной зелени</h2>
+<h3>Ояки</h3>
+<p>Ояки это лепёшка из пшеничного теста с начинкой: её и пекут в печи, и готовят на пару. Начинку чаще всего делают из местных продуктов, например из маринованной зелени ноадзава-на, и приправляют довольно остро.</p>
+<figure>
+  <img src="img/oyaki-buns.jpg" alt="Круглые подрумяненные лепёшки ояки лежат в бамбуковой корзине" loading="lazy">
+  <figcaption>Ояки пекут до румяной корочки и подают прямо в бамбуковой корзине</figcaption>
+</figure>
+<div class="more">
+  <h4>Что ещё попробовать</h4>
+  <ul>
+    <li><b>Тодзи-соба</b>, лапшу, которую варят вместе с овощами в одном горшке</li>
+    <li><b>Собакаки</b>, густую гречневую массу, которую едят ложкой</li>
+    <li><b>Рисовые пирожные с каштаном</b></li>
+  </ul>
+</div>
+
+<p class="kicker" id="eat">Где поесть</p>
+<h2>Ресторан, где лапшу делают из одной гречихи</h2>
+<h3>Сёкуни-кан</h3>
+<p>Рестораном управляет Китадзава Масакадзу, которого в 2010 году выбрали одним из семи лучших поваров страны на первом конкурсе кулинарных мастеров. Здесь варят дзювари-соба, лапшу из одной гречихи, без пшеничной муки, и подают к ней блюда из местных сезонных продуктов.</p>
+<figure>
+  <img src="img/soba-noodles.jpg" alt="Порция гречневой лапши на зелёном листе в керамической чаше" loading="lazy">
+  <figcaption>Гречневую лапшу подают горкой на большом зелёном листе, рядом соус и приправы</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Адрес</dt><dd>3250-3 Kasuga, Saku, Nagano</dd></div>
+  <div><dt>Телефон</dt><dd>+81 267-52-2010</dd></div>
+  <div><dt>Часы</dt><dd>с 11:30 до 15:00, ужин с 17:00 только по брони</dd></div>
+  <div><dt>Выходные</dt><dd>среда и четверг (в праздники, во время золотой недели, череды праздников в начале мая, и в августе работает)</dd></div>
+</dl>
+
+<p class="kicker" id="craft">Ремёсла</p>
+<h2>Лак на стекле</h2>
+<h3>Лаковые изделия Кисо от мастерской Маруёси Косака</h3>
+<p>Мастерская делает лаковую посуду в традиции Кисо, но не только из дерева: здесь научились закреплять лак на стеклянной посуде. Так стекло сохраняет свою лёгкость, а цвет и узор остаются яркими и современными.</p>
+<figure class="obj">
+  <img src="img/kiso-lacquerware.jpg" alt="Шесть лаковых чашек с полосатым и однотонным узором стоят в ряд" loading="lazy">
+  <figcaption>Чашки покрыты лаком полосами и однотонными полями, и каждая чуть отличается от соседней</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Телефон</dt><dd>+81 264-34-2245</dd></div>
+  <div><dt>Сайт</dt><dd><a href="http://www.maruyoshi-kosaka.jp" target="_blank" rel="noopener">maruyoshi-kosaka.jp</a></dd></div>
+</dl>
+
+<p class="kicker" id="buy">Что привезти</p>
+<h2>Бутылка вина из Нагано</h2>
+<h3>Вино «Гоити» Эстейт Мерло</h3>
+<p>Винодельня работает с 1911 года. В этом вине из сорта мерло аромат чёрных ягод и выдержки сливаются в плотный, основательный вкус.</p>
+<figure class="obj">
+  <img src="img/goichi-wine-merlot.jpg" alt="Бутылка вина «Гоити» с этикеткой на белом фоне" loading="lazy">
+  <figcaption>Бутылка «Гоити» Эстейт Мерло из винодельни Хаяси</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Цена</dt><dd>2768 иен за 720 мл</dd></div>
+  <div><dt>Справки</dt><dd>винодельня Хаяси</dd></div>
+  <div><dt>Телефон</dt><dd>+81 263-52-0059</dd></div>
+  <div><dt>Сайт</dt><dd><a href="http://www.goichiwine.co.jp" target="_blank" rel="noopener">goichiwine.co.jp</a></dd></div>
+</dl>
+
+<p class="kicker" id="stay">Где остановиться</p>
+<h2>Домики в лесу у реки</h2>
+<h3>Хосиноя Каруидзава</h3>
+<p>Курортный отель спрятан в лесу: отдельные домики стоят вдоль реки и на склоне горы, так что природу здесь чувствуешь в любое время года. Этот отель считают пионером нового подхода к японским курортам, когда само место и его атмосфера становятся брендом.</p>
+<figure>
+  <img src="img/hoshinoya-karuizawa.jpg" alt="Деревянные домики у реки в лесу в сумерках, вдоль воды горят огни" loading="lazy">
+  <figcaption>В сумерках вдоль воды зажигают огни, и домики на берегу реки читаются один за другим</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Адрес</dt><dd>Hoshino, Karuizawa, Nagano</dd></div>
+  <div><dt>Телефон</dt><dd>+81 570-073-066 (общее бронирование)</dd></div>
+  <div><dt>Номеров</dt><dd>77</dd></div>
+  <div><dt>Цена</dt><dd>от 84 000 иен за номер в сутки без налога и сервисного сбора, питание не включено</dd></div>
+  <div><dt>Сайт</dt><dd><a href="https://hoshinoya.com/karuizawa" target="_blank" rel="noopener">hoshinoya.com/karuizawa</a></dd></div>
+</dl>
+
+<p class="kicker" id="talk">Местный диалект</p>
+<h2>Как здесь хвалят еду и просят сбегать за покупкой</h2>
+<ul class="dialect">
+  <li><b>Эрээ умээнаа</b><span>Ну очень вкусно</span></li>
+  <li><b>Ойдэнаситэ</b><span>Добро пожаловать, заходите</span></li>
+  <li><b>Тётто соко мадэ тондэкитэ!</b><span>Сбегай быстренько туда!</span></li>
+  <li><b>Сёдзи га цумойи наа</b><span>Перегородка сёдзи плохо скользит по пазу</span></li>
+</ul>
+
+<p class="kicker" id="records">Рекорды</p>
+<h2>Первые в стране по голубике, фейерверкам и гитарам</h2>
+<ul class="records">
+  <li><strong>№1</strong> по сбору голубики</li>
+  <li><strong>№1</strong> по производству фейерверков</li>
+  <li><strong>№1</strong> по выпуску гитар</li>
+</ul>
+
+<p class="kicker" id="qa">Вопросы и ответы</p>
+<h2>Два вопроса о Нагано</h2>
+<details open>
+  <summary>Художница из Мацумото, которую узнают по узору из горошин, это кто?</summary>
+  <p>Яёи Кусама, одна из главных художниц японского авангарда: её картины, скульптуры и целые комнаты построены на горошинах. Она занималась также дизайном одежды и писала романы, а в 2016 году получила орден Культуры.</p>
+</details>
+<details>
+  <summary>Какой курорт с горячими источниками дал имя местной зелени?</summary>
+  <p>Ноадзава-онсэн. Есть версия, что источник открыл монах Гёки. В эпоху Эдо настоятель храма Кэммэйдзи привёз из Киото семена репы, которую выращивали при храме Тэннодзи. В местном климате репа изменилась, и так появилась ноадзава-на, листовая зелень, которую здесь солят и маринуют.</p>
+</details>
+
+<p class="kicker" id="data">Справочник</p>
+<h2>Нагано в цифрах</h2>
+<h3>Общие данные</h3>
+<div class="tbl"><table><tbody>
+  <tr><td>Административный центр</td><td>Нагано</td></tr>
+  <tr><td>Муниципалитеты</td><td>19 городов, 23 посёлка и 35 сёл</td></tr>
+  <tr><td>Площадь</td><td>13 562 км²</td></tr>
+  <tr><td>Население</td><td>2,06 млн человек</td></tr>
+  <tr><td>Плотность населения</td><td>152,1 чел./км²</td></tr>
+  <tr><td>Туристов в год</td><td>30,82 млн</td></tr>
+  <tr><td>Символ-дерево</td><td>берёза</td></tr>
+  <tr><td>Символ-цветок</td><td>горечавка</td></tr>
+  <tr><td>Символ-птица</td><td>белая куропатка</td></tr>
+</tbody></table></div>
+<h3>Климат</h3>
+<div class="tbl"><table><tbody>
+  <tr><td>Средняя годовая температура</td><td>13,0 °C</td></tr>
+  <tr><td>Средний максимум</td><td>32,8 °C</td></tr>
+  <tr><td>Средний минимум</td><td>-4,6 °C</td></tr>
+  <tr><td>Осадки</td><td>886 мм в год</td></tr>
+  <tr><td>Ясных дней</td><td>21</td></tr>
+  <tr><td>Дней с осадками</td><td>110</td></tr>
+  <tr><td>Дней со снегом</td><td>73</td></tr>
+</tbody></table></div>
+<h3>Для путешественника</h3>
+<div class="tbl"><table><tbody>
+  <tr><td>Горячих источников</td><td>214</td></tr>
+  <tr><td>Отелей и рёканов</td><td>2750</td></tr>
+  <tr><td>Художественных музеев</td><td>106</td></tr>
+  <tr><td>Музеев</td><td>263</td></tr>
+  <tr><td>Придорожных станций митиноэки</td><td>52</td></tr>
+  <tr><td>Объектов культурного наследия</td><td>189, из них 10 национальных сокровищ</td></tr>
+  <tr><td>Национальные сокровища</td><td>главный зал храма Дзэнкодзи, донжон замка Мацумото, старое здание школы Кайти и другие</td></tr>
+  <tr><td>Исторических памятников</td><td>38</td></tr>
+  <tr><td>Живописных мест</td><td>6</td></tr>
+  <tr><td>Памятников природы</td><td>25</td></tr>
+  <tr><td>Национальные и квазинациональные парки</td><td>Дзёсинэцу Когэн, Мёко Тогакуси Рэндзан, Тюбу Сангаку, Титибу Тама Каи и другие, всего 8</td></tr>
+</tbody></table></div>
+<h3>Природные памятники</h3>
+<p>Летяга, туфовые холмы и шарики известняка у источника Сирахо, место произрастания гриба тэнгу-но мугимэси, большая криптомерия в Цукисэ и другие.</p>
+  </div>
+</article>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тояма: королевство воды у подножия гор</title>
+</head>
+<body style="margin:0;background:#fff">
+<!-- site-bar -->
+<style>.site-bar{position:sticky;top:0;z-index:50;background:rgba(252,252,250,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(22,24,26,.14);font-family:Inter,system-ui,sans-serif}
+.site-bar .in{max-width:1180px;margin:0 auto;padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.site-bar a{text-decoration:none;color:#16181A;font-size:14px}.site-bar .brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;font-weight:600}
+.site-bar .back{color:#1E3050}.site-bar .back:hover{color:#B3352D}</style>
+<div class="site-bar"><div class="in"><a class="brand" href="../../index.html">Omamori Concierge</a><a class="back" href="../../index.html#map-section">&larr; К карте Японии</a></div></div>
+<!-- /site-bar -->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Журнальный стиль: все правила ограничены .mj-article, чтобы не задевать остальной сайт */
+.mj-article{--ink:#141414;--muted:#5C5C5C;--line:#DADADA;--red:#B3261E;--paper:#FFFFFF;
+  background:var(--paper);color:var(--ink);font-family:"PT Serif",Georgia,"Times New Roman",serif;font-size:19px;line-height:1.7;padding-block:0 96px}
+.mj-article *{box-sizing:border-box}
+.mj-article img{display:block;max-width:100%}
+.mj-article a{color:var(--red);text-underline-offset:3px}
+.mj-article a:focus-visible,.mj-article summary:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+.mj-head{max-width:980px;margin:0 auto;padding:64px 16px 40px;text-align:center}
+.mj-eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 18px}
+.mj-article h1{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:clamp(36px,6vw,68px);line-height:1.05;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.mj-hero{max-width:1280px;margin:0 auto}
+.mj-article .mj-hero img{width:100%;aspect-ratio:16/7;object-fit:cover}
+.mj-article .mj-hero p{margin:0;padding:10px 16px 0;font-size:14px;font-style:italic;color:var(--muted)}
+
+.mj-body{max-width:712px;margin:0 auto;padding:56px 16px 0}
+.mj-article .lede{font-size:23px;line-height:1.55;margin:0 0 14px}
+.mj-article .lede::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:92px;line-height:.8;padding:8px 10px 0 0;color:var(--red)}
+.mj-article .byline{font-size:14px;color:var(--muted);font-style:italic;padding-bottom:28px;border-bottom:1px solid var(--line);margin:0}
+
+.mj-article .kicker{margin:72px 0 0;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);text-align:center;scroll-margin-top:24px}
+.mj-article h2{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-style:italic;font-size:clamp(28px,4vw,40px);line-height:1.15;text-align:center;margin:12px 0 28px;text-wrap:balance}
+.mj-article h3{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:24px;line-height:1.3;margin:32px 0 8px}
+.mj-article p{margin:0 0 16px}
+
+.mj-article figure{margin:36px -110px}
+.mj-article figure img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.mj-article figure.obj img{object-fit:contain;background:#fff;padding:24px;border:1px solid var(--line)}
+.mj-article figcaption{font-size:14px;font-style:italic;color:var(--muted);margin:10px 110px 0}
+@media (max-width:960px){.mj-article figure{margin:28px 0}.mj-article figcaption{margin:10px 0 0}}
+
+.mj-article .info{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:12px 0;margin:24px 0;font-size:16px;display:grid;gap:4px}
+.mj-article .info div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px}
+.mj-article .info dt{font-weight:700}
+.mj-article .info dd{margin:0;overflow-wrap:anywhere}
+@media (max-width:480px){.mj-article .info div{grid-template-columns:1fr;gap:0}}
+
+.mj-article .more{margin:28px 0}
+.mj-article .more h4{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:21px;font-weight:600;margin:0 0 6px}
+.mj-article .more ul{margin:0;padding-left:20px}
+.mj-article .more li{margin:6px 0}
+.mj-article .more li::marker{color:var(--red)}
+
+.mj-article .dialect{list-style:none;padding:0;margin:16px 0;border-top:2px solid var(--ink)}
+.mj-article .dialect li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.mj-article .dialect b{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:600;font-size:21px}
+.mj-article .dialect span{color:var(--muted);align-self:center}
+@media (max-width:520px){.mj-article .dialect li{grid-template-columns:1fr;gap:2px}}
+
+.mj-article .records{list-style:none;padding:0;margin:16px 0;display:grid;gap:14px}
+.mj-article .records li{display:flex;gap:16px;align-items:baseline}
+.mj-article .records strong{flex:none;font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:34px;line-height:1;color:var(--red)}
+
+.mj-article details{border-bottom:1px solid var(--line)}
+.mj-article details:first-of-type{border-top:2px solid var(--ink)}
+.mj-article summary{cursor:pointer;list-style:none;position:relative;padding:14px 32px 14px 0;font-weight:700}
+.mj-article summary::-webkit-details-marker{display:none}
+.mj-article summary::after{content:"+";position:absolute;right:4px;top:8px;font-family:"Playfair Display",Georgia,serif;font-size:26px;color:var(--red)}
+.mj-article details[open] summary::after{content:"−"}
+.mj-article details p{margin:0 0 16px}
+
+.mj-article .tbl{overflow-x:auto}
+.mj-article table{width:100%;border-collapse:collapse;font-size:16px;font-variant-numeric:tabular-nums;border-top:2px solid var(--ink)}
+.mj-article td{padding:8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.mj-article td:first-child{color:var(--muted);width:50%;padding-right:16px}
+</style>
+
+<article class="mj-article">
+  <header class="mj-head">
+    <p class="mj-eyebrow">Префектура Тояма</p>
+    <h1>Тояма: королевство воды у подножия гор</h1>
+  </header>
+  <figure class="mj-hero" style="margin:0">
+    <img src="img/gokayama-village.jpg" alt="Дома под очень крутыми соломенными крышами стоят среди террас полей и лесистых гор">
+    <p>Дома под очень крутыми соломенными крышами стоят среди террас полей и лесистых гор</p>
+  </figure>
+  <div class="mj-body">
+<p class="lede">Три тысячи метров над морем, ущелье в форме буквы V, вагонетка вдоль реки и рыба, которой гордится залив. Рассказываем, за чем ехать в префектуру Тояма, которую называют королевством воды.</p>
+<p class="byline">Префектура Тояма · 7 минут чтения · цены указаны на 2020 год</p>
+
+<p class="kicker" id="about">О префектуре</p>
+<h2>Королевство воды у подножия гор</h2>
+<p>В старину эти земли делили на три области: Этидзэн, Эттю и Этиго, а потом от Эттю отделилась Ното, то есть нынешняя Тояма. Префектура прижата к морю хребтом Татэяма с вершинами выше трёх тысяч метров, а между горами и заливом лежит равнина. Здесь есть ущелье Куробэ, одно из самых глубоких ущелий страны в форме буквы V, заболоченное плато Мидагахара, которое охраняет Рамсарская конвенция, то есть международное соглашение о водно-болотных угодьях, и ледники, впервые в Японии получившие официальное признание.</p>
+<p>В заливе Тояма, который называют природным садком, рыбаки ставят сети-ловушки, и улов богат: зимой здесь берут желтохвоста, а ещё белую креветку и светящегося кальмара. Традиция торговцев лекарствами из Эттю жива до сих пор: префектура по-прежнему делает и продаёт лекарства, и эта отрасль держит её экономику.</p>
+<p>Эмблема префектуры повторяет очертания горы Татэяма, а в середине помещён первый слог названия префектуры.</p>
+
+<p class="kicker" id="see">Что посмотреть</p>
+<h2>Поезд, который идёт вдоль ущелья</h2>
+<h3>Железная дорога ущелья Куробэ, вагонетка-троллейбус</h3>
+<p>Дорога длиной 20,1 километра занимает 80 минут. За это время поезд проходит над рекой у моста высотой 60 метров, а на станции Канэцури, где на берегу бьют горячие источники, напротив через воду видно нерастаявший снег.</p>
+<figure>
+  <img src="img/kurobe-gorge-railway.jpg" alt="Красный мост и оранжевый поезд идут через зелёное ущелье над бирюзовой рекой" loading="lazy">
+  <figcaption>Вагонетка идёт по мосту над рекой, а по обоим берегам поднимаются крутые лесистые склоны</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Справки</dt><dd>центр продаж железной дороги ущелья Куробэ</dd></div>
+  <div><dt>Телефон</dt><dd>+81 765-62-1011</dd></div>
+</dl>
+<div class="more">
+  <h4>Что ещё посмотреть</h4>
+  <ul>
+    <li><b>Маршрут Татэяма Куробэ</b> через горы с высокогорной дорогой</li>
+    <li><b>Берег Амахараси</b>, откуда открывается вид на залив и хребет</li>
+    <li><b>Деревни Гокаямы</b> с домами под крутыми соломенными крышами</li>
+  </ul>
+</div>
+
+<p class="kicker" id="fest">Праздники</p>
+<h2>Семь повозок, которые съезжаются вместе</h2>
+<h3>Праздник повозок в Такаоке</h3>
+<p>Семь повозок украшают техниками местных ремёсел, которыми славится Такаока, и в каждом квартале свою повозку наряжают заново. После обряда очищения повозки объезжают улицы, а затем выстраиваются все вместе. Праздник признан важным культурным достоянием страны, и материальным, и нематериальным.</p>
+<figure>
+  <img src="img/takaoka-float-festival.jpg" alt="Богато украшенная повозка с цветами едет по улице, рядом участники праздника" loading="lazy">
+  <figcaption>Повозку с резьбой, цветами и фонарями тянут по улице, а рядом идут участники праздника</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Когда</dt><dd>ежегодно 1 мая</dd></div>
+  <div><dt>Место</dt><dd>кварталы Ямамати-судзи и Катахарамати, город Такаока, префектура Тояма</dd></div>
+</dl>
+<div class="more">
+  <h4>Другие праздники</h4>
+  <ul>
+    <li><b>Фестиваль тюльпанов в Тонами</b>, когда поля превращаются в разноцветные полосы</li>
+    <li><b>Праздник татэмон</b> с высокими шестами и фонарями</li>
+    <li><b>Праздник ветра в Этиго-Яцуо</b> с народными танцами под музыку</li>
+  </ul>
+</div>
+
+<p class="kicker" id="arch">Музеи и архитектура</p>
+<h2>Здание, которое сверкает на солнце</h2>
+<h3>ТОЯМА Кирари</h3>
+<p>Комплекс построил архитектор Кэнго Кума, и в нём работают городской музей стекла и другие учреждения. Стекло и алюминий на фасаде отражают свет под разными углами, поэтому здание и правда сверкает.</p>
+<figure>
+  <img src="img/toyama-kirari-glass.jpg" alt="Современное здание с фасадом из стекла и алюминия на городской улице" loading="lazy">
+  <figcaption>Фасад собран из стекла и металла, поэтому здание как будто меняется в зависимости от угла, под которым на него смотришь</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Адрес</dt><dd>5-1 Nishimachi, Toyama, Toyama</dd></div>
+  <div><dt>Телефон</dt><dd>+81 76-461-3100 (городской музей стекла)</dd></div>
+  <div><dt>Сайт</dt><dd><a href="http://toyama-glass-art-museum.jp" target="_blank" rel="noopener">toyama-glass-art-museum.jp</a></dd></div>
+</dl>
+<div class="more">
+  <h4>Что ещё посмотреть</h4>
+  <ul>
+    <li><b>Художественный музей префектуры Тояма</b></li>
+    <li><b>Литературный музей Коси-но куни</b></li>
+    <li><b>Художественный музей города Такаока</b></li>
+  </ul>
+</div>
+
+<p class="kicker" id="food">Местная кухня</p>
+<h2>Форель в деревянной кадке</h2>
+<h3>Масу-суши</h3>
+<p>Кусочки подсоленной форели укладывают на листья саса, то есть бамбуковой травы, которыми выстлан деревянный ящик, сверху идёт рис с уксусом, и всё это прижимают и заворачивают в те же листья.</p>
+<figure>
+  <img src="img/masu-sushi.jpg" alt="Два куска прессованного суши из форели на бамбуковом листе" loading="lazy">
+  <figcaption>Масу-суши нарезают треугольными кусками и подают на бамбуковом листе: сквозь рис видно розовую форель</figcaption>
+</figure>
+<div class="more">
+  <h4>Что ещё попробовать</h4>
+  <ul>
+    <li><b>Суши из рыбы залива Тояма</b></li>
+    <li><b>Тушёный желтохвост с редькой дайкон</b></li>
+    <li><b>Тонко нарезанный желтохвост, который окунают в горячий бульон</b></li>
+  </ul>
+</div>
+
+<p class="kicker" id="eat">Где поесть</p>
+<h2>Ресторан на ферме пряных трав</h2>
+<h3>healthian-wood</h3>
+<p>Хозяйство открылось в марте 2020 года. В зале «The Kitchen» подают обед с пряными травами, которые здесь же и выращивают, а в «The Table» гостей ждёт полноценный сет из нескольких блюд.</p>
+<figure>
+  <img src="img/healthian-wood-herb-farm.jpg" alt="Современное здание ресторана отражается в залитом водой рисовом поле" loading="lazy">
+  <figcaption>Здание ресторана стоит среди полей и отражается в залитой водой рисовой низине</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Адрес</dt><dd>57-1 Nakaagano, Tateyama, Nakaniikawa, Toyama</dd></div>
+  <div><dt>Телефон</dt><dd>+81 76-482-2536</dd></div>
+  <div><dt>Часы</dt><dd>The Kitchen с 11:00 до 15:00 (последний заказ в 14:00), The Table с 12:00 и с 18:00</dd></div>
+  <div><dt>Бронь</dt><dd>не позднее трёх дней до визита: обед между 12:00 и 13:00, ужин между 18:00 и 19:00</dd></div>
+  <div><dt>Выходные</dt><dd>среда и третий вторник месяца</dd></div>
+  <div><dt>Сайт</dt><dd><a href="https://www.healthian-wood.jp" target="_blank" rel="noopener">healthian-wood.jp</a></dd></div>
+</dl>
+
+<p class="kicker" id="craft">Ремёсла</p>
+<h2>Стеклянные бутыли как объекты искусства</h2>
+<h3>Работы Киноситы Такары</h3>
+<p>Мастер работает в Тояме, и его вещи отличает простая и ясная форма. Серия родилась после знакомства с фермой Сэйз, где нашлись и место, и тема для работы.</p>
+<figure class="obj">
+  <img src="img/glass-art-bottles.jpg" alt="Две стеклянные бутыли матового зелёного и оливкового цвета на белом фоне" loading="lazy">
+  <figcaption>Две бутыли стоят рядом: матово-зелёная и оливковая, обе с узким горлышком и мягкой, неровной поверхностью</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Справки</dt><dd>Simpleglass</dd></div>
+  <div><dt>Сайт</dt><dd><a href="https://t-simpleglass.com" target="_blank" rel="noopener">t-simpleglass.com</a></dd></div>
+</dl>
+
+<p class="kicker" id="buy">Что привезти</p>
+<h2>Бутылка сакэ из Тоямы</h2>
+<h3>Дайгиндзё «Масуидзуми» от сакеварни Масуда</h3>
+<p>Во вкусе этого сакэ разворачивается насыщенная основа, а следом приходит лёгкая сладость спелого фрукта.</p>
+<figure class="obj">
+  <img src="img/masuizumi-daiginjo.jpg" alt="Бутылка сакэ «Масуидзуми» с золотой этикеткой на белом фоне" loading="lazy">
+  <figcaption>На этикетке указана категория дайгиндзё, а фон украшен тиснёным узором</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Цена</dt><dd>2970 иен за 720 мл</dd></div>
+  <div><dt>Телефон</dt><dd>+81 76-437-9916</dd></div>
+  <div><dt>Сайт</dt><dd><a href="http://www.masuizumi.co.jp" target="_blank" rel="noopener">masuizumi.co.jp</a></dd></div>
+</dl>
+
+<p class="kicker" id="stay">Где остановиться</p>
+<h2>Дом на холме среди полей</h2>
+<h3>Сэйз Фарм</h3>
+<p>Гостевой дом стоит на небольшом холме рядом с винодельней, и его сдают целиком, как дачу, на сутки. На территории есть ферма, ресторан и магазин.</p>
+<figure>
+  <img src="img/says-farm-guesthouse.jpg" alt="Светлая комната с деревянным полом, длинным столом и диванами" loading="lazy">
+  <figcaption>Внутри дома длинный общий стол, диваны и деревянные балки под потолком</figcaption>
+</figure>
+<dl class="info">
+  <div><dt>Адрес</dt><dd>238 Kitayama, Yogawa, Himi, Toyama</dd></div>
+  <div><dt>Телефон</dt><dd>+81 766-72-8288</dd></div>
+  <div><dt>Номеров</dt><dd>один дом с тремя спальнями, в день принимают только одну группу</dd></div>
+  <div><dt>Цена</dt><dd>от 35 200 иен за сутки (цена за один дом при размещении двух гостей, сервисный сбор включён, налог отдельно)</dd></div>
+  <div><dt>Сайт</dt><dd><a href="http://www.saysfarm.com/stay" target="_blank" rel="noopener">saysfarm.com/stay</a></dd></div>
+</dl>
+
+<p class="kicker" id="talk">Местный диалект</p>
+<h2>Как здесь хвалят еду и благодарят за покупку</h2>
+<ul class="dialect">
+  <li><b>Нантю умай гакээ</b><span>Ну очень вкусно</span></li>
+  <li><b>Ицумо дэкай токо тэморотэ, кино доку на нээ</b><span>Спасибо, что всегда у нас много покупаете</span></li>
+  <li><b>Иттэнса дэ макэтатя, хагаясии но!</b><span>Проиграли с разницей в одно очко, как обидно!</span></li>
+</ul>
+
+<p class="kicker" id="records">Рекорды</p>
+<h2>Первые в стране по тюльпанам, домам и плотине</h2>
+<ul class="records">
+  <li><strong>№1</strong> по отгрузке луковиц тюльпанов</li>
+  <li><strong>№1</strong> по доле собственного жилья</li>
+  <li><strong>№1</strong> по высоте плотины: это плотина Куробэ</li>
+</ul>
+
+<p class="kicker" id="qa">Вопросы и ответы</p>
+<h2>Два вопроса о Тояме</h2>
+<details open>
+  <summary>Какой морской деликатес называют драгоценностью залива Тояма?</summary>
+  <p>Белую креветку, сироэби. Она живёт только в заливе Тояма, вырастает от 5 до 8 сантиметров, а цвет у неё прозрачный, с нежным розовым отливом. Плотный, благородно сладкий вкус и тающая текстура сделали её очень популярной.</p>
+</details>
+<details>
+  <summary>Сколько лет строили плотину Куробэ?</summary>
+  <p>Семь лет. Работы начались в 1956 году, то есть в 31-й год эпохи Сёва, и на стройку ушло 51,3 млрд иен по деньгам того времени. О том, как тяжело дался этот проект, рассказывает фильм «Куробэ-но тайё», название которого переводится как «Солнце Куробэ».</p>
+</details>
+
+<p class="kicker" id="data">Справочник</p>
+<h2>Тояма в цифрах</h2>
+<h3>Общие данные</h3>
+<div class="tbl"><table><tbody>
+  <tr><td>Административный центр</td><td>Тояма</td></tr>
+  <tr><td>Муниципалитеты</td><td>10 городов, 4 посёлка и 1 село</td></tr>
+  <tr><td>Площадь</td><td>4248 км²</td></tr>
+  <tr><td>Население</td><td>1,05 млн человек</td></tr>
+  <tr><td>Плотность населения</td><td>247,2 чел./км²</td></tr>
+  <tr><td>Туристов в год</td><td>6,06 млн</td></tr>
+  <tr><td>Символ-дерево</td><td>кедр татэяма-суги</td></tr>
+  <tr><td>Символ-цветок</td><td>тюльпан</td></tr>
+  <tr><td>Символ-птица</td><td>белая куропатка</td></tr>
+</tbody></table></div>
+<h3>Климат</h3>
+<div class="tbl"><table><tbody>
+  <tr><td>Средняя годовая температура</td><td>15,0 °C</td></tr>
+  <tr><td>Средний максимум</td><td>32,8 °C</td></tr>
+  <tr><td>Средний минимум</td><td>-1,0 °C</td></tr>
+  <tr><td>Осадки</td><td>2751 мм в год</td></tr>
+  <tr><td>Ясных дней</td><td>16</td></tr>
+  <tr><td>Дней с осадками</td><td>179</td></tr>
+  <tr><td>Дней со снегом</td><td>64</td></tr>
+</tbody></table></div>
+<h3>Для путешественника</h3>
+<div class="tbl"><table><tbody>
+  <tr><td>Горячих источников</td><td>71</td></tr>
+  <tr><td>Отелей и рёканов</td><td>426</td></tr>
+  <tr><td>Художественных музеев</td><td>27</td></tr>
+  <tr><td>Музеев</td><td>78</td></tr>
+  <tr><td>Придорожных станций митиноэки</td><td>15</td></tr>
+  <tr><td>Объектов культурного наследия</td><td>49, из них 1 национальное сокровище</td></tr>
+  <tr><td>Национальные сокровища</td><td>храм Дзуйрюдзи</td></tr>
+  <tr><td>Исторических памятников</td><td>21</td></tr>
+  <tr><td>Живописных мест</td><td>3</td></tr>
+  <tr><td>Памятников природы</td><td>22</td></tr>
+  <tr><td>Всемирное наследие</td><td>деревни с домами под соломенными крышами в Гокаяме</td></tr>
+  <tr><td>Национальные и квазинациональные парки</td><td>Тюбу Сангаку, Хакусан, полуостров Ното, всего 3</td></tr>
+</tbody></table></div>
+<h3>Природные памятники</h3>
+<p>Морская гладь, где собираются светящиеся кальмары, водопад Сёмё, каровые склоны горы Якуси, ущелье Куробэ с обрывами Саруби и Окуканэяма, затопленный лес в Уодзу и другие.</p>
+  </div>
+</article>
+</body>
+</html>

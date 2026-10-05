@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Хёго: белый замок, сакэ из Нада и онсэны у двух морей</title>
+</head>
+<body style="margin:0;background:#fff">
+<!-- site-bar -->
+<style>.site-bar{position:sticky;top:0;z-index:50;background:rgba(252,252,250,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(22,24,26,.14);font-family:Inter,system-ui,sans-serif}
+.site-bar .in{max-width:1180px;margin:0 auto;padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.site-bar a{text-decoration:none;color:#16181A;font-size:14px}.site-bar .brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;font-weight:600}
+.site-bar .back{color:#1E3050}.site-bar .back:hover{color:#B3352D}</style>
+<div class="site-bar"><div class="in"><a class="brand" href="../../index.html">Omamori Concierge</a><a class="back" href="../../index.html#map-section">&larr; К карте Японии</a></div></div>
+<!-- /site-bar -->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Журнальный стиль: все правила ограничены .mj-article, чтобы не задевать остальной сайт */
+.mj-article{--ink:#141414;--muted:#5C5C5C;--line:#DADADA;--red:#B3261E;--paper:#FFFFFF;
+  background:var(--paper);color:var(--ink);font-family:"PT Serif",Georgia,"Times New Roman",serif;font-size:19px;line-height:1.7;padding-block:0 96px}
+.mj-article *{box-sizing:border-box}
+.mj-article img{display:block;max-width:100%}
+.mj-article a{color:var(--red);text-underline-offset:3px}
+.mj-article a:focus-visible,.mj-article summary:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+.mj-head{max-width:980px;margin:0 auto;padding:64px 16px 40px;text-align:center}
+.mj-eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 18px}
+.mj-article h1{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:clamp(36px,6vw,68px);line-height:1.05;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.mj-hero{max-width:1280px;margin:0 auto}
+.mj-article .mj-hero img{width:100%;aspect-ratio:16/7;object-fit:cover}
+.mj-article .mj-hero p{margin:0;padding:10px 16px 0;font-size:14px;font-style:italic;color:var(--muted)}
+
+.mj-body{max-width:712px;margin:0 auto;padding:56px 16px 0}
+.mj-article .lede{font-size:23px;line-height:1.55;margin:0 0 14px}
+.mj-article .lede::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:92px;line-height:.8;padding:8px 10px 0 0;color:var(--red)}
+.mj-article .byline{font-size:14px;color:var(--muted);font-style:italic;padding-bottom:28px;border-bottom:1px solid var(--line);margin:0}
+
+.mj-article .kicker{margin:72px 0 0;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);text-align:center;scroll-margin-top:24px}
+.mj-article h2{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-style:italic;font-size:clamp(28px,4vw,40px);line-height:1.15;text-align:center;margin:12px 0 28px;text-wrap:balance}
+.mj-article h3{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:24px;line-height:1.3;margin:32px 0 8px}
+.mj-article p{margin:0 0 16px}
+
+.mj-article figure{margin:36px -110px}
+.mj-article figure img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.mj-article figure.obj img{object-fit:contain;background:#fff;padding:24px;border:1px solid var(--line)}
+.mj-article figcaption{font-size:14px;font-style:italic;color:var(--muted);margin:10px 110px 0}
+@media (max-width:960px){.mj-article figure{margin:28px 0}.mj-article figcaption{margin:10px 0 0}}
+
+.mj-article .info{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:12px 0;margin:24px 0;font-size:16px;display:grid;gap:4px}
+.mj-article .info div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px}
+.mj-article .info dt{font-weight:700}
+.mj-article .info dd{margin:0;overflow-wrap:anywhere}
+@media (max-width:480px){.mj-article .info div{grid-template-columns:1fr;gap:0}}
+
+.mj-article .more{margin:28px 0}
+.mj-article .more h4{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:21px;font-weight:600;margin:0 0 6px}
+.mj-article .more ul{margin:0;padding-left:20px}
+.mj-article .more li{margin:6px 0}
+.mj-article .more li::marker{color:var(--red)}
+
+.mj-article .dialect{list-style:none;padding:0;margin:16px 0;border-top:2px solid var(--ink)}
+.mj-article .dialect li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.mj-article .dialect b{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:600;font-size:21px}
+.mj-article .dialect span{color:var(--muted);align-self:center}
+@media (max-width:520px){.mj-article .dialect li{grid-template-columns:1fr;gap:2px}}
+
+.mj-article .records{list-style:none;padding:0;margin:16px 0;display:grid;gap:14px}
+.mj-article .records li{display:flex;gap:16px;align-items:baseline}
+.mj-article .records strong{flex:none;font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:34px;line-height:1;color:var(--red)}
+
+.mj-article details{border-bottom:1px solid var(--line)}
+.mj-article details:first-of-type{border-top:2px solid var(--ink)}
+.mj-article summary{cursor:pointer;list-style:none;position:relative;padding:14px 32px 14px 0;font-weight:700}
+.mj-article summary::-webkit-details-marker{display:none}
+.mj-article summary::after{content:"+";position:absolute;right:4px;top:8px;font-family:"Playfair Display",Georgia,serif;font-size:26px;color:var(--red)}
+.mj-article details[open] summary::after{content:"−"}
+.mj-article details p{margin:0 0 16px}
+
+.mj-article .tbl{overflow-x:auto}
+.mj-article table{width:100%;border-collapse:collapse;font-size:16px;font-variant-numeric:tabular-nums;border-top:2px solid var(--ink)}
+.mj-article td{padding:8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.mj-article td:first-child{color:var(--muted);width:50%;padding-right:16px}
+</style>
+
+<article class="mj-article">
+  <header class="mj-head">
+    <p class="mj-eyebrow">Префектура Хёго</p>
+    <h1>Хёго: белый замок, сакэ из Нада и онсэны у двух морей</h1>
+  </header>
+  <figure class="mj-hero" style="margin:0">
+    <img src="img/takeda-castle.jpg" alt="Каменные стены старого замка на вершине горы над облаками">
+    <p>Руины замка Такэда на рассвете поднимаются над морем облаков, за это их называют «замком в небесах»</p>
+  </figure>
+  <div class="mj-body">
+  <p class="lede">Самый красивый замок Японии, почти треть всего японского сакэ, носилки с божествами, которые сталкивают друг с другом на осеннем празднике, и курорт, где гости гуляют по улицам в юкате. Рассказываем, за чем ехать в Хёго.</p>
+  <p class="byline">Префектура Хёго · 8 минут чтения · данные указаны на 2026 год</p>
+
+  <p class="kicker" id="about">О префектуре</p>
+  <h2>Пять старых провинций под одним именем</h2>
+  <p>Хёго самая большая по площади префектура региона Кансай, то есть региона вокруг Осаки и Киото. Она выходит сразу к двум морям: на севере к Японскому, на юге к Внутреннему морю Сэто-Найкай, усыпанному островами. Префектура сложилась из пяти старых провинций: Сэццу, Харима, Тадзима, Тамба и остров Авадзи, поэтому японцы до сих пор называют её «пять стран Хёго».</p>
+  <p>Столица префектуры, Кобе, в 1868 году одним из первых портов Японии открылся для иностранной торговли. Купцы из Европы и Америки строили здесь свои дома, и в квартале Китано они стоят до сих пор. Японцы называют их идзинкан, то есть «дома иностранцев».</p>
+  <p>А ещё Хёго главный винный погреб страны: здесь варят почти треть всего японского сакэ. В 1923 году именно здесь вывели сорт риса ямада-нисики, который пивовары считают лучшим для сакэ. И даже японское время отсчитывают отсюда: через город Акаси проходит меридиан, по которому живёт вся страна.</p>
+
+  <p class="kicker" id="see">Что посмотреть</p>
+  <h2>Белая цапля над равниной Харима</h2>
+  <h3>Замок Химэдзи</h3>
+  <p>Белоснежный замок с изогнутыми крышами японцы ласково зовут Сирасаги-дзё, «замок белой цапли». Его главная башня стоит с начала XVII века и пережила войны, землетрясения и бомбёжки, поэтому это один из немногих японских замков, который сохранился в подлинном виде. Башня признана национальным сокровищем, а в 1993 году замок одним из первых в Японии вошёл в список Всемирного наследия ЮНЕСКО.</p>
+  <figure>
+    <img src="img/himeji-castle.jpg" alt="Белый многоярусный замок с изогнутыми крышами на холме">
+    <figcaption>Белые стены и ярусы крыш замка Химэдзи видны из любой точки старого города</figcaption>
+  </figure>
+  <dl class="info">
+    <div><dt>Адрес</dt><dd>68 Honmachi, Himeji, Hyogo</dd></div>
+    <div><dt>Телефон</dt><dd>+81 79-285-1146</dd></div>
+    <div><dt>Часы</dt><dd>с 9:00 до 17:00, последний вход в 16:00</dd></div>
+    <div><dt>Выходные</dt><dd>29 и 30 декабря</dd></div>
+  </dl>
+  <div class="more">
+    <h4>Что ещё посмотреть</h4>
+    <ul>
+      <li><b>Онсэн Киносаки</b>, курортный городок с семью общественными купальнями, между которыми гуляют прямо в юкате, лёгком хлопковом кимоно</li>
+      <li><b>Руины замка Такэда</b>, каменные стены на вершине горы, которые осенними утрами поднимаются над облаками</li>
+      <li><b>Онсэн Арима</b>, один из древнейших курортов Японии, знаменитый рыжей «золотой» и прозрачной «серебряной» водой</li>
+    </ul>
+  </div>
+
+  <p class="kicker" id="fest">Праздники</p>
+  <h2>Праздник, где носилки с богами бьются друг о друга</h2>
+  <h3>Нада-но кэнка мацури</h3>
+  <p>Название переводится как «праздник драки в Нада», и оно не преувеличивает. Каждую осень у святилища Мацубара Хатиман в Химэдзи сталкивают друг с другом три микоси, переносных святилища, в которых, по поверьям, едет божество. Чем сильнее удар, тем больше радуется бог. Вокруг под барабаны раскачивают нарядные повозки-ятай из семи окрестных районов. Праздник охраняется как нематериальное культурное наследие префектуры.</p>
+  <figure>
+    <img src="img/nada-kenka.jpg" alt="Толпа участников поднимает над головами переносные святилища">
+    <figcaption>Участники в белых одеждах сшибают переносные святилища под крики тысяч зрителей</figcaption>
+  </figure>
+  <dl class="info">
+    <div><dt>Когда</dt><dd>14 и 15 октября</dd></div>
+    <div><dt>Место</dt><dd>святилище Мацубара Хатиман, город Химэдзи</dd></div>
+  </dl>
+  <div class="more">
+    <h4>Другие праздники</h4>
+    <ul>
+      <li><b>Кобе Луминарие</b>, зимний праздник света, который появился в 1995 году в память о жертвах Великого землетрясения Хансин</li>
+      <li><b>Ако Гиси-сай</b>, шествие 14 декабря в честь 47 ронинов из Ако, самураев из самой знаменитой японской истории о верности</li>
+      <li><b>Праздник Кобе</b>, большой весенний городской карнавал с парадом по центральным улицам</li>
+    </ul>
+  </div>
+
+  <p class="kicker" id="arch">Музеи и архитектура</p>
+  <h2>Бетон и стекло на берегу залива</h2>
+  <h3>Музей искусств префектуры Хёго</h3>
+  <p>Одно из главных зданий Тадао Андо, японского архитектора, который получил Притцкеровскую премию, самую почётную награду в архитектуре. Музей открылся в 2002 году на берегу залива Осака: его строили как символ возрождения Кобе после землетрясения 1995 года. Гладкий бетон, стеклянные галереи и открытые лестницы к морю сами по себе стоят поездки, а внутри собрана большая коллекция японского и западного искусства.</p>
+  <figure>
+    <img src="img/hyogo-museum-of-art.jpg" alt="Бетонное здание музея со стеклянными галереями у воды">
+    <figcaption>Бетонные объёмы музея Тадао Андо выходят террасами прямо к заливу</figcaption>
+  </figure>
+  <dl class="info">
+    <div><dt>Адрес</dt><dd>1-1-1 Wakinohamakaigan-dori, Chuo-ku, Kobe, Hyogo</dd></div>
+    <div><dt>Телефон</dt><dd>+81 78-262-1011</dd></div>
+    <div><dt>Часы</dt><dd>с 10:00 до 18:00</dd></div>
+    <div><dt>Выходные</dt><dd>понедельник</dd></div>
+    <div><dt>Сайт</dt><dd><a href="https://www.artm.pref.hyogo.jp" target="_blank" rel="noopener">artm.pref.hyogo.jp</a></dd></div>
+  </dl>
+  <div class="more">
+    <h4>Что ещё посмотреть</h4>
+    <ul>
+      <li><b>Дом с флюгером</b>, кирпичный особняк немецкого купца 1909 года в квартале Китано, с флюгером в виде петуха на крыше</li>
+      <li><b>Портовая башня Кобе</b>, красная решётчатая башня 1963 года, символ городской гавани</li>
+      <li><b>Музей литературы города Химэдзи</b>, ещё одна работа Тадао Андо с видом на замок</li>
+    </ul>
+  </div>
+
+  <p class="kicker" id="food">Местная кухня</p>
+  <h2>Омлет с осьминогом, который едят ложкой из бульона</h2>
+  <h3>Акаси-яки</h3>
+  <p>Родственник знаменитых такояки из Осаки, только нежнее. Шарики из жидкого теста, в котором больше яиц, чем муки, с кусочком осьминога внутри, пекут в медной форме и подают на деревянной доске. Едят их, окуная в лёгкий бульон даси, отвар из сушёной рыбы и водорослей. Сами жители Акаси называют это блюдо просто тамагояки, «жареные яйца».</p>
+  <figure>
+    <img src="img/akashiyaki.jpg" alt="Золотистые мягкие шарики на деревянной доске рядом с чашкой бульона">
+    <figcaption>Акаси-яки подают на наклонной доске, а рядом ставят чашку с горячим бульоном для макания</figcaption>
+  </figure>
+  <div class="more">
+    <h4>Что ещё попробовать</h4>
+    <ul>
+      <li><b>Говядина Кобе</b>, одна из трёх самых знаменитых японских мраморных говядин, с очень строгими правилами отбора</li>
+      <li><b>Собамэси</b>, лапша, обжаренная вместе с рисом на железной плите, родом из рабочего района Нагата в Кобе</li>
+      <li><b>Иканаго-но кугини</b>, мелкая рыбка песчанка, томлённая в соевом соусе с имбирём, весеннее домашнее блюдо</li>
+    </ul>
+  </div>
+
+  <p class="kicker" id="eat">Где поесть</p>
+  <h2>Мраморная говядина прямо с раскалённой плиты</h2>
+  <h3>Моурия, главный ресторан</h3>
+  <p>Ресторан работает с 1885 года и считается одним из старейших мест в Кобе, где подают местную говядину. Готовят по-японски, на тэппане: повар жарит стейк на раскалённой железной плите прямо перед гостем, сидящим у стойки, и тут же нарезает его.</p>
+  <figure>
+    <img src="img/mouriya-teppanyaki.jpg" alt="Повар жарит стейк на железной плите перед гостями">
+    <figcaption>Стейк из говядины Кобе жарят на плите прямо перед гостем у стойки</figcaption>
+  </figure>
+  <dl class="info">
+    <div><dt>Адрес</dt><dd>2-1-17 Shimoyamate-dori, Chuo-ku, Kobe, Hyogo</dd></div>
+    <div><dt>Телефон</dt><dd>+81 78-391-4603</dd></div>
+    <div><dt>Часы</dt><dd>с 11:00 до 22:00, последний заказ в 21:00</dd></div>
+    <div><dt>Сайт</dt><dd><a href="https://www.mouriya.co.jp" target="_blank" rel="noopener">mouriya.co.jp</a></dd></div>
+  </dl>
+
+  <p class="kicker" id="craft">Ремёсла</p>
+  <h2>Глиняная посуда, которую обжигают уже восемьсот лет</h2>
+  <h3>Керамика Тамба</h3>
+  <p>Тамба-яки входит в «шесть старинных печей Японии» вместе с керамикой Сэто, Токонамэ, Сигараки, Бидзэн и Этидзэн. Посуду здесь делают около восьмисот лет, и в деревне Татикуи до сих пор топят ноборигама, длинные печи, которые ступенями поднимаются по склону холма. Пепел от дров оседает на сосудах и сам превращается в глазурь, поэтому двух одинаковых изделий не бывает. В парке ремёсел можно посмотреть работы местных мастеров и попробовать себя за гончарным кругом.</p>
+  <figure class="obj">
+    <img src="img/tamba-yaki.jpg" alt="Керамический сосуд с натуральной зольной глазурью">
+    <figcaption>Зольная глазурь ложится на керамику Тамба неровными подтёками, и каждый сосуд получается своим</figcaption>
+  </figure>
+  <dl class="info">
+    <div><dt>Справки</dt><dd>парк ремёсел Тамба, Татикуи Суэ-но сато</dd></div>
+    <div><dt>Адрес</dt><dd>3 Kamitachikui, Imada-cho, Tambasasayama, Hyogo</dd></div>
+    <div><dt>Телефон</dt><dd>+81 79-597-2034</dd></div>
+    <div><dt>Часы</dt><dd>с 10:00 до 17:00</dd></div>
+    <div><dt>Выходные</dt><dd>с 29 декабря по 3 января</dd></div>
+  </dl>
+  <div class="more">
+    <h4>Что ещё посмотреть</h4>
+    <ul>
+      <li><b>Ручные пилы и инструменты из Мики</b>, город кузнецов, где делают больше ручных пил, чем где-либо в Японии</li>
+      <li><b>Сумки из Тоёока</b>, крупнейший в Японии центр по производству сумок</li>
+      <li><b>Счёты из Оно</b>, деревянные соробан, японские счёты, которые здесь делают вручную</li>
+    </ul>
+  </div>
+
+  <p class="kicker" id="buy">Что привезти</p>
+  <h2>Сакэ из пяти деревень и вафли из старого порта</h2>
+  <h3>Сакэ из Нада</h3>
+  <p>Побережье между Кобе и Нисиномией называют Нада-гого, «пять деревень Нада». Сакэ здесь варят с XIV века, а секрет местного вкуса в воде миямидзу: она богата минералами и почти не содержит железа, которое портит цвет напитка. Лучше всего знакомиться с ним в музее пивоварни Хакуцуру. Он занимает старое здание начала XX века, где сакэ варили до 1969 года, а в конце экскурсии дают попробовать несколько сортов.</p>
+  <figure>
+    <img src="img/nada-sake.jpg" alt="Деревянные бочки и инструменты старой пивоварни сакэ">
+    <figcaption>В старой пивоварне Хакуцуру сохранили деревянные чаны и инструменты прежних мастеров</figcaption>
+  </figure>
+  <dl class="info">
+    <div><dt>Справки</dt><dd>музей пивоварни Хакуцуру</dd></div>
+    <div><dt>Адрес</dt><dd>4-5-5 Sumiyoshi-minamimachi, Higashinada-ku, Kobe, Hyogo</dd></div>
+    <div><dt>Телефон</dt><dd>+81 78-822-8907</dd></div>
+    <div><dt>Часы</dt><dd>с 9:30 до 16:30, последний вход в 16:00</dd></div>
+    <div><dt>Цена</dt><dd>вход бесплатный</dd></div>
+  </dl>
+  <h3>Гофры Кобе Фугэцудо</h3>
+  <p>Тонкие хрустящие вафли с нежным кремом внутри стали сладким символом Кобе. Кондитерская работает с 1897 года, и её жестяные коробки с гофрами японцы привозят из Кобе в подарок.</p>
+  <figure class="obj">
+    <img src="img/fugetsudo-gaufres.jpg" alt="Круглые тонкие вафли с кремом">
+    <figcaption>Круглые гофры Фугэцудо: два тонких хрустящих листа и слой крема между ними</figcaption>
+  </figure>
+  <dl class="info">
+    <div><dt>Адрес</dt><dd>3-3-10 Motomachi-dori, Chuo-ku, Kobe, Hyogo</dd></div>
+    <div><dt>Телефон</dt><dd>+81 78-321-5598</dd></div>
+    <div><dt>Часы</dt><dd>с 10:00 до 18:00</dd></div>
+    <div><dt>Выходные</dt><dd>второй и четвёртый вторник месяца</dd></div>
+    <div><dt>Сайт</dt><dd><a href="https://www.kobe-fugetsudo.co.jp" target="_blank" rel="noopener">kobe-fugetsudo.co.jp</a></dd></div>
+  </dl>
+
+  <p class="kicker" id="stay">Где остановиться</p>
+  <h2>Деревянный рёкан в городке семи купален</h2>
+  <h3>Нисимурая Хонкан</h3>
+  <p>Рёкан, то есть традиционная японская гостиница с татами и горячими источниками, принимает гостей в Киносаки с середины XIX века, больше 165 лет. Его деревянные корпуса внесены в реестр культурных ценностей Японии. Отсюда удобно, как это принято в Киносаки, надеть юкату и пройтись по всем семи общественным купальням городка.</p>
+  <figure>
+    <img src="img/nishimuraya-kinosaki.jpg" alt="Деревянный корпус старого рёкана над японским садом">
+    <figcaption>Деревянные корпуса рёкана Нисимурая окружают японский сад с прудом</figcaption>
+  </figure>
+  <dl class="info">
+    <div><dt>Адрес</dt><dd>469 Yushima, Kinosaki-cho, Toyooka, Hyogo</dd></div>
+    <div><dt>Телефон</dt><dd>+81 796-32-2211</dd></div>
+    <div><dt>Сайт</dt><dd><a href="https://www.nishimuraya.ne.jp/honkan/" target="_blank" rel="noopener">nishimuraya.ne.jp/honkan</a></dd></div>
+  </dl>
+
+  <p class="kicker" id="talk">Местный диалект</p>
+  <h2>Как говорят в Кобе и Химэдзи</h2>
+  <ul class="dialect">
+    <li><b>Нани ситон?</b><span>Ты что делаешь?</span></li>
+    <li><b>Дабо!</b><span>Дурак! (резкое словечко Харимы)</span></li>
+    <li><b>Хокаситоитэ</b><span>Выброси это</span></li>
+  </ul>
+
+  <p class="kicker" id="records">Рекорды</p>
+  <h2>Три первых места страны</h2>
+  <ul class="records">
+    <li><strong>№1</strong> по производству сакэ, почти треть всего японского</li>
+    <li><strong>№1</strong> по выращиванию нори, морских водорослей для суши</li>
+    <li><strong>№1</strong> по производству спичек, около 80% японских спичек</li>
+  </ul>
+
+  <p class="kicker" id="qa">Вопросы и ответы</p>
+  <h2>Проверьте себя</h2>
+  <details open>
+    <summary>Почему время во всей Японии отсчитывают от города Акаси?</summary>
+    <p>Через Акаси проходит меридиан 135 градусов восточной долготы, и в 1886 году именно его выбрали основой японского стандартного времени. В 1960 году прямо на меридиане открыли городской планетарий, а часы на его башне стали символом «города времени».</p>
+  </details>
+  <details>
+    <summary>Какой знаменитый театр, где все роли играют женщины, родился в Хёго?</summary>
+    <p>Такарадзука. Первое представление труппа дала в 1914 году в городе Такарадзука, в зале, переделанном из бассейна. Сегодня это одно из самых популярных зрелищ Японии, а в Такарадзуке работает её главный театр.</p>
+  </details>
+
+  <p class="kicker" id="data">Справочник</p>
+  <h2>Хёго в цифрах</h2>
+  <h3>Общие данные</h3>
+  <div class="tbl"><table><tbody>
+    <tr><td>Административный центр</td><td>Кобе</td></tr>
+    <tr><td>Муниципалитеты</td><td>29 городов и 12 посёлков</td></tr>
+    <tr><td>Площадь</td><td>8401 км²</td></tr>
+    <tr><td>Население</td><td>5,39 млн человек</td></tr>
+    <tr><td>Плотность населения</td><td>642 чел./км²</td></tr>
+    <tr><td>Символ-дерево</td><td>камфорное дерево</td></tr>
+    <tr><td>Символ-цветок</td><td>нодзигику, дикая хризантема</td></tr>
+    <tr><td>Символ-птица</td><td>дальневосточный аист</td></tr>
+  </tbody></table></div>
+  <h3>Для путешественника</h3>
+  <div class="tbl"><table><tbody>
+    <tr><td>Всемирное наследие</td><td>замок Химэдзи</td></tr>
+    <tr><td>Национальные парки</td><td>Сэто-Найкай и Санъин-Кайган</td></tr>
+    <tr><td>Самые известные онсэны</td><td>Арима и Киносаки</td></tr>
+  </tbody></table></div>
+  </div>
+</article>
+
+</body>
+</html>
