@@ -10,7 +10,8 @@ def slug(d):
 folders=sorted(d for d in os.listdir(SRC) if os.path.isdir(os.path.join(SRC,d)) and d not in SKIP and os.path.exists(os.path.join(SRC,d,'article_ru.html')))
 num={}; titles={}
 BAR='''<!-- site-bar -->
-<style>.site-bar{position:sticky;top:0;z-index:1000;background:rgba(252,252,250,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(22,24,26,.14);font-family:Inter,system-ui,sans-serif}
+<style>.mj-hero{margin-left:auto!important;margin-right:auto!important}  /* center the hero photo on wide screens */
+.site-bar{position:sticky;top:0;z-index:1000;background:rgba(252,252,250,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(22,24,26,.14);font-family:Inter,system-ui,sans-serif}
 .site-bar .in{max-width:1180px;margin:0 auto;padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .site-bar a{text-decoration:none;color:#16181A;font-size:14px}.site-bar .brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;font-weight:600}
 .site-bar .back{color:#1E3050}.site-bar .back:hover{color:#B3352D}</style>

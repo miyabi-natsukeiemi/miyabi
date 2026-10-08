@@ -36,6 +36,8 @@ articles/kagawa/<slug>/    Kagawa sub-articles (44). index.html + images/
   like prefectures inside a region. The inset sits left of Kyūshū, in the visible strip outside the viewBox (`_placeInset`).
   The Northern Territories (Kunashiri, Etorofu, Shikotan, Habomai) are removed from the Hokkaido shape in `_draw` (Ren's request).
 - Every page has a sticky `<!-- site-bar --> … <!-- /site-bar -->` block (brand link + back link). Keep it when editing.
+  Its `<style>` also carries a rule that centers the hero photo (`.mj-hero` has an inline `margin:0` in the article HTML).
+  For Kagawa sub-articles the block comes from `BAR` in `tools/kagawa_map_build.py`.
 - Article styling lives inside each page under `.mj-article` (fonts: Playfair Display + PT Serif, red accent #B3261E). Keep new styles scoped so they don't leak into other pages.
 
 ## Kagawa map (articles/kagawa/index.html)
