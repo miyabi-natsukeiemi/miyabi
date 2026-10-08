@@ -260,6 +260,8 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
   cursor:pointer; color:var(--body2); transition:.15s}
 #map-section .chip:hover{border-color:var(--indigo-soft)}
 #map-section .chip.on{background:var(--indigo); border-color:var(--indigo); color:#fff}
+#map-section .chip::before{content:''; display:inline-block; width:9px; height:9px; border-radius:50%; background:var(--c);
+  margin-right:6px; vertical-align:0; box-shadow:0 0 0 1.5px #fff}
 #map-section .mode-row{display:flex; align-items:center; gap:8px; padding-top:4px; border-top:1px solid var(--line)}
 #map-section .mode-row .axis-label{margin:0}
 #map-section .modebtn{font-family:'PT Mono',monospace; font-size:11px; letter-spacing:.08em; padding:5px 10px; border:1px solid var(--indigo);
@@ -278,7 +280,29 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
 #map-section .pop a.go{font-size:12px; color:var(--seal); text-decoration:none; font-weight:600}
 #map-section .pop a.go:hover{text-decoration:underline}
 #map-section .pop .close{position:absolute; top:8px; right:10px; background:none; border:0; cursor:pointer; font-size:15px; color:var(--indigo-soft)}
-#map-section .pop .tagline{font-family:'PT Mono',monospace; font-size:10px; color:var(--indigo-soft); text-transform:uppercase; letter-spacing:.08em}
+#map-section .pop.photo{width:290px; padding:0; max-height:calc(100% - 130px); overflow:auto}  /* keep clear of the breadcrumb and back button */
+#map-section .pop.photo img{display:block; width:100%; aspect-ratio:16/9; object-fit:cover}
+#map-section .pop.photo .in{padding:14px 16px 16px}
+#map-section .pop.photo h3{font-size:19px; line-height:1.2; margin:0 0 8px}
+#map-section .pop.photo a.go{font-size:13px}
+#map-section .pop.photo .close{top:8px; right:8px; width:26px; height:26px; border-radius:50%; background:rgba(255,255,255,.9)}
+#map-section .pop .sibs{display:block; font-size:11.5px; font-style:italic; color:var(--body2); margin:-4px 0 8px}
+#map-section .pop .more{margin-top:12px; padding-top:10px; border-top:1px solid var(--line)}
+#map-section .pop .more .mono{font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--indigo-soft)}
+#map-section .pop .links{list-style:none; margin:6px 0 0; padding:0}
+#map-section .pop .links li{margin:0 0 6px; line-height:1.35}
+#map-section .pop .links a{color:var(--seal); text-decoration:none; font-size:12.5px}
+#map-section .pop .links a:hover{text-decoration:underline}
+#map-section .pop .approx{font-size:12px; font-style:italic; margin:10px 0 0}
+#map-section .map-hint{position:absolute; top:16px; left:16px; z-index:5; max-width:260px; display:flex; gap:10px; align-items:flex-start;
+  padding:12px 14px; background:rgba(252,252,250,.97); border:1px solid var(--line); border-left:3px solid var(--seal);
+  box-shadow:0 10px 30px rgba(20,20,20,.10); font-size:14px; line-height:1.45; color:var(--ink); pointer-events:none;
+  animation:mapHintIn .5s ease .4s backwards; transition:opacity .25s ease, transform .25s ease}
+#map-section .map-hint .ic{font-size:18px; line-height:1}
+#map-section .map-hint.off{opacity:0; transform:translateY(-6px)}
+#map-section .map-hint.below{top:100px}
+@keyframes mapHintIn{from{opacity:0; transform:translateY(-6px)}to{opacity:1; transform:none}}
+#map-section .pop .tagline{font-family:'PT Mono',monospace; font-size:10px; color:var(--indigo-soft); text-transform:uppercase; letter-spacing:.08em; display:block; margin:-2px 0 8px}
 
 @media(max-width:760px){
   #map-section .board{display:none}
@@ -406,6 +430,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
               <button class="chip" data-val="history">История</button>
               <button class="chip" data-val="night">Ночная жизнь</button>
               <button class="chip" data-val="nature">Природа</button>
+              <button class="chip" data-val="stay">Где остановиться</button>
             </div>
           </div>
           <div class="mode-row">
@@ -417,12 +442,14 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
         </div>
       </div>
 
+      <div class="map-hint" id="mapHint" role="note"><span class="ic" aria-hidden="true">☝</span><span class="tx">Нажмите на регион Японии, который вас интересует</span></div>
+
       <div class="pop" id="pop"></div>
       <div class="pref-card" id="prefCard" aria-live="polite"></div>
     </div>
 
     <div class="map-mobile-alt">
-      <div class="pref-list"><div class="pref-group"><span class="mono">Хоккайдо</span><ul><li><a href="articles/hokkaido/index.html">Хоккайдо</a></li></ul></div><div class="pref-group"><span class="mono">Тохоку</span><ul><li><a href="articles/aomori/index.html">Аомори</a></li><li><a href="articles/iwate/index.html">Иватэ</a></li><li><a href="articles/miyagi/index.html">Мияги</a></li><li><a href="articles/akita/index.html">Акита</a></li><li><a href="articles/yamagata/index.html">Ямагата</a></li><li><a href="articles/fukushima/index.html">Фукусима</a></li></ul></div><div class="pref-group"><span class="mono">Канто</span><ul><li><a href="articles/ibaraki/index.html">Ибараки</a></li><li><a href="articles/tochigi/index.html">Тотиги</a></li><li><a href="articles/gunma/index.html">Гумма</a></li><li><a href="articles/saitama/index.html">Сайтама</a></li><li><a href="articles/chiba/index.html">Тиба</a></li><li><a href="articles/tokyo/index.html">Токио</a></li><li><a href="articles/kanagawa/index.html">Канагава</a></li></ul></div><div class="pref-group"><span class="mono">Тюбу</span><ul><li><a href="articles/niigata/index.html">Ниигата</a></li><li><a href="articles/toyama/index.html">Тояма</a></li><li><a href="articles/ishikawa/index.html">Исикава</a></li><li><a href="articles/fukui/index.html">Фукуи</a></li><li><a href="articles/yamanashi/index.html">Яманаси</a></li><li><a href="articles/nagano/index.html">Нагано</a></li><li><a href="articles/gifu/index.html">Гифу</a></li><li><a href="articles/shizuoka/index.html">Сидзуока</a></li><li><a href="articles/aichi/index.html">Айти</a></li></ul></div><div class="pref-group"><span class="mono">Кансай</span><ul><li><a href="articles/mie/index.html">Миэ</a></li><li><a href="articles/shiga/index.html">Сига</a></li><li><a href="articles/kyoto/index.html">Киото</a></li><li><a href="articles/osaka/index.html">Осака</a></li><li><a href="articles/hyogo/index.html">Хёго</a></li><li><a href="articles/nara/index.html">Нара</a></li><li><a href="articles/wakayama/index.html">Вакаяма</a></li></ul></div><div class="pref-group"><span class="mono">Тюгоку</span><ul><li><a href="articles/tottori/index.html">Тоттори</a></li><li><a href="articles/shimane/index.html">Симанэ</a></li><li><a href="articles/okayama/index.html">Окаяма</a></li><li><a href="articles/hiroshima/index.html">Хиросима</a></li><li><a href="articles/yamaguchi/index.html">Ямагути</a></li></ul></div><div class="pref-group"><span class="mono">Сикоку</span><ul><li><a href="articles/tokushima/index.html">Токусима</a></li><li><a href="articles/kagawa/index.html">Кагава</a></li><li><a href="articles/ehime/index.html">Эхимэ</a></li><li><a href="articles/kochi/index.html">Коти</a></li></ul></div><div class="pref-group"><span class="mono">Кюсю и Окинава</span><ul><li><a href="articles/fukuoka/index.html">Фукуока</a></li><li><a href="articles/saga/index.html">Сага</a></li><li><a href="articles/nagasaki/index.html">Нагасаки</a></li><li><a href="articles/kumamoto/index.html">Кумамото</a></li><li><a href="articles/oita/index.html">Оита</a></li><li><a href="articles/miyazaki/index.html">Миядзаки</a></li><li><a href="articles/kagoshima/index.html">Кагосима</a></li><li><a href="articles/okinawa/index.html">Окинава</a></li></ul></div></div>
+      <div class="pref-list"><div class="pref-group"><span class="mono">Хоккайдо</span><ul><li><a href="articles/hokkaido/index.html">Хоккайдо</a></li></ul></div><div class="pref-group"><span class="mono">Тохоку</span><ul><li><a href="articles/aomori/index.html">Аомори</a></li><li><a href="articles/iwate/index.html">Иватэ</a></li><li><a href="articles/miyagi/index.html">Мияги</a></li><li><a href="articles/akita/index.html">Акита</a></li><li><a href="articles/yamagata/index.html">Ямагата</a></li><li><a href="articles/fukushima/index.html">Фукусима</a></li></ul></div><div class="pref-group"><span class="mono">Канто</span><ul><li><a href="articles/ibaraki/index.html">Ибараки</a></li><li><a href="articles/tochigi/index.html">Тотиги</a></li><li><a href="articles/gunma/index.html">Гумма</a></li><li><a href="articles/saitama/index.html">Сайтама</a></li><li><a href="articles/chiba/index.html">Тиба</a></li><li><a href="articles/tokyo/index.html">Токио</a></li><li><a href="articles/kanagawa/index.html">Канагава</a></li></ul></div><div class="pref-group"><span class="mono">Тюбу</span><ul><li><a href="articles/niigata/index.html">Ниигата</a></li><li><a href="articles/toyama/index.html">Тояма</a></li><li><a href="articles/ishikawa/index.html">Исикава</a></li><li><a href="articles/fukui/index.html">Фукуи</a></li><li><a href="articles/yamanashi/index.html">Яманаси</a></li><li><a href="articles/nagano/index.html">Нагано</a></li><li><a href="articles/gifu/index.html">Гифу</a></li><li><a href="articles/shizuoka/index.html">Сидзуока</a></li><li><a href="articles/aichi/index.html">Айти</a></li></ul></div><div class="pref-group"><span class="mono">Кансай</span><ul><li><a href="articles/mie/index.html">Миэ</a></li><li><a href="articles/shiga/index.html">Сига</a></li><li><a href="articles/kyoto/index.html">Киото</a></li><li><a href="articles/osaka/index.html">Осака</a></li><li><a href="articles/hyogo/index.html">Хёго</a></li><li><a href="articles/nara/index.html">Нара</a></li><li><a href="articles/wakayama/index.html">Вакаяма</a></li></ul></div><div class="pref-group"><span class="mono">Тюгоку</span><ul><li><a href="articles/tottori/index.html">Тоттори</a></li><li><a href="articles/shimane/index.html">Симанэ</a></li><li><a href="articles/okayama/index.html">Окаяма</a></li><li><a href="articles/hiroshima/index.html">Хиросима</a></li><li><a href="articles/yamaguchi/index.html">Ямагути</a></li></ul></div><div class="pref-group"><span class="mono">Сикоку</span><ul><li><a href="articles/tokushima/index.html">Токусима</a></li><li><a href="articles/kagawa/index.html">Кагава</a></li><li><a href="articles/ehime/index.html">Эхимэ</a></li><li><a href="articles/kochi/index.html">Коти</a></li></ul></div><div class="pref-group"><span class="mono">Кюсю</span><ul><li><a href="articles/fukuoka/index.html">Фукуока</a></li><li><a href="articles/saga/index.html">Сага</a></li><li><a href="articles/nagasaki/index.html">Нагасаки</a></li><li><a href="articles/kumamoto/index.html">Кумамото</a></li><li><a href="articles/oita/index.html">Оита</a></li><li><a href="articles/miyazaki/index.html">Миядзаки</a></li><li><a href="articles/kagoshima/index.html">Кагосима</a></li></ul></div><div class="pref-group"><span class="mono">Окинава</span><ul><li><a href="articles/okinawa/index.html">Окинава</a></li></ul></div></div>
     </div>
   </div>
 </section>
@@ -906,7 +933,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
  *   rail       "off" で左の地方リストを隠す
  *   panel      "off" で右の情報パネルを隠す
  *   caption    "off" で右下のキャプションを隠す
- *   region     初期選択の地方ID（hokkaido/tohoku/kanto/chubu/kinki/chugoku/shikoku/kyushu）
+ *   region     初期選択の地方ID（hokkaido/tohoku/kanto/chubu/kinki/chugoku/shikoku/kyushu/okinawa）
  *   pref       初期選択の都道府県コード（1–47）
  *
  * プロパティ / メソッド
@@ -949,9 +976,12 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
     {id:'shikoku', name:'四国', en:'Shikoku', ids:[36,37,38,39], prefs:4, area:'18,803', pop:'約369万人', hub:'松山市',
      lead:'四国山地が中央を走る、日本の主要四島でもっとも小さな島。八十八箇所を巡る遍路の道が全域を結びます。',
      note:'太平洋側は日本有数の多雨地帯。'},
-    {id:'kyushu', name:'九州・沖縄', en:'Kyūshū & Okinawa', ids:[40,41,42,43,44,45,46,47], prefs:8, area:'44,513', pop:'約1,426万人', hub:'福岡市',
+    {id:'kyushu', name:'九州', en:'Kyūshū', ids:[40,41,42,43,44,45,46], prefs:7, area:'42,231', pop:'約1,279万人', hub:'福岡市',
      lead:'火山と温泉、そして大陸への玄関口。南へ連なる島々は亜熱帯の気候と独自の文化をもちます。',
-     note:'活火山が集中し、地熱発電の導入量が国内最大級。'}
+     note:'活火山が集中し、地熱発電の導入量が国内最大級。'},
+    {id:'okinawa', name:'沖縄', en:'Okinawa', ids:[47], prefs:1, area:'2,282', pop:'約147万人', hub:'那覇市',
+     lead:'本土から南へ約600km、亜熱帯の島々が連なる県。琉球王国の歴史と独自の文化を今に伝えます。',
+     note:'160の島からなり、うち有人島は約50。'}
   ];
   var PREF = {
     1:['Hokkaidō','札幌市'],2:['Aomori','青森市'],3:['Iwate','盛岡市'],4:['Miyagi','仙台市'],5:['Akita','秋田市'],
@@ -967,7 +997,14 @@ footer{border-top:1px solid var(--line);padding:40px 0;font-size:13.5px;color:va
   };
   var PREF_JA = {1:'北海道',2:'青森県',3:'岩手県',4:'宮城県',5:'秋田県',6:'山形県',7:'福島県',8:'茨城県',9:'栃木県',10:'群馬県',11:'埼玉県',12:'千葉県',13:'東京都',14:'神奈川県',15:'新潟県',16:'富山県',17:'石川県',18:'福井県',19:'山梨県',20:'長野県',21:'岐阜県',22:'静岡県',23:'愛知県',24:'三重県',25:'滋賀県',26:'京都府',27:'大阪府',28:'兵庫県',29:'奈良県',30:'和歌山県',31:'鳥取県',32:'島根県',33:'岡山県',34:'広島県',35:'山口県',36:'徳島県',37:'香川県',38:'愛媛県',39:'高知県',40:'福岡県',41:'佐賀県',42:'長崎県',43:'熊本県',44:'大分県',45:'宮崎県',46:'鹿児島県',47:'沖縄県'};
   var PREF_RU = {1:'Хоккайдо',2:'Аомори',3:'Иватэ',4:'Мияги',5:'Акита',6:'Ямагата',7:'Фукусима',8:'Ибараки',9:'Тотиги',10:'Гумма',11:'Сайтама',12:'Тиба',13:'Токио',14:'Канагава',15:'Ниигата',16:'Тояма',17:'Исикава',18:'Фукуи',19:'Яманаси',20:'Нагано',21:'Гифу',22:'Сидзуока',23:'Айти',24:'Миэ',25:'Сига',26:'Киото',27:'Осака',28:'Хёго',29:'Нара',30:'Вакаяма',31:'Тоттори',32:'Симанэ',33:'Окаяма',34:'Хиросима',35:'Ямагути',36:'Токусима',37:'Кагава',38:'Эхимэ',39:'Коти',40:'Фукуока',41:'Сага',42:'Нагасаки',43:'Кумамото',44:'Оита',45:'Миядзаки',46:'Кагосима',47:'Окинава'};
-  var REGION_RU = {hokkaido:'Хоккайдо', tohoku:'Тохоку', kanto:'Канто', chubu:'Тюбу', kinki:'Кинки', chugoku:'Тюгоку', shikoku:'Сикоку', kyushu:'Кюсю и Окинава'};
+  var REGION_RU = {hokkaido:'Хоккайдо', tohoku:'Тохоку', kanto:'Канто', chubu:'Тюбу', kinki:'Кинки', chugoku:'Тюгоку', shikoku:'Сикоку', kyushu:'Кюсю', okinawa:'Окинава'};
+  // Okinawa's island groups (clickable inside the Okinawa view), assigned by polygon centroid longitude
+  var ISLES = [
+    {id:'main', ru:'Остров Окинава', test:function (lon) { return lon >= 126 && lon < 130; }},
+    {id:'miyako', ru:'Острова Мияко', test:function (lon) { return lon >= 124.6 && lon < 126; }},
+    {id:'yaeyama', ru:'Острова Яэяма', test:function (lon) { return lon < 124.6; }},
+    {id:'daito', ru:'Острова Дайто', test:function (lon) { return lon >= 130; }}
+  ];
 
   var REGION_OF = {}; REGIONS.forEach(function (r) { r.ids.forEach(function (i) { REGION_OF[i] = r.id; }); });
   var byId = {}; REGIONS.forEach(function (r) { byId[r.id] = r; });
@@ -1023,7 +1060,8 @@ svg{display:block; width:100%; height:100%}
 .pref.hov .land{fill:var(--_tint); stroke:color-mix(in srgb,var(--_accent) 60%,transparent); stroke-width:1.1}
 .pref.pick .land{fill:var(--_accent); stroke:color-mix(in srgb,var(--_accent) 40%,var(--_ink)); stroke-width:1.2}
 .pref.dim{opacity:.42}
-#camera{transition:transform var(--_dur) var(--_ease)}
+.pref.pick[data-pref="37"] .land,.pref.pick[data-pref="47"] .land{fill:var(--_tint)}  /* Kagawa: light fill so its colored article pins stay readable */
+#camera{transition:transform var(--_dur) var(--_ease), opacity .3s linear}
 .rlabel{font-size:22px; font-weight:800; fill:var(--_ink); paint-order:stroke; stroke:var(--_bg);
   stroke-width:5px; stroke-linejoin:round; pointer-events:none; transition:opacity .3s linear}
 .plabel{font-size:17px; font-weight:600; fill:var(--_ink); paint-order:stroke; stroke:var(--_bg);
@@ -1033,6 +1071,18 @@ svg{display:block; width:100%; height:100%}
 .inset-frame{fill:none; stroke:color-mix(in srgb,var(--_ink) 20%,transparent); stroke-width:2;
   transition:stroke .3s linear, stroke-width .3s linear}
 .inset-frame.focus{stroke:var(--_accent); stroke-width:4}
+#inset{transition:opacity .3s linear, transform var(--_dur) var(--_ease)}
+#inset .inset-frame{vector-effect:non-scaling-stroke}
+#inset.big .inset-cap{opacity:0}
+#inset.big .inset-frame{stroke:transparent}
+#camera.away{opacity:0; pointer-events:none}
+.isle-hit{fill:transparent}
+#inset.big .isle{cursor:pointer}
+#inset.big .isle.hov .land{fill:var(--_tint2)}
+#inset .pref.has-isle .isle:not(.on){opacity:.35}
+#isleLabels{opacity:0; transition:opacity .3s linear; pointer-events:none}
+#inset.big #isleLabels{opacity:1}
+#inset.gone{opacity:0; pointer-events:none}
 .inset-cap{font-size:11px; letter-spacing:.12em; text-transform:uppercase; fill:var(--_mute)}
 .cap{position:absolute; right:20px; bottom:14px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
   color:color-mix(in srgb,var(--_ink) 45%,transparent); pointer-events:none}
@@ -1074,9 +1124,18 @@ td{padding:9px 0; font-size:14px; font-variant-numeric:tabular-nums;
   text-transform:uppercase; color:color-mix(in srgb,var(--_ink) 45%,transparent)}
 .jm-pin{transition:opacity .25s linear}
 .jm-pin .jm-hit{r:20; fill:transparent; stroke:none}
-.jm-pin .jm-dot{r:5; fill:var(--_accent); stroke:var(--_bg); stroke-width:2; transition:r .15s linear}
-.jm-pin:hover .jm-dot{r:7}
+.jm-pin .jm-dot{r:6.5; fill:var(--_accent); stroke:var(--_bg); stroke-width:2; transition:r .15s linear}
+.jm-pin:hover .jm-dot{r:8.5}
 .jm-pin-city .jm-hit{r:28}
+.jm-pin-kg .jm-hit{r:12}
+.jm-pin-kg .jm-dot{r:7}
+.jm-pin-kg:hover .jm-dot,.jm-pin.near .jm-dot{r:9}
+.jm-cl .jm-hit{r:16; fill:transparent}
+.jm-cl .jm-dot{r:10; fill:var(--jm-city-color, #1E3050); stroke:var(--_bg); stroke-width:2; transition:r .15s linear}
+.jm-cl:hover .jm-dot,.jm-cl.near .jm-dot{r:12}
+.hl g.jm-pin:not(.sib),.hl g.jm-cl:not(.sib){opacity:.3}
+.jm-pin.sib .jm-dot,.jm-cl.sib .jm-dot{stroke:var(--_ink); stroke-width:2.5}
+.jm-cl .jm-n{font-size:10px; font-weight:800; fill:#fff; text-anchor:middle; pointer-events:none}
 .jm-pin-city .jm-halo{r:17; fill:var(--jm-city-color, #1E3050); opacity:.16}
 .jm-pin-city .jm-dot{r:12; fill:var(--jm-city-color, #1E3050); stroke:var(--_bg); stroke-width:3}
 .jm-pin-city:hover .jm-dot{r:14}
@@ -1167,6 +1226,8 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
     select(region, pref) {
       this._active = region && byId[region] ? region : null;
       this._pref = this._active && pref && REGION_OF[+pref] === this._active ? +pref : null;
+      if (this._active === 'okinawa') this._pref = 47;  // one-prefecture region, only in the inset
+      this._focus = null; this._isle = null;
       if (this._ready) this._render();
       return this;
     }
@@ -1195,7 +1256,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
     _emit(kind, extra) {
       var d = Object.assign({
         region: this._active, regionName: this._active ? byId[this._active].name : null,
-        pref: this._pref, prefName: this._pref ? PREF_JA[this._pref] : null
+        pref: this._pref, prefName: this._pref ? PREF_JA[this._pref] : null, isle: this._isle || null
       }, extra || {});
       this.dispatchEvent(new CustomEvent('japan-map:' + kind, { detail: d, bubbles: true, composed: true }));
     }
@@ -1234,23 +1295,28 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
 
       this._root.querySelector('.stage').addEventListener('click', function () {
         if (!self._active) return;
+        if (self._focus) { self._unfocus(); return; }
+        if (self._hasGroups()) return;  // dense pins: a near-miss shouldn't jump back to all of Japan
         self.select(null); self._emit('select');
       });
       this._root.querySelector('.back').addEventListener('click', function (e) {
         e.stopPropagation();
-        self._pref ? self.select(self._active, null) : self.select(null);
-        self._emit('select');
+        self._up();
       });
       this._keys = function (e) {
         if (e.key !== 'Escape' || !self._active) return;
-        self._pref ? self.select(self._active, null) : self.select(null);
-        self._emit('select');
+        self._up();
       };
       document.addEventListener('keydown', this._keys);
+      this._onResize = function () { if (self._ready) self._placeInset(); };
+      window.addEventListener('resize', this._onResize);
       this._applyLayout();
     }
 
-    disconnectedCallback() { document.removeEventListener('keydown', this._keys); }
+    disconnectedCallback() {
+      document.removeEventListener('keydown', this._keys);
+      window.removeEventListener('resize', this._onResize);
+    }
 
     _applyLayout() {
       var sh = this._root.querySelector('.shell');
@@ -1267,6 +1333,15 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       var self = this, W = this.W, H = this.H, PAD = this.PAD, INSET = this.INSET;
       var l = this._root.querySelector('.loading'); if (l) l.remove();
 
+      // 北方領土（国後・択捉・色丹・歯舞）は描かない。北海道の多角形のうち、島の中心が
+      // 東経145.85°より東、または東経145.3°以東かつ北緯43.6°以北のものを除く（根室半島・知床半島・ユルリ島は残る）
+      geo.features.forEach(function (f) {
+        if (f.properties.id !== 1 || f.geometry.type !== 'MultiPolygon') return;
+        f.geometry.coordinates = f.geometry.coordinates.filter(function (c) {
+          var ct = d3.geoCentroid({ type: 'Polygon', coordinates: c });
+          return !(ct[0] > 145.85 || (ct[0] > 145.3 && ct[1] > 43.6));
+        });
+      });
       var feats = geo.features.filter(function (f) { return REGION_OF[f.properties.id]; });
       this._main = feats.filter(function (f) { return f.properties.id !== 47; });
       var okinawa = feats.filter(function (f) { return f.properties.id === 47; });
@@ -1342,13 +1417,53 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
         rl.append('text').attr('class', 'rlabel').attr('x', c[0] + n[0]).attr('y', c[1] + n[1]).text(REGION_RU[r.id]);
       });
 
-      var ins = svg.append('g').attr('transform', 'translate(' + INSET.x + ',' + INSET.y + ')');
+      var ins = svg.append('g').attr('id', 'inset').attr('transform', 'translate(' + INSET.x + ',' + INSET.y + ')');
       ins.append('rect').attr('class', 'inset-frame').attr('width', INSET.w).attr('height', INSET.h);
-      ins.append('g').attr('class', 'region').attr('data-region', 'kyushu')
-        .selectAll('g').data(okinawa).join('g').attr('class', 'pref').attr('data-pref', 47)
-        .append('path').attr('class', 'land').attr('d', pathOki);
+      var okiPref = ins.append('g').attr('class', 'region').attr('data-region', 'okinawa')
+        .append('g').attr('class', 'pref').attr('data-pref', 47);
+      var isles = ISLES.map(function (i) { return { id: i.id, ru: i.ru, test: i.test, polys: [] }; });
+      okinawa.forEach(function (f) {
+        var polys = f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates : [f.geometry.coordinates];
+        polys.forEach(function (c) {
+          var lon = d3.geoCentroid({ type: 'Polygon', coordinates: c })[0];
+          var g = isles.find(function (i) { return i.test(lon); });
+          if (g) g.polys.push(c);
+        });
+      });
+      isles = isles.filter(function (i) { return i.polys.length; });
+      isles.forEach(function (i) {
+        var mp = function (cs) { return { type: 'Feature', properties: {}, geometry: { type: 'MultiPolygon', coordinates: cs } }; };
+        i.feature = mp(i.polys);
+        // frame and hit box: islands within ~1.3° of the group's largest one, so far-off rocks
+        // (Senkaku, Iōtorishima, Oki-Daitō) don't stretch them
+        var areas = i.polys.map(function (c) { return d3.geoArea({ type: 'Polygon', coordinates: c }); });
+        var big = d3.geoCentroid({ type: 'Polygon', coordinates: i.polys[areas.indexOf(Math.max.apply(null, areas))] });
+        i.b = pathOki.bounds(mp(i.polys.filter(function (c) {
+          var ct = d3.geoCentroid({ type: 'Polygon', coordinates: c });
+          return Math.hypot(ct[0] - big[0], ct[1] - big[1]) < 1.3;
+        })));
+      });
+      this._isles = isles;
+      var ig = okiPref.selectAll('g.isle').data(isles).join('g').attr('class', 'isle').attr('data-isle', function (i) { return i.id; });
+      // transparent box around each group so the tiny islands are easy to hit
+      ig.append('rect').attr('class', 'isle-hit')
+        .attr('x', function (i) { return i.b[0][0] - 4; }).attr('y', function (i) { return i.b[0][1] - 4; })
+        .attr('width', function (i) { return i.b[1][0] - i.b[0][0] + 8; }).attr('height', function (i) { return i.b[1][1] - i.b[0][1] + 8; });
+      ig.append('path').attr('class', 'land').attr('d', function (i) { return pathOki(i.feature); });
+      ig.on('mouseenter', function () { if (self._active === 'okinawa' && !self._isle) this.classList.add('hov'); })
+        .on('mouseleave', function () { this.classList.remove('hov'); })
+        .on('click', function (e, i) {
+          if (self._active !== 'okinawa') return;  // whole-Japan view: the click opens Okinawa (pref handler)
+          e.stopPropagation();
+          if (self._isle === i.id) return;
+          this.classList.remove('hov');
+          self._isle = i.id; self._render(); self._emit('select');
+        });
+      ins.append('g').attr('id', 'isleLabels').selectAll('text').data(isles).join('text')
+        .attr('class', 'plabel').attr('data-isle', function (i) { return i.id; }).text(function (i) { return i.ru; });
       ins.append('text').attr('class', 'inset-cap').attr('x', 4).attr('y', -8).text('Окинава');
       this._projOki = pathOkiProj;
+      this._insetHome = { x: INSET.x, y: INSET.y, w: INSET.w, h: INSET.h };
       this._pinsLayerOki = ins.append('g').attr('id', 'pinsLayerOki');
 
       svg.selectAll('.region')
@@ -1365,11 +1480,14 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
           e.stopPropagation();
           var id = +this.dataset.pref, reg = REGION_OF[id];
           if (self._active !== reg) self.select(reg);
+          else if (self._pref === id && self._hasGroups()) return;
           else self.select(reg, self._pref === id ? null : id);
           self._emit('select');
         });
 
       this._pinsLayer = camera.append('g').attr('id', 'pinsLayer');
+      this._clusterLayer = camera.append('g').attr('id', 'clusterLayer');
+      this._magnet(svg.node());
       this._ready = true;
       var r0 = this.getAttribute('region'), p0 = this.getAttribute('pref');
       if (r0 || p0) this.select(r0 || REGION_OF[+p0], p0);
@@ -1400,7 +1518,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       var self = this;
       var sel = layer.selectAll('g.jm-pin').data(data, function (d) { return d.id; });
       sel.exit().remove();
-      var enter = sel.enter().append('g').attr('class', function (d) { return 'jm-pin' + (d.cluster ? ' jm-pin-city' : ''); })
+      var enter = sel.enter().append('g').attr('class', function (d) { return 'jm-pin' + (d.cluster ? ' jm-pin-city' : '') + (d.cls ? ' ' + d.cls : ''); })
         .attr('data-id', function (d) { return d.id; })
         .style('cursor', 'pointer')
         .on('click', function (e, d) {
@@ -1409,10 +1527,10 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
           self._emit('pin', { pin: d, trigger: 'click', node: this });
         })
         .on('mouseenter', function (e, d) {
-          if (!d.cluster) self._emit('pin', { pin: d, trigger: 'hover', node: this });
+          if (!d.cluster && !d.group) self._emit('pin', { pin: d, trigger: 'hover', node: this });
         })
         .on('mouseleave', function (e, d) {
-          if (!d.cluster) self._emit('pinout', { pin: d });
+          if (!d.cluster && !d.group) self._emit('pinout', { pin: d });
         });
       enter.filter(function (d) { return d.cluster; }).append('circle').attr('class', 'jm-halo');
       enter.append('circle').attr('class', 'jm-hit');
@@ -1424,6 +1542,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
         self._d3.select(this).attr('transform', 'translate(' + xy[0] + ',' + xy[1] + ')');
       });
       merged.select('.jm-label').text(function (d) { return d.cluster ? d.title : ''; });
+      merged.select('.jm-dot').style('fill', function (d) { return d.color || null; });
     }
 
     _updatePinVisibility() {
@@ -1447,11 +1566,9 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
           .style('opacity', topLevel ? 0.55 : null)
           .attr('transform', 'translate(' + xy[0] + ',' + xy[1] + ') scale(' + inv + ')');
       });
-      // Okinawa's inset is fixed (never zoomed by the main camera) and has no click-to-zoom behavior
-      // of its own, so it follows the same top-level rule as the main map: visible always (so filters
-      // stay visible), but only clickable once the Kyūshū & Okinawa region has been drilled into
-      // (Okinawa belongs to that group, so it shouldn't unlock just because some other region is zoomed).
-      var okiInteractive = self._active === 'kyushu';
+      // Okinawa's inset is not moved by the main camera. Like the main map's top level, its pins are visible
+      // but not clickable until Okinawa itself is open (then the inset is enlarged and pins keep a normal size).
+      var okiInteractive = self._active === 'okinawa', okiS = okiInteractive ? 1 / (this._insetK || 1) : 0.6;
       this._pinsLayerOki.selectAll('g.jm-pin').each(function (d) {
         var xy = self._projOki([d.lon, d.lat]);
         self._d3.select(this)
@@ -1459,8 +1576,214 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
           .style('pointer-events', okiInteractive ? null : 'none')
           .style('cursor', okiInteractive ? null : 'default')
           .style('opacity', okiInteractive ? null : 0.55)
-          .attr('transform', 'translate(' + xy[0] + ',' + xy[1] + ') scale(0.6)');
+          .attr('transform', 'translate(' + xy[0] + ',' + xy[1] + ') scale(' + okiS + ')');
       });
+      this._renderClusters(scale, inv);
+    }
+
+    // Grouped pins (d.group, e.g. Kagawa articles) that sit too close on screen merge into one numbered marker;
+    // clicking it zooms into just those pins (this._focus).
+    _renderClusters(scale, inv) {
+      var self = this, d3 = this._d3, vis = [], groups = [];
+      if (!this._clusterLayer) return;
+      var hasG = this._hasGroups();  // there, ordinary pins of the same prefecture cluster together with grouped ones
+      this._pinsLayer.selectAll('g.jm-pin').each(function (d) {
+        if ((d.group || hasG) && !d.cluster && this.style.display !== 'none') vis.push({ d: d, node: this, xy: self._proj([d.lon, d.lat]) });
+      });
+      if (!this._focus && this._active) {
+        var lim = 15 / scale, used = new Set();
+        vis.forEach(function (a) {
+          if (used.has(a)) return;
+          var g = vis.filter(function (b) {
+            return !used.has(b) && Math.hypot(a.xy[0] - b.xy[0], a.xy[1] - b.xy[1]) < lim;
+          });
+          if (g.length < 2) return;
+          g.forEach(function (b) { used.add(b); b.node.style.display = 'none'; });
+          groups.push(g);
+        });
+      }
+      var data = groups.map(function (g) {
+        return { key: g.map(function (b) { return b.d.id; }).join(','), pins: g.map(function (b) { return b.d; }),
+          xy: [d3.mean(g, function (b) { return b.xy[0]; }), d3.mean(g, function (b) { return b.xy[1]; })] };
+      });
+      var sel = this._clusterLayer.selectAll('g.jm-cl').data(data, function (c) { return c.key; });
+      sel.exit().remove();
+      var en = sel.enter().append('g').attr('class', 'jm-cl').style('cursor', 'pointer')
+        .on('click', function (e, c) { e.stopPropagation(); self._focusOn(c.pins); });
+      en.append('circle').attr('class', 'jm-hit');
+      en.append('circle').attr('class', 'jm-dot');
+      en.append('text').attr('class', 'jm-n').attr('dy', '.35em');
+      en.merge(sel)
+        .attr('transform', function (c) { return 'translate(' + c.xy[0] + ',' + c.xy[1] + ') scale(' + inv + ')'; })
+        .select('.jm-n').text(function (c) { return c.pins.length; });
+      // in a prefecture with grouped pins the magnet (_magnet) handles all pointer input, so dots don't steal hits
+      if (!this._active) this._thin(24);
+      this._spread(scale, inv);
+      if (this._sib) this.highlightPins(this._sib);
+      var mag = hasG ? 'none' : null;
+      this._pinsLayer.style('pointer-events', mag);
+      this._clusterLayer.style('pointer-events', mag);
+    }
+
+    // Okinawa inset: shown on the whole-Japan view; when Okinawa is open it grows into the middle of the map
+    _placeInset() {
+      var self = this, R = this._root, active = this._active, cam = R.querySelector('#camera'), inset = R.querySelector('#inset'), H = this._insetHome;
+      if (inset) {
+        // home spot: left of Kyūshū so Kagoshima's southern islands don't run into it. The svg is usually wider
+        // than the viewBox, so use the visible strip to the left of it, but never past the visible edge.
+        var svg = R.querySelector('svg'), sw = svg.clientWidth, sh = svg.clientHeight;
+        var visW = sw && sh ? Math.max(this.VB.w, this.VB.h * sw / sh) : this.VB.w;
+        var hx = Math.max(this.VB.x - (visW - this.VB.w) / 2 + 24, H.x - H.w * 1.1);
+        var big = active === 'okinawa', k = 1, x = hx, y = H.y;
+        var isle = big && this._isle && this._isles.find(function (i) { return i.id === this._isle; }, this);
+        if (big) {  // frame the area with pins (the prefecture itself spans ~1000 km of mostly sea), or the picked island group
+          var pts = (this._pins || []).filter(function (d) { return d.prefId === 47; })
+            .map(function (d) { return self._projOki([d.lon, d.lat]); });
+          var x0 = 0, y0 = 0, x1 = H.w, y1 = H.h;
+          if (isle) { x0 = isle.b[0][0] - 2; y0 = isle.b[0][1] - 2; x1 = isle.b[1][0] + 2; y1 = isle.b[1][1] + 2; }
+          else if (pts.length > 1) {
+            x0 = Math.min.apply(null, pts.map(function (p) { return p[0]; })) - 8; x1 = Math.max.apply(null, pts.map(function (p) { return p[0]; })) + 8;
+            y0 = Math.min.apply(null, pts.map(function (p) { return p[1]; })) - 8; y1 = Math.max.apply(null, pts.map(function (p) { return p[1]; })) + 8;
+          }
+          k = Math.min(isle ? 40 : 12, this.VB.w * (isle ? 0.7 : 0.62) / (x1 - x0), this.VB.h * (isle ? 0.9 : 0.8) / (y1 - y0));
+          x = this.VB.x + this.VB.w / 2 - k * (x0 + x1) / 2; y = this.VB.y + this.VB.h / 2 - k * (y0 + y1) / 2;
+        }
+        this._insetK = k;
+        inset.setAttribute('transform', 'translate(' + x + ',' + y + ') scale(' + k + ')');
+        inset.classList.toggle('gone', !!active && !big);
+        inset.classList.toggle('big', big);
+        cam.classList.toggle('away', big);
+        var cur = this._isle;
+        R.querySelectorAll('#inset .isle').forEach(function (n) { n.classList.toggle('on', n.dataset.isle === cur); });
+        R.querySelector('#inset .pref').classList.toggle('has-isle', !!isle);
+        R.querySelectorAll('#isleLabels text').forEach(function (n, idx) {
+          var i = self._isles[idx];
+          n.style.display = cur && i.id !== cur ? 'none' : '';
+          n.setAttribute('transform', 'translate(' + (i.b[0][0] + i.b[1][0]) / 2 + ',' + (i.b[0][1] - 3 / k) + ') scale(' + (1 / k).toFixed(4) + ')');
+        });
+      }
+    }
+
+    _up() {
+      if (this._focus) { this._unfocus(); return; }
+      if (this._isle) { this._isle = null; this._render(); this._emit('select'); return; }
+      this._pref && this._active !== 'okinawa' ? this.select(this._active, null) : this.select(null);
+      this._emit('select');
+    }
+
+    // Whole-Japan view: show a sample of the pins, none closer than `gap` viewBox units to another
+    // (in data order; filters apply first). Zooming into a region shows all of them again.
+    _thin(gap) {
+      var self = this, kept = [];
+      this._pinsLayer.selectAll('g.jm-pin').each(function (d) {
+        if (this.style.display === 'none') return;
+        var xy = self._proj([d.lon, d.lat]);
+        if (kept.some(function (k) { return Math.hypot(k[0] - xy[0], k[1] - xy[1]) < gap; })) this.style.display = 'none';
+        else kept.push(xy);
+      });
+    }
+
+    // Pins that overlap on screen push each other apart a little (at most ~1 dot radius from their true spot),
+    // so none hides another; cluster markers stay put and only push pins.
+    _spread(scale, inv) {
+      var self = this, items = [], fixed = [];
+      this._pinsLayer.selectAll('g.jm-pin').each(function (d) {
+        if (this.style.display === 'none') return;
+        var xy = self._proj([d.lon, d.lat]);
+        items.push({ n: this, x0: xy[0] * scale, y0: xy[1] * scale, x: xy[0] * scale, y: xy[1] * scale, r: d.group ? 7 : 6.5 });
+      });
+      this._clusterLayer.selectAll('g.jm-cl').each(function (c) { fixed.push({ x: c.xy[0] * scale, y: c.xy[1] * scale, r: 10 }); });
+      function push(a, b, k, seed) {  // move a (and b when k < 1) apart; k = share of the overlap a takes
+        var dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy), min = a.r + b.r + 1;
+        if (d >= min) return false;
+        if (d < 1e-6) { dx = Math.cos(seed); dy = Math.sin(seed); d = 1; }  // same spot: split in a fixed direction
+        var o = (min - d), ux = dx / d, uy = dy / d;
+        a.x += ux * o * k; a.y += uy * o * k;
+        if (k < 1) { b.x -= ux * o * (1 - k); b.y -= uy * o * (1 - k); }
+        return true;
+      }
+      for (var it = 0; it < 8; it++) {
+        var moved = false;
+        for (var i = 0; i < items.length; i++) {
+          for (var j = i + 1; j < items.length; j++) if (push(items[i], items[j], 0.5, i * 2.4 + j)) moved = true;
+          for (var f = 0; f < fixed.length; f++) if (push(items[i], fixed[f], 1, i)) moved = true;
+        }
+        items.forEach(function (a) {  // never drift more than ~1 radius from the real location
+          var dx = a.x - a.x0, dy = a.y - a.y0, d = Math.hypot(dx, dy), cap = a.r * 1.2;
+          if (d > cap) { a.x = a.x0 + dx / d * cap; a.y = a.y0 + dy / d * cap; }
+        });
+        if (!moved) break;
+      }
+      items.forEach(function (a) {
+        a.n.setAttribute('transform', 'translate(' + a.x / scale + ',' + a.y / scale + ') scale(' + inv + ')');
+      });
+    }
+
+    // mark a set of pin ids (e.g. all places of one article); other pins fade. null clears.
+    highlightPins(ids) {
+      this._sib = ids || null;
+      if (!this._pinsLayer) return;
+      var R = this._root;
+      R.querySelectorAll('#pinsLayer g.jm-pin').forEach(function (n) { n.classList.toggle('sib', !!ids && ids.has(n.__data__.id)); });
+      R.querySelectorAll('#clusterLayer g.jm-cl').forEach(function (n) {
+        n.classList.toggle('sib', !!ids && n.__data__.pins.some(function (p) { return ids.has(p.id); }));
+      });
+      this._pinsLayer.classed('hl', !!ids);
+      this._clusterLayer.classed('hl', !!ids);
+    }
+
+    _hasGroups() {
+      var pref = this._pref;
+      return !!pref && (this._pins || []).some(function (d) { return d.group && d.prefId === pref; });
+    }
+    _focusOn(pins) { this._focus = pins; this._render(); this._emit('focus'); }
+    // zoom only as far as needed for the closest two pins of the cluster to sit ~20 units apart
+    _focusCap() {
+      var self = this, xy = this._focus.map(function (d) { return self._proj([d.lon, d.lat]); }), dmin = Infinity;
+      xy.forEach(function (a, i) { xy.slice(i + 1).forEach(function (b) {
+        dmin = Math.min(dmin, Math.hypot(a[0] - b[0], a[1] - b[1]));
+      }); });
+      return Math.max(1.5 * (this._prefScale || 1), Math.min(160, 20 / Math.max(dmin, 1e-6)));
+    }
+    _unfocus() { this._focus = null; this._render(); this._emit('select'); }
+
+    // In a prefecture with grouped pins (small and dense), the pointer "catches" the nearest pin or cluster
+    // within ~26px instead of requiring a hit on the dot itself.
+    _magnet(svgNode) {
+      var self = this, near = null;
+      function nearest(e) {
+        if (!self._hasGroups()) return null;
+        var best = null, bd = 26;
+        self._root.querySelectorAll('#pinsLayer g.jm-pin, #clusterLayer g.jm-cl').forEach(function (n) {
+          if (!n.__data__) return;
+          if (n.style.display === 'none' || n.style.pointerEvents === 'none') return;
+          var r = n.querySelector('.jm-dot').getBoundingClientRect();
+          var dist = Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height / 2));
+          if (dist < bd) { bd = dist; best = n; }
+        });
+        return best;
+      }
+      function set(n) {
+        if (n === near) return;
+        if (near) {
+          near.classList.remove('near');
+          if (near.classList.contains('jm-pin')) self._emit('pinout', { pin: near.__data__ });
+        }
+        near = n;
+        if (n) {
+          n.classList.add('near');
+          if (n.classList.contains('jm-pin')) self._emit('pin', { pin: n.__data__, trigger: 'hover', node: n });
+        }
+      }
+      svgNode.addEventListener('pointermove', function (e) { if (e.pointerType !== 'touch') set(nearest(e)); });
+      svgNode.addEventListener('pointerleave', function () { set(null); });
+      svgNode.addEventListener('click', function (e) {
+        var n = nearest(e);
+        if (!n) return;
+        e.stopPropagation();
+        if (n.classList.contains('jm-cl')) { set(null); self._focusOn(n.__data__.pins); }
+        else self._emit('pin', { pin: n.__data__, trigger: 'click', node: n });
+      }, true);
     }
 
 
@@ -1468,7 +1791,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       if (!this._pins) return;
       var self = this;
       this._pins.forEach(function (p) { p.__match = idSet ? idSet.has(p.id) : true; });
-      this._updatePinVisibility();
+      this._renderPins();  // also refreshes colors (d.color may change with the filters)
     }
 
     _hoverRegion(id, on) {
@@ -1485,10 +1808,10 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       if (on) this._emit('hover', { hoverPref: +id, hoverPrefName: PREF_JA[+id] });
     }
 
-    _frame(features, fit) {
+    _frame(features, fit, cap) {
       var b = this._path.bounds({ type: 'FeatureCollection', features: features });
       var dx = Math.max(b[1][0] - b[0][0], 1), dy = Math.max(b[1][1] - b[0][1], 1);
-      var s = Math.min(22, fit * Math.min(this.VB.w / dx, this.VB.h / dy));
+      var s = Math.min(cap || (this._pref === 37 ? 60 : 22), fit * Math.min(this.VB.w / dx, this.VB.h / dy));
       return [this.VB.x + this.VB.w / 2 - s * (b[0][0] + b[1][0]) / 2,
               this.VB.y + this.VB.h / 2 - s * (b[0][1] + b[1][1]) / 2, s];
     }
@@ -1517,17 +1840,26 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       var rlg = R.querySelector('#regionLabels'); if (rlg) rlg.classList.toggle('hide', !!active);
       var back = R.querySelector('.back');
       back.classList.toggle('on', !!active);
-      back.textContent = pref ? '← Назад к региону' : '← Ко всей карте';
+      back.textContent = this._focus ? '← Ко всей префектуре' : this._isle ? '← Ко всей Окинаве' : (pref && active !== 'okinawa') ? '← Назад к региону' : '← Ко всей карте';
       this._crumb();
 
       var cam = R.querySelector('#camera');
+      this._placeInset();
+      if (active === 'okinawa') {  // main map stays at full view, muted; the inset carries the content
+        cam.setAttribute('transform', 'translate(0,0) scale(1)'); this._lastScale = 1;
+        this._updatePinVisibility(); this._fillPanel(); return;
+      }
       if (!active) { cam.setAttribute('transform', 'translate(0,0) scale(1)'); this._lastScale = 1; this._updatePinVisibility(); this._fillPanel(true); return; }
 
       var inRegion = this._main.filter(function (f) { return REGION_OF[f.properties.id] === active; });
       var offMap = !!pref && !this._byPref[pref];              // 沖縄県はインセットのみ
       var target = (pref && !offMap) ? [this._byPref[pref]] : inRegion;
-      var t = this._frame(target.map(function (f) { return f.core; }), (pref && !offMap) ? 0.62 : 0.78);
+      var t = this._focus
+        ? this._frame([{ type: 'Feature', properties: {}, geometry: { type: 'MultiPoint',
+            coordinates: this._focus.map(function (d) { return [d.lon, d.lat]; }) } }], 0.45, this._focusCap())
+        : this._frame(target.map(function (f) { return f.core; }), (pref && !offMap) ? (pref === 37 ? 0.8 : 0.62) : 0.78);  // Kagawa: zoom closer, it carries ~50 article pins
       cam.setAttribute('transform', 'translate(' + t[0] + ',' + t[1] + ') scale(' + t[2] + ')');
+      if (!this._focus) this._prefScale = t[2];
       this._lastScale = t[2]; this._updatePinVisibility();
       var fr = R.querySelector('.inset-frame'); if (fr) fr.classList.toggle('focus', offMap);
 
@@ -1547,12 +1879,16 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       if (!this._active) { c.innerHTML = ''; return; }
       var r = byId[this._active];
       var html = '<button type="button" data-lvl="0">Япония</button><span>/</span>' +
-        '<button type="button" data-lvl="1"' + (this._pref ? '' : ' disabled') + '>' + REGION_RU[r.id] + '</button>';
-      if (this._pref) html += '<span>/</span><button type="button" data-lvl="2" disabled>' + PREF_RU[this._pref] + '</button>';
+        '<button type="button" data-lvl="1"' + ((r.id === 'okinawa' ? this._isle : this._pref) ? '' : ' disabled') + '>' + REGION_RU[r.id] + '</button>';
+      if (this._isle) html += '<span>/</span><button type="button" data-lvl="2" disabled>' +
+        this._isles.find(function (i) { return i.id === this._isle; }, this).ru + '</button>';
+      if (this._pref && r.id !== 'okinawa') html += '<span>/</span><button type="button" data-lvl="2"' + (this._focus ? '' : ' disabled') + '>' + PREF_RU[this._pref] + '</button>';
       c.innerHTML = html;
       c.querySelectorAll('button').forEach(function (b) {
         b.addEventListener('click', function (e) {
           e.stopPropagation();
+          if (b.dataset.lvl === '2') { self._unfocus(); return; }
+          if (b.dataset.lvl === '1' && self._active === 'okinawa') { if (self._isle) self._up(); return; }
           b.dataset.lvl === '0' ? self.select(null) : self.select(self._active, null);
           self._emit('select');
         });
@@ -1625,6 +1961,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
 
 
 </script>
+<!-- kagawa-japan-pins --><script>window.KAGAWA_PINS={"cats": {"see": ["Посмотреть", "#1F5A7A"], "stay": ["Где остановиться", "#7A4A8C"], "eat": ["Где поесть", "#B3261E"], "shop": ["Где купить", "#A0740A"], "art": ["Архитектура и искусство", "#2F6B4A"], "craft": ["Мастерские", "#4E6E8E"]}, "art": {"kukai-seven-temples": {"t": "Семь храмов Кукая: малое паломничество по Кагаве", "u": "articles/kagawa/kukai-seven-temples/index.html", "l": "Паломничество по всем 88 храмам Сикоку (о-хэнро) требует недель, поэтому у него существует короткая версия: маршрут «семи мест», семь храмов, связанных с Кукаем. Два дня…", "i": "articles/kagawa/kukai-seven-temples/thumb.jpg"}, "shikoku-aquarium": {"t": "Аквариум Сикоку: мощные течения снизу вверх", "u": "articles/kagawa/shikoku-aquarium/index.html", "l": "У подножия моста Сэто-охаси, в посёлке Утадзу, открылся крупнейший на Сикоку аквариум. Его главная фишка: морские пейзажи острова, показанные в движении, от бешеного…", "i": "articles/kagawa/shikoku-aquarium/thumb.jpg"}, "tsukahara-karaburo": {"t": "Карабуро Цукахара: каменная парная, где горит самый жаркий огонь Японии", "u": "articles/kagawa/tsukahara-karaburo/index.html", "l": "Карабуро, старинная каменная парная баня, предок японской сауны, дожили до наших дней в считаном количестве, и в городе Сануки стоит самая жаркая из них: каменная…", "i": "articles/kagawa/tsukahara-karaburo/thumb.jpg"}, "shimayu": {"t": "Сима-ю: баня, которая сводит путешественников с островитянами", "u": "articles/kagawa/shimayu/index.html", "l": "На Сёдосиме архитектор Дзё Нагасака обновил общественную баню так, чтобы она работала на весь остров: банный зал «Сима-ю», столовая «Симамэси» и гостиница «Симахаку»…", "i": "articles/kagawa/shimayu/thumb.jpg"}, "sanuki-olive-yeast-sake": {"t": "Сакэ из оливковых дрожжей: четыре сорта, сваренные целиком в Кагаве", "u": "articles/kagawa/sanuki-olive-yeast-sake/index.html", "l": "Кагава научилась варить сакэ на дрожжах из собственной оливы: четыре винокурни, четыре сорта с тропической кислинкой. Рассказываем, что из этого вышло.", "i": "articles/kagawa/sanuki-olive-yeast-sake/thumb.jpg"}, "setouchi-shunsaikan": {"t": "Сэтоути Сюнсайкан в Симбаси: три продукта Кагавы, которые стоит привезти", "u": "articles/kagawa/setouchi-shunsaikan/index.html", "l": "Антена-шопы собирают вкус целой префектуры под одной крышей. В Симбаси такой магазин делят Кагава и Эхимэ, и вот три продукта, ради которых сюда стоит зайти.", "i": "articles/kagawa/setouchi-shunsaikan/thumb.jpg"}, "homemakers-ginger-syrup": {"t": "Имбирные сиропы HOMEMAKERS: ферма, где варят имбирь с цитрусами", "u": "articles/kagawa/homemakers-ginger-syrup/index.html", "l": "На Сёдосиме, втором по величине острове Внутреннего Японского моря, прячется горная деревня Хитояма. Здесь живёт органическая ферма HOMEMAKERS, и её имбирный сироп…", "i": "articles/kagawa/homemakers-ginger-syrup/thumb.jpg"}, "hakueido-kannonji": {"t": "Печенье «Канъондзи» от Хакуэйдо: сладость, придуманная художником", "u": "articles/kagawa/hakueido-kannonji/index.html", "l": "В Канъондзи старинная кондитерская продаёт печенье, у которого художник придумал не только вкус, но и каждую деталь обёртки. Это «Канъондзи» из серии «паломничество по…", "i": "articles/kagawa/hakueido-kannonji/thumb.jpg"}, "hakueido-ichiya-an": {"t": "Мандзю «Ития-ан» от Хакуэйдо: сладость с гречишной мукой", "u": "articles/kagawa/hakueido-ichiya-an/index.html", "l": "Кондитерская Хакуэйдо ведёт историю с 1897 года и держит четыре магазина в Канъондзи. Её знаменитый мандзю «Ития-ан» прячет в себе гречишную муку и имя поэта XVI века.", "i": "articles/kagawa/hakueido-ichiya-an/thumb.jpg"}, "hogetsudo-rokumangoku": {"t": "Монака «Рокумангоку» от Хогэцудо: сладость в честь самурайского дохода княжества", "u": "articles/kagawa/hogetsudo-rokumangoku/index.html", "l": "Кондитерская Хогэцудо в Маругамэ работает больше ста лет, и её знаменитое монака названо в честь дохода княжества Маругамэ: шестьдесят тысяч коку риса. Это «Рокумангоку»…", "i": "articles/kagawa/hogetsudo-rokumangoku/thumb.jpg"}, "kamado-tora-manju": {"t": "Мандзю «Тора» от Камадо: булочка с тигром и мёдом", "u": "articles/kagawa/kamado-tora-manju/index.html", "l": "Кондитерская Камадо в Сакаидэ продаёт большие мандзю с тигровым названием и тигровым цветом. Это «Тора-мандзю» из серии «паломничество по народному искусству и…", "i": "articles/kagawa/kamado-tora-manju/thumb.jpg"}, "kamado-monaka": {"t": "Монака «Камадо» от Камадо: вафли с тиснёным логотипом", "u": "articles/kagawa/kamado-monaka/index.html", "l": "Кондитерская Камадо в Сакаидэ работает с 1936 года, и её одноимённое монака носит название магазина на каждой вафле: это «Камадо-монака» из серии «паломничество по…", "i": "articles/kagawa/kamado-monaka/thumb.jpg"}, "tomoedo-castella": {"t": "Кастелла от Томоэдо: бисквит с рисунками путешественников", "u": "articles/kagawa/tomoedo-castella/index.html", "l": "Если в Кагаве вас манят искусство и дизайн, не проходите мимо местных кондитерских. В Хигасикагаве ради этого стоит заглянуть в старинную Томоэдо, где кастеллу продают в…", "i": "articles/kagawa/tomoedo-castella/thumb.jpg"}, "tomoedo-budo-mochi": {"t": "«Будо-моти» от Томоэдо: моти, названное в честь воинской доблести", "u": "articles/kagawa/tomoedo-budo-mochi/index.html", "l": "Собираясь в Кагаву, обязательно загляните в мир местного искусства и дизайна. Самая вкусная его часть: кондитерские, связанные с художником Кунибо Вадой. Сегодня…", "i": "articles/kagawa/tomoedo-budo-mochi/thumb.jpg"}, "yoshioka-genpeimochi": {"t": "Моти «Гэмпэймоти» от Ёсиока Гэмпэймоти хомпо: красное и белое в честь двух кланов", "u": "articles/kagawa/yoshioka-genpeimochi/index.html", "l": "Бывает, что сладость открывает страницу японской истории. В Такамацу такая сладость называется «Гэмпэймоти», и кондитерская Ёсиока Гэмпэймоти хомпо печёт её с 1862 года…", "i": "articles/kagawa/yoshioka-genpeimochi/thumb.jpg"}, "ohloy-brewing": {"t": "OHLOY BREWING: крафтовое пиво со вкусом Кагавы", "u": "articles/kagawa/ohloy-brewing/index.html", "l": "«OHLOY BREWING» начинала как «фантомная пивоварня»: собственной площадки у команды не было, и варка шла на арендованном оборудовании. Слава расходилась по сарафанному…", "i": "articles/kagawa/ohloy-brewing/thumb.jpg"}, "mitani-seito": {"t": "Васамбон и «Сики-но хана» от Митани Сэйто: сахар, который тает на языке", "u": "articles/kagawa/mitani-seito/index.html", "l": "Сахар васамбон из Кагавы и Токусимы тает на языке быстрее любого другого японского сахара. Фабрика Митани Сэйто в Хигасикагаве варит его с 1804 года по старой…", "i": "articles/kagawa/mitani-seito/thumb.jpg"}, "setouchi-mitoyo-cola": {"t": "«Сэтоути Митоё кола»: крафтовая кола, которая рассказывает о регионе", "u": "articles/kagawa/setouchi-mitoyo-cola/index.html", "l": "Крафтовая кола из Митоё варится на мандаринах соо, местном остром перце и соли из морской воды Титибугахамы. Компания Сэтоути удон кампани выпускает её как «колу для…", "i": "articles/kagawa/setouchi-mitoyo-cola/thumb.jpg"}, "wara-ya": {"t": "Удонная «Варая» и старинный дом, с которого начался Сикоку-мура", "u": "articles/kagawa/wara-ya/index.html", "l": "Крестьянский дом с соломенной кровлей у подножия горы Ясима перевезли сюда из соседней префектуры, и именно с него в 1975 году начался музей под открытым небом…", "i": "articles/kagawa/wara-ya/thumb.jpg"}, "roka": {"t": "Рёкан Рока: ночлег среди искусства на острове Наосима", "u": "articles/kagawa/roka/index.html", "l": "На Наосиме, маленьком острове современного искусства во Внутреннем Японском море, дождались своего настоящего рёкана: одиннадцать номеров-сюит с открытыми ваннами на…", "i": "articles/kagawa/roka/thumb.jpg"}, "umitota": {"t": "Умитота: старинный дом между морем и рисовыми полями", "u": "articles/kagawa/umitota/index.html", "l": "На Тэсиме, острове во Внутреннем Японском море, дизайнер Акира Минагава переделал полувековой дом под аренду целиком: живи как дома, гуляй на террасе между морем и…", "i": "articles/kagawa/umitota/thumb.jpg"}, "lemon-hotel": {"t": "Лимонный отель на Тэсиме: арт-объект, в котором можно переночевать", "u": "articles/kagawa/lemon-hotel/index.html", "l": "Сэтоути давно стало синонимом арт-путешествия: раз в три года здесь проходит Международный фестиваль искусств, и ради работ художников под открытым небом на острова…", "i": "articles/kagawa/lemon-hotel/thumb.jpg"}, "urashima-village-udon-house": {"t": "Ночлег ради впечатлений в Митоё: остров Урасимы Таро и сборы по варке удона", "u": "articles/kagawa/urashima-village-udon-house/index.html", "l": "В Митоё, на западе Кагавы, есть два места, куда едут не ради номера, а ради опыта. В одном ночуешь напротив острова из легенды об Урасиме Таро, в другом сам месишь тесто…", "i": "articles/kagawa/urashima-village-udon-house/thumb.jpg"}, "sazae-sana-mane": {"t": "SAZAE: раковина-сауна на глэмпинге SANA MANE", "u": "articles/kagawa/sazae-sana-mane/index.html", "l": "SANA MANE, глэмпинг-курорт на Наосиме, обзавёлся собственной сауной SAZAE. Внутри она как раковина моллюска: стены закручиваются к дыре в потолке, и пар уходит в небо…", "i": "articles/kagawa/sazae-sana-mane/thumb.jpg"}, "guntu": {"t": "Ганцу: маленький рёкан, который плавает по Внутреннему Японскому морю", "u": "articles/kagawa/guntu/index.html", "l": "В октябре 2017 года по Внутреннему Японскому морю вышел корабль, не похожий ни на один лайнер: Ганцу, девятнадцать кают-сюит, много дерева и идея маленького знаменитого…", "i": "articles/kagawa/guntu/thumb.jpg"}, "tange": {"t": "Кэндзо Тангэ и рождение «арт-префектуры» Кагава", "u": "articles/kagawa/tange/index.html", "l": "Кагаву знают как «префектуру удона», но у неё есть и второе лицо: её называют «арт-префектурой». Здесь стоят музеи, которые ценят прежде всего как архитектуру, а в…", "i": "articles/kagawa/tange/thumb.jpg"}, "prefectural-office": {"t": "Здание правительства префектуры Кагава: начало «арт-префектуры»", "u": "articles/kagawa/prefectural-office/index.html", "l": "В 1958 году в Такамацу появилось здание правительства префектуры, спроектированное Кэндзо Тангэ. Сегодня его называют отправной точкой «арт-префектуры» Кагава: именно…", "i": "articles/kagawa/prefectural-office/thumb.jpg"}, "inokuma-artists": {"t": "Сикоку-мура и художник Гэнъитиро Инокума: эстафета творцов", "u": "articles/kagawa/inokuma-artists/index.html", "l": "Идёшь по дорожке в зелени, и глаз ловит перемены: то у беседки за каменной кладкой появится объект, похожий на черепаху, то между домами мелькнёт скульптура. Сикоку-мура…", "i": "articles/kagawa/inokuma-artists/thumb.jpg"}, "sugar-mill": {"t": "Сахарные хижины Сикоку-муры: как Сануки делала белый сахар", "u": "articles/kagawa/sugar-mill/index.html", "l": "Две круглые хижины под конусными соломенными крышами сохранились в Японии только в музее под открытым небом Сикоку-мура под Такамацу. В них отжимали сок сахарного…", "i": "articles/kagawa/sugar-mill/thumb.jpg"}, "shikokumura": {"t": "Сикоку-мура: деревня-музей у подножия горы Ясима", "u": "articles/kagawa/shikokumura/index.html", "l": "У подножия горы Ясима на северо-востоке Такамацу раскинулся музей под открытым небом «Сикоку-мура». С 1976 года здесь собирают дома и постройки, в которых жили и…", "i": "articles/kagawa/shikokumura/thumb.jpg"}, "inokuma": {"t": "Гэнъитиро Инокума: художник и «арт-директор» Кагавы", "u": "articles/kagawa/inokuma/index.html", "l": "В Маругамэ и Сакаидэ его по-домашнему зовут «Инокума-сан»: художник Гэнъитиро Инокума был не только живописцем, но и тем, кто свёл губернатора Масанори Канэко с…", "i": "articles/kagawa/inokuma/thumb.jpg"}, "oyane-san": {"t": "«Оянэ-сан»: новые ворота Сикоку-муры", "u": "articles/kagawa/oyane-san/index.html", "l": "С 2022 года Сикоку-муру встречают новые входные ворота «Оянэ-сан». Их спроектировал архитектор Ёсиюки Кавадзоэ: огромная кровля то поднимается, то опускается, повторяя…", "i": "articles/kagawa/oyane-san/thumb.jpg"}, "ando-gallery": {"t": "Галерея Сикоку-муры Тадао Андо: свет и вода", "u": "articles/kagawa/ando-gallery/index.html", "l": "Бетон и стекло, свет, падающий на воду: выверенная простая форма подчёркивает красоту. Такова «Галерея Сикоку-муры», маленький музей в деревне, построенный Тадао Андо в…", "i": "articles/kagawa/ando-gallery/thumb.jpg"}, "nagare": {"t": "Масаюки Нагарэ: камень и звук Сикоку-муры", "u": "articles/kagawa/nagare/index.html", "l": "Дорога «Нагарэ-дзака» длиной 231 метр и водопад «Сомига-таки» с грохотом воды: этот необычный ландшафт и звук деревни создал скульптор по камню Масаюки Нагарэ.", "i": "articles/kagawa/nagare/thumb.jpg"}, "yusanso-asan-kotonami": {"t": "Юсансо Асан Котонами: гостиница, которая вросла в горную деревню", "u": "articles/kagawa/yusanso-asan-kotonami/index.html", "l": "В зелёных горах посёлка Манно прячется единственный онсэн-рёкан этих мест. Группе Hotel New Awaji досталась гостиница, чужая для своего пейзажа, и она перестроила её…", "i": "articles/kagawa/yusanso-asan-kotonami/thumb.jpg"}, "beams-japan": {"t": "Лаки и кожа Кагавы: что BEAMS JAPAN привозит из префектуры в Токио", "u": "articles/kagawa/beams-japan/index.html", "l": "Кагаву в Японии называют префектурой искусства, и на то есть причина: местные лаки, ткани, кожу и камень уже несколько лет привозят в Токио, где покупатели BEAMS JAPAN…", "i": "articles/kagawa/beams-japan/thumb.jpg"}, "teshima-craft": {"t": "Керамика острова Тэсима: посуда из глины, ракушек и трав острова", "u": "articles/kagawa/teshima-craft/index.html", "l": "Прохладный морской ветер делает осень лучшим временем для поездок по островам. На маленьком острове Тэсима в архипелаге Сиваку молодые художники делают керамику из того…", "i": "articles/kagawa/teshima-craft/thumb.jpg"}, "tai-masahiro": {"t": "Стеклодув Масахиро Тай: посуда, которой хочется пользоваться каждый день", "u": "articles/kagawa/tai-masahiro/index.html", "l": "Чаши и стаканы Масахиро Тая хочется взять в руки: у них толстый «пухлый» край и янтарная кайма, как у вещи с историей. В мастерской «Гласстайм» в посёлке Аягава он…", "i": "articles/kagawa/tai-masahiro/thumb.jpg"}, "tai-masahiro-summer": {"t": "Летнее стекло Масахиро Тая: прохлада на каждый день", "u": "articles/kagawa/tai-masahiro-summer/index.html", "l": "В жару пить хочется из стекла: оно прохладное и на вид, и на ощупь. Масахиро Тай делает посуду, которая живёт на столе каждый день и со временем нравится только больше.", "i": "articles/kagawa/tai-masahiro-summer/thumb.jpg"}, "tet": {"t": "«tet.»: бренд, который родился в городе перчаток", "u": "articles/kagawa/tet/index.html", "l": "Почти все японские перчатки шьют в Хигасикагаве, и именно здесь появился бренд tet. Его летние вещи защищают руки от солнца и при этом остаются приятными на ощупь.", "i": "articles/kagawa/tet/thumb.jpg"}, "ogijima-workation": {"t": "Огидзима: остров, где работают у моря", "u": "articles/kagawa/ogijima-workation/index.html", "l": "Паром идёт от порта Такамацу сорок минут, и на подходе к Огидзиме за водой открываются склоны, по которым дома поднимаются ступенями. На острове площадью около 1,4…", "i": "articles/kagawa/ogijima-workation/thumb.jpg"}, "shiwaku-islands": {"t": "Острова Сиваку: флот, ремесло и камень", "u": "articles/kagawa/shiwaku-islands/index.html", "l": "К северу от Такамацу лежат 28 островов Сиваку. В эпоху Муромати и Эдо их жители разбогатели на морских перевозках, а плотники с этих островов строили храмы и дома по…", "i": "articles/kagawa/shiwaku-islands/thumb.jpg"}, "seto-ohashi": {"t": "Мост Сэто-Охаси: девять километров над морем", "u": "articles/kagawa/seto-ohashi/index.html", "l": "Сэто-Охаси состоит из шести мостов между Хонсю и Сикоку, совмещенная автомобильная и железная дорога, одна из крупнейших в мире. Длина морского участка 9,4 километра, и…", "i": "articles/kagawa/seto-ohashi/thumb.jpg"}, "seto-currents": {"t": "Сэтоути: течения, которые делают рыбу вкусной", "u": "articles/kagawa/seto-currents/index.html", "l": "Около 700 островов создают в Сэтоути ту самую картину множества островов, которой любуются с берега. Здесь издавна известны «акаси-тай» и «акаси-дако», а также морской…", "i": "articles/kagawa/seto-currents/thumb.jpg"}}, "pins": [{"n": "№71 Ияданидзи", "a": "Митоё", "c": "see", "la": 34.221462, "ln": 133.716888, "x": 1, "s": ["kukai-seven-temples"]}, {"n": "№72 Мандарадзи", "a": "Дзэнцудзи", "c": "see", "la": 34.223492, "ln": 133.750412, "x": 0, "s": ["kukai-seven-temples"]}, {"n": "№73 Сюссякадзи", "a": "Дзэнцудзи", "c": "see", "la": 34.216114, "ln": 133.749374, "x": 0, "s": ["kukai-seven-temples"]}, {"n": "№74 Коямадзи", "a": "Дзэнцудзи", "c": "see", "la": 34.231613, "ln": 133.765747, "x": 0, "s": ["kukai-seven-temples"]}, {"n": "№75 Дзэнцудзи", "a": "Дзэнцудзи", "c": "see", "la": 34.224976, "ln": 133.774338, "x": 0, "s": ["kukai-seven-temples"]}, {"n": "№76 Кондзодзи", "a": "Дзэнцудзи", "c": "see", "la": 34.249863, "ln": 133.780991, "x": 0, "s": ["kukai-seven-temples"]}, {"n": "№77 Дорюдзи", "a": "Тадоцу", "c": "see", "la": 34.27618, "ln": 133.762985, "x": 0, "s": ["kukai-seven-temples"]}, {"n": "Кондитерская Кумаока", "a": "Дзэнцудзи", "c": "shop", "la": 34.225811, "ln": 133.77475, "x": 0, "s": ["kukai-seven-temples"]}, {"n": "Удонная «Охара»", "a": "Дзэнцудзи", "c": "eat", "la": 34.227173, "ln": 133.768005, "x": 0, "s": ["kukai-seven-temples"]}, {"n": "Аквариум Сикоку", "a": "Утадзу", "c": "see", "la": 34.312881, "ln": 133.80809, "x": 0, "s": ["shikoku-aquarium"]}, {"n": "Карабуро Цукахара", "a": "Сануки", "c": "see", "la": 34.246601, "ln": 134.165421, "x": 0, "s": ["tsukahara-karaburo"]}, {"n": "Баня Сима-ю", "a": "о. Сёдосима", "c": "see", "la": 34.488445, "ln": 134.169907, "x": 0, "s": ["shimayu"]}, {"n": "HOMEMAKERS", "a": "о. Сёдосима", "c": "eat", "la": 34.507465, "ln": 134.226166, "x": 1, "s": ["homemakers-ginger-syrup"]}, {"n": "Хакуэйдо", "a": "Канъондзи", "c": "shop", "la": 34.129396, "ln": 133.652686, "x": 0, "s": ["hakueido-kannonji", "hakueido-ichiya-an"]}, {"n": "Хогэцудо", "a": "Маругамэ", "c": "shop", "la": 34.291752, "ln": 133.797089, "x": 0, "s": ["hogetsudo-rokumangoku"]}, {"n": "Мэйбуцу Камадо", "a": "Сакаидэ", "c": "shop", "la": 34.316189, "ln": 133.873306, "x": 0, "s": ["kamado-tora-manju", "kamado-monaka"]}, {"n": "Томоэдо", "a": "Хигасикагава", "c": "shop", "la": 34.250877, "ln": 134.33461, "x": 0, "s": ["tomoedo-castella", "tomoedo-budo-mochi"]}, {"n": "Ёсиока Гэмпэймоти хомпо", "a": "Такамацу", "c": "shop", "la": 34.34502, "ln": 134.056473, "x": 0, "s": ["yoshioka-genpeimochi"]}, {"n": "Митани Сэйто", "a": "Хигасикагава", "c": "shop", "la": 34.215862, "ln": 134.418686, "x": 0, "s": ["mitani-seito"]}, {"n": "OHLOY BREWING", "a": "Такамацу, Мурэ", "c": "eat", "la": 34.349121, "ln": 134.132751, "x": 1, "s": ["ohloy-brewing"]}, {"n": "Удонная «Варая»", "a": "Такамацу, Ясима", "c": "eat", "la": 34.343757, "ln": 134.108237, "x": 0, "s": ["wara-ya"]}, {"n": "Сикоку-мура", "a": "Такамацу, Ясима", "c": "art", "la": 34.345005, "ln": 134.108124, "x": 0, "s": ["shikokumura", "oyane-san", "ando-gallery", "nagare", "inokuma-artists", "sugar-mill"]}, {"n": "Рёкан Рока", "a": "о. Наосима", "c": "stay", "la": 34.459797, "ln": 133.99559, "x": 1, "s": ["roka"]}, {"n": "SANA MANE и сауна SAZAE", "a": "о. Наосима", "c": "stay", "la": 34.45166, "ln": 133.976456, "x": 1, "s": ["sazae-sana-mane"]}, {"n": "Умитота", "a": "о. Тэсима (豊島), рядом с Сёдосимой", "c": "stay", "la": 34.485191, "ln": 134.05954, "x": 1, "s": ["umitota"]}, {"n": "Лимонный отель", "a": "о. Тэсима (豊島), рядом с Сёдосимой", "c": "stay", "la": 34.479767, "ln": 134.092285, "x": 1, "s": ["lemon-hotel"]}, {"n": "URASHIMA VILLAGE", "a": "Митоё, полуостров Сёнай", "c": "stay", "la": 34.233791, "ln": 133.617584, "x": 1, "s": ["urashima-village-udon-house"]}, {"n": "UDON HOUSE", "a": "Митоё", "c": "stay", "la": 34.149197, "ln": 133.678284, "x": 1, "s": ["urashima-village-udon-house"]}, {"n": "Юсансо Асан Котонами", "a": "Манно", "c": "stay", "la": 34.097458, "ln": 133.973175, "x": 1, "s": ["yusanso-asan-kotonami"]}, {"n": "Здание правительства префектуры", "a": "Такамацу", "c": "art", "la": 34.340183, "ln": 134.044388, "x": 0, "s": ["tange", "prefectural-office"]}, {"n": "Анабуки-арена Кагава", "a": "Такамацу", "c": "art", "la": 34.353642, "ln": 134.046143, "x": 0, "s": ["tange"]}, {"n": "MIMOCA, музей Инокумы", "a": "Маругамэ", "c": "art", "la": 34.291058, "ln": 133.791855, "x": 0, "s": ["tange", "inokuma"]}, {"n": "Музей Кайи Хигасиямы в Сэтоути", "a": "Сакаидэ, о. Сямидзима", "c": "art", "la": 34.347679, "ln": 133.824036, "x": 1, "s": ["tange"]}, {"n": "Мемориал Джорджа Накасимы", "a": "Такамацу, Мурэ", "c": "art", "la": 34.334358, "ln": 134.15303, "x": 0, "s": ["tange"]}, {"n": "Sinra (лак)", "a": "Аягава", "c": "craft", "la": 34.261898, "ln": 133.993729, "x": 0, "s": ["beams-japan"]}, {"n": "Итивадо когэй (лак)", "a": "Такамацу, Ясима", "c": "craft", "la": 34.34296, "ln": 134.114594, "x": 0, "s": ["beams-japan"]}, {"n": "Кавагутия сиккитэн (лак)", "a": "Сануки", "c": "craft", "la": 34.250072, "ln": 134.172409, "x": 0, "s": ["beams-japan"]}, {"n": "Окавара сэнсёку хомпо (крашение)", "a": "Такамацу", "c": "craft", "la": 34.342068, "ln": 134.056122, "x": 0, "s": ["beams-japan"]}, {"n": "A-LOOK (оливковая кожа)", "a": "Хигасикагава", "c": "craft", "la": 34.240795, "ln": 134.334167, "x": 0, "s": ["beams-japan"]}, {"n": "Фукусин (перчатки)", "a": "Хигасикагава", "c": "craft", "la": 34.24218, "ln": 134.35907, "x": 0, "s": ["beams-japan", "tet"]}, {"n": "Тэсима тоэн (керамика)", "a": "о. Тэсима (手島), острова Сиваку", "c": "craft", "la": 34.397011, "ln": 133.669601, "x": 1, "s": ["teshima-craft"]}, {"n": "Стеклянная мастерская Масахиро Тая", "a": "Аягава", "c": "craft", "la": 34.252308, "ln": 133.917908, "x": 1, "s": ["tai-masahiro", "tai-masahiro-summer"]}, {"n": "«Кува то хон»", "a": "о. Огидзима", "c": "stay", "la": 34.4262, "ln": 134.0612, "x": 1, "s": ["ogijima-workation"]}, {"n": "Огидзима Юкуру", "a": "о. Огидзима", "c": "stay", "la": 34.4243, "ln": 134.059, "x": 1, "s": ["ogijima-workation"]}, {"n": "«Дамонтэ сёкай»", "a": "о. Огидзима", "c": "eat", "la": 34.422315, "ln": 134.055101, "x": 0, "s": ["ogijima-workation"]}, {"n": "Квартал Касасима", "a": "о. Хондзима", "c": "see", "la": 34.395897, "ln": 133.779175, "x": 0, "s": ["shiwaku-islands"]}, {"n": "Кюфуку брюинг Хондзима", "a": "о. Хондзима", "c": "eat", "la": 34.385258, "ln": 133.77916, "x": 1, "s": ["shiwaku-islands"]}, {"n": "Пустыня Отодзан", "a": "о. Хиросима", "c": "see", "la": 34.362606, "ln": 133.702143, "x": 0, "s": ["shiwaku-islands"]}, {"n": "Оноэ-тэй", "a": "о. Хиросима", "c": "see", "la": 34.375813, "ln": 133.722794, "x": 1, "s": ["shiwaku-islands"]}, {"n": "Мост Сэто-Охаси, парк у моста", "a": "Сакаидэ", "c": "see", "la": 34.351391, "ln": 133.825638, "x": 0, "s": ["seto-ohashi"]}]};</script><!-- /kagawa-japan-pins -->
 <script>
 
 (function(){
@@ -6462,13 +6799,42 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
   }
 ];
 
+  // ---- Kagawa article pins (generated by tools/kagawa_map_build.py), shown only when Kagawa is open ----
+  var KG = window.KAGAWA_PINS;
+  var KG_TYPE = { see:['view'], eat:['food'], shop:['food'], art:['history'], craft:['activity'], stay:['stay'] };
+  var KG_PINS = !KG ? [] : KG.pins.map(function(p, i){
+    return { id:'kg-' + i, title:p.n, lon:p.ln, lat:p.la, prefId:37, clusterOf:37,
+      type:KG_TYPE[p.c] || [], cls:'jm-pin-kg',
+      group:'kg', art:p.s[0], tagline:p.n + ' · ' + p.a, approx:!!p.x,
+      links:p.s.map(function(s){ var a = KG.art[s]; return { href:a.u, title:a.t, img:a.i, lede:a.l }; }) };
+  });
+  var ALL = PINS.concat(KG_PINS);
+  // places that share an article (in list order), for "Место N из M" and highlighting on the map
+  var KG_BY_ART = {};
+  KG_PINS.forEach(function(p){ p.links.length && (KG_BY_ART[p.art] = KG_BY_ART[p.art] || []).push(p.id); });
+
+  // one color per filter type: chips show it, pins take the color of their first type
+  // (with filters on: of their first selected type)
+  var TYPE_COLOR = { view:'#2F6FB5', food:'#C8541E', onsen:'#B5487A', festival:'#C99A12', activity:'#138A7E',
+    history:'#7A5230', night:'#3B3F8F', nature:'#5E8F2A', stay:'#7A4A8C' };
+  document.querySelectorAll('.chips[data-axis="type"] .chip').forEach(function(b){
+    b.style.setProperty('--c', TYPE_COLOR[b.dataset.val]);
+  });
+  function colorPins(){
+    ALL.forEach(function(p){
+      var t = p.type || [];
+      var pick = state.type.size ? t.filter(function(x){ return state.type.has(x); })[0] : t[0];
+      p.color = TYPE_COLOR[pick || t[0]] || '#8A8A8A';
+    });
+  }
+
   var TOTAL = PINS.filter(function(p){return !p.cluster;}).length;
 
   var map = document.getElementById('map');
   var pop = document.getElementById('pop');
 
   map.addEventListener('japan-map:ready', function(){
-    map.pins = PINS.filter(function(p){ return !p.cluster; });
+    map.pins = ALL.filter(function(p){ return !p.cluster; });
     applyFilters();
   });
 
@@ -6517,9 +6883,10 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
 
 
   function applyFilters(){
+    colorPins();
     var matched = new Set();
     var shown = 0;
-    PINS.forEach(function(p){
+    ALL.forEach(function(p){
       if (p.cluster) { matched.add(p.id); return; } // city markers always visible
       if (pinMatches(p)) { matched.add(p.id); shown++; }
     });
@@ -6528,28 +6895,58 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
   }
 
   // ---- popover ----
-  var hideTimer = null;
+  // hover shows the card after a short pause (so sweeping across dense pins doesn't flicker);
+  // a click pins it open until closed or until the user clicks elsewhere
+  var hideTimer = null, showTimer = null, pinned = false;
   map.addEventListener('japan-map:pin', function(e){
     var d = e.detail.pin;
     if (d.cluster) return; // click already triggers zoom/navigation
-    clearTimeout(hideTimer);
-    showPop(d, e.detail.node);
+    clearTimeout(hideTimer); clearTimeout(showTimer);
+    if (e.detail.trigger === 'click') { pinned = true; showPop(d); return; }
+    if (pinned) return;
+    showTimer = setTimeout(function(){ showPop(d); }, pop.classList.contains('show') ? 160 : 60);
   });
   map.addEventListener('japan-map:pinout', function(){
-    hideTimer = setTimeout(hidePop, 180);
+    clearTimeout(showTimer);
+    if (!pinned) hideTimer = setTimeout(hidePop, 180);
   });
+  map.addEventListener('japan-map:focus', function(){ hidePop(); });
+  map.addEventListener('japan-map:select', function(){ hidePop(); });
   pop.addEventListener('mouseenter', function(){ clearTimeout(hideTimer); });
-  pop.addEventListener('mouseleave', function(){ hideTimer = setTimeout(hidePop, 180); });
+  pop.addEventListener('mouseleave', function(){ if (!pinned) hideTimer = setTimeout(hidePop, 180); });
 
   function showPop(d, node){
     var kj = d.kj ? '<span class="kj" aria-hidden="true">' + d.kj + '</span>' : '';
     var link = d.url ? '<a class="go" href="' + d.url + '">Читать статью →</a>' : '';
-    pop.innerHTML = '<button class="close" aria-label="Закрыть">✕</button>' + kj +
-      '<h3>' + d.title + '</h3><p>' + d.blurb + '</p>' + link;
+    var body = d.blurb ? '<p>' + d.blurb + '</p>' : '';
+    var tag = d.tagline ? '<span class="tagline" style="color:' + (d.color || '') + '">' + d.tagline + '</span>' : '';
+    if (d.links) {
+      // article card like the prefecture card: photo, title, lead; other articles about the same place below
+      var a = d.links[0], more = d.links.slice(1), sib = KG_BY_ART[d.art] || [];
+      var nth = sib.length > 1 ? '<span class="sibs">Место ' + (sib.indexOf(d.id) + 1) + ' из ' + sib.length + ' в этой статье</span>' : '';
+      if (map.highlightPins) map.highlightPins(sib.length > 1 ? new Set(sib) : null);
+      pop.innerHTML = '<button class="close" aria-label="Закрыть">✕</button>' +
+        (a.img ? '<img src="' + a.img + '" alt="">' : '') +
+        '<div class="in">' + tag + nth + '<h3>' + a.title + '</h3>' + (a.lede ? '<p>' + a.lede + '</p>' : '') +
+        '<a class="go" href="' + a.href + '">Читать статью →</a>' +
+        (more.length ? '<div class="more"><span class="mono">Ещё об этом месте</span><ul class="links">' + more.map(function(l){
+          return '<li><a href="' + l.href + '">' + l.title + '</a></li>';
+        }).join('') + '</ul></div>' : '') +
+        (d.approx ? '<p class="approx">Точка примерная</p>' : '') + '</div>';
+      pop.classList.add('photo');
+    } else {
+      pop.innerHTML = '<button class="close" aria-label="Закрыть">✕</button>' + kj +
+        '<h3>' + d.title + '</h3>' + tag + body + link;
+      pop.classList.remove('photo');
+      if (map.highlightPins) map.highlightPins(null);
+    }
     pop.classList.add('show'); // fixed position (bottom-left of the board, set in CSS) — stays clear of the pins
     pop.querySelector('.close').addEventListener('click', hidePop);
   }
-  function hidePop(){ pop.classList.remove('show'); }
+  function hidePop(){
+    pop.classList.remove('show'); pinned = false; clearTimeout(showTimer);
+    if (map.highlightPins) map.highlightPins(null);
+  }
   document.querySelector('.board').addEventListener('click', function(e){
     if (!pop.contains(e.target) && !e.target.closest('.jm-pin')) hidePop();
   });
@@ -6574,7 +6971,23 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
   }
   function hide(){ card.classList.remove('show'); }
   map.addEventListener('japan-map:select', function(e){ e.detail.pref ? show(e.detail.pref) : hide(); });
+  // "what to tap next" hint: region on the whole-Japan view, then prefecture (or island group in Okinawa);
+  // once zoomed in it sits below the breadcrumb and back button
+  var hint = document.getElementById('mapHint');
+  function syncHint(e){
+    if (!hint) return;
+    var d = e.detail || {}, text = null;
+    if (!d.region) text = 'Нажмите на регион Японии, который вас интересует';
+    else if (d.region === 'okinawa') text = d.isle ? null : 'Нажмите на группу островов, которая вас интересует';
+    else if (!d.pref) text = 'Нажмите на префектуру, которая вас интересует';
+    if (text) hint.querySelector('.tx').textContent = text;
+    hint.classList.toggle('off', !text);
+    hint.classList.toggle('below', !!d.region);
+  }
+  map.addEventListener('japan-map:select', syncHint);
+  map.addEventListener('japan-map:reset', syncHint);
   map.addEventListener('japan-map:reset', hide);
+  map.addEventListener('japan-map:focus', hide);  // zoomed into a pin cluster: give the map the room
   // pin popover and prefecture card share the corner: hide the card while a pin popover is open
   new MutationObserver(function(){ card.style.visibility = pop.classList.contains('show') ? 'hidden' : ''; })
     .observe(pop, { attributes:true, attributeFilter:['class'] });

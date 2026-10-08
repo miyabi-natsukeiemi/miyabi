@@ -175,3 +175,31 @@ page=page.replace('</div></article>',SECTION_LIST+'</div></article>',1)
 assert 'kagawa-map -->' in page and 'kagawa-articles' in page
 open(page_path,'w',encoding='utf-8').write(page)
 print(len(titles),'articles,',len(P),'pins; nopin:',sorted(s for s in titles if s not in used))
+
+# Same pins on the top-page Japan map (index.html): shown when the user zooms into Kagawa.
+top_path=os.path.join(REPO,'index.html'); top=open(top_path,encoding='utf-8').read()
+CATS={'see':['Посмотреть','#1F5A7A'],'stay':['Где остановиться','#7A4A8C'],'eat':['Где поесть','#B3261E'],'shop':['Где купить','#A0740A'],'art':['Архитектура и искусство','#2F6B4A'],'craft':['Мастерские','#4E6E8E']}
+def card(s):
+    """Photo + short lead for the top-map popover: thumb.jpg made from the article's first image (macOS sips)."""
+    d=os.path.join(KG,s); src=open(os.path.join(d,'index.html'),encoding='utf-8').read()
+    m=re.search(r'<p class="lede"[^>]*>(.*?)</p>',src,re.S) or re.search(r'<p>(.*?)</p>',src,re.S)
+    lede=html.unescape(re.sub(r'<[^>]+>','',m.group(1))).strip() if m else ''
+    if len(lede)>170: lede=lede[:170].rsplit(' ',1)[0].rstrip(' ,.;:—')+'…'
+    c={'t':titles[s],'u':f'articles/kagawa/{s}/index.html','l':lede}
+    im=re.search(r'<img[^>]+src="([^"]+)"',src)
+    if im and not im.group(1).startswith(('http','data:')):
+        img=os.path.normpath(os.path.join(d,im.group(1))); th=os.path.join(d,'thumb.jpg')
+        if os.path.exists(img):
+            if not os.path.exists(th) or os.path.getmtime(th)<os.path.getmtime(img):
+                os.system(f'sips -Z 600 -s format jpeg -s formatOptions 72 "{img}" --out "{th}" >/dev/null')
+            c['i']=f'articles/kagawa/{s}/thumb.jpg'
+    return c
+kg_top=dict(cats=CATS,art={s:card(s) for s in titles},pins=pins_js)
+SECTION_TOP=f'<!-- kagawa-japan-pins --><script>window.KAGAWA_PINS={json.dumps(kg_top,ensure_ascii=False)};</script><!-- /kagawa-japan-pins -->\n'
+ANCHOR='<script>\n\n(function(){\n  // ---- production dataset'
+if '<!-- kagawa-japan-pins -->' in top:
+    top=re.sub(r'<!-- kagawa-japan-pins -->.*?<!-- /kagawa-japan-pins -->\n',lambda m:SECTION_TOP,top,flags=re.S)
+else:
+    assert ANCHOR in top; top=top.replace(ANCHOR,SECTION_TOP+ANCHOR,1)
+open(top_path,'w',encoding='utf-8').write(top)
+print('index.html: Kagawa pins on the Japan map updated')

@@ -30,6 +30,11 @@ articles/<prefecture>/     One folder per prefecture (47), e.g. articles/kagawa/
 articles/kagawa/<slug>/    Kagawa sub-articles (44). index.html + images/
 ```
 
+- Japan map (`<japan-map>` in index.html): 9 regions; Okinawa is its own region (not part of Kyūshū). It lives only in the
+  bottom-left inset, which shows on the whole-Japan view and grows to fill the map when Okinawa is opened (main map hidden).
+  Inside Okinawa, island groups (`ISLES`: main island, Miyako, Yaeyama, Daitō; split by polygon longitude) can be clicked to zoom in,
+  like prefectures inside a region. The inset sits left of Kyūshū, in the visible strip outside the viewBox (`_placeInset`).
+  The Northern Territories (Kunashiri, Etorofu, Shikotan, Habomai) are removed from the Hokkaido shape in `_draw` (Ren's request).
 - Every page has a sticky `<!-- site-bar --> … <!-- /site-bar -->` block (brand link + back link). Keep it when editing.
 - Article styling lives inside each page under `.mj-article` (fonts: Playfair Display + PT Serif, red accent #B3261E). Keep new styles scoped so they don't leak into other pages.
 
@@ -39,6 +44,25 @@ The Kagawa page has a Leaflet map ("Кагава на карте", `#kagawa-map`
 Both are **generated** by `tools/kagawa_map_build.py` and live between marker comments:
 `<!-- kagawa-map -->…<!-- /kagawa-map -->` and `<!-- kagawa-articles -->…<!-- /kagawa-articles -->`.
 Do not hand-edit inside those markers; change the script and re-run it.
+
+The same script also writes the pins into the top page (`index.html`) between `<!-- kagawa-japan-pins -->…<!-- /kagawa-japan-pins -->`
+(`window.KAGAWA_PINS`). On the Japan map these article pins appear only once Kagawa is selected (`clusterOf:37`), colored by category.
+Kagawa categories map to the map filters in `KG_TYPE` in index.html
+(see→Виды, eat/shop→Гастрономия, art→История, craft→Активности, stay→Где остановиться).
+- Pin colors on the Japan map = filter type (`TYPE_COLOR` in index.html; the filter chips show the same color dots).
+  A pin takes the color of its first type, or of its first selected type while filters are on. The Leaflet map on the
+  Kagawa page keeps its own 6 category colors.
+- Whole-Japan view shows only a spaced-out sample of pins (`_thin(24)`, ~70 of ~450); a region or prefecture shows all.
+- Overlapping pins are nudged apart on screen by `_spread` (max ~1 dot radius from the true spot), so they never move to another place.
+
+- Popover: photo card like the prefecture card (first article's photo, title, lead, "Читать статью", other articles of the place below).
+  The script makes `articles/kagawa/<slug>/thumb.jpg` (600px, via macOS `sips`) from each article's first image and takes the lead from `p.lede`.
+- Pins marked `group` (the Kagawa ones) are handled specially by `<japan-map>` inside that prefecture: pins that overlap on screen
+  merge into a numbered marker (`_renderClusters`; clicking it zooms into those pins, `_focus`), and the pointer catches the nearest
+  pin within ~26px (`_magnet`). The 6 ordinary Kagawa pins take part too. Clicking empty map inside Kagawa does not zoom out.
+- Hover opens the card after a short delay; a click keeps it open until closed.
+- Several pins can share one article (e.g. the 7-temple pilgrimage has 9 places). Ren chose to keep one pin per place: the card says
+  "Место N из M в этой статье" (list order of `P`) and the other places of that article are highlighted (`highlightPins`).
 
 - Source articles: `~/Documents/miyabi_articles/kagawa_articles/NN_slug/` (`article_ru.html` + `images/`).
   The script copies each into `articles/kagawa/<slug>/`, injects the site-bar, and rebuilds the map and list.
