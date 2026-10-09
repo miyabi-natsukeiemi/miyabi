@@ -1532,9 +1532,10 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
         .on('mouseleave', function (e, d) {
           if (!d.cluster && !d.group) self._emit('pinout', { pin: d });
         });
-      enter.filter(function (d) { return d.cluster; }).append('circle').attr('class', 'jm-halo');
-      enter.append('circle').attr('class', 'jm-hit');
-      enter.append('circle').attr('class', 'jm-dot');
+      // sizes also as attributes: browsers without the CSS `r` property (older Safari) would draw nothing
+      enter.filter(function (d) { return d.cluster; }).append('circle').attr('class', 'jm-halo').attr('r', 17);
+      enter.append('circle').attr('class', 'jm-hit').attr('r', function (d) { return d.cluster ? 28 : d.cls ? 12 : 20; });
+      enter.append('circle').attr('class', 'jm-dot').attr('r', function (d) { return d.cluster ? 12 : d.cls ? 7 : 6.5; });
       enter.append('text').attr('class', 'jm-label').attr('y', -12);
       var merged = enter.merge(sel);
       merged.each(function (d) {
@@ -1610,8 +1611,8 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       sel.exit().remove();
       var en = sel.enter().append('g').attr('class', 'jm-cl').style('cursor', 'pointer')
         .on('click', function (e, c) { e.stopPropagation(); self._focusOn(c.pins); });
-      en.append('circle').attr('class', 'jm-hit');
-      en.append('circle').attr('class', 'jm-dot');
+      en.append('circle').attr('class', 'jm-hit').attr('r', 16);
+      en.append('circle').attr('class', 'jm-dot').attr('r', 10);
       en.append('text').attr('class', 'jm-n').attr('dy', '.35em');
       en.merge(sel)
         .attr('transform', function (c) { return 'translate(' + c.xy[0] + ',' + c.xy[1] + ') scale(' + inv + ')'; })
