@@ -27,7 +27,8 @@ articles/<prefecture>/     One folder per prefecture (47), e.g. articles/kagawa/
   index.html               Prefecture guide (magazine style, class .mj-article)
   img/                     Photos for the guide
   thumb.jpg                Thumbnail used by the top-page map
-articles/kagawa/<slug>/    Kagawa sub-articles (44). index.html + images/
+articles/kagawa/<slug>/    Kagawa sub-articles (44). index.html + images/ + thumb.jpg
+articles/kochi/<slug>/     Kochi sub-articles (21), same layout
 ```
 
 - Japan map (`<japan-map>` in index.html): 9 regions; Okinawa is its own region (not part of Kyūshū). It lives only in the
@@ -36,55 +37,77 @@ articles/kagawa/<slug>/    Kagawa sub-articles (44). index.html + images/
   like prefectures inside a region. The inset sits left of Kyūshū, in the visible strip outside the viewBox (`_placeInset`).
   The Northern Territories (Kunashiri, Etorofu, Shikotan, Habomai) are removed from the Hokkaido shape in `_draw` (Ren's request).
 - Every page has a sticky `<!-- site-bar --> … <!-- /site-bar -->` block (brand link + back link). Keep it when editing.
-  Its `<style>` also carries a rule that centers the hero photo (`.mj-hero` has an inline `margin:0` in the article HTML).
-  For Kagawa sub-articles the block comes from `BAR` in `tools/kagawa_map_build.py`.
+  Its `<style>` also carries a rule that centers the hero photo (`.mj-hero` has an inline `margin:0` in the article HTML)
+  and, in sub-articles, the `p.credits` style.
+  For generated sub-articles (Kagawa, Kochi) the block comes from `BAR` in `tools/pref_map_build.py`.
 - Article styling lives inside each page under `.mj-article` (fonts: Playfair Display + PT Serif, red accent #B3261E). Keep new styles scoped so they don't leak into other pages.
 
-## Kagawa map (articles/kagawa/index.html)
+## Prefecture article maps (Kagawa, Kochi)
 
-The Kagawa page has a Leaflet map ("Кагава на карте", `#kagawa-map`) with 50 pins and a themed list of all Kagawa articles (`#kagawa-articles`).
-Both are **generated** by `tools/kagawa_map_build.py` and live between marker comments:
-`<!-- kagawa-map -->…<!-- /kagawa-map -->` and `<!-- kagawa-articles -->…<!-- /kagawa-articles -->`.
-Do not hand-edit inside those markers; change the script and re-run it.
+Prefectures with their own sub-articles (now Kagawa and Kochi) get the same three things, all **generated** by
+`tools/pref_map_build.py <pref>` from a config in `tools/prefs/<pref>.py`:
 
-The same script also writes the pins into the top page (`index.html`) between `<!-- kagawa-japan-pins -->…<!-- /kagawa-japan-pins -->`
-(`window.KAGAWA_PINS`). On the Japan map these article pins appear only once Kagawa is selected (`clusterOf:37`), colored by category.
-Kagawa categories map to the map filters in `KG_TYPE` in index.html
-(see→Виды, eat/shop→Гастрономия, art→История, craft→Активности, stay→Где остановиться).
-- Pin colors on the Japan map = filter type (`TYPE_COLOR` in index.html; the filter chips show the same color dots).
-  A pin takes the color of its first type, or of its first selected type while filters are on. The Leaflet map on the
-  Kagawa page keeps its own 6 category colors.
-- Whole-Japan view shows only a spaced-out sample of pins (`_thin(24)`, ~70 of ~450); a region or prefecture shows all.
+1. Sub-articles: `~/Documents/miyabi_articles/<pref>_articles/NN_slug/` (`article_ru.html` + `images/`) are copied to
+   `articles/<pref>/<slug>/` (slug = folder name without `NN_`), with the site-bar injected (`BAR`) and a `thumb.jpg`.
+2. On the prefecture guide `articles/<pref>/index.html`: a Leaflet map ("Кагава на карте", "Коти на карте"; `#<pref>-map`)
+   and a themed list of all articles (`#<pref>-articles`), between `<!-- <pref>-map -->…` and `<!-- <pref>-articles -->…`.
+3. On the top page `index.html`: the same pins between `<!-- <pref>-japan-pins -->…` (`window.KAGAWA_PINS`, `window.KOCHI_PINS`).
+
+Do not hand-edit inside those markers; change the config or script and re-run it. Run from the repo root:
+`python3 tools/pref_map_build.py kagawa` (or `kochi`; no argument = all). It is idempotent.
+
+Config per prefecture (`tools/prefs/<pref>.py`): source folder, skipped folders, Russian labels (map title, intro, list title,
+back link), Leaflet start view, `TOP_VAR`, `pins(A)` returning `[name, area, category, lat, lng, approx, [article slugs]]`,
+and `GROUPS` (themes of the article list; must cover every article).
+- Kagawa: pins are written out in the config. For 19 and 25 there are two folders each; the site uses `19_ohloy_brewing` and `25_lemon_hotel` (underscores) and skips the hyphen ones (Ren's choice). These two use an older template without `.mj-article`.
+  Two different islands are both "Тэсима": 豊島 (near Shodoshima) and 手島 (Shiwaku). Area labels keep the kanji.
+- Kochi: pins come from `pins_batch1..4.json` in the source folder (`name_ja` and `source` are not shown). `MERGE` joins one place
+  written up in several articles into one pin (hotel nansui, Кагэцу, Ёкогура mountain and museum). Different places that share
+  placeholder coordinates are spread ~150 m around the point so each can be clicked on the Leaflet map.
+- Categories: see / stay / eat / shop / art / craft. `approx=1` draws a dashed circle "Точка примерная". Ren accepted approximate positions.
+- Map tiles: OpenStreetMap standard tiles (CARTO tiles need an API key).
+- Adding a prefecture: write `tools/prefs/<pref>.py`, add `[window.<PREF>_PINS, <code>, '<prefix>']` to `PREF_SETS` in index.html.
+
+### On the top-page Japan map
+- Article pins appear only once their prefecture is open (`clusterOf` = prefecture code: Kagawa 37, Kochi 39).
+- Categories map to the map filters in `KG_TYPE` in index.html
+  (see→Виды, eat/shop→Гастрономия, art→История, craft→Активности, stay→Где остановиться).
+- Pin colors = filter type (`TYPE_COLOR`; the filter chips show the same dots). A pin takes the color of its first type, or of its
+  first selected type while filters are on. The Leaflet maps on the prefecture pages keep their own 6 category colors.
+- Whole-Japan view shows only a spaced-out sample of pins (`_thin(24)`); a region or prefecture shows all.
 - Overlapping pins are nudged apart on screen by `_spread` (max ~1 dot radius from the true spot), so they never move to another place.
-
 - Popover: photo card like the prefecture card (first article's photo, title, lead, "Читать статью", other articles of the place below).
-  The script makes `articles/kagawa/<slug>/thumb.jpg` (600px, via macOS `sips`) from each article's first image and takes the lead from `p.lede`.
-- Pins marked `group` (the Kagawa ones) are handled specially by `<japan-map>` inside that prefecture: pins that overlap on screen
-  merge into a numbered marker (`_renderClusters`; clicking it zooms into those pins, `_focus`), and the pointer catches the nearest
-  pin within ~26px (`_magnet`). The 6 ordinary Kagawa pins take part too. Clicking empty map inside Kagawa does not zoom out.
+  `thumb.jpg` (600px, macOS `sips`) comes from the article's first image, the lead from `p.lede`.
+- In a prefecture with article pins (`group`), `<japan-map>` zooms closer, uses a light fill, merges pins that overlap on screen into
+  a numbered marker (`_renderClusters`; click zooms into them, `_focus`), and the pointer catches the nearest pin within ~26px
+  (`_magnet`). Ordinary pins of that prefecture take part too. Clicking empty map there does not zoom out.
 - Hover opens the card after a short delay; a click keeps it open until closed.
-- Several pins can share one article (e.g. the 7-temple pilgrimage has 9 places). Ren chose to keep one pin per place: the card says
-  "Место N из M в этой статье" (list order of `P`) and the other places of that article are highlighted (`highlightPins`).
-
-- Source articles: `~/Documents/miyabi_articles/kagawa_articles/NN_slug/` (`article_ru.html` + `images/`).
-  The script copies each into `articles/kagawa/<slug>/`, injects the site-bar, and rebuilds the map and list.
-  Folders `19_ohloy-brewing` and `25_lemon-hotel` are old duplicates and are skipped on purpose.
-- Pins: list `P` in the script — Russian name, area label, category, lat, lng, approx flag, article slugs.
-  Categories: see / stay / eat / shop / art / craft. `approx=1` draws a dashed circle labelled "Точка примерная" (district- or island-level position). Ren accepted approximate positions; no need to research exact ones.
-- Two different islands are both "Тэсима" in Russian: 豊島 (near Shodoshima) and 手島 (Shiwaku islands). Area labels must keep the kanji to tell them apart.
-- Map tiles: OpenStreetMap standard tiles (CARTO tiles need an API key and showed "API KEY REQUIRED").
-- Run: `python3 tools/kagawa_map_build.py` from the repo root. It is idempotent.
+- Several pins can share one article (e.g. Kagawa's 7-temple pilgrimage has 9 places). One pin per place: the card says
+  "Место N из M в этой статье" (pin order) and the other places of that article are highlighted (`highlightPins`).
+- Kochi's older top-map pins: castle and Sunday market were removed (article pins replace them); tataki and Shimanto link to
+  articles 03 and 02 via `url`; Ashizuri has no article.
 
 ## Content rules
 
 - Do not change article text unless Ren asks. Article content was checked by Ren.
 - Japanese text Ren asks for: don't use 「・」 as a list connector; use 「、」 or 「や」 (proper nouns are fine).
+- Proper nouns (revision of 2026-10-09, all guides and sub-articles; full rules: `_pipeline/rules_common.md` 4.7 on Ren's Mac):
+  places and dishes, festivals, the article's hero and world-famous names stay; passing town names and minor people are replaced by
+  a description or role; historical figures stay with years and a 1–3 sentence explanation. Name order is "имя фамилия".
+- Photo credits are not in captions: one closing line `<p class="credits">Фото: …</p>` (Kagawa and Kochi sub-articles only;
+  guides have none). Its style `p.credits` is in the site-bar `<style>` of the sub-articles (`BAR` in `tools/pref_map_build.py`).
+- Revised files carry "- редактура имён собственных (v1)" in the closing `<!-- АКТУАЛИЗИРОВАНО … -->` comment.
+  Pre-revision copies on Ren's Mac: `47_main_articles_v1/`, `kagawa_articles_v1/`, `kochi_articles_v1/`.
+- Prefecture guides come from `~/Documents/miyabi_articles/47_main_articles/<pref>_<id>.zip` (`index.html`; Hyogo is `hyogo.zip`).
+  A repo guide is that file plus the site-bar block (and a blank line) right after `<body …>`; Kagawa and Kochi also get the
+  generated blocks. To update: write the zip's `index.html` with the repo's site-bar inserted, then re-run the build script.
 - Several article HTML files end with editorial HTML comments (sourcing notes). They are invisible on screen but public in the page source. Ren has not decided yet whether to remove them.
 
 ## Source material on Ren's Mac
 
 - `~/Documents/miyabi_articles/47_main_articles/` – prefecture guides (source)
 - `~/Documents/miyabi_articles/kagawa_articles/` – Kagawa sub-articles (source for the build script)
+- `~/Documents/miyabi_articles/kochi_articles/` – Kochi sub-articles and `pins_batch*.json` (source for the build script)
 - `~/Documents/miyabi_articles/miyabi_site/` – older local copy of the site; this repo is now the source of truth
 - `~/Documents/miyabi_articles/_to_delete/` – junk to be deleted by Ren
 

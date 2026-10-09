@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ёкогура: гора доктора Макино, бетон Андо и синева Ниёдо</title>
+<meta name="description" content="Гора Ёкогура в посёлке Оти: растения, названные Макино, музей в лесу от Тадао Андо, изумрудная Ниёдо и бумага тоса-васи.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+body{margin:0;background:#fff}
+.mj-article{--ink:#141414;--muted:#5C5C5C;--line:#DADADA;--red:#B3261E;--paper:#FFFFFF;
+  background:var(--paper);color:var(--ink);font-family:"PT Serif",Georgia,"Times New Roman",serif;font-size:19px;line-height:1.7;padding-block:0 96px}
+.mj-article *{box-sizing:border-box}
+.mj-article img{display:block;max-width:100%;height:auto}
+.mj-article a{color:var(--red);text-underline-offset:3px}
+.mj-article a:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.mj-head{max-width:980px;margin:0 auto;padding:64px 16px 40px;text-align:center}
+.mj-eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 18px}
+.mj-article h1{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:clamp(34px,6vw,64px);line-height:1.08;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.mj-hero{max-width:1280px;margin:0 auto}
+.mj-article .mj-hero img{width:100%;aspect-ratio:16/8;object-fit:cover}
+.mj-article .mj-hero figcaption{margin:0;padding:10px 16px 0;font-size:14px;font-style:italic;color:var(--muted)}
+.mj-body{max-width:712px;margin:0 auto;padding:56px 16px 0}
+.mj-article .lede{font-size:23px;line-height:1.55;margin:0 0 32px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.mj-article .lede::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:92px;line-height:.8;padding:8px 10px 0 0;color:var(--red)}
+.mj-article .kicker{margin:72px 0 0;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);text-align:center}
+.mj-article h2{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-style:italic;font-size:clamp(28px,4vw,40px);line-height:1.15;text-align:center;margin:12px 0 28px;text-wrap:balance}
+.mj-article h3{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:24px;line-height:1.3;margin:32px 0 8px}
+.mj-article p{margin:0 0 16px}
+.mj-article blockquote{margin:32px 0;padding:0 0 0 24px;border-left:3px solid var(--red);font-size:21px;font-style:italic;line-height:1.55}
+.mj-article blockquote p{margin:0 0 8px}
+.mj-article blockquote cite{display:block;font-size:15px;font-style:normal;color:var(--muted)}
+.mj-article figure{margin:36px -110px}
+.mj-article figure img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.mj-article figure.obj img{object-fit:contain;background:#fff;padding:24px;border:1px solid var(--line)}
+.mj-article figure.tall img{aspect-ratio:auto}
+.mj-article figcaption{font-size:14px;font-style:italic;color:var(--muted);margin:10px 110px 0;line-height:1.5}
+.mj-article .mj-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mj-article .mj-pair img{aspect-ratio:4/5}
+.mj-article .mj-pair figcaption{grid-column:1/-1}
+.mj-article .mj-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:36px -110px}
+.mj-article .mj-gallery figure{margin:0}
+.mj-article .mj-gallery img{aspect-ratio:1/1}
+.mj-article .mj-gallery figcaption{margin:6px 0 0;font-size:13px}
+@media (max-width:960px){.mj-article figure,.mj-article .mj-gallery{margin:28px 0}.mj-article figcaption{margin:10px 0 0}}
+@media (max-width:560px){.mj-article .mj-gallery{grid-template-columns:1fr 1fr}.mj-article .mj-pair{grid-template-columns:1fr}.mj-article .lede{font-size:20px}}
+.mj-article .info{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:12px 0;margin:32px 0;font-size:16px}
+.mj-article .info .info-title{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:20px;margin:0 0 8px}
+.mj-article .info dl{margin:0;display:grid;gap:4px}
+.mj-article .info dl div{display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px}
+.mj-article .info dt{font-weight:700}
+.mj-article .info dd{margin:0;overflow-wrap:anywhere}
+@media (max-width:480px){.mj-article .info dl div{grid-template-columns:1fr;gap:0}}
+.mj-article ul,.mj-article ol{margin:0 0 16px;padding-left:24px}
+.mj-article li{margin:6px 0}
+.mj-article li::marker{color:var(--red);font-weight:700}
+.mj-article .profile{background:#F6F4F1;padding:20px 24px;margin:32px 0;font-size:16px;line-height:1.6}
+.mj-article .profile b{font-family:"Playfair Display",Georgia,serif;font-size:19px;display:block;margin-bottom:4px}
+</style>
+</head>
+<body>
+<!-- site-bar -->
+<style>.mj-hero{margin-left:auto!important;margin-right:auto!important}  /* center the hero photo on wide screens */
+p.credits{font-size:14px;line-height:1.5;color:var(--muted,#5C5C5C);margin:48px 0 0}  /* closing "Фото: …" line: small and quiet */
+.site-bar{position:sticky;top:0;z-index:1000;background:rgba(252,252,250,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(22,24,26,.14);font-family:Inter,system-ui,sans-serif}
+.site-bar .in{max-width:1180px;margin:0 auto;padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.site-bar a{text-decoration:none;color:#16181A;font-size:14px}.site-bar .brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;font-weight:600}
+.site-bar .back{color:#1E3050}.site-bar .back:hover{color:#B3352D}</style>
+<div class="site-bar"><div class="in"><a class="brand" href="../../../index.html">Omamori Concierge</a><a class="back" href="../index.html#kochi-map">&larr; Коти на карте</a></div></div>
+<!-- /site-bar -->
+
+<article class="mj-article">
+
+  <header class="mj-head">
+    <p class="mj-eyebrow">Префектура Коти · посёлок Оти · горы и ремёсла</p>
+    <h1>Ёкогура: гора доктора Макино, бетон Андо и синева Ниёдо</h1>
+  </header>
+
+  <figure class="mj-hero" style="margin:0">
+    <img src="images/01.jpg" alt="Известняковый утёс над зелёным склоном горы" loading="eager">
+    <figcaption>Утёс «Бака-дамэси», «безрассудство»: известняковая стена высотой около 80 метров. Имя родилось из испытания удалью: дойти до самого края считалось глупостью. У подножия лежит «пещера Хэйкэ», где, по преданию, укрывался император Антоку (1178–1185).</figcaption>
+  </figure>
+
+  <div class="mj-body">
+
+    <p class="lede">Человек, назвавший себя «духом трав и деревьев», всю жизнь изучал растения. Его горой была Ёкогура в посёлке Оти: сюда стоит приехать за лесом, где по каждому склону расставлены имена, за музеем Тадао Андо и за самой чистой рекой Японии.</p>
+
+    <div class="profile">
+      <p><strong>Томитаро Макино</strong>, ботаник. Родился в 1862 году в посёлке Сагава префектуры Коти. Первый специалист страны по систематике растений. За 94 года жизни собрал около 400 000 гербарных листов, описал более 1500 видов и разновидностей. Много сил отдал подготовке молодых ботаников, лекциям и изданию определителей растений. Его жизнь легла в основу утренней саги NHK «Ранман».</p>
+    </div>
+
+    <p class="kicker">Гора-загадка</p>
+    <h2>Лес, где звучит романтика легенд</h2>
+
+    <p>Гора Ёкогура в средней западной части Коти, в посёлке Оти, была полем работы доктора Макино с детских лет: сюда он приходил снова и снова. Проводит по горе гид, выросшая в Оти и с детства собиравшая здесь растения: «Эта гора с детских лет была моей игровой площадкой, я обожала собирать растения». Гора невысокая, около 800 метров, но это единственная в Тоса гора сюгэндо, горного аскетического пути. Есть крутые скальные участки, а тем, кто хочет идти неспешно и разглядывать растения, подойдёт трёхчасовой маршрут.</p>
+
+    <p>«В этой горе много вековых дубов и буков», продолжает гид. По склонам стоят камни с вырезанными строками самого Макино. Его танка на склоне горы: «Лес за лесом, кедровые рощи без конца: гора Ёкогура, как в век богов».</p>
+
+    <figure>
+      <img src="images/02.jpg" alt="Гид в лесу среди высоких деревьев" loading="lazy">
+      <figcaption>Гид по Ёкогуре: для неё гора с детства «игровая площадка».</figcaption>
+    </figure>
+
+    <p>Здесь же живёт и история о принце-беглеце. Говорят, свита юного императора Антоку (1178–1185) добралась до этих мест и скрылась в горах. Антоку правил Японией в 1180–1185 годах под покровительством могущественного рода Тайра и погиб ребёнком в морской битве при Данноура в 1185 году, когда Тайра были разбиты родом Минамото. Гора, которую любил доктор, хранит следы и этой глубокой старины.</p>
+
+    <figure>
+      <img src="images/03.jpg" alt="Каменная лестница и тории святилища среди густого леса" loading="lazy">
+      <figcaption>Тории святилища Ёкокурагу, где почитают императора Антоку: за воротами лестница уходит к главному павильону; вокруг свежий зеленый полумрак, рядом можно поискать и молодой ёкогура-ноки.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="images/04.jpg" alt="Горный склон со скалами и зеленью" loading="lazy">
+      <figcaption>След императора Антоку: по преданию, род Тайра, проигравший битву при Данноура, тайно укрылся в этих горах. Ёкокурагу почитает его своим божеством; здесь же мавзолейный референт императорского двора и места, связанные с родом Тайра.</figcaption>
+    </figure>
+
+    <p class="kicker">Музей в лесу</p>
+    <h2>Бетон Андо, который однажды скроют кроны</h2>
+
+    <p>Тем, кто хочет узнать гору глубже, дорога ведёт к подножию: там среди леса стоит музей природы «Ёкогураяма». Здание из бетона спроектировал Тадао Андо: оно современное, но красиво сливается с окружающим лесом. Длинный пологий подъём, затем коридор: сам подход поставлен как драматургия.</p>
+
+    <p>Для музея это редкость, зато очень «андовское» решение: пространство, залитое естественным светом. «Угол, под которым свет падает из больших окон и щелей, меняет увиденное в зависимости от времени дня», говорит куратор музея.</p>
+
+    <figure>
+      <img src="images/05.jpg" alt="Длинный пандус музея среди деревьев" loading="lazy">
+      <figcaption>Подход к музею: длинная пологая дорожка среди деревьев; стоя внутри здания, чувствуешь, как растворяешься в природе.</figcaption>
+    </figure>
+
+    <p>Первый зал показывает устройство местной земли: макет посёлка Оти с горой Ёкогура, где сразу видно взаимное расположение и главные точки горы. Дальше точная диорама реликтового леса акагаси на гребне с его зверями: и сюда мягко падает верхний свет, перенося внутрь горы. После земной поверхности маршрут уводит вглубь: под Ёкогурой нашли один из древнейших в стране слоёв, возрастом около 400 миллионов лет, и здесь собраны окаменелости и породы, собранные вокруг горы. Популярный у детей уголок позволяет трогать природу руками. Отдельная выставка рассказывает об истории этих мест, начавшейся с того, что в X веке Цунэмото Бэфу освоил здешние земли, а старое имя горы стало центром сюгэндо. Наконец, есть и раздел о самом докторе Макино и Ёкогуре: подлинные гербарные листы, фотографии, драгоценные материалы.</p>
+
+    <figure>
+      <img src="images/06.jpg" alt="Просторный выставочный зал на двух уровнях" loading="lazy">
+      <figcaption>Выставочные залы на двух этажах: среди экспонатов подлинный череп трицератопса.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="images/07.jpg" alt="Вестибюль третьего этажа с видом через стекло" loading="lazy">
+      <figcaption>С обзорного вестибюля третьего этажа виден озеленённый верхний ярус и городок Оти.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="images/08.jpg" alt="Куратор музея в рабочем помещении" loading="lazy">
+      <figcaption>Куратор музея и специалист по тануки: «Камеры вокруг музея тоже часто ловят тануки».</figcaption>
+    </figure>
+
+    <figure>
+      <img src="images/09.jpg" alt="Ростовая фигура ботаника в музейном зале" loading="lazy">
+      <figcaption>Ростовая фигура доктора Макино: популярное место для снимков, голов у фигуры три варианта.</figcaption>
+    </figure>
+
+    <p>Если вы едете на гору ради треккинга, начинайте с музея. Чем гора Ёкогура отличается от других и что в ней особенного, лучше узнать заранее: тогда растения и следы старины на маршруте заговорят с вами сами.</p>
+
+    <p>Идея, с которой музей открылся в 1997 году, звучит так: «музей, который однажды покроется лесом». Вокруг здания сажают деревья и озеленяют крышу, и замысел понемногу сбывается. Чем ближе узнаёшь этот музей, живущий в согласии с горой, тем он интереснее.</p>
+
+    <section class="info">
+      <p class="info-title">Музей природы «Ёкогураяма» посёлка Оти</p>
+      <dl>
+        <div><dt>Адрес</dt><dd>префектура Коти, уезд Такаока, посёлок Оти, Оти-хэй, 737-12</dd></div>
+        <div><dt>Телефон</dt><dd>+81 889-26-1060</dd></div>
+        <div><dt>Часы работы</dt><dd>9:00–16:30 (вход до 16:00)</dd></div>
+        <div><dt>Выходные</dt><dd>вторник и среда (если это праздник, закрыт следующий рабочий день); с 29 декабря по 2 января</dd></div>
+        <div><dt>Сайт</dt><dd><a href="https://www.yokogurayama-museum.jp/" target="_blank" rel="noopener">yokogurayama-museum.jp</a></dd></div>
+      </dl>
+    </section>
+
+    <p class="kicker">Растения доктора</p>
+    <h2>Тысяча триста видов: треть флоры Коти</h2>
+
+    <p>«В мире нет травы, которую зовут сорняком», любил повторять доктор Макино. На Ёкогуре растёт около 1300 видов растений, больше трети всей флоры, известной в Коти. Настоящая сокровищница растений.</p>
+
+    <p>Гид то и дело останавливается и показывает: «Смотрите, вот короги-ран, который доктор назвал как новый вид. А здесь комияма-сумире, красиво же. Это тоже его имя». Сама она любит находить мелкие цветы и улыбается от уха до уха. Эти цветы прячутся так, что без подсказки не заметишь, и при этом полны тихой жизненной силы. В саге «Ранман» о взгляде на растения сказано: «никто их не замечает, но они живут». На горных тропах глаза сами тянутся вперёд и вверх, а здесь обязательно опустите взгляд на обочину: попробуйте поприветствовать растение, как это делал доктор.</p>
+
+    <figure>
+      <img src="images/10.jpg" alt="Цветущая ветка дерева на фоне зелени" loading="lazy">
+      <figcaption>Цветок ёкогура-ноки.</figcaption>
+    </figure>
+
+    <p>На самой вершине стоит главный павильон святилища Ёкокурагу, где почитают императора Антоку. Рядом с ним растёт и ёкогура-ноки, дерево, которое доктор нашёл и назвал сам, причём именно с этого дерева снят эталонный гербарный образец. Встреча с такой редкостью делает вершину ещё дороже.</p>
+
+    <div class="mj-gallery">
+      <figure><img src="images/11.jpg" alt="Мелкий фиолетовый цветок крупным планом" loading="lazy"><figcaption>Дзёро-хототогису: собран доктором в 1887 году, имя получил в честь придворной дамы. Один из любимых цветов учёного, сегодня вид на грани исчезновения.</figcaption></figure>
+      <figure><img src="images/12.jpg" alt="Крошечная орхидея на тёмном фоне" loading="lazy"><figcaption>Короги-ран: маленькая орхидея из подлеска, лепестки напоминают крыло сверчка, отсюда имя доктора. Цветёт в начале сентября, но не каждый год.</figcaption></figure>
+      <figure><img src="images/13.jpg" alt="Жёлтые мелкие цветки на ветке" loading="lazy"><figcaption>Ёкогура-ноки: листопадное дерево семейства крушиновых; найдено и названо доктором у святилища, жёлтые цветки в начале июня.</figcaption></figure>
+      <figure><img src="images/14.jpg" alt="Белая фиалка среди лесной подстилки" loading="lazy"><figcaption>Комияма-сумире: многолетняя фиалка вдоль тропы, всего 2–3 сантиметра высотой, белые цветки смотрят вбок в конце мая.</figcaption></figure>
+      <figure><img src="images/15.jpg" alt="Тонкий стебель с белым цветком" loading="lazy"><figcaption>Хина-сядзин: новый вид, названный доктором в 1892 году; тонкий стебель и белые цветки в октябре.</figcaption></figure>
+    </div>
+
+    <div class="mj-gallery">
+      <figure><img src="images/16.jpg" alt="Сине-фиолетовый цветок горечавки" loading="lazy"><figcaption>Асама-риндо: горечавка мельче обычной, с волнистым краем листа; сине-фиолетовые цветки с зелёным крапом расцветают в конце октября.</figcaption></figure>
+      <figure><img src="images/17.jpg" alt="Зелёное растение с изогнутыми плодами" loading="lazy"><figcaption>Ёкогура-цукубанэ: образец, собранный местным собирателем растений из Оти, доктор представил научному миру как новый вид; имя от названия волана для игры в перья. Цветёт в начале мая.</figcaption></figure>
+      <figure><img src="images/18.jpg" alt="Растение с цветками прямо на листьях" loading="lazy"><figcaption>Ханаикада: цветки растут прямо посреди листа, как гребцы на плоту, отсюда имя; плоды тоже сидят на листьях, редкая повадка.</figcaption></figure>
+      <figure><img src="images/19.jpg" alt="Светлые цветки на раздвоенных листьях" loading="lazy"><figcaption>Гинбай-со: лист раздвоен на конце; белые цветки напоминают сливу, отсюда имя «серебряная слива». Цветёт в июне и июле.</figcaption></figure>
+    </div>
+
+    <p class="kicker">Гора и река</p>
+    <h2>Синева Ниёдо и бумага тоса-васи</h2>
+
+    <p>Вторая природа этих мест, река Ниёдо. На национальном рейтинге чистоты больших рек её снова и снова ставят на первое место, а до нельзя прозрачный голубой цвет так и прозвали: «синева Ниёдо». У базы кемпфилда можно пожить с палаткой или сплавиться по реке на рафте: река становится ближе.</p>
+
+    <figure>
+      <img src="images/20.jpg" alt="Рафт на изумрудной реке среди горных берегов" loading="lazy">
+      <figcaption>Кобальтовая «синева Ниёдо» захватывает дух: рафтинг от кемпфилда «Snow Peak Оти» подходит и новичкам. Понизкие мосты, уходящие в пик сброса воды из плотины под воду,: пейзаж, символизирующий Ниёдо.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="images/21.jpg" alt="Низкий бетонный мост без перил над изумрудной рекой" loading="lazy">
+      <figcaption>Низкий мост Асоо над изумрудной рекой: одна из съёмочных площадок аниме-фильма «Красавица и дракон».</figcaption>
+    </figure>
+
+    <p>Богатое дерево котийских гор и чистая вода дали жизнь и другой культуре: бумаге тоса-васи. Это один из трёх великих бумажных районов Японии, бумагу делают прежде всего в посёлке Ино, на берегах Ниёдо. Самое старое упоминание стоит в своде законов «Энгисики», законченном в 927 году: Тоса названа среди поставщиков бумаги. К концу эпохи Эдо на складах бумаги в Осаке «тосамоно», тосская бумага, занимала уже около четырёх десятых товара.</p>
+
+    <p>«Кодзо даёт длинное волокно, из него бумага льётся легко и выходит прочной, её трудно порвать. Гампи и мицумата волокно дают тонкое и короткое, с ними трудно, зато бумага выходит гладкой и изящной», рассказывает мастер-бумажник, которая делает отлив в бумажном музее посёлка Ино. За её спиной 67 лет ремесла, и заказы к ней не заканчиваются.</p>
+
+    <figure>
+      <img src="images/22.jpg" alt="Мастер отливает лист бумаги на раме-сите" loading="lazy">
+      <figcaption>«Сто листов отолью, и все ста будут одинаковой толщины: в этом мастерство», говорит мастер-бумажник; от отлива до сушки делает всё сама, в многолюдные дни выходит по 40–50 листов.</figcaption>
+    </figure>
+
+    <p>Отдельный сюжет: тоса-васи в современном дизайне, от украшений до предметов интерьера. Похоже, у старой бумаги большое будущее.</p>
+
+    <figure>
+      <img src="images/23.jpg" alt="Серьги из бумаги тоса-васи на витрине" loading="lazy">
+      <figcaption>Лавка «WASHI ORIORI» пары художников: серьги и клипсы из бумаги тоса-васи с вкраплениями, по 3300 иен.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="images/24.jpg" alt="Бумажные абажуры для ламп" loading="lazy">
+      <figcaption>Абажуры для ламп из тоса-васи в виде кошек и собак (цены по запросу).</figcaption>
+    </figure>
+
+    <section class="info">
+      <p class="info-title">Snow Peak Оти кемпфилд на реке Ниёдо</p>
+      <dl>
+        <div><dt>Адрес</dt><dd>префектура Коти, уезд Такаока, посёлок Оти, Катаока, 4</dd></div>
+        <div><dt>Телефон</dt><dd>+81 889-27-2622</dd></div>
+      </dl>
+    </section>
+
+    <section class="info">
+      <p class="info-title">WASHI ORIORI</p>
+      <dl>
+        <div><dt>Адрес</dt><dd>префектура Коти, уезд Такаока, посёлок Оти, Оти-ко, 2060</dd></div>
+        <div><dt>Телефон</dt><dd>+81 90-5422-3155</dd></div>
+      </dl>
+    </section>
+
+    <p class="kicker">Вокруг горы</p>
+    <h2>Где остановиться и что съесть</h2>
+
+    <p>Вокруг Ёкогуры много мест с характером; приятно неспешно объехать их все, чувствуя местный воздух.</p>
+
+    <p>В кемпфилде «Snow Peak Оти» на чистой Ниёдо стоят десять мобильных домиков «JYUBAKO»; при нём фирменный магазин снаряжения и одежды, и жизнь на свежем воздухе выходит вполне уютной. Ремесленная история продолжается в лавке «WASHI ORIORI», открытой в 2021 году: интерьер старинной аптеки «Окава-якухо» из эпохи Сёва сохранён как был, а на полках работы пары художников: её корни в Оти, его дорога из Токио, и несколько лет назад они переехали сюда вдвоём. Популярны и мастер-классы: и бумажные украшения, и аксессуары. Историю и весь процесс бумаги можно узнать в бумажном музее посёлка Ино: редкое место, где ремесло земли можно почувствовать руками; здесь же продаётся бумага от мастеров, и в первое воскресенье месяца проходит платный мастер-класс отлива.</p>
+
+    <figure>
+      <img src="images/25.jpg" alt="Мобильный домик у самой реки среди зелени" loading="lazy">
+      <figcaption>Жилые домики JYUBAKO, все десять у самой воды: дом на двоих за 18 040 иен с налогом.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="images/26.jpg" alt="Интерьер лавки со старыми аптечными шкафами" loading="lazy">
+      <figcaption>«WASHI ORIORI»: аптечные шкафы старой аптеки и деревянные витрины сохранены; пара художников переехала сюда несколько лет назад.</figcaption>
+    </figure>
+
+    <figure>
+      <img src="images/27.jpg" alt="Экспозиция бумажного музея с сырьём и инструментами" loading="lazy">
+      <figcaption>Бумажный музей посёлка Ино: сырьё и весь путь бумаги на богатых материалах; в первое воскресенье месяца мастер-класс отлива (платно).</figcaption>
+    </figure>
+
+    <p>С едой здесь тоже порядок: земли хватает и на овощи, и на фрукты. «Дзию-кэн», главный филиал в Оти, стоит чуть в стороне от большой дороги, но посетители идут не переводя дыхание. Их «мисо-кацу-рамэн» кладёт на мисо-рамэн толстую котлету: блюдо мощное, а вкус при этом мягкий.</p>
+
+    <figure>
+      <img src="images/28.jpg" alt="Миска рамэн с котлетой тонкацу" loading="lazy">
+      <figcaption>«Мисо-кацу-рамэн» в «Дзию-кэн», 990 иен: внутри и щедрая порция домашней тя-сю</figcaption>
+    </figure>
+
+    <p>В посёлке Сагава, на родине доктора Макино, работает кафе при старом доме Хамагути: дом, где с середины эпохи Эдо варили сакэ, превращён в кафе с лавкой местных сувениров. Летний фаворит: какигори: в воздушной стружке льда прячется мягкое мороженое из местного молока «дзити».</p>
+
+    <figure>
+      <img src="images/29.jpg" alt="Клубничный какигори на подносе" loading="lazy">
+      <figcaption>Клубничный какигори в кафе «Сакава» старого дома Хамагути, 850 иен (со сгущёнкой из молока «дзити» плюс 50 иен); подают примерно до конца сентября</figcaption>
+    </figure>
+
+    <p>«Хатаяма-гадэн» в посёлке Ино гордится пиццей с деревенскими овощами, прежде всего с плодовыми томатами: толстое домашнее тесто держит сочную начинку, и сытность отменная.</p>
+
+    <figure>
+      <img src="images/30.jpg" alt="Пицца с томатами и овощами" loading="lazy">
+      <figcaption>Пицца с овощами за 1750 иен: плодовые томаты и цукини; сладость овощей впечатляет</figcaption>
+    </figure>
+
+    <p>«Томотото» в деревне Хидака: кафе с гостевыми комнатами , целиком посвятившее себя томату. Здесь и карри, и паста, и напитки с томатами в главной роли: вкус, какой не встретишь в другом месте. Район щедрый на впечатления: успейте насладиться им по полной.</p>
+
+    <figure>
+      <img src="images/31.jpg" alt="Тарелка томатного карри" loading="lazy">
+      <figcaption>«Хай-тэнсён-кари» в «Томотото», 1200 иен: в одной порции три томата; острота резкая, вкус глубокий</figcaption>
+    </figure>
+
+    <section class="info">
+      <p class="info-title">Бумажный музей посёлка Ино</p>
+      <dl>
+        <div><dt>Адрес</dt><dd>префектура Коти, уезд Агава, посёлок Ино, Сайваймати, 110-1</dd></div>
+        <div><dt>Телефон</dt><dd>+81 88-893-0886</dd></div>
+      </dl>
+    </section>
+
+    <section class="info">
+      <p class="info-title">Дзию-кэн, главный филиал в Оти</p>
+      <dl>
+        <div><dt>Адрес</dt><dd>префектура Коти, уезд Такаока, посёлок Оти, Токорояма-Икагаятё, 2882</dd></div>
+        <div><dt>Телефон</dt><dd>+81 889-26-0198</dd></div>
+      </dl>
+    </section>
+
+    <section class="info">
+      <p class="info-title">Старый дом Хамагути</p>
+      <dl>
+        <div><dt>Адрес</dt><dd>префектура Коти, уезд Такаока, посёлок Сагава, Ко, 1472-1</dd></div>
+        <div><dt>Телефон</dt><dd>+81 889-20-9500 (туристическая ассоциация Сагавы)</dd></div>
+      </dl>
+    </section>
+
+    <section class="info">
+      <p class="info-title">Хатаяма-гадэн</p>
+      <dl>
+        <div><dt>Адрес</dt><dd>префектура Коти, уезд Агава, посёлок Ино, Хакава, 98</dd></div>
+        <div><dt>Телефон</dt><dd>+81 88-893-4848</dd></div>
+      </dl>
+    </section>
+
+    <section class="info">
+      <p class="info-title">Томотото</p>
+      <dl>
+        <div><dt>Адрес</dt><dd>префектура Коти, уезд Такаока, деревня Хидака, Симобун, 1889-1</dd></div>
+        <div><dt>Телефон</dt><dd>+81 889-39-2000</dd></div>
+      </dl>
+    </section>
+
+  <p class="credits">Фото: Садахо Найто.</p>
+  </div>
+</article>
+<!-- АКТУАЛИЗИРОВАНО
+- было: «開館時間｜9:00〜17:00（入館は16:30まで） 休館日｜月曜（祝日の場合は翌日休）» / стало: «часы 9:00–16:30 (вход до 16:00); выходные: вторник и среда (если праздник, закрыт следующий рабочий день); с 29 декабря по 2 января закрыт; расписание действует с 1 апреля 2026 года» / источник: https://www.yokogurayama-museum.jp/ (официальный сайт музея)
+- НЕ УДАЛОСЬ ПРОВЕРИТЬ: цену входа (в оригинальной карточке нет; данные порталов расходятся), планируемую остановку работы на время ремонта кондиционирования, упомянутую на порталах (даты не извлечены); карточки адресов приведены без изменений
+- редактура имён собственных (v1)
+- справка об императоре Антоку: https://ru.wikipedia.org/wiki/Антоку
+- справка о роде Тайра: https://ru.wikipedia.org/wiki/Тайра_(род)
+- справка о битве при Данноура: https://ru.wikipedia.org/wiki/Битва_при_Данноура
+- справка о Томитаро Макино: https://ru.wikipedia.org/wiki/Макино_Томитаро
+- справка о Цунэмото Бэфу: https://ja.wikipedia.org/wiki/横倉山_(高知県)
+-->
+</body>
+</html>
