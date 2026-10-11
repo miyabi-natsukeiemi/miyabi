@@ -28,7 +28,7 @@ articles/<prefecture>/     One folder per prefecture (47), e.g. articles/kagawa/
   img/                     Photos for the guide
   thumb.jpg                Thumbnail used by the top-page map
 articles/kagawa/<slug>/    Kagawa sub-articles (44). index.html + images/ + thumb.jpg
-articles/kochi/<slug>/     Kochi sub-articles (21), same layout
+articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12), tokushima (9), hiroshima (22)
 ```
 
 - Japan map (`<japan-map>` in index.html): 9 regions; Okinawa is its own region (not part of Kyūshū). It lives only in the
@@ -42,34 +42,42 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout
   For generated sub-articles (Kagawa, Kochi) the block comes from `BAR` in `tools/pref_map_build.py`.
 - Article styling lives inside each page under `.mj-article` (fonts: Playfair Display + PT Serif, red accent #B3261E). Keep new styles scoped so they don't leak into other pages.
 
-## Prefecture article maps (Kagawa, Kochi)
+## Prefecture article maps (Kagawa, Kochi, Ehime, Tokushima, Hiroshima)
 
-Prefectures with their own sub-articles (now Kagawa and Kochi) get the same three things, all **generated** by
+Prefectures with their own sub-articles get the same three things, all **generated** by
 `tools/pref_map_build.py <pref>` from a config in `tools/prefs/<pref>.py`:
 
 1. Sub-articles: `~/Documents/miyabi_articles/<pref>_articles/NN_slug/` (`article_ru.html` + `images/`) are copied to
    `articles/<pref>/<slug>/` (slug = folder name without `NN_`), with the site-bar injected (`BAR`) and a `thumb.jpg`.
 2. On the prefecture guide `articles/<pref>/index.html`: a Leaflet map ("Кагава на карте", "Коти на карте"; `#<pref>-map`)
    and a themed list of all articles (`#<pref>-articles`), between `<!-- <pref>-map -->…` and `<!-- <pref>-articles -->…`.
-3. On the top page `index.html`: the same pins between `<!-- <pref>-japan-pins -->…` (`window.KAGAWA_PINS`, `window.KOCHI_PINS`).
+3. On the top page `index.html`: the same pins between `<!-- <pref>-japan-pins -->…` (`window.KAGAWA_PINS`, `window.KOCHI_PINS`, …).
+   Only `article_ru.html` and `images/` are copied; other files in the source folders (`article.md` etc.) stay out.
 
 Do not hand-edit inside those markers; change the config or script and re-run it. Run from the repo root:
-`python3 tools/pref_map_build.py kagawa` (or `kochi`; no argument = all). It is idempotent.
+`python3 tools/pref_map_build.py kagawa` (or another prefecture; no argument = all). It is idempotent.
 
 Config per prefecture (`tools/prefs/<pref>.py`): source folder, skipped folders, Russian labels (map title, intro, list title,
 back link), Leaflet start view, `TOP_VAR`, `pins(A)` returning `[name, area, category, lat, lng, approx, [article slugs]]`,
 and `GROUPS` (themes of the article list; must cover every article).
 - Kagawa: pins are written out in the config. For 19 and 25 there are two folders each; the site uses `19_ohloy_brewing` and `25_lemon_hotel` (underscores) and skips the hyphen ones (Ren's choice). These two use an older template without `.mj-article`.
   Two different islands are both "Тэсима": 豊島 (near Shodoshima) and 手島 (Shiwaku). Area labels keep the kanji.
-- Kochi: pins come from `pins_batch1..4.json` in the source folder (`name_ja` and `source` are not shown). `MERGE` joins one place
-  written up in several articles into one pin (hotel nansui, Кагэцу, Ёкогура mountain and museum). Different places that share
-  placeholder coordinates are spread ~150 m around the point so each can be clicked on the Leaflet map.
+- Kochi, Ehime, Tokushima, Hiroshima: pins come from `pins_batch*.json` in the source folder via `json_pins` in the script
+  (`name_ja` and `source` are not shown). `MERGE` joins one place written up in several articles into one pin (first article =
+  card; an optional 4th item picks whose coordinates to use); `EXTRA` adds articles to a pin. Different places that share
+  coordinates are spread ~150 m around the point so each can be clicked on the Leaflet map.
+  - Kochi (39): 21 articles, 73 pins. MERGE: hotel nansui (21+04), Кагэцу (06+10), Ёкогура mountain and museum (12+14).
+  - Ehime (38): 12 articles (no 12: the Nakajima ecotour had ended), 20 pins. MERGE: рёкан «Кия» (02+09).
+  - Tokushima (36): 9 articles, 45 pins. MERGE: Ава-одори кайкан (01+03, at 03's point), удацу Вакимати (07+04).
+    EXTRA: cafe «Полстар» (05) also links 07.
+  - Hiroshima (34): 22 articles (no 18: the bakery closed in 2022), 43 pins. MERGE: святилище Ицукусима (01+22, at 01's point).
 - Categories: see / stay / eat / shop / art / craft. `approx=1` draws a dashed circle "Точка примерная". Ren accepted approximate positions.
 - Map tiles: OpenStreetMap standard tiles (CARTO tiles need an API key).
 - Adding a prefecture: write `tools/prefs/<pref>.py`, add `[window.<PREF>_PINS, <code>, '<prefix>']` to `PREF_SETS` in index.html.
 
 ### On the top-page Japan map
-- Article pins appear only once their prefecture is open (`clusterOf` = prefecture code: Kagawa 37, Kochi 39).
+- Article pins appear only once their prefecture is open (`clusterOf` = prefecture code: Kagawa 37, Kochi 39, Ehime 38,
+  Tokushima 36, Hiroshima 34).
 - Categories map to the map filters in `KG_TYPE` in index.html
   (see→Виды, eat/shop→Гастрономия, art→История, craft→Активности, stay→Где остановиться).
 - Pin colors = filter type (`TYPE_COLOR`; the filter chips show the same dots). A pin takes the color of its first type, or of its
@@ -84,7 +92,8 @@ and `GROUPS` (themes of the article list; must cover every article).
 - Hover opens the card after a short delay; a click keeps it open until closed.
 - Several pins can share one article (e.g. Kagawa's 7-temple pilgrimage has 9 places). One pin per place: the card says
   "Место N из M в этой статье" (pin order) and the other places of that article are highlighted (`highlightPins`).
-- Kochi's older top-map pins: castle and Sunday market were removed (article pins replace them); tataki and Shimanto link to
+- Older top-map pins at the same place as an article pin were removed: Kochi castle and Sunday market, Dogo, Uwajima,
+  Awa-odori, Iya, Oboke, Onomichi, Takehara. Kochi: tataki and Shimanto link to
   articles 03 and 02 via `url`; Ashizuri has no article.
 
 ## Content rules
@@ -107,7 +116,8 @@ and `GROUPS` (themes of the article list; must cover every article).
 
 - `~/Documents/miyabi_articles/47_main_articles/` – prefecture guides (source)
 - `~/Documents/miyabi_articles/kagawa_articles/` – Kagawa sub-articles (source for the build script)
-- `~/Documents/miyabi_articles/kochi_articles/` – Kochi sub-articles and `pins_batch*.json` (source for the build script)
+- `~/Documents/miyabi_articles/<pref>_articles/` (kochi, ehime, tokushima, hiroshima) – sub-articles and `pins_batch*.json` (source for the build script)
+- `~/Documents/miyabi_articles/_pipeline/<PREF>_SITE_HANDOVER.md` – handover notes for adding each prefecture
 - `~/Documents/miyabi_articles/miyabi_site/` – older local copy of the site; this repo is now the source of truth
 - `~/Documents/miyabi_articles/_to_delete/` – junk to be deleted by Ren
 
