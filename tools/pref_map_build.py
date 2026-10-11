@@ -88,9 +88,47 @@ map.fitBounds(L.featureGroup(all).getBounds().pad(0.05));
 CATS={'see':['Посмотреть','#1F5A7A'],'stay':['Где остановиться','#7A4A8C'],'eat':['Где поесть','#B3261E'],'shop':['Где купить','#A0740A'],'art':['Архитектура и искусство','#2F6B4A'],'craft':['Мастерские','#4E6E8E']}
 ANCHOR='<script>\n\n(function(){\n  // ---- production dataset'
 
+def json_pins(src, A, merge=(), extra=None):
+    """Pins from pins_batch*.json in the source folder -> [name, area, category, lat, lng, approx, [article slugs]].
+    merge: (name to show, area or None, [(article number, name in the JSON), ...], optional (number, name) whose
+    coordinates to use) joins one place written up in several articles into one pin; the first article is the card.
+    extra: {(article number, name): [more article numbers]} adds articles to a pin."""
+    import glob, math
+    src=os.path.expanduser(src); raw=[]; extra=extra or {}
+    for f in sorted(glob.glob(os.path.join(src,'pins_batch*.json'))):
+        raw+=json.load(open(f,encoding='utf-8'))
+    out=[]; seen={}
+    def key(p): return (p['article'][:2], p['name_ru'])
+    merged={k:m for m in merge for k in m[2]}
+    for p in raw:
+        k=key(p)
+        if k in seen:  # same article, same place in another batch
+            continue
+        m=merged.get(k)
+        if m:
+            if m[0] in seen: continue
+            group=[q for q in raw if key(q) in m[2]]
+            if len(m)>3: base=next(q for q in group if key(q)==m[3])
+            else: base=([q for q in group if not q['approx']] or group)[0]
+            pin=[m[0], m[1] or base['area_ru'], base['category'], base['lat'], base['lng'], 1 if all(q['approx'] for q in group) else 0,
+                 A(*[n for n,_ in m[2]])]
+            seen[m[0]]=pin; out.append(pin); continue
+        pin=[p['name_ru'], p['area_ru'], p['category'], p['lat'], p['lng'], int(p['approx']), A(p['article'][:2], *extra.get(k,[]))]
+        seen[k]=pin; out.append(pin)
+    # Different places that share placeholder coordinates: spread them ~150 m around the point,
+    # otherwise only the top one can be clicked on the Leaflet map.
+    by={}
+    for p in out: by.setdefault((round(p[3],4),round(p[4],4)),[]).append(p)
+    for g in by.values():
+        if len(g)<2: continue
+        for i,p in enumerate(g):
+            a=2*math.pi*i/len(g)
+            p[3]=round(p[3]+0.0014*math.sin(a),6); p[4]=round(p[4]+0.0016*math.cos(a),6)
+    return out
+
 def build(key):
     spec=importlib.util.spec_from_file_location(key,os.path.join(REPO,'tools','prefs',key+'.py'))
-    C=importlib.util.module_from_spec(spec); spec.loader.exec_module(C)
+    C=importlib.util.module_from_spec(spec); C.json_pins=json_pins; spec.loader.exec_module(C)
     SRC=os.path.expanduser(C.SRC); OUT=os.path.join(REPO,'articles',key)
     slug=getattr(C,'slug',default_slug)
     folders=sorted(d for d in os.listdir(SRC) if os.path.isdir(os.path.join(SRC,d)) and d not in C.SKIP and os.path.exists(os.path.join(SRC,d,'article_ru.html')))
