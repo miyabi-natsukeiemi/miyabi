@@ -113,7 +113,9 @@ and `GROUPS` (themes of the article list; must cover every article).
   Later prefectures, removed: Hagi, Akiyoshido, Izumo, Adachi, Himeji castle, Arima, Nachi waterfall, Osaka castle, the Miho museum
   ("Музей Michu"), lake Biwa. Linked via `url`: fugu Shimonoseki (Yamaguchi 11), Tottori dunes (06), Matsue sunset (05), Tsuwano (18),
   Kobe Kitano (11), Himeji anago (02), Sasayama (09), Koyasan (01), Kumano kodo (04), Shirahama (09), Nakanoshima (Osaka 07),
-  Shitennoji (15), Hiei (Shiga 05), Omihachiman (17), Nagahama (03).
+  Shitennoji (15), Hiei (Shiga 05), Omihachiman (17), Nagahama (03), Daisen (Tottori 04), Uradome (Tottori 02),
+  Yunotsu (Shimane 16), Hinomisaki (Shimane 10).
+  Pins that fell into the sea were moved by address (GSI address search, OSM) on 2026-10-12; the source note is in `pins_claude*.json`.
 
 ## Content rules
 
