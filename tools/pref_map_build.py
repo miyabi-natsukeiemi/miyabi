@@ -88,14 +88,15 @@ map.fitBounds(L.featureGroup(all).getBounds().pad(0.05));
 CATS={'see':['Посмотреть','#1F5A7A'],'stay':['Где остановиться','#7A4A8C'],'eat':['Где поесть','#B3261E'],'shop':['Где купить','#A0740A'],'art':['Архитектура и искусство','#2F6B4A'],'craft':['Мастерские','#4E6E8E']}
 ANCHOR='<script>\n\n(function(){\n  // ---- production dataset'
 
-def json_pins(src, A, merge=(), extra=None):
+def json_pins(src, A, merge=(), extra=None, pattern='pins_batch*.json'):
     """Pins from pins_batch*.json in the source folder -> [name, area, category, lat, lng, approx, [article slugs]].
     merge: (name to show, area or None, [(article number, name in the JSON), ...], optional (number, name) whose
     coordinates to use) joins one place written up in several articles into one pin; the first article is the card.
-    extra: {(article number, name): [more article numbers]} adds articles to a pin."""
+    extra: {(article number, name): [more article numbers]} adds articles to a pin.
+    pattern: which pin files to read (Yamaguchi also has pins_claude*.json)."""
     import glob, math
     src=os.path.expanduser(src); raw=[]; extra=extra or {}
-    for f in sorted(glob.glob(os.path.join(src,'pins_batch*.json'))):
+    for f in sorted(glob.glob(os.path.join(src,pattern))):
         raw+=json.load(open(f,encoding='utf-8'))
     out=[]; seen={}
     def key(p): return (p['article'][:2], p['name_ru'])
@@ -167,8 +168,9 @@ def build(key):
     page=re.sub(r'<p class="kg-jump"[^>]*>.*?</p>','',page,flags=re.S)
     n_art=len(titles)
     jump=f'<p class="kg-jump" style="font-size:16px;margin:16px 0 0"><a href="#{key}-map">Карта: {places} из {n_art} {"статьи" if n_art%10==1 and n_art%100!=11 else "статей"}</a> · <a href="#{key}-articles">{C.LIST_LINK}</a></p>'
-    page=page.replace('</p><p class="kicker" id="about">','</p>'+jump+section_map+'<p class="kicker" id="about">',1)
-    page=page.replace('</div></article>',section_list+'</div></article>',1)
+    # insertion points; guides may have line breaks between the tags (e.g. Yamaguchi)
+    page=re.sub(r'</p>(\s*)<p class="kicker" id="about">',lambda m:'</p>'+jump+section_map+m.group(1)+'<p class="kicker" id="about">',page,count=1)
+    page=re.sub(r'</div>(\s*)</article>',lambda m:section_list+'</div>'+m.group(1)+'</article>',page,count=1)
     assert f'{key}-map -->' in page and f'{key}-articles' in page
     open(page_path,'w',encoding='utf-8').write(page)
     print(key+':',len(titles),'articles,',len(P),'pins; nopin:',sorted(s for s in titles if s not in used))
@@ -190,7 +192,9 @@ def build(key):
                     os.system(f'sips -Z 600 -s format jpeg -s formatOptions 72 "{img}" --out "{th}" >/dev/null')
                 c['i']=f'articles/{key}/{s}/thumb.jpg'
         return c
-    top_data=dict(cats=CATS,art={s:card(s) for s in titles},pins=pins_js)
+    # TOP_SKIP: pin names left off the top map because an older top-map pin there already links to the article
+    top_skip=getattr(C,'TOP_SKIP',set())
+    top_data=dict(cats=CATS,art={s:card(s) for s in titles},pins=[p for p in pins_js if p['n'] not in top_skip])
     section_top=f'<!-- {key}-japan-pins --><script>window.{C.TOP_VAR}={json.dumps(top_data,ensure_ascii=False)};</script><!-- /{key}-japan-pins -->\n'
     if f'<!-- {key}-japan-pins -->' in top:
         top=re.sub(rf'<!-- {key}-japan-pins -->.*?<!-- /{key}-japan-pins -->\n',lambda m:section_top,top,flags=re.S)

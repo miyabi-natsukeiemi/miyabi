@@ -42,7 +42,7 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
   For generated sub-articles (Kagawa, Kochi) the block comes from `BAR` in `tools/pref_map_build.py`.
 - Article styling lives inside each page under `.mj-article` (fonts: Playfair Display + PT Serif, red accent #B3261E). Keep new styles scoped so they don't leak into other pages.
 
-## Prefecture article maps (Kagawa, Kochi, Ehime, Tokushima, Hiroshima)
+## Prefecture article maps (Kagawa, Kochi, Ehime, Tokushima, Hiroshima, Okayama, Yamaguchi, Tottori, Shimane, Hyogo, Wakayama, Osaka, Shiga)
 
 Prefectures with their own sub-articles get the same three things, all **generated** by
 `tools/pref_map_build.py <pref>` from a config in `tools/prefs/<pref>.py`:
@@ -62,8 +62,8 @@ back link), Leaflet start view, `TOP_VAR`, `pins(A)` returning `[name, area, cat
 and `GROUPS` (themes of the article list; must cover every article).
 - Kagawa: pins are written out in the config. For 19 and 25 there are two folders each; the site uses `19_ohloy_brewing` and `25_lemon_hotel` (underscores) and skips the hyphen ones (Ren's choice). These two use an older template without `.mj-article`.
   Two different islands are both "Тэсима": 豊島 (near Shodoshima) and 手島 (Shiwaku). Area labels keep the kanji.
-- Kochi, Ehime, Tokushima, Hiroshima: pins come from `pins_batch*.json` in the source folder via `json_pins` in the script
-  (`name_ja` and `source` are not shown). `MERGE` joins one place written up in several articles into one pin (first article =
+- Kochi and the later prefectures: pins come from `pins_batch*.json` in the source folder via `json_pins` in the script
+  (`name_ja` and `source` are not shown; from Yamaguchi on, `pattern='pins_*.json'` also reads `pins_claude*.json`). `MERGE` joins one place written up in several articles into one pin (first article =
   card; an optional 4th item picks whose coordinates to use); `EXTRA` adds articles to a pin. Different places that share
   coordinates are spread ~150 m around the point so each can be clicked on the Leaflet map.
   - Kochi (39): 21 articles, 73 pins. MERGE: hotel nansui (21+04), Кагэцу (06+10), Ёкогура mountain and museum (12+14).
@@ -71,13 +71,28 @@ and `GROUPS` (themes of the article list; must cover every article).
   - Tokushima (36): 9 articles, 45 pins. MERGE: Ава-одори кайкан (01+03, at 03's point), удацу Вакимати (07+04).
     EXTRA: cafe «Полстар» (05) also links 07.
   - Hiroshima (34): 22 articles (no 18: the bakery closed in 2022), 43 pins. MERGE: святилище Ицукусима (01+22, at 01's point).
+  - Okayama (33): 21 articles (no 12, 17, 20), 53 pins. MERGE: сад Коракуэн (02+18), галерея «Фукуока сёю» (14+21), SABOE OKAYAMA (18+21).
+  - Yamaguchi (35): 19 articles (01–10 Genspark, 11–19 Claude; cards of 11, 12, 14–19 not checked yet), 61 pins.
+    MERGE: рёкан «Отанисансо» (08+07), святилище Сёин / Сёка Сондзюку (01+02).
+  - The next six were written by Claude on 2026-10-12; prices and hours on their cards are not checked yet (`<pref>_card_check.md`
+    in the source folder), and almost all pin positions are estimates from addresses (approx=1).
+  - Tottori (31): 9 articles, 26 pins. MERGE: рынок «Кароити» (06+08, at 08's point).
+  - Shimane (32): 22 articles, 81 pins. MERGE: Идзумо-тайся (01+02), музей Адати (04+11), рёкан «Саги-но-ю со» (11+13),
+    «Юномати кагурадэн» (17+19).
+  - Hyogo (28): 22 articles, 67 pins. MERGE: замок Химэдзи (01+02).
+  - Wakayama (30): 16 articles, 65 pins. MERGE: Конгобу-дзи (01+02+03), Дандзё-гаран (01+03), Ниуцухимэ, Ниу-кансёбу,
+    Дзисон-ин, Окуно-ин (02+03 each), Кумано Нати-тайся (04+05), Нэгородзи (08+16, at 16's point).
+  - Osaka (27): 15 articles, 18 pins (17 on the top map, see `TOP_SKIP`). No MERGE.
+  - Shiga (25): 19 articles (no 14: the auberge has been closed since January 2025), 36 pins. MERGE: аллея метасеквой (18+02, at 18's point).
+- `TOP_SKIP` (optional, a set of pin names): pins shown on the prefecture page only, because an older top-map pin at that place
+  already links to the article (Osaka: Храм Ситэнно-дзи → `kn3-osaka-shitennoji`).
 - Categories: see / stay / eat / shop / art / craft. `approx=1` draws a dashed circle "Точка примерная". Ren accepted approximate positions.
 - Map tiles: OpenStreetMap standard tiles (CARTO tiles need an API key).
 - Adding a prefecture: write `tools/prefs/<pref>.py`, add `[window.<PREF>_PINS, <code>, '<prefix>']` to `PREF_SETS` in index.html.
 
 ### On the top-page Japan map
 - Article pins appear only once their prefecture is open (`clusterOf` = prefecture code: Kagawa 37, Kochi 39, Ehime 38,
-  Tokushima 36, Hiroshima 34).
+  Tokushima 36, Hiroshima 34, Okayama 33, Yamaguchi 35, Tottori 31, Shimane 32, Hyogo 28, Wakayama 30, Osaka 27, Shiga 25).
 - Categories map to the map filters in `KG_TYPE` in index.html
   (see→Виды, eat/shop→Гастрономия, art→История, craft→Активности, stay→Где остановиться).
 - Pin colors = filter type (`TYPE_COLOR`; the filter chips show the same dots). A pin takes the color of its first type, or of its
@@ -95,6 +110,10 @@ and `GROUPS` (themes of the article list; must cover every article).
 - Older top-map pins at the same place as an article pin were removed: Kochi castle and Sunday market, Dogo, Uwajima,
   Awa-odori, Iya, Oboke, Onomichi, Takehara. Kochi: tataki and Shimanto link to
   articles 03 and 02 via `url`; Ashizuri has no article.
+  Later prefectures, removed: Hagi, Akiyoshido, Izumo, Adachi, Himeji castle, Arima, Nachi waterfall, Osaka castle, the Miho museum
+  ("Музей Michu"), lake Biwa. Linked via `url`: fugu Shimonoseki (Yamaguchi 11), Tottori dunes (06), Matsue sunset (05), Tsuwano (18),
+  Kobe Kitano (11), Himeji anago (02), Sasayama (09), Koyasan (01), Kumano kodo (04), Shirahama (09), Nakanoshima (Osaka 07),
+  Shitennoji (15), Hiei (Shiga 05), Omihachiman (17), Nagahama (03).
 
 ## Content rules
 
