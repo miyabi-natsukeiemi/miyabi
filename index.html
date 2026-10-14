@@ -1216,6 +1216,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       this._ready = false; this._timer = null;
       this.W = 1000; this.H = 900; this.PAD = 46;
       this.INSET = { x: 40, y: 680, w: 190, h: 155 };
+      this.OKI_FOCUS_MAX = 600;  // deepest zoom of the Okinawa inset (inset units are ~0.2 per km)
       this.VB = { x: 0, y: 0, w: 1000, h: 900 };
     }
 
@@ -1455,9 +1456,9 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
         .on('click', function (e, i) {
           if (self._active !== 'okinawa') return;  // whole-Japan view: the click opens Okinawa (pref handler)
           e.stopPropagation();
-          if (self._isle === i.id) return;
+          if (self._isle === i.id && !self._focus) return;
           this.classList.remove('hov');
-          self._isle = i.id; self._render(); self._emit('select');
+          self._isle = i.id; self._focus = null; self._render(); self._emit('select');
         });
       ins.append('g').attr('id', 'isleLabels').selectAll('text').data(isles).join('text')
         .attr('class', 'plabel').attr('data-isle', function (i) { return i.id; }).text(function (i) { return i.ru; });
@@ -1465,6 +1466,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       this._projOki = pathOkiProj;
       this._insetHome = { x: INSET.x, y: INSET.y, w: INSET.w, h: INSET.h };
       this._pinsLayerOki = ins.append('g').attr('id', 'pinsLayerOki');
+      this._clusterLayerOki = ins.append('g').attr('id', 'clusterLayerOki');
 
       svg.selectAll('.region')
         .on('mouseenter', function () { self._hoverRegion(this.dataset.region, true); })
@@ -1572,8 +1574,9 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       var okiInteractive = self._active === 'okinawa', okiS = okiInteractive ? 1 / (this._insetK || 1) : 0.6;
       this._pinsLayerOki.selectAll('g.jm-pin').each(function (d) {
         var xy = self._projOki([d.lon, d.lat]);
+        var visible = d.clusterOf ? okiInteractive : true;  // article pins only once Okinawa is open, as in other prefectures
         self._d3.select(this)
-          .style('display', (d.__match !== false) ? '' : 'none')
+          .style('display', (visible && d.__match !== false) ? '' : 'none')
           .style('pointer-events', okiInteractive ? null : 'none')
           .style('cursor', okiInteractive ? null : 'default')
           .style('opacity', okiInteractive ? null : 0.55)
@@ -1585,14 +1588,15 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
     // Grouped pins (d.group, e.g. Kagawa articles) that sit too close on screen merge into one numbered marker;
     // clicking it zooms into just those pins (this._focus).
     _renderClusters(scale, inv) {
-      var self = this, d3 = this._d3, vis = [], groups = [];
+      var self = this, d3 = this._d3;
       if (!this._clusterLayer) return;
       var hasG = this._hasGroups();  // there, ordinary pins of the same prefecture cluster together with grouped ones
-      this._pinsLayer.selectAll('g.jm-pin').each(function (d) {
-        if ((d.group || hasG) && !d.cluster && this.style.display !== 'none') vis.push({ d: d, node: this, xy: self._proj([d.lon, d.lat]) });
-      });
-      if (!this._focus && this._active) {
-        var lim = 15 / scale, used = new Set();
+      // visible pins of a layer that sit closer than `lim` (layer units) merge; the pins themselves are hidden
+      function group(layer, proj, lim) {
+        var vis = [], groups = [], used = new Set();
+        layer.selectAll('g.jm-pin').each(function (d) {
+          if ((d.group || hasG) && !d.cluster && this.style.display !== 'none') vis.push({ d: d, node: this, xy: proj([d.lon, d.lat]) });
+        });
         vis.forEach(function (a) {
           if (used.has(a)) return;
           var g = vis.filter(function (b) {
@@ -1602,21 +1606,29 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
           g.forEach(function (b) { used.add(b); b.node.style.display = 'none'; });
           groups.push(g);
         });
+        return groups.map(function (g) {
+          return { key: g.map(function (b) { return b.d.id; }).join(','), pins: g.map(function (b) { return b.d; }),
+            xy: [d3.mean(g, function (b) { return b.xy[0]; }), d3.mean(g, function (b) { return b.xy[1]; })] };
+        });
       }
-      var data = groups.map(function (g) {
-        return { key: g.map(function (b) { return b.d.id; }).join(','), pins: g.map(function (b) { return b.d; }),
-          xy: [d3.mean(g, function (b) { return b.xy[0]; }), d3.mean(g, function (b) { return b.xy[1]; })] };
-      });
-      var sel = this._clusterLayer.selectAll('g.jm-cl').data(data, function (c) { return c.key; });
-      sel.exit().remove();
-      var en = sel.enter().append('g').attr('class', 'jm-cl').style('cursor', 'pointer')
-        .on('click', function (e, c) { e.stopPropagation(); self._focusOn(c.pins); });
-      en.append('circle').attr('class', 'jm-hit').attr('r', 16);
-      en.append('circle').attr('class', 'jm-dot').attr('r', 10);
-      en.append('text').attr('class', 'jm-n').attr('dy', '.35em');
-      en.merge(sel)
-        .attr('transform', function (c) { return 'translate(' + c.xy[0] + ',' + c.xy[1] + ') scale(' + inv + ')'; })
-        .select('.jm-n').text(function (c) { return c.pins.length; });
+      function draw(layer, data, k) {
+        var sel = layer.selectAll('g.jm-cl').data(data, function (c) { return c.key; });
+        sel.exit().remove();
+        var en = sel.enter().append('g').attr('class', 'jm-cl').style('cursor', 'pointer')
+          .on('click', function (e, c) { e.stopPropagation(); self._focusOn(c.pins); });
+        en.append('circle').attr('class', 'jm-hit').attr('r', 16);
+        en.append('circle').attr('class', 'jm-dot').attr('r', 10);
+        en.append('text').attr('class', 'jm-n').attr('dy', '.35em');
+        en.merge(sel)
+          .attr('transform', function (c) { return 'translate(' + c.xy[0] + ',' + c.xy[1] + ') scale(' + k + ')'; })
+          .select('.jm-n').text(function (c) { return c.pins.length; });
+      }
+      draw(this._clusterLayer, !this._focus && this._active && this._active !== 'okinawa' ? group(this._pinsLayer, this._proj, 15 / scale) : [], inv);
+      // Okinawa's inset: the same while Okinawa is open, in inset units (the inset is scaled by _insetK). Most of its
+      // pins sit around Naha, so markers stay on after a zoom (_focus) too and can be opened again, step by step.
+      // At the deepest zoom (see _placeInset) markers would no longer open, so the pins are shown one by one.
+      var okiK = this._insetK || 1, okiDeepest = this._focus && okiK >= this.OKI_FOCUS_MAX;
+      draw(this._clusterLayerOki, this._active === 'okinawa' && !okiDeepest ? group(this._pinsLayerOki, this._projOki, 15 / okiK) : [], 1 / okiK);
       // in a prefecture with grouped pins the magnet (_magnet) handles all pointer input, so dots don't steal hits
       if (!this._active) this._thin(24);
       this._spread(scale, inv);
@@ -1624,6 +1636,8 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       var mag = hasG ? 'none' : null;
       this._pinsLayer.style('pointer-events', mag);
       this._clusterLayer.style('pointer-events', mag);
+      this._pinsLayerOki.style('pointer-events', mag);
+      this._clusterLayerOki.style('pointer-events', mag);
     }
 
     // Okinawa inset: shown on the whole-Japan view; when Okinawa is open it grows into the middle of the map
@@ -1647,6 +1661,14 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
             y0 = Math.min.apply(null, pts.map(function (p) { return p[1]; })) - 8; y1 = Math.max.apply(null, pts.map(function (p) { return p[1]; })) + 8;
           }
           k = Math.min(isle ? 40 : 12, this.VB.w * (isle ? 0.7 : 0.62) / (x1 - x0), this.VB.h * (isle ? 0.9 : 0.8) / (y1 - y0));
+          if (this._focus) {  // a numbered marker was clicked: zoom until its closest two pins sit ~20 units apart (cf. _focusCap)
+            var fp = this._focus.map(function (d) { return self._projOki([d.lon, d.lat]); }), dmin = Infinity;
+            fp.forEach(function (a, i) { fp.slice(i + 1).forEach(function (b) { dmin = Math.min(dmin, Math.hypot(a[0] - b[0], a[1] - b[1])); }); });
+            x0 = Math.min.apply(null, fp.map(function (p) { return p[0]; })); x1 = Math.max.apply(null, fp.map(function (p) { return p[0]; }));
+            y0 = Math.min.apply(null, fp.map(function (p) { return p[1]; })); y1 = Math.max.apply(null, fp.map(function (p) { return p[1]; }));
+            var cap = Math.max(1.5 * k, Math.min(this.OKI_FOCUS_MAX, 20 / Math.max(dmin, 1e-6)));
+            k = Math.min(cap, 0.45 * Math.min(this.VB.w / Math.max(x1 - x0, 0.2), this.VB.h / Math.max(y1 - y0, 0.2)));
+          }
           x = this.VB.x + this.VB.w / 2 - k * (x0 + x1) / 2; y = this.VB.y + this.VB.h / 2 - k * (y0 + y1) / 2;
         }
         this._insetK = k;
@@ -1725,12 +1747,14 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       this._sib = ids || null;
       if (!this._pinsLayer) return;
       var R = this._root;
-      R.querySelectorAll('#pinsLayer g.jm-pin').forEach(function (n) { n.classList.toggle('sib', !!ids && ids.has(n.__data__.id)); });
-      R.querySelectorAll('#clusterLayer g.jm-cl').forEach(function (n) {
+      R.querySelectorAll('#pinsLayer g.jm-pin, #pinsLayerOki g.jm-pin').forEach(function (n) { n.classList.toggle('sib', !!ids && ids.has(n.__data__.id)); });
+      R.querySelectorAll('#clusterLayer g.jm-cl, #clusterLayerOki g.jm-cl').forEach(function (n) {
         n.classList.toggle('sib', !!ids && n.__data__.pins.some(function (p) { return ids.has(p.id); }));
       });
       this._pinsLayer.classed('hl', !!ids);
       this._clusterLayer.classed('hl', !!ids);
+      this._pinsLayerOki.classed('hl', !!ids);
+      this._clusterLayerOki.classed('hl', !!ids);
     }
 
     _hasGroups() {
@@ -1755,7 +1779,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       function nearest(e) {
         if (!self._hasGroups()) return null;
         var best = null, bd = 26;
-        self._root.querySelectorAll('#pinsLayer g.jm-pin, #clusterLayer g.jm-cl').forEach(function (n) {
+        self._root.querySelectorAll('#pinsLayer g.jm-pin, #clusterLayer g.jm-cl, #pinsLayerOki g.jm-pin, #clusterLayerOki g.jm-cl').forEach(function (n) {
           if (!n.__data__) return;
           if (n.style.display === 'none' || n.style.pointerEvents === 'none') return;
           var r = n.querySelector('.jm-dot').getBoundingClientRect();
@@ -1856,10 +1880,13 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       var inRegion = this._main.filter(function (f) { return REGION_OF[f.properties.id] === active; });
       var offMap = !!pref && !this._byPref[pref];              // 沖縄県はインセットのみ
       var target = (pref && !offMap) ? [this._byPref[pref]] : inRegion;
+      // article pins on far islands (e.g. Kagoshima's Yoron) can lie outside the prefecture's core shape: frame them too
+      var pinFrame = (pref && !offMap && this._hasGroups()) ? [{ type: 'Feature', properties: {}, geometry: { type: 'MultiPoint',
+        coordinates: this._pins.filter(function (d) { return d.group && d.prefId === pref; }).map(function (d) { return [d.lon, d.lat]; }) } }] : [];
       var t = this._focus
         ? this._frame([{ type: 'Feature', properties: {}, geometry: { type: 'MultiPoint',
             coordinates: this._focus.map(function (d) { return [d.lon, d.lat]; }) } }], 0.45, this._focusCap())
-        : this._frame(target.map(function (f) { return f.core; }), (pref && !offMap) ? (this._hasGroups() ? 0.8 : 0.62) : 0.78);  // prefectures with article pins: zoom closer
+        : this._frame(target.map(function (f) { return f.core; }).concat(pinFrame), (pref && !offMap) ? (this._hasGroups() ? 0.8 : 0.62) : 0.78);  // prefectures with article pins: zoom closer
       cam.setAttribute('transform', 'translate(' + t[0] + ',' + t[1] + ') scale(' + t[2] + ')');
       if (!this._focus) this._prefScale = t[2];
       this._lastScale = t[2]; this._updatePinVisibility();
@@ -4524,7 +4551,8 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
     ],
     "blurb": "Один из старейших буддийских храмов Японии, основанный в конце VI века.",
     "prefId": 27,
-    "clusterOf": 27
+    "clusterOf": 27,
+    "url": "articles/osaka/kongo-gumi/index.html"
   },
   {
     "id": "kn3-osaka-tsutenkaku",
@@ -4574,7 +4602,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
     ],
     "blurb": "Купеческий город на озере Бива с сохранившимися каналами, по которым и сейчас ходят лодки.",
     "prefId": 25,
-    "url": "articles/osaka/kongo-gumi/index.html"
+    "url": "articles/shiga/omihachiman-iba-house/index.html"
   },
   {
     "id": "kn3-kobe-kitano",
@@ -4598,8 +4626,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       "view"
     ],
     "blurb": "Единственный оригинальный «горный замок» Японии — часто парит над облаками осенним утром.",
-    "prefId": 33,
-    "url": "articles/shiga/omihachiman-iba-house/index.html"
+    "prefId": 33
   },
   {
     "id": "cs3-ritsurin",
@@ -5774,7 +5801,8 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
     ],
     "blurb": "Исторический центр деловой Осаки на острове между двумя реками — здания начала XX века.",
     "prefId": 27,
-    "clusterOf": 27
+    "clusterOf": 27,
+    "url": "articles/osaka/kodomo-hon-no-mori-nakanoshima/index.html"
   },
   {
     "id": "kn7-nara-horyuji",
@@ -5785,8 +5813,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       "history"
     ],
     "blurb": "Старейшие деревянные постройки в мире — храмовый комплекс VII века, объект ЮНЕСКО.",
-    "prefId": 29,
-    "url": "articles/osaka/kodomo-hon-no-mori-nakanoshima/index.html"
+    "prefId": 29
   },
   {
     "id": "cs8-kagawa-shodoshima2",
@@ -6566,7 +6593,8 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
   var PREF_SETS = [[window.KAGAWA_PINS, 37, 'kg'], [window.KOCHI_PINS, 39, 'kc'], [window.EHIME_PINS, 38, 'eh'],
     [window.TOKUSHIMA_PINS, 36, 'tk'], [window.HIROSHIMA_PINS, 34, 'hs'], [window.OKAYAMA_PINS, 33, 'oy'],
     [window.YAMAGUCHI_PINS, 35, 'yg'], [window.TOTTORI_PINS, 31, 'tt'], [window.SHIMANE_PINS, 32, 'sm'],
-    [window.HYOGO_PINS, 28, 'hg'], [window.WAKAYAMA_PINS, 30, 'wk'], [window.OSAKA_PINS, 27, 'os'], [window.SHIGA_PINS, 25, 'sg']];
+    [window.HYOGO_PINS, 28, 'hg'], [window.WAKAYAMA_PINS, 30, 'wk'], [window.OSAKA_PINS, 27, 'os'],
+    [window.SHIGA_PINS, 25, 'sg']];
   var KG_TYPE = { see:['view'], eat:['food'], shop:['food'], art:['history'], craft:['activity'], stay:['stay'] };
   var KG_PINS = [];
   PREF_SETS.forEach(function(set){

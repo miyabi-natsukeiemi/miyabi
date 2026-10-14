@@ -112,7 +112,7 @@ def json_pins(src, A, merge=(), extra=None, pattern='pins_batch*.json'):
             if len(m)>3: base=next(q for q in group if key(q)==m[3])
             else: base=([q for q in group if not q['approx']] or group)[0]
             pin=[m[0], m[1] or base['area_ru'], base['category'], base['lat'], base['lng'], 1 if all(q['approx'] for q in group) else 0,
-                 A(*[n for n,_ in m[2]])]
+                 A(*dict.fromkeys(n for n,_ in m[2]))]  # one article may bring two places of the same pin
             seen[m[0]]=pin; out.append(pin); continue
         pin=[p['name_ru'], p['area_ru'], p['category'], p['lat'], p['lng'], int(p['approx']), A(p['article'][:2], *extra.get(k,[]))]
         seen[k]=pin; out.append(pin)
