@@ -42,7 +42,7 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
   For generated sub-articles (Kagawa, Kochi) the block comes from `BAR` in `tools/pref_map_build.py`.
 - Article styling lives inside each page under `.mj-article` (fonts: Playfair Display + PT Serif, red accent #B3261E). Keep new styles scoped so they don't leak into other pages.
 
-## Prefecture article maps (Kagawa, Kochi, Ehime, Tokushima, Hiroshima, Okayama, Yamaguchi, Tottori, Shimane, Hyogo, Wakayama, Osaka, Shiga)
+## Prefecture article maps (Kagawa, Kochi, Ehime, Tokushima, Hiroshima, Okayama, Yamaguchi, Tottori, Shimane, Hyogo, Wakayama, Osaka, Shiga, Kyushu and Okinawa)
 
 Prefectures with their own sub-articles get the same three things, all **generated** by
 `tools/pref_map_build.py <pref>` from a config in `tools/prefs/<pref>.py`:
@@ -84,15 +84,37 @@ and `GROUPS` (themes of the article list; must cover every article).
     Дзисон-ин, Окуно-ин (02+03 each), Кумано Нати-тайся (04+05), Нэгородзи (08+16, at 16's point).
   - Osaka (27): 15 articles, 18 pins (17 on the top map, see `TOP_SKIP`). No MERGE.
   - Shiga (25): 19 articles (no 14: the auberge has been closed since January 2025), 36 pins. MERGE: аллея метасеквой (18+02, at 18's point).
+  - Kyushu and Okinawa, written by Claude on 2026-10-12/13; cards not checked yet (`<pref>_card_check.md`). `DROP` in the config
+    leaves pins off both maps (outside the prefecture, mentioned in passing, or no address), as the handovers proposed.
+    On 2026-10-14 the 105 pins that sat in the sea got new coordinates (`_pipeline/KYUSHU8_SEA_PINS.md`, backup in
+    `_pipeline/_bak_20261014_pins/`); 2026-10-16 Daimaru (Oita 24) moved ~25 m out of the river.
+  - Nagasaki (42): 27 articles, 95 pins. MERGE: «Ады» Ундзэна (19+20), музей Ики-коку (01+11, at 11's point), Goto Retreat ray (14+15),
+    Yuyado Jyo-kiya (21+22).
+  - Saga (41): 14 articles, 28 pins. DROP: the two Kyoto places of 14. MERGE: Wataya Besso with Pierre Hermé (08+09),
+    Nakashima Farm (12+13), Fukuchiyo and Souan Nabeshima (06).
+  - Fukuoka (40): 21 articles (07 is in two groups), 37 pins. DROP: Kitakyushu airport, the Ritz-Carlton (16), the Yame point (11).
+    MERGE: Kyushu National Museum (01+02), BATHHOUSE and NISHIKIMACHI (02), Fairfield Ukiha and the roadside station (08).
+  - Kumamoto (43): 16 articles (no 13: the Shiranui museum closed after the July 2026 earthquake), 36 pins.
+    DROP: Coffee Gallery, Toranosuke (02). MERGE: Yakoboku and Ruri-AN (08+10), Hananoka Shuzo (09+15), Takenokuma (06).
+  - Oita (44): 31 articles, 94 pins. DROP: the Kannawa town point (21). MERGE: «Цуканома» (02+05+10), «Каннава муси-ю» (10+20),
+    roadside station Kamae and Buri Laboratory (28+29). Not merged: «Кохи Мокуба» (01) and «Кохи кобо Мокуба» (04), same shop unconfirmed.
+  - Miyazaki (45): 5 articles, 18 pins. DROP: Skal, Pappacarbone. MERGE: святилище Аосима (01+02).
+  - Kagoshima (46): 30 articles, 121 pins. DROP: the Yakushima island point (07), Тябана, TOBA TOBA COLA, Satsuma Vidro Kogei,
+    «Сакая Маэкава». MERGE: Сэнганъэн (01+06), five Amami places (22/25/26/28), MIJORA and 2 waters (24).
+  - Okinawa (47): 69 articles, 237 pins. DROP: замок Сюри, рынок Макиси, остров Такэтоми, two Shuri utaki, the placeholder of 48.
+    14 MERGE (HOSHINOYA x2, Kintiti soba, EIBUN, LIQUID, Като сёкудо, Mizuho Shuzo, Ихэя, museums, Идзэна, Кудака, HYGGE).
+  - No pin on the map: Fukuoka 11, Kagoshima 09, 17, 30, Okinawa 01, 02, 48, 52.
 - `TOP_SKIP` (optional, a set of pin names): pins shown on the prefecture page only, because an older top-map pin at that place
-  already links to the article (Osaka: Храм Ситэнно-дзи → `kn3-osaka-shitennoji`).
+  already links to the article (Osaka: Храм Ситэнно-дзи → `kn3-osaka-shitennoji`; also Yutoku Inari, Dazaifu, Ohori Terrace,
+  Nakadake, Usuki Buddhas, Usa, Kuju, Aoshima, Saitobaru, Sengan-en, the Ibusuki sand baths).
 - Categories: see / stay / eat / shop / art / craft. `approx=1` draws a dashed circle "Точка примерная". Ren accepted approximate positions.
 - Map tiles: OpenStreetMap standard tiles (CARTO tiles need an API key).
 - Adding a prefecture: write `tools/prefs/<pref>.py`, add `[window.<PREF>_PINS, <code>, '<prefix>']` to `PREF_SETS` in index.html.
 
 ### On the top-page Japan map
 - Article pins appear only once their prefecture is open (`clusterOf` = prefecture code: Kagawa 37, Kochi 39, Ehime 38,
-  Tokushima 36, Hiroshima 34, Okayama 33, Yamaguchi 35, Tottori 31, Shimane 32, Hyogo 28, Wakayama 30, Osaka 27, Shiga 25).
+  Tokushima 36, Hiroshima 34, Okayama 33, Yamaguchi 35, Tottori 31, Shimane 32, Hyogo 28, Wakayama 30, Osaka 27, Shiga 25,
+  Fukuoka 40, Saga 41, Nagasaki 42, Kumamoto 43, Oita 44, Miyazaki 45, Kagoshima 46, Okinawa 47).
 - Categories map to the map filters in `KG_TYPE` in index.html
   (see→Виды, eat/shop→Гастрономия, art→История, craft→Активности, stay→Где остановиться).
 - Pin colors = filter type (`TYPE_COLOR`; the filter chips show the same dots). A pin takes the color of its first type, or of its
@@ -115,6 +137,13 @@ and `GROUPS` (themes of the article list; must cover every article).
   Kobe Kitano (11), Himeji anago (02), Sasayama (09), Koyasan (01), Kumano kodo (04), Shirahama (09), Nakanoshima (Osaka 07),
   Shitennoji (15), Hiei (Shiga 05), Omihachiman (17), Nagahama (03), Daisen (Tottori 04), Uradome (Tottori 02),
   Yunotsu (Shimane 16), Hinomisaki (Shimane 10).
+  Kyushu: Kaneda castle, Sasebo (x2), Karatsu, Arita (x2), Yutoku, Dazaifu, Ohori, Yanagawa, Kurokawa, Aso, Amakusa, Yufuin,
+  Usuki, Usa, Kuju, Aoshima, Saitobaru, Takachiho, Sakurajima, Sengan-en, Ibusuki, Kirishima, Yakushima; Okinawa: Shuri, Makishi,
+  soba, Kerama, Zamami, Taketomi, Ishigaki, Miyako, Yonaguni, cape Hedo.
+  Known offsets of older pins, left as they are (Ren): r2-kanedajo, ky3-usuki, ky2-obi, ky3-satsuma, cs5-saga-yutoku (~20 km);
+  titles: ky-kurokawa «Онсэн Куроками», ky5-saga-arita2 «Керамические печи Имари» (linked to Arita 05), ky-kuju (old park name).
+  Okinawa inset: article pins show once Okinawa is open; close pins merge into numbered markers that zoom step by step
+  (`_clusterLayerOki`, `OKI_FOCUS_MAX`). Prefectures with article pins frame those pins too (`pinFrame`, e.g. Yoron).
   Pins that fell into the sea were moved by address (GSI address search, OSM) on 2026-10-12; the source note is in `pins_claude*.json`.
 
 ## Content rules
