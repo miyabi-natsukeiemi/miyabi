@@ -42,7 +42,7 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
   For generated sub-articles (Kagawa, Kochi) the block comes from `BAR` in `tools/pref_map_build.py`.
 - Article styling lives inside each page under `.mj-article` (fonts: Playfair Display + PT Serif, red accent #B3261E). Keep new styles scoped so they don't leak into other pages.
 
-## Prefecture article maps (Kagawa, Kochi, Ehime, Tokushima, Hiroshima, Okayama, Yamaguchi, Tottori, Shimane, Hyogo, Wakayama, Osaka, Shiga, Kyushu and Okinawa)
+## Prefecture article maps (Kagawa, Kochi, Ehime, Tokushima, Hiroshima, Okayama, Yamaguchi, Tottori, Shimane, Hyogo, Wakayama, Osaka, Shiga, Kyushu and Okinawa, Mie, Nara)
 
 Prefectures with their own sub-articles get the same three things, all **generated** by
 `tools/pref_map_build.py <pref>` from a config in `tools/prefs/<pref>.py`:
@@ -104,9 +104,15 @@ and `GROUPS` (themes of the article list; must cover every article).
   - Okinawa (47): 69 articles, 237 pins. DROP: замок Сюри, рынок Макиси, остров Такэтоми, two Shuri utaki, the placeholder of 48.
     14 MERGE (HOSHINOYA x2, Kintiti soba, EIBUN, LIQUID, Като сёкудо, Mizuho Shuzo, Ихэя, museums, Идзэна, Кудака, HYGGE).
   - No pin on the map: Fukuoka 11, Kagoshima 09, 17, 30, Okinawa 01, 02, 48, 52.
+  - Mie (24): 27 articles by Claude (2026-10-16 in Claude Code on the Mac, `_pipeline/WRITER_MAC.md`; cards not checked yet),
+    97 pins. Re-applied 2026-10-17 after Ren's edits (Latin shop names, «Цубакикиси», pins of Okage Yokocho spread apart).
+    MERGE: Дзингу Тёкокан (02+15), рёкан «Асакити» (06+15), Тадо-тайся (18+19), Yunoyama Sosuikyo (20+21), Цубаки-оками (22+21).
+  - Nara (29): 37 articles by Claude (2026-10-17; cards not checked yet), 134 pins. No MERGE (Ren: the same place in two
+    articles keeps two pins; identical coordinates were spread ~25 m apart), no DROP. 15 (Сакон Сима) points to the
+    ruins of Tsubai castle instead of Sekigahara. 19 is `uhn-maruto-shoyu` (the inn was renamed in 2026).
 - `TOP_SKIP` (optional, a set of pin names): pins shown on the prefecture page only, because an older top-map pin at that place
   already links to the article (Osaka: Храм Ситэнно-дзи → `kn3-osaka-shitennoji`; also Yutoku Inari, Dazaifu, Ohori Terrace,
-  Nakadake, Usuki Buddhas, Usa, Kuju, Aoshima, Saitobaru, Sengan-en, the Ibusuki sand baths).
+  Nakadake, Usuki Buddhas, Usa, Kuju, Aoshima, Saitobaru, Sengan-en, the Ibusuki sand baths, Nara's Kimpusen-ji → `kn-yoshino`).
 - Categories: see / stay / eat / shop / art / craft. `approx=1` draws a dashed circle "Точка примерная". Ren accepted approximate positions.
 - Map tiles: OpenStreetMap standard tiles (CARTO tiles need an API key).
 - Adding a prefecture: write `tools/prefs/<pref>.py`, add `[window.<PREF>_PINS, <code>, '<prefix>']` to `PREF_SETS` in index.html.
@@ -114,7 +120,7 @@ and `GROUPS` (themes of the article list; must cover every article).
 ### On the top-page Japan map
 - Article pins appear only once their prefecture is open (`clusterOf` = prefecture code: Kagawa 37, Kochi 39, Ehime 38,
   Tokushima 36, Hiroshima 34, Okayama 33, Yamaguchi 35, Tottori 31, Shimane 32, Hyogo 28, Wakayama 30, Osaka 27, Shiga 25,
-  Fukuoka 40, Saga 41, Nagasaki 42, Kumamoto 43, Oita 44, Miyazaki 45, Kagoshima 46, Okinawa 47).
+  Fukuoka 40, Saga 41, Nagasaki 42, Kumamoto 43, Oita 44, Miyazaki 45, Kagoshima 46, Okinawa 47, Mie 24, Nara 29).
 - Categories map to the map filters in `KG_TYPE` in index.html
   (see→Виды, eat/shop→Гастрономия, art→История, craft→Активности, stay→Где остановиться).
 - Pin colors = filter type (`TYPE_COLOR`; the filter chips show the same dots). A pin takes the color of its first type, or of its
@@ -139,7 +145,8 @@ and `GROUPS` (themes of the article list; must cover every article).
   Yunotsu (Shimane 16), Hinomisaki (Shimane 10).
   Kyushu: Kaneda castle, Sasebo (x2), Karatsu, Arita (x2), Yutoku, Dazaifu, Ohori, Yanagawa, Kurokawa, Aso, Amakusa, Yufuin,
   Usuki, Usa, Kuju, Aoshima, Saitobaru, Takachiho, Sakurajima, Sengan-en, Ibusuki, Kirishima, Yakushima; Okinawa: Shuri, Makishi,
-  soba, Kerama, Zamami, Taketomi, Ishigaki, Miyako, Yonaguni, cape Hedo.
+  soba, Kerama, Zamami, Taketomi, Ishigaki, Miyako, Yonaguni, cape Hedo; Mie: Toba ama (14), cb-ise removed (01's inner-shrine
+  pin replaces it, Ren); Nara: Asuka (01), Yoshino (02), Horyuji (03), Nara park (04).
   Known offsets of older pins, left as they are (Ren): r2-kanedajo, ky3-usuki, ky2-obi, ky3-satsuma, cs5-saga-yutoku (~20 km);
   titles: ky-kurokawa «Онсэн Куроками», ky5-saga-arita2 «Керамические печи Имари» (linked to Arita 05), ky-kuju (old park name).
   Okinawa inset: article pins show once Okinawa is open; close pins merge into numbered markers that zoom step by step
