@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LAMP BAR: бар в Наре, где лучший бармен мира смешивает коктейли из нарского сакэ и чая</title>
+<meta name="description" content="Бар в квартале Нарамати, хозяин которого в 2015 году выиграл мировой конкурс барменов: три комнаты вокруг света, вермут из сакэ и коктейли с нарским чаем.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+body{margin:0;background:#fff}
+.mj-article{--ink:#141414;--muted:#5C5C5C;--line:#DADADA;--red:#B3261E;--paper:#FFFFFF;
+  background:var(--paper);color:var(--ink);font-family:"PT Serif",Georgia,"Times New Roman",serif;font-size:19px;line-height:1.7;padding-block:0 96px}
+.mj-article *{box-sizing:border-box}
+.mj-article img{display:block;max-width:100%;height:auto}
+.mj-article a{color:var(--red);text-underline-offset:3px}
+.mj-article a:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.mj-head{max-width:980px;margin:0 auto;padding:64px 16px 40px;text-align:center}
+.mj-eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 18px}
+.mj-article h1{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:clamp(34px,6vw,64px);line-height:1.08;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.mj-hero{max-width:1280px;margin:0 auto}
+.mj-article .mj-hero img{width:100%;aspect-ratio:16/8;object-fit:cover}
+.mj-article .mj-hero figcaption{margin:0;padding:10px 16px 0;font-size:14px;font-style:italic;color:var(--muted)}
+.mj-body{max-width:712px;margin:0 auto;padding:56px 16px 0}
+.mj-article .lede{font-size:23px;line-height:1.55;margin:0 0 32px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.mj-article .lede::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:92px;line-height:.8;padding:8px 10px 0 0;color:var(--red)}
+.mj-article .kicker{margin:72px 0 0;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);text-align:center}
+.mj-article h2{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-style:italic;font-size:clamp(28px,4vw,40px);line-height:1.15;text-align:center;margin:12px 0 28px;text-wrap:balance}
+.mj-article h3{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:24px;line-height:1.3;margin:32px 0 8px}
+.mj-article p{margin:0 0 16px}
+.mj-article blockquote{margin:32px 0;padding:0 0 0 24px;border-left:3px solid var(--red);font-size:21px;font-style:italic;line-height:1.55}
+.mj-article blockquote p{margin:0 0 8px}
+.mj-article blockquote cite{display:block;font-size:15px;font-style:normal;color:var(--muted)}
+.mj-article figure{margin:36px -110px}
+.mj-article figure img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.mj-article figure.obj img{object-fit:contain;background:#fff;padding:24px;border:1px solid var(--line)}
+.mj-article figure.tall img{aspect-ratio:auto}
+.mj-article figcaption{font-size:14px;font-style:italic;color:var(--muted);margin:10px 110px 0;line-height:1.5}
+.mj-article .mj-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mj-article .mj-pair img{aspect-ratio:4/5}
+.mj-article .mj-pair figcaption{grid-column:1/-1}
+.mj-article .mj-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:36px -110px}
+.mj-article .mj-gallery figure{margin:0}
+.mj-article .mj-gallery img{aspect-ratio:1/1}
+.mj-article .mj-gallery figcaption{margin:6px 0 0;font-size:13px}
+@media (max-width:960px){.mj-article figure,.mj-article .mj-gallery{margin:28px 0}.mj-article figcaption{margin:10px 0 0}}
+@media (max-width:560px){.mj-article .mj-gallery{grid-template-columns:1fr 1fr}.mj-article .mj-pair{grid-template-columns:1fr}.mj-article .lede{font-size:20px}}
+.mj-article .info{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:12px 0;margin:32px 0;font-size:16px}
+.mj-article .info .info-title{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:20px;margin:0 0 8px}
+.mj-article .info dl{margin:0;display:grid;gap:4px}
+.mj-article .info dl div{display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px}
+.mj-article .info dt{font-weight:700}
+.mj-article .info dd{margin:0;overflow-wrap:anywhere}
+@media (max-width:480px){.mj-article .info dl div{grid-template-columns:1fr;gap:0}}
+.mj-article ul,.mj-article ol{margin:0 0 16px;padding-left:24px}
+.mj-article li{margin:6px 0}
+.mj-article li::marker{color:var(--red);font-weight:700}
+.mj-article .profile{background:#F6F4F1;padding:20px 24px;margin:32px 0;font-size:16px;line-height:1.6}
+.mj-article .profile b{font-family:"Playfair Display",Georgia,serif;font-size:19px;display:block;margin-bottom:4px}
+</style>
+</head>
+<body>
+<!-- site-bar -->
+<style>.mj-hero{margin-left:auto!important;margin-right:auto!important}  /* center the hero photo on wide screens */
+p.credits{font-size:14px;line-height:1.5;color:var(--muted,#5C5C5C);margin:48px 0 0}  /* closing "Фото: …" line: small and quiet */
+.site-bar{position:sticky;top:0;z-index:1000;background:rgba(252,252,250,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(22,24,26,.14);font-family:Inter,system-ui,sans-serif}
+.site-bar .in{max-width:1180px;margin:0 auto;padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.site-bar a{text-decoration:none;color:#16181A;font-size:14px}.site-bar .brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;font-weight:600}
+.site-bar .back{color:#1E3050}.site-bar .back:hover{color:#B3352D}</style>
+<div class="site-bar"><div class="in"><a class="brand" href="../../../index.html">Omamori Concierge</a><a class="back" href="../index.html#nara-map">&larr; Нара на карте</a></div></div>
+<!-- /site-bar -->
+
+<article class="mj-article">
+
+  <header class="mj-head">
+    <p class="mj-eyebrow">Префектура Нара · Нара · бар</p>
+    <h1>LAMP BAR: бар в Наре, где лучший бармен мира смешивает коктейли из нарского сакэ и чая</h1>
+  </header>
+
+  <figure class="mj-hero" style="margin:0">
+    <img src="images/03.jpg" alt="Пять коктейлей в разных бокалах на стойке бара" loading="eager">
+    <figcaption>Пять коктейлей LAMP BAR выстроились на стойке, за ними полки с бокалами.</figcaption>
+  </figure>
+
+  <div class="mj-body">
+
+    <p class="lede">В 2015 году лучшим барменом мира стал хозяин небольшого бара из Нары. С тех пор в LAMP BAR едут со всего света, а он сам решил доказать, что древняя столица Японии может задавать тон барной культуре всей страны.</p>
+
+    <p class="kicker">Чемпион</p>
+    <h2>Бармен из Нары против 20 000 соперников</h2>
+    <p>Бар хорош тем, что здесь можно не только выпить, но и попробовать незнакомый напиток, а за разговором с барменом узнать его историю. В LAMP BAR, в квартале Нарамати старого города Нары, за стойкой стоит человек, которого называют лучшим барменом мира.</p>
+    <figure>
+      <img src="images/04.jpg" alt="Бармен Митито Канэко за стойкой своего бара" loading="lazy">
+      <figcaption>Митито Канэко родился в 1981 году в префектуре Нара, учился в барах Вакаямы и Нары и в 2011 году открыл LAMP BAR.</figcaption>
+    </figure>
+    <p>Митито Канэко открыл LAMP BAR в 2011 году. В 2015 году он победил в WORLD CLASS, крупнейшем мировом конкурсе барменов. Конкурс проводят с 2009 года под девизом «Raising the Bar»: поднять ценность барной культуры во всём мире и через бар рассказывать гостям, как прекрасны хорошие напитки. В 2015 году в нём участвовали около 20 000 барменов из 54 стран.</p>
+    <p>Подготовка пришлась на самое неудобное время. В январе бар переехал в новое помещение, работал в нём Канэко совсем один, а в феврале и апреле проходили японские отборочные туры, к которым нужно было придумать собственные коктейли.</p>
+    <blockquote>
+      <p>«За границей я тогда почти не бывал и по-английски толком не говорил. Но шанс в жизни не приходит тогда, когда тебе удобно. Чтобы его поймать, надо быть готовым в любой момент. Поэтому я решил: как бы ни было тяжело, раз шанс пришёл, я его беру»</p>
+      <cite>Митито Канэко</cite>
+    </blockquote>
+    <p>Он стал представителем Японии и поехал на мировой финал в ЮАР. Финал состоял из шести дисциплин, и Канэко выиграл общий зачёт: судьи отметили его изобретательность и подачу, где были и юмор, и сюрприз. В задании «10 разных коктейлей за 10 минут» он успел сделать 12, включая бокалы для переводчиков, и ещё поднять с ними тост. По его словам, раньше он так волновался, что дрожали руки, но со второго отборочного тура был настолько занят, что на волнение не осталось сил, и он начал свободно импровизировать.</p>
+    <p>После победы жизнь Канэко изменилась. Чемпион становится лицом конкурса и ездит по миру с лекциями: к 2020 году он побывал за границей уже 60 раз и продолжает летать до сих пор.</p>
+    <figure>
+      <img src="images/01.jpg" alt="Барная стойка LAMP BAR с бутылками и бокалами" loading="lazy">
+      <figcaption>Стойка LAMP BAR. Бармен, который работает вместе с Канэко, вошёл в десятку лучших японского финала WORLD CLASS 2017.</figcaption>
+    </figure>
+    <p class="kicker">Пространство</p>
+    <h2>Три комнаты «вокруг света»</h2>
+    <p>В 2015 году бар переехал из помещения на 12 мест в нынешнее, на 26 мест. Новое пространство Канэко построил вокруг идеи «around the world» и разделил его на три комнаты. Главный зал рассказывает о том, как появились коктейли. В комнате путешествий главная тема это дорожный сундук, в каких когда-то развозили напитки по разным странам. Зеркальная комната посвящена истории алкоголя.</p>
+    <blockquote>
+      <p>«Мне хотелось, чтобы гостей со всего мира трогали не только коктейли, но и само пространство»</p>
+      <cite>Митито Канэко</cite>
+    </blockquote>
+    <figure>
+      <img src="images/05.jpg" alt="Посетители за стойкой главного зала и бармен у дальнего края" loading="lazy">
+      <figcaption>Стойка главного зала. Справа в глубине коктейль подаёт сам Канэко. В день съёмки почти половина гостей были иностранцами.</figcaption>
+    </figure>
+    <figure class="mj-pair">
+      <img src="images/07.jpg" alt="Мягкие диваны в главном зале бара" loading="lazy">
+      <img src="images/06.jpg" alt="Старый дорожный сундук в стене бара" loading="lazy">
+      <figcaption>Слева: в главном зале кроме стойки есть диваны для компаний. Справа: вход в комнату путешествий спрятан за этим сундуком.</figcaption>
+    </figure>
+    <p>Бар занимает первый этаж небольшого здания. За место здесь берут чардж: в 2024 году он составлял 550 иен.</p>
+    <figure>
+      <img src="images/15.jpg" alt="Вход в LAMP BAR с тяжёлой дверью" loading="lazy">
+      <figcaption>Эта дверь ведёт из обычного вечера в другой мир.</figcaption>
+    </figure>
+    <p class="kicker">Взгляд</p>
+    <h2>Бары Японии и «перевод культуры»</h2>
+    <p>Поездки по миру многое показали Канэко. Бармены разных стран встречаются лично и обмениваются новостями, а японские часто не знают новых ингредиентов и техник. В 2020 году он говорил, что в рейтинг «50 лучших баров Азии» попали лишь около пяти японских баров, тогда как сингапурских там гораздо больше, и опасался, что Япония может отстать.</p>
+    <p>В то же время он заново увидел, насколько хороши японская кухня и ремесло. Чтобы иностранец это понял, нужен «перевод культуры»: объяснять одно и то же разными словами для гостей из разных стран и рассказывать историю напитка через посуду и меню.</p>
+    <blockquote>
+      <p>«Возвращаясь домой, я понял, что японские продукты и способы готовки, которые казались мне обычными, на самом деле очень своеобразны. Даже наши довольно мягкие приправы собраны из тончайших сочетаний, как будто нитку продевают в иголку. Теперь я помню об этом в работе»</p>
+      <cite>Митито Канэко</cite>
+    </blockquote>
+    <p>В 2024 году он хотел не столько действовать ради себя, сколько делиться опытом, и принимал стажёров из Японии и других стран. В ноябре 2023 года Канэко впервые курировал бар за границей: он руководил обновлением бара EAST END в отеле HOTEL PROVERBS Taipei на Тайване.</p>
+    <p>Нару он считает сильным барным городом. По его словам, за первые десять конкурсов WORLD CLASS бармены из Нары восемь раз попадали в десятку лучших, а бары города дружат между собой.</p>
+    <blockquote>
+      <p>«В Наре есть история и самая разная культура, и уровень баров здесь высокий. Хочется поднять японскую барную культуру именно отсюда»</p>
+      <cite>Митито Канэко</cite>
+    </blockquote>
+    <p class="kicker">Своё</p>
+    <h2>Вермут из сакэ</h2>
+    <p>Нару называют родиной японского сакэ, и Канэко решил на этом сыграть. Мечта сделать лучший мартини привела его к собственному вермуту. Вместе с винокурней из города Нара он в 2021 году запустил марку Japanese Sensorium и начал продавать вермут на основе сакэ «Иссуй Химуро».</p>
+    <figure class="mj-pair">
+      <img src="images/14.jpg" alt="Бутылка вермута на основе сакэ" loading="lazy">
+      <img src="images/13.jpg" alt="Бутылка горького апельсинового ликёра" loading="lazy">
+      <figcaption>Слева: вермут из сакэ «Иссуй Химуро» в 2024 году продавался и на сайте Japanese Sensorium. Справа: собственный напиток бара LAMP bitter orange для коктейля Lamp Negroni.</figcaption>
+    </figure>
+    <p class="kicker">Меню</p>
+    <h2>Коктейли, рождённые в Наре</h2>
+    <p>В 2024 году каждый из коктейлей ниже стоил 1650 иен, а цены в меню начинались от 1320 иен. Меню меняется по сезону, и набор напитков бывает другим.</p>
+    <figure>
+      <img src="images/09.jpg" alt="Прозрачный коктейль в наклонённом бокале на керамической подставке" loading="lazy">
+      <figcaption>Colorless: из виски убрали танины, горечь и терпкость, и он стал прозрачным. Шерри, шампанское и лемонграсс дают свежесть и мягкое долгое послевкусие. Подставка собственная, из керамики.</figcaption>
+    </figure>
+    <p>Colorless придумал сам Канэко. В 2020 году его подавали на подставке из переработанной нарской древесины, в 2024 году на керамической.</p>
+    <figure class="tall">
+      <img src="images/02.jpg" alt="Прозрачный коктейль на деревянной подставке" loading="lazy">
+      <figcaption>Коктейль Colorless на основе виски на подставке, сделанной из отходов древесины префектуры Нара (2020 год).</figcaption>
+    </figure>
+    <div class="mj-gallery">
+      <figure><img src="images/08.jpg" alt="Коктейль с чайным листом и томатом в бокале" loading="lazy"><figcaption>Savories: заваренные немного горячей водой листья чая Ямато из Нары дают глубокий вкус, к нему добавлен вкус томата. Основа водка, акценты какао и чёрный чай.</figcaption></figure>
+      <figure><img src="images/10.jpg" alt="Прозрачный мартини в тонком бокале" loading="lazy"><figcaption>Issui Martini: вермут на основе нарского сакэ с лопухом, кипарисом хиноки и полынью, японский ответ классическому мартини.</figcaption></figure>
+      <figure><img src="images/11.jpg" alt="Тёмно-красный коктейль со льдом в стакане" loading="lazy"><figcaption>Lamp Negroni: кампари, настоянный на нарском лопухе, хиноки и цедре грейпфрута, с японским джином и вермутом. Пахнет обожжённым хиноки, землёй и травой.</figcaption></figure>
+      <figure><img src="images/12.jpg" alt="Тёмный коктейль в бокале на ножке" loading="lazy"><figcaption>El Presidente: тёмный ром с нарским обжаренным чаем ходзитя и копчёным китайским чаем лапсанг сушонг. Идею подсказал дымный коктейль, выпитый в России.</figcaption></figure>
+    </div>
+    <section class="info">
+      <p class="info-title">LAMP BAR</p>
+      <dl>
+        <div><dt>Адрес</dt><dd>префектура Нара, Нара, Цунофури-тё, 26, здание Исэя, 1-й этаж</dd></div>
+        <div><dt>Телефон</dt><dd>+81 742-24-2200</dd></div>
+        <div><dt>Часы работы</dt><dd>17:00–2:00, в праздники до 24:00</dd></div>
+        <div><dt>Выходные</dt><dd>нерегулярно</dd></div>
+        <div><dt>Цены / Вход</dt><dd>чардж 550 иен, коктейли от 1320 иен</dd></div>
+        <div><dt>Сайт</dt><dd><a href="https://www.lamp-bar.com/" target="_blank" rel="noopener">lamp-bar.com</a></dd></div>
+      </dl>
+    </section>
+
+    <p class="credits">Фото: Юта Того, Митито Канэко.</p>
+
+  </div>
+</article>
+<!-- АКТУАЛИЗИРОВАНО
+- НЕ ПРОВЕРЯЛОСЬ: цены и часы по оригиналу 2024 года (営業時間｜17:00〜翌2:00、祝日〜24:00 / 定休日｜不定休 / チャージ550円、カクテル1320円〜)
+- работает, проверено: https://www.lamp-bar.com/ (сайт действует, сообщений о закрытии нет); отзывы 2025 года: https://retty.me/area/PRE29/ARE120/SUB12001/100001267636/
+- 一水氷室: чтение «Иссуй Химуро» по названию коктейля Issui Martini и обычному чтению 氷室; официальная латиница не найдена
+-->
+</body>
+</html>
