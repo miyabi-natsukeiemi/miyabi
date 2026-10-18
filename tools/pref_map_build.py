@@ -193,8 +193,11 @@ def build(key):
                 c['i']=f'articles/{key}/{s}/thumb.jpg'
         return c
     # TOP_SKIP: pin names left off the top map because an older top-map pin there already links to the article
+    # An entry can also be ('NN', name): only that article's pin of that name (two articles may share a pin name).
     top_skip=getattr(C,'TOP_SKIP',set())
-    top_data=dict(cats=CATS,art={s:card(s) for s in titles},pins=[p for p in pins_js if p['n'] not in top_skip])
+    def skipped(p):
+        return any(t==p['n'] if isinstance(t,str) else (t[1]==p['n'] and num.get(t[0]) in p['s']) for t in top_skip)
+    top_data=dict(cats=CATS,art={s:card(s) for s in titles},pins=[p for p in pins_js if not skipped(p)])
     section_top=f'<!-- {key}-japan-pins --><script>window.{C.TOP_VAR}={json.dumps(top_data,ensure_ascii=False)};</script><!-- /{key}-japan-pins -->\n'
     if f'<!-- {key}-japan-pins -->' in top:
         top=re.sub(rf'<!-- {key}-japan-pins -->.*?<!-- /{key}-japan-pins -->\n',lambda m:section_top,top,flags=re.S)
