@@ -42,7 +42,7 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
   For generated sub-articles (Kagawa, Kochi) the block comes from `BAR` in `tools/pref_map_build.py`.
 - Article styling lives inside each page under `.mj-article` (fonts: Playfair Display + PT Serif, red accent #B3261E). Keep new styles scoped so they don't leak into other pages.
 
-## Prefecture article maps (Kagawa, Kochi, Ehime, Tokushima, Hiroshima, Okayama, Yamaguchi, Tottori, Shimane, Hyogo, Wakayama, Osaka, Shiga, Kyushu and Okinawa, Mie, Nara, Kyoto, Ishikawa, Toyama, Niigata, Nagano, Gifu, Fukui, Shizuoka, Aichi)
+## Prefecture article maps (Kagawa, Kochi, Ehime, Tokushima, Hiroshima, Okayama, Yamaguchi, Tottori, Shimane, Hyogo, Wakayama, Osaka, Shiga, Kyushu and Okinawa, Mie, Nara, Kyoto, Ishikawa, Toyama, Niigata, Nagano, Gifu, Fukui, Shizuoka, Aichi, Yamanashi)
 
 Prefectures with their own sub-articles get the same three things, all **generated** by
 `tools/pref_map_build.py <pref>` from a config in `tools/prefs/<pref>.py`:
@@ -137,9 +137,13 @@ and `GROUPS` (themes of the article list; must cover every article).
     (68 on the top map, see `TOP_SKIP`). No MERGE, no DROP; 08 has no pin for Sumiya Bunjiro (no visits for individuals, Ren).
     Kiyosu castle is in 06 and 30 (two pins ~25 m apart). 23–30 are warlords of Owari and Mikawa with places in Aichi only;
     30 Fukushima Masanori also has a Nagano article (`nagano/fukushima-masanori`, linked). 16 is `matsuzuki` (まつ月＝まつづき).
+  - Yamanashi (19): 22 articles by Claude (2026-10-19, quality-checked and photo-checked the same day; cards not checked yet), 40 pins
+    (38 on the top map, see `TOP_SKIP`). No MERGE, no DROP. No 23 (Wanoka sweets) and 24 (Totsuka vinegar): nowhere to visit.
+    塩山 is «Эндзан». Slugs follow the official names: 07 `zen-bed-bogetsuan` (望月庵＝ぼうげつあん), 11 `mt-shakushi-gateway-camp`.
+    Fufu is written «Fufu» as in Shizuoka 01. 04: the Yoshida trail has a fee and a cap at the fifth station since 2024 (said in the text).
 - `TOP_SKIP` (optional, a set of pin names, or `('NN', name)` to hide only that article's pin when two articles share a name): pins shown on the prefecture page only, because an older top-map pin at that place
   already links to the article (Osaka: Храм Ситэнно-дзи → `kn3-osaka-shitennoji`; also Yutoku Inari, Dazaifu, Ohori Terrace,
-  Nakadake, Usuki Buddhas, Usa, Kuju, Aoshima, Saitobaru, Sengan-en, the Ibusuki sand baths, Nara's Kimpusen-ji → `kn-yoshino`, Kyoto's Fushimi Inari → `kyo-fushimi`, Nijo castle → `kn3-kyoto-nijo`, Ishikawa's Abare festival → `r2-abare-matsuri`, Natadera of 26, Toyama's Amaharashi coast → `cb-amaharashi`, Niigata's Sado Kinzan → `cb-sado`, Gifu castle → `r2-gifucastle`, Gujo-odori → `cb2-gujo-hachiman`, Fukui's dinosaur museum of 04, Aichi's Inuyama castle → `cb2-inuyama`).
+  Nakadake, Usuki Buddhas, Usa, Kuju, Aoshima, Saitobaru, Sengan-en, the Ibusuki sand baths, Nara's Kimpusen-ji → `kn-yoshino`, Kyoto's Fushimi Inari → `kyo-fushimi`, Nijo castle → `kn3-kyoto-nijo`, Ishikawa's Abare festival → `r2-abare-matsuri`, Natadera of 26, Toyama's Amaharashi coast → `cb-amaharashi`, Niigata's Sado Kinzan → `cb-sado`, Gifu castle → `r2-gifucastle`, Gujo-odori → `cb2-gujo-hachiman`, Fukui's dinosaur museum of 04, Aichi's Inuyama castle → `cb2-inuyama`, Yamanashi's Oshino Hakkai → `cb-oshinohakkai` and Fuji fifth station → `cb2-fuji5th`).
 - Categories: see / stay / eat / shop / art / craft. `approx=1` draws a dashed circle "Точка примерная". Ren accepted approximate positions.
 - Map tiles: OpenStreetMap standard tiles (CARTO tiles need an API key).
 - Adding a prefecture: write `tools/prefs/<pref>.py`, add `[window.<PREF>_PINS, <code>, '<prefix>']` to `PREF_SETS` in index.html.
@@ -147,7 +151,7 @@ and `GROUPS` (themes of the article list; must cover every article).
 ### On the top-page Japan map
 - Article pins appear only once their prefecture is open (`clusterOf` = prefecture code: Kagawa 37, Kochi 39, Ehime 38,
   Tokushima 36, Hiroshima 34, Okayama 33, Yamaguchi 35, Tottori 31, Shimane 32, Hyogo 28, Wakayama 30, Osaka 27, Shiga 25,
-  Fukuoka 40, Saga 41, Nagasaki 42, Kumamoto 43, Oita 44, Miyazaki 45, Kagoshima 46, Okinawa 47, Mie 24, Nara 29, Kyoto 26, Ishikawa 17, Toyama 16, Niigata 15, Nagano 20, Gifu 21, Fukui 18, Shizuoka 22, Aichi 23).
+  Fukuoka 40, Saga 41, Nagasaki 42, Kumamoto 43, Oita 44, Miyazaki 45, Kagoshima 46, Okinawa 47, Mie 24, Nara 29, Kyoto 26, Ishikawa 17, Toyama 16, Niigata 15, Nagano 20, Gifu 21, Fukui 18, Shizuoka 22, Aichi 23, Yamanashi 19).
 - Categories map to the map filters in `KG_TYPE` in index.html
   (see→Виды, eat/shop→Гастрономия, art→История, craft→Активности, stay→Где остановиться).
 - Pin colors = filter type (`TYPE_COLOR`; the filter chips show the same dots). A pin takes the color of its first type, or of its
@@ -180,7 +184,9 @@ and `GROUPS` (themes of the article list; must cover every article).
   Togakushi (21), all at other points than the article pins, so no TOP_SKIP; Gifu: castle (01), Gujo-Hachiman (02), Hida-Furukawa (03);
   Fukui: Echizen crab (01), Ichijodani (04); `cb-dino` (~10 km off) removed, 03's dinosaur museum pin shows instead;
   Shizuoka: Atami (01), Izu onsen (04 Asaba), Nihondaira (14), ~1 km from the article pins, so no TOP_SKIP;
-  Aichi: Inuyama castle (01, article pin TOP_SKIP), Arimatsu (02), Seto (04).
+  Aichi: Inuyama castle (01, article pin TOP_SKIP), Arimatsu (02), Seto (04);
+  Yamanashi: Kawaguchiko (01), Oshino Hakkai and Fuji fifth station (04, article pins TOP_SKIP), Katsunuma vineyards (05);
+  `cb2-shosenkyo` stood ~17 km off near Enzan and was moved to the gorge (35.7426, 138.5653) on 2026-10-19 (Ren).
   Known offsets of older pins, left as they are (Ren): r2-kanedajo, ky3-usuki, ky2-obi, ky3-satsuma, cs5-saga-yutoku (~20 km);
   titles: ky-kurokawa «Онсэн Куроками», ky5-saga-arita2 «Керамические печи Имари» (linked to Arita 05), ky-kuju (old park name).
   Okinawa inset: article pins show once Okinawa is open; close pins merge into numbered markers that zoom step by step
