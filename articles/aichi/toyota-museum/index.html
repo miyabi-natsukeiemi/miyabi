@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Художественный музей Тоёты: сетка, вода и рассеянный свет Ёсио Танигути</title>
+<meta name="description" content="Музей на холме в Тоёте: здание Ёсио Танигути с фасадом над водой, сад Питера Уокера, чайный павильон и залы, где искусство смотрят при меняющемся свете.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+body{margin:0;background:#fff}
+.mj-article{--ink:#141414;--muted:#5C5C5C;--line:#DADADA;--red:#B3261E;--paper:#FFFFFF;
+  background:var(--paper);color:var(--ink);font-family:"PT Serif",Georgia,"Times New Roman",serif;font-size:19px;line-height:1.7;padding-block:0 96px}
+.mj-article *{box-sizing:border-box}
+.mj-article img{display:block;max-width:100%;height:auto}
+.mj-article a{color:var(--red);text-underline-offset:3px}
+.mj-article a:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.mj-head{max-width:980px;margin:0 auto;padding:64px 16px 40px;text-align:center}
+.mj-eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 18px}
+.mj-article h1{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:clamp(34px,6vw,64px);line-height:1.08;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.mj-hero{max-width:1280px;margin:0 auto}
+.mj-article .mj-hero img{width:100%;aspect-ratio:16/8;object-fit:cover}
+.mj-article .mj-hero figcaption{margin:0;padding:10px 16px 0;font-size:14px;font-style:italic;color:var(--muted)}
+.mj-body{max-width:712px;margin:0 auto;padding:56px 16px 0}
+.mj-article .lede{font-size:23px;line-height:1.55;margin:0 0 32px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.mj-article .lede::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:92px;line-height:.8;padding:8px 10px 0 0;color:var(--red)}
+.mj-article .kicker{margin:72px 0 0;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);text-align:center}
+.mj-article h2{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-style:italic;font-size:clamp(28px,4vw,40px);line-height:1.15;text-align:center;margin:12px 0 28px;text-wrap:balance}
+.mj-article h3{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:24px;line-height:1.3;margin:32px 0 8px}
+.mj-article p{margin:0 0 16px}
+.mj-article blockquote{margin:32px 0;padding:0 0 0 24px;border-left:3px solid var(--red);font-size:21px;font-style:italic;line-height:1.55}
+.mj-article blockquote p{margin:0 0 8px}
+.mj-article blockquote cite{display:block;font-size:15px;font-style:normal;color:var(--muted)}
+.mj-article figure{margin:36px -110px}
+.mj-article figure img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.mj-article figure.obj img{object-fit:contain;background:#fff;padding:24px;border:1px solid var(--line)}
+.mj-article figure.tall img{aspect-ratio:auto}
+.mj-article figcaption{font-size:14px;font-style:italic;color:var(--muted);margin:10px 110px 0;line-height:1.5}
+.mj-article .mj-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mj-article .mj-pair img{aspect-ratio:4/5}
+.mj-article .mj-pair figcaption{grid-column:1/-1}
+.mj-article .mj-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:36px -110px}
+.mj-article .mj-gallery figure{margin:0}
+.mj-article .mj-gallery img{aspect-ratio:1/1}
+.mj-article .mj-gallery figcaption{margin:6px 0 0;font-size:13px}
+@media (max-width:960px){.mj-article figure,.mj-article .mj-gallery{margin:28px 0}.mj-article figcaption{margin:10px 0 0}}
+@media (max-width:560px){.mj-article .mj-gallery{grid-template-columns:1fr 1fr}.mj-article .mj-pair{grid-template-columns:1fr}.mj-article .lede{font-size:20px}}
+.mj-article .info{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:12px 0;margin:32px 0;font-size:16px}
+.mj-article .info .info-title{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:20px;margin:0 0 8px}
+.mj-article .info dl{margin:0;display:grid;gap:4px}
+.mj-article .info dl div{display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px}
+.mj-article .info dt{font-weight:700}
+.mj-article .info dd{margin:0;overflow-wrap:anywhere}
+@media (max-width:480px){.mj-article .info dl div{grid-template-columns:1fr;gap:0}}
+.mj-article ul,.mj-article ol{margin:0 0 16px;padding-left:24px}
+.mj-article li{margin:6px 0}
+.mj-article li::marker{color:var(--red);font-weight:700}
+.mj-article .profile{background:#F6F4F1;padding:20px 24px;margin:32px 0;font-size:16px;line-height:1.6}
+.mj-article .profile b{font-family:"Playfair Display",Georgia,serif;font-size:19px;display:block;margin-bottom:4px}
+</style>
+</head>
+<body>
+<!-- site-bar -->
+<style>.mj-hero{margin-left:auto!important;margin-right:auto!important}  /* center the hero photo on wide screens */
+p.credits{font-size:14px;line-height:1.5;color:var(--muted,#5C5C5C);margin:48px 0 0}  /* closing "Фото: …" line: small and quiet */
+.site-bar{position:sticky;top:0;z-index:1000;background:rgba(252,252,250,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(22,24,26,.14);font-family:Inter,system-ui,sans-serif}
+.site-bar .in{max-width:1180px;margin:0 auto;padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.site-bar a{text-decoration:none;color:#16181A;font-size:14px}.site-bar .brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;font-weight:600}
+.site-bar .back{color:#1E3050}.site-bar .back:hover{color:#B3352D}</style>
+<div class="site-bar"><div class="in"><a class="brand" href="../../../index.html">Omamori Concierge</a><a class="back" href="../index.html#aichi-map">&larr; Айти на карте</a></div></div>
+<!-- /site-bar -->
+
+<article class="mj-article">
+
+  <header class="mj-head">
+    <p class="mj-eyebrow">Префектура Айти · Тоёта · архитектура</p>
+    <h1>Художественный музей Тоёты: сетка, вода и рассеянный свет Ёсио Танигути</h1>
+  </header>
+
+  <figure class="mj-hero" style="margin:0">
+    <img src="images/01.jpg" alt="Светлое здание музея отражается в широком плоском бассейне на закате" loading="eager">
+    <figcaption>Длинный фасад музея стоит над водой, и в сумерках здание отражается в ней целиком.</figcaption>
+  </figure>
+
+  <div class="mj-body">
+
+    <p class="lede">Художественный музей города Тоёта стоит на холме среди зелени, и сюда едут не только ради коллекции. Здание спроектировал Ёсио Танигути, один из самых известных в Японии архитекторов музеев, а сад вокруг создал американский ландшафтный архитектор Питер Уокер.</p>
+
+    <p class="kicker">Авторы</p>
+    <h2>Архитектор и садовник</h2>
+    <p>Ёсио Танигути (1937–2024) родился в Токио. Он окончил инженерный факультет университета Кэйо, в 1964 году получил диплом архитектора в Гарварде, работал в бюро Кэндзо Тангэ и в 1975 году открыл собственную мастерскую. Среди его работ музей современного искусства Гэнъитиро Инокумы в Маругамэ (1991), галерея сокровищ храма Хорюдзи при Токийском национальном музее (1999), реконструкция Музея современного искусства в Нью-Йорке (2004) и новый корпус Киотского национального музея (2014). Танигути дважды получал премию Архитектурного института Японии и был удостоен премии «Премиум Империале».</p>
+    <p>Питер Уокер родился в 1932 году в Калифорнии и работает по всему миру. В Японии вместе с Аратой Исодзаки он проектировал парк научного города Харима, а вместе с Танигути площадь перед станцией Маругамэ. В Нью-Йорке он создал мемориал 11 сентября (2011): там на месте башен-близнецов устроены два огромных бассейна, ставшие местом тихой памяти.</p>
+    <p class="kicker">Музей</p>
+    <h2>Место для разговора с искусством</h2>
+    <figure>
+      <img src="images/02.jpg" alt="Вход в музей под низким навесом рядом с белой каменной стеной" loading="lazy">
+      <figcaption>Вход в музей скромный: низкий навес, полумрак и белая стена с названием.</figcaption>
+    </figure>
+    <p>Музей открылся в 1995 году. Его задумали как место, где человек и произведение вступают в диалог и у каждого посетителя складываются свои отношения с работами. В 2015 году, к двадцатилетию, здание обновили под руководством самого Танигути.</p>
+    <p class="kicker">Архитектура</p>
+    <h2>Между старым и новым городом</h2>
+    <p>Музеи Танигути не просто залы для выставок. Он переводит в архитектуру то, как музей собирает коллекцию и как работает, и наделяет здание чертами именно этого места. В Тоёте музей поставлен на холм, где одинаково хорошо смотрятся и здание, и природа, а перепад высот участка стал частью замысла.</p>
+    <figure>
+      <img src="images/03.jpg" alt="Бронзовая скульптура на газоне под деревьями у стены музея" loading="lazy">
+      <figcaption>Скульптуры расставлены прямо на газоне, среди деревьев, у серо-зелёных стен музея.</figcaption>
+    </figure>
+    <blockquote>
+      <p>«Для меня важно проектировать здание, которое подходит своему месту и опирается на историю и природу участка. С участка видна угловая башня замка тех времён, когда Тоёта ещё называлась Коромо. А с противоположной стороны открывается вид на новый город. Там, где старый город встречается с новым, я устроил широкую террасу с кафе и поставил скульптуры, чтобы музей стал одним целым с окружающим пейзажем»</p>
+      <cite>Ёсио Танигути</cite>
+    </blockquote>
+    <p>Вокруг здания приятно просто гулять. Музей открывается не сразу: поднимаешься по дорожке шаг за шагом, по пути видишь скульптуры под открытым небом и блики света на воде, и только потом на фоне неба появляется само здание.</p>
+    <figure>
+      <img src="images/04.jpg" alt="Круглый бассейн на площадке перед низким светлым зданием музея под синим небом" loading="lazy">
+      <figcaption>По дороге к музею встречается круглый бассейн, а здание постепенно вырастает на фоне неба.</figcaption>
+    </figure>
+    <h3>Фасад над водой</h3>
+    <p>Перед зданием раскинулась гладь воды, по которой бегут круги. Над ней тянется огромный горизонтальный фасад, и его строгая сетка производит сильное впечатление. Вечером залы с молочными стёклами начинают светиться изнутри, и музей, словно фонарь, повисает над водой. В этот момент здание само становится произведением.</p>
+    <figure class="tall">
+      <img src="images/05.jpg" alt="Угол здания, облицованного серо-зелёными каменными плитами, под широким навесом" loading="lazy">
+      <figcaption>Стены облицованы крупными каменными плитами, и сетка швов повторяет сетку всего фасада.</figcaption>
+    </figure>
+    <p class="kicker">Интерьер</p>
+    <h2>Свет, который ведёт по залам</h2>
+    <p>После огромного фасада вход кажется подчёркнуто скромным, и в этом контрасте есть своя игра. Потолок здесь низкий, свет приглушённый, а молочное матовое стекло мягко пропускает дневной свет снаружи. Справа зал временных выставок, слева светлый зал высотой в несколько этажей. По лестнице можно подняться в ещё более просторный и светлый зал.</p>
+    <figure class="tall">
+      <img src="images/06.jpg" alt="Белый зал высотой в несколько этажей с лестницей и стеклянными перилами" loading="lazy">
+      <figcaption>Белый многосветный зал с лестницей: отсюда начинается путь по залам.</figcaption>
+    </figure>
+    <p>Маршрут построен на смене света. Сначала попадаешь в открытое пространство, полное света, потом в небольшие залы, потом снова в светлый простор. Из-за этого на искусство смотришь каждый раз немного иначе.</p>
+    <p>В лаунже и в зале Сэцуро Такахаси снаружи внутрь продолжается пол из тёмно-зелёного сланца. Граница между улицей и залом стирается, а пейзаж в проёме окна выглядит как ещё одна картина.</p>
+    <p class="kicker">Сад</p>
+    <h2>Круг и квадрат Питера Уокера</h2>
+    <figure>
+      <img src="images/07.jpg" alt="Длинная светлая стена с серо-зелёными плитами на фоне деревьев и неба" loading="lazy">
+      <figcaption>Пологий пандус и длинные стены подчёркивают перспективу и простор участка.</figcaption>
+    </figure>
+    <p>Сад в два яруса построен на противопоставлениях: круг и квадрат, строгая геометрия и свободная форма. На дне верхнего пруда и в саду лежит рисунок из полос, нижний сад расчерчен шахматной клеткой из газона и гравия, а скульптуры расставлены так, чтобы эту геометрию сбить. Пологий пандус и длинная каменная дорожка усиливают перспективу, и пространство кажется ещё шире.</p>
+    <p>Когда-то на этом месте стоял замок Ситисю, резиденция правителей княжества Коромо. В углу участка восстановлена его угловая башня.</p>
+    <p class="kicker">Чайный павильон</p>
+    <h2>«Додзиэн»</h2>
+    <figure>
+      <img src="images/08.jpg" alt="Деревянный чайный павильон с широкой крышей среди клёнов и мха" loading="lazy">
+      <figcaption>Деревянный чайный павильон в стиле сукия тоже построил Танигути.</figcaption>
+    </figure>
+    <p>К западу от музея, на участке, где стоял замок княжества Коромо, находится чайный павильон «Додзиэн». Холм здесь когда-то называли Додзияма. Деревянное здание в стиле сукия спроектировал тот же Танигути. После встречи с искусством здесь можно не спеша посидеть и посмотреть, как меняется сад в разные времена года.</p>
+    <p>В музее есть ресторан с видом на город и музейный магазин, где находишь и то, что искал, и то, о чём не думал.</p>
+    <figure>
+      <img src="images/09.jpg" alt="Здание музея ночью светится и отражается в тёмной воде" loading="lazy">
+      <figcaption>После заката залы светятся изнутри, и музей похож на тёплый фонарь над водой.</figcaption>
+    </figure>
+    <p>Архитектура здесь служит рамой для искусства, но и сама по себе стоит поездки. Большой пруд, терраса со скульптурами, вид на город: в Художественном музее Тоёты легко провести весь день, никуда не торопясь. Входной билет на постоянную экспозицию в 2022 году стоил 300 иен.</p>
+    <section class="info">
+      <p class="info-title">Художественный музей города Тоёта</p>
+      <dl>
+        <div><dt>Адрес</dt><dd>префектура Айти, Тоёта, Косака-хонмати, 8-5-1</dd></div>
+        <div><dt>Телефон</dt><dd>+81 565-34-6610</dd></div>
+        <div><dt>Часы работы</dt><dd>10:00–17:30, вход до 17:00; ресторан 10:00–17:30 (обед 10:30–15:00); чайный павильон «Додзиэн» 11:00–16:00</dd></div>
+        <div><dt>Выходные</dt><dd>понедельник (кроме праздничных дней), дни смены экспозиции, новогодние праздники</dd></div>
+        <div><dt>Цены / Вход</dt><dd>постоянная экспозиция: взрослые 300 иен, студенты и старшеклассники 200 иен, ученики средней школы и младше бесплатно; группы от 20 человек 250 и 150 иен; временные выставки по отдельной цене</dd></div>
+        <div><dt>Сайт</dt><dd><a href="https://www.museum.toyota.aichi.jp/" target="_blank" rel="noopener">museum.toyota.aichi.jp</a></dd></div>
+      </dl>
+    </section>
+
+  </div>
+</article>
+<!-- АКТУАЛИЗИРОВАНО
+- НЕ ПРОВЕРЯЛОСЬ: цены и часы по оригиналу 2022 года
+- музей работает, проверено: https://www.museum.toyota.aichi.jp/ (с 24 сентября по 23 октября 2026 года весь музей закрыт на смену экспозиции, парковка закрыта)
+- «Додзиэн» (童子苑) и ресторан: отдельных сведений о работе в 2026 году не найдено, оставлено по оригиналу
+- годы жизни Ёсио Танигути: в оригинале только 1937 год рождения, год смерти 2024 общеизвестен
+- 七州城 = замок Ситисю, 挙母藩 = княжество Коромо (в оригинале опечатка 拳母藩), 髙橋節郎館 = зал Сэцуро Такахаси
+- в карте опущены льготы (жители Тоёты, инвалиды и др.), см. сайт музея
+-->
+</body>
+</html>
