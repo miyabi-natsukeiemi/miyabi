@@ -42,7 +42,7 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
   For generated sub-articles (Kagawa, Kochi) the block comes from `BAR` in `tools/pref_map_build.py`.
 - Article styling lives inside each page under `.mj-article` (fonts: Playfair Display + PT Serif, red accent #B3261E). Keep new styles scoped so they don't leak into other pages.
 
-## Prefecture article maps (Kagawa, Kochi, Ehime, Tokushima, Hiroshima, Okayama, Yamaguchi, Tottori, Shimane, Hyogo, Wakayama, Osaka, Shiga, Kyushu and Okinawa, Mie, Nara, Kyoto, Ishikawa, Toyama)
+## Prefecture article maps (Kagawa, Kochi, Ehime, Tokushima, Hiroshima, Okayama, Yamaguchi, Tottori, Shimane, Hyogo, Wakayama, Osaka, Shiga, Kyushu and Okinawa, Mie, Nara, Kyoto, Ishikawa, Toyama, Niigata)
 
 Prefectures with their own sub-articles get the same three things, all **generated** by
 `tools/pref_map_build.py <pref>` from a config in `tools/prefs/<pref>.py`:
@@ -119,9 +119,11 @@ and `GROUPS` (themes of the article list; must cover every article).
   - Toyama (16): 23 articles by Claude (2026-10-17, quality-checked and fixed 2026-10-18; cards not checked yet), 67 pins.
     No MERGE, no DROP. 氷見 is «Хими». Slugs follow the readings: 14 `kane-no-sanzun-nikoka` (和香＝にこか), 15 `takaoka-ichibamachi`
     (市場街＝いちばまち). Kurobe Gorge Railway reopened to Keyakidaira on 2026-10-01 (07, 09; Keyakidaira is limited to the station area).
+  - Niigata (15): 23 articles by Claude (2026-10-19, quality-checked and photo-checked the same day; cards not checked yet), 81 pins.
+    No MERGE, no DROP. Echigo-Tsumari articles (01–04) describe only works on view all year (the sources are about the 2022 festival).
 - `TOP_SKIP` (optional, a set of pin names, or `('NN', name)` to hide only that article's pin when two articles share a name): pins shown on the prefecture page only, because an older top-map pin at that place
   already links to the article (Osaka: Храм Ситэнно-дзи → `kn3-osaka-shitennoji`; also Yutoku Inari, Dazaifu, Ohori Terrace,
-  Nakadake, Usuki Buddhas, Usa, Kuju, Aoshima, Saitobaru, Sengan-en, the Ibusuki sand baths, Nara's Kimpusen-ji → `kn-yoshino`, Kyoto's Fushimi Inari → `kyo-fushimi`, Nijo castle → `kn3-kyoto-nijo`, Ishikawa's Abare festival → `r2-abare-matsuri`, Natadera of 26, Toyama's Amaharashi coast → `cb-amaharashi`).
+  Nakadake, Usuki Buddhas, Usa, Kuju, Aoshima, Saitobaru, Sengan-en, the Ibusuki sand baths, Nara's Kimpusen-ji → `kn-yoshino`, Kyoto's Fushimi Inari → `kyo-fushimi`, Nijo castle → `kn3-kyoto-nijo`, Ishikawa's Abare festival → `r2-abare-matsuri`, Natadera of 26, Toyama's Amaharashi coast → `cb-amaharashi`, Niigata's Sado Kinzan → `cb-sado`).
 - Categories: see / stay / eat / shop / art / craft. `approx=1` draws a dashed circle "Точка примерная". Ren accepted approximate positions.
 - Map tiles: OpenStreetMap standard tiles (CARTO tiles need an API key).
 - Adding a prefecture: write `tools/prefs/<pref>.py`, add `[window.<PREF>_PINS, <code>, '<prefix>']` to `PREF_SETS` in index.html.
@@ -129,7 +131,7 @@ and `GROUPS` (themes of the article list; must cover every article).
 ### On the top-page Japan map
 - Article pins appear only once their prefecture is open (`clusterOf` = prefecture code: Kagawa 37, Kochi 39, Ehime 38,
   Tokushima 36, Hiroshima 34, Okayama 33, Yamaguchi 35, Tottori 31, Shimane 32, Hyogo 28, Wakayama 30, Osaka 27, Shiga 25,
-  Fukuoka 40, Saga 41, Nagasaki 42, Kumamoto 43, Oita 44, Miyazaki 45, Kagoshima 46, Okinawa 47, Mie 24, Nara 29, Kyoto 26, Ishikawa 17, Toyama 16).
+  Fukuoka 40, Saga 41, Nagasaki 42, Kumamoto 43, Oita 44, Miyazaki 45, Kagoshima 46, Okinawa 47, Mie 24, Nara 29, Kyoto 26, Ishikawa 17, Toyama 16, Niigata 15).
 - Categories map to the map filters in `KG_TYPE` in index.html
   (see→Виды, eat/shop→Гастрономия, art→История, craft→Активности, stay→Где остановиться).
 - Pin colors = filter type (`TYPE_COLOR`; the filter chips show the same dots). A pin takes the color of its first type, or of its
@@ -157,7 +159,8 @@ and `GROUPS` (themes of the article list; must cover every article).
   soba, Kerama, Zamami, Taketomi, Ishigaki, Miyako, Yonaguni, cape Hedo; Mie: Toba ama (14), cb-ise removed (01's inner-shrine
   pin replaces it, Ren); Nara: Asuka (01), Yoshino (02), Horyuji (03), Nara park (04); Kyoto: Fushimi Inari (01), Arashiyama (02),
   Nijo (09), Nishijin (12), Kamo river dinner (07), Uji (13), Ohara (15); Ishikawa: Abare festival (01); `r2-natadera` (~10 km off)
-  removed, 22's Natadera pin shows instead (as cb-ise in Mie); Toyama: Tateyama snow walls (01), Toyama bay (02), Amaharashi (18).
+  removed, 22's Natadera pin shows instead (as cb-ise in Mie); Toyama: Tateyama snow walls (01), Toyama bay (02), Amaharashi (18); Niigata: Echigo-Tsumari (01), Sado (05), sake (07);
+  `cb-kiyotsu` (~10 km off) removed, 04's Tunnel of Light pin shows instead.
   Known offsets of older pins, left as they are (Ren): r2-kanedajo, ky3-usuki, ky2-obi, ky3-satsuma, cs5-saga-yutoku (~20 km);
   titles: ky-kurokawa «Онсэн Куроками», ky5-saga-arita2 «Керамические печи Имари» (linked to Arita 05), ky-kuju (old park name).
   Okinawa inset: article pins show once Okinawa is open; close pins merge into numbered markers that zoom step by step
