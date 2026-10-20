@@ -138,7 +138,7 @@ def build(key):
     for d in folders:
         s=slug(d); num[d[:2]]=s
         src=open(os.path.join(SRC,d,'article_ru.html'),encoding='utf-8').read()
-        m=re.search(r'<h1[^>]*>(.*?)</h1>',src,re.S); titles[s]=re.sub(r'<[^>]+>','',m.group(1)).strip()
+        m=re.search(r'<h1[^>]*>(.*?)</h1>',src,re.S); titles[s]=html.unescape(re.sub(r'<[^>]+>','',m.group(1))).strip()  # escaped again where it is written
         if '<!-- site-bar -->' not in src:
             src=re.sub(r'(<body[^>]*>)',lambda m:m.group(1)+'\n'+bar,src,count=1)
         out=os.path.join(OUT,s); os.makedirs(out,exist_ok=True)

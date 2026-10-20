@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ICOR NISEKO: магазин и кафе в Нисэко, построенные как галерея для природы</title>
+<meta name="description" content="Магазин и кафе косметического бренда ICOR в Нисэко: длинное здание в форме буквы S среди леса, речка у террасы и сэндвичи из местных продуктов.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+body{margin:0;background:#fff}
+.mj-article{--ink:#141414;--muted:#5C5C5C;--line:#DADADA;--red:#B3261E;--paper:#FFFFFF;
+  background:var(--paper);color:var(--ink);font-family:"PT Serif",Georgia,"Times New Roman",serif;font-size:19px;line-height:1.7;padding-block:0 96px}
+.mj-article *{box-sizing:border-box}
+.mj-article img{display:block;max-width:100%;height:auto}
+.mj-article a{color:var(--red);text-underline-offset:3px}
+.mj-article a:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.mj-head{max-width:980px;margin:0 auto;padding:64px 16px 40px;text-align:center}
+.mj-eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 18px}
+.mj-article h1{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:clamp(34px,6vw,64px);line-height:1.08;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.mj-hero{max-width:1280px;margin:0 auto}
+.mj-article .mj-hero img{width:100%;aspect-ratio:16/8;object-fit:cover}
+.mj-article .mj-hero figcaption{margin:0;padding:10px 16px 0;font-size:14px;font-style:italic;color:var(--muted)}
+.mj-body{max-width:712px;margin:0 auto;padding:56px 16px 0}
+.mj-article .lede{font-size:23px;line-height:1.55;margin:0 0 32px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.mj-article .lede::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:92px;line-height:.8;padding:8px 10px 0 0;color:var(--red)}
+.mj-article .kicker{margin:72px 0 0;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);text-align:center}
+.mj-article h2{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-style:italic;font-size:clamp(28px,4vw,40px);line-height:1.15;text-align:center;margin:12px 0 28px;text-wrap:balance}
+.mj-article h3{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:24px;line-height:1.3;margin:32px 0 8px}
+.mj-article p{margin:0 0 16px}
+.mj-article blockquote{margin:32px 0;padding:0 0 0 24px;border-left:3px solid var(--red);font-size:21px;font-style:italic;line-height:1.55}
+.mj-article blockquote p{margin:0 0 8px}
+.mj-article blockquote cite{display:block;font-size:15px;font-style:normal;color:var(--muted)}
+.mj-article figure{margin:36px -110px}
+.mj-article figure img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.mj-article figure.obj img{object-fit:contain;background:#fff;padding:24px;border:1px solid var(--line)}
+.mj-article figure.tall img{aspect-ratio:auto}
+.mj-article figcaption{font-size:14px;font-style:italic;color:var(--muted);margin:10px 110px 0;line-height:1.5}
+.mj-article .mj-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mj-article .mj-pair img{aspect-ratio:4/5}
+.mj-article .mj-pair figcaption{grid-column:1/-1}
+.mj-article .mj-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:36px -110px}
+.mj-article .mj-gallery figure{margin:0}
+.mj-article .mj-gallery img{aspect-ratio:1/1}
+.mj-article .mj-gallery figcaption{margin:6px 0 0;font-size:13px}
+@media (max-width:960px){.mj-article figure,.mj-article .mj-gallery{margin:28px 0}.mj-article figcaption{margin:10px 0 0}}
+@media (max-width:560px){.mj-article .mj-gallery{grid-template-columns:1fr 1fr}.mj-article .mj-pair{grid-template-columns:1fr}.mj-article .lede{font-size:20px}}
+.mj-article .info{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:12px 0;margin:32px 0;font-size:16px}
+.mj-article .info .info-title{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:20px;margin:0 0 8px}
+.mj-article .info dl{margin:0;display:grid;gap:4px}
+.mj-article .info dl div{display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px}
+.mj-article .info dt{font-weight:700}
+.mj-article .info dd{margin:0;overflow-wrap:anywhere}
+@media (max-width:480px){.mj-article .info dl div{grid-template-columns:1fr;gap:0}}
+.mj-article ul,.mj-article ol{margin:0 0 16px;padding-left:24px}
+.mj-article li{margin:6px 0}
+.mj-article li::marker{color:var(--red);font-weight:700}
+.mj-article .profile{background:#F6F4F1;padding:20px 24px;margin:32px 0;font-size:16px;line-height:1.6}
+.mj-article .profile b{font-family:"Playfair Display",Georgia,serif;font-size:19px;display:block;margin-bottom:4px}
+</style>
+</head>
+<body>
+<!-- site-bar -->
+<style>.mj-hero{margin-left:auto!important;margin-right:auto!important}  /* center the hero photo on wide screens */
+p.credits{font-size:14px;line-height:1.5;color:var(--muted,#5C5C5C);margin:48px 0 0}  /* closing "Фото: …" line: small and quiet */
+.site-bar{position:sticky;top:0;z-index:1000;background:rgba(252,252,250,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(22,24,26,.14);font-family:Inter,system-ui,sans-serif}
+.site-bar .in{max-width:1180px;margin:0 auto;padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.site-bar a{text-decoration:none;color:#16181A;font-size:14px}.site-bar .brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;font-weight:600}
+.site-bar .back{color:#1E3050}.site-bar .back:hover{color:#B3352D}</style>
+<div class="site-bar"><div class="in"><a class="brand" href="../../../index.html">Omamori Concierge</a><a class="back" href="../index.html#hokkaido-map">&larr; Хоккайдо на карте</a></div></div>
+<!-- /site-bar -->
+
+<article class="mj-article">
+
+  <header class="mj-head">
+    <p class="mj-eyebrow">Префектура Хоккайдо · Нисэко · архитектура</p>
+    <h1>ICOR NISEKO: магазин и кафе в Нисэко, построенные как галерея для природы</h1>
+  </header>
+
+  <figure class="mj-hero" style="margin:0">
+    <img src="images/01.jpg" alt="Длинное изогнутое здание с деревянной галереей на фоне леса" loading="eager">
+    <figcaption>Длинный низкий фасад ICOR NISEKO плавно изгибается у кромки леса.</figcaption>
+  </figure>
+
+  <div class="mj-body">
+
+    <p class="lede">В 2021 году японский бренд средств по уходу за кожей ICOR открыл в Нисэко свой главный магазин с кафе и офисом. Здание спроектировали так, чтобы шумная трасса за спиной исчезла, а остались лес, речка и родниковая вода с горы Йотэй.</p>
+
+    <p class="kicker">Место</p>
+    <h2>Нисэко и его природа</h2>
+    <p>ICOR NISEKO одновременно штаб-квартира бренда, его главный магазин и кафе. Здесь продают косметику, а в кафе подают лёгкие блюда и напитки, придуманные с оглядкой на красоту и здоровье. Но едут сюда и ради самого здания: о нём заговорили ещё во время стройки.</p>
+    <p>Нисэко лежит примерно в двух часах езды на машине от аэропорта Новый Титосэ и от Саппоро. На востоке поднимается гора Йотэй, входящая в национальный парк, на севере тянется хребет Нисэко с вершиной Нисэко-Аннупури, и это уже квазинациональный парк. Курорт со всех сторон окружён лесами и горами.</p>
+    <figure>
+      <img src="images/02.jpg" alt="Деревья на зелёной поляне" loading="lazy">
+      <figcaption>Нисэко окружают горы: на востоке гора Йотэй, на севере хребет Нисэко с вершиной Нисэко-Аннупури.</figcaption>
+    </figure>
+    <p>Само название пришло из языка айнов: «нисэй-ко-ан-пэцу» значит «река в ущелье». Йотэй за правильный силуэт зовут «Эдзо-Фудзи», то есть Фудзи северного острова, а зимой Нисэко славится пушистым снегом. Люди жили здесь очень давно: в округе нашли памятники конца эпохи Дзёмон, им около трёх тысяч лет.</p>
+    <p class="kicker">Бренд</p>
+    <h2>Сокровище на языке айнов</h2>
+    <p>Слово «ICOR» взято из айнского языка и значит «сокровище». Земля, природа и вода для бренда и есть такие сокровища: их красоту нужно ценить, раскрывать и беречь, и с этой мысли ICOR начинался.</p>
+    <figure>
+      <img src="images/03.jpg" alt="Прозрачная речка среди зелёных берегов" loading="lazy">
+      <figcaption>Речка Дайни-Касюмбэцу в Нисэко.</figcaption>
+    </figure>
+    <p>Бренд думает и об экологии. Свою продукцию он выпускает на заводе на Хоккайдо, чтобы сырьё не приходилось везти издалека, а для напитков в кафе подобрал особые стаканы, о них ниже.</p>
+    <p class="kicker">Архитектура</p>
+    <h2>Галерея для природы</h2>
+    <p>Сверху здание похоже на вытянутую плавную букву S. Его проектировали архитектор, ландшафтный дизайнер и дизайнер интерьера, отталкиваясь от главной мысли бренда: и природа, и люди одинаково драгоценны. Воплощали проект мастера-строители, а сотрудники ICOR сами доделывали интерьер и попутно сочиняли меню кафе. Магазин строили с заботой о природе и задумывали как место, где люди и природа живут рядом и куда всем хочется возвращаться.</p>
+    <figure>
+      <img src="images/04.jpg" alt="Вид сверху на изогнутое здание среди деревьев" loading="lazy">
+      <figcaption>Если смотреть сверху, ICOR NISEKO изгибается плавной буквой S.</figcaption>
+    </figure>
+    <p>Здание спроектировал архитектор 1977 года рождения, который работал в Японии и за рубежом: он сделал «Дом из ёсинской криптомерии» вместе с Airbnb и садовое пространство в доме Луиса Баррагана в Мексике. Луис Барраган (1902–1988) был мексиканским архитектором, лауреатом Притцкеровской премии, его дом в Мехико входит в список Всемирного наследия ЮНЕСКО. Архитектор преподавал в Токийском технологическом институте, был приглашённым профессором в Гарварде и Калифорнийском университете в Лос-Анджелесе. В Нисэко его задачей было выразить идею бренда и как можно полнее раскрыть красоту самого места.</p>
+    <figure class="mj-pair">
+      <img src="images/05.jpg" alt="Деревянная скамья вдоль стены с видом на луг" loading="lazy">
+      <img src="images/06.jpg" alt="Окна в деревянных рамах в стене здания" loading="lazy">
+      <figcaption>Слева: на скамье вдоль стены можно сидеть и смотреть на пейзаж Нисэко. Справа: все окна и двери здесь в деревянных рамах.</figcaption>
+    </figure>
+    <p>Магазин стоит у оживлённой национальной трассы, но внутри машин не видно и не слышно. Длинный изогнутый корпус отгораживает дорогу и собирает звук речки, которая бежит со стороны террасы. Её питают родники горы Йотэй, и журчание воды словно чувствуешь всем телом. Получилась галерея, где выставлена сама природа Нисэко, и смотреть на неё можно в любое время года.</p>
+    <figure>
+      <img src="images/07.jpg" alt="Длинный узкий зал с потолком из светлого дерева" loading="lazy">
+      <figcaption>Потолок отделан хоккайдской берёзой, её используют и в средствах ICOR. В узком длинном зале на удивление спокойно: шум дороги остаётся снаружи, слышны только звуки природы.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/08.jpg" alt="Вид из окна магазина на зелень снаружи" loading="lazy">
+      <figcaption>Вид из зала наружу.</figcaption>
+    </figure>
+    <p class="kicker">Интерьер</p>
+    <h2>Стекло и свет</h2>
+    <p>Интерьер придумал дизайнер интерьеров родом с Хоккайдо, 1986 года рождения. Он поработал в нескольких бюро и в 2019 году открыл своё, а в 2022 году работал в Токио и сам вёл проекты магазинов и домов от чертежа до стройки. Бренд особенно бережно относится к воде, и эту мысль дизайнер передал через стекло и свет. Прозрачные стеклянные прилавки сделаны до мелочей тонко, и товары с едой на них смотрятся особенно красиво.</p>
+    <figure>
+      <img src="images/09.jpg" alt="Стеклянный прилавок с бутылками и продуктами" loading="lazy">
+      <figcaption>Стеклянные прилавки. Здесь продают напитки и продукты марок из окрестностей Нисэко.</figcaption>
+    </figure>
+    <p>Свет в зале меняется весь день. Тени и блики ложатся на стеклянные прилавки и полки, и каждый такой рисунок живёт лишь мгновение. Летом можно сидеть снаружи под журчание речки и ветер, зимой смотреть на снег из тёплого зала, и в любой сезон ловить свой особенный свет.</p>
+    <figure>
+      <img src="images/10.jpg" alt="Зал с бетонными поверхностями и деревянной отделкой" loading="lazy">
+      <figcaption>Холодные гладкие материалы соседствуют с тёплым деревом.</figcaption>
+    </figure>
+    <p class="kicker">Сад</p>
+    <h2>Ландшафт по законам пермакультуры</h2>
+    <p>Ландшафт доверили дизайнеру, который основал бюро parsley и любит работать с той растительностью и рельефом, что уже есть на участке. Сад здесь задуман по принципам пермакультуры: это способ проектировать так, чтобы человек и природа могли долго жить рядом, не истощая землю.</p>
+    <figure>
+      <img src="images/11.jpg" alt="Длинное низкое здание магазина за зелёными грядками, позади лес" loading="lazy">
+      <figcaption>Вокруг круглый год цветут хоккайдские травы и цветы. После схода снега у речки появляются белокрыльник, калужница, белокопытник, незабудки и хохлатка, в середине мая цветут горные вишни и магнолия кобус, в начале лета луг покрывают ромашки и люпины, а осенью ярко окрашиваются берёзовые рощи. В речке, текущей с горы Йотэй, водятся гольцы и форель ямамэ.</figcaption>
+    </figure>
+    <p>В 2022 году перед магазином готовили сад, где цветник смешан с огородом. Растения для компоста и для семян следующего года выращивали из семян на талой воде с горы Йотэй. Компост делали сами, вместе с сотрудниками ICOR: из сакэ-касу, рисовой шелухи и гречишной лузги, которые соседние фермы и заведения иначе выбросили бы. Так готовились к весне 2023 года.</p>
+    <p class="kicker">Кафе</p>
+    <h2>Хоккайдо на тарелке</h2>
+    <p>В кафе подают лёгкие блюда и напитки. Есть сэндвичи из продуктов Нисэко, сладости и напитки, в которых чувствуется подход косметического бренда к красоте. Всё это можно взять и устроиться на скамье прямо в зале.</p>
+    <figure>
+      <img src="images/12.jpg" alt="Сэндвич со свежими овощами на металлической тарелке" loading="lazy">
+      <figcaption>Овощной сэндвич из Нисэко без мяса, 770 иен с налогом в 2022 году. Булку для него пекут на соседней ферме в каменной печи на дровах. Овощи сезонные, поэтому начинка меняется.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/13.jpg" alt="Десерт в баночке и сэндвич с колбаской" loading="lazy">
+      <figcaption>Слева: брюле на сакэ-касу местной сакэварни «Нисэко сюдзо» с горьковатым эспрессо-соусом, 583 иены с налогом в 2022 году. Справа: сэндвич вроде хот-дога с колбаской из хоккайдского пятнистого оленя, 880 иен с налогом в 2022 году. Оленина богата белком и витаминами группы B.</figcaption>
+    </figure>
+    <p>Сакэ-касу, остаток после отжима сакэ, это ферментированный продукт, питательный и полезный для кишечника. В брюле он даёт глубокий вкус, а эспрессо делает десерт по-взрослому горьковатым.</p>
+    <figure>
+      <img src="images/14.jpg" alt="Бумажный стакан без крышки в руках" loading="lazy">
+      <figcaption>Напитки от 440 иен с налогом в 2022 году. Кофе варят из зёрен кофейни ONIBUS COFFEE, соки делают в Нисэко, Ёити и других соседних городках. Бумажные стаканы Butterfly Cup придуманы в Ирландии ради меньшего количества пластика: им не нужны ни крышка, ни трубочка.</figcaption>
+    </figure>
+    <p class="kicker">Магазин</p>
+    <h2>Вся линейка ICOR</h2>
+    <p>В магазине продают все средства ICOR, и каждое можно взять в руки, понюхать и попробовать на коже. Сотрудники хорошо разбираются в уходе: расспросят о состоянии кожи, расскажут, как пользоваться средствами, и подскажут, что выбрать. Здесь же есть то, чего нет ни в интернет-магазине, ни в других точках: соль для ванны, сделанная вместе с хоккайдскими отелями, и выпуски прошлых ограниченных серий.</p>
+    <figure>
+      <img src="images/15.jpg" alt="Средства по уходу за кожей ICOR на полке" loading="lazy">
+      <figcaption>Природа помогает быть красивыми и снаружи, и изнутри.</figcaption>
+    </figure>
+    <p>Зимой магазин утопает в снегу, и из окон открывается тихий белый пейзаж. С крыши свисают огромные сосульки, а на снегу иногда видны белки и зайцы. Смотреть на них приятно с чем-то тёплым в руках: на сакэ-касу здесь варят горячий шоколад, а из овощей делают суп-пюре.</p>
+    <figure>
+      <img src="images/16.jpg" alt="Суп-пюре, выпечка и напиток в бумажном стакане на подносе" loading="lazy">
+      <figcaption>Суп-пюре с выпечкой и горячий напиток: с ними приятно смотреть на зимний пейзаж за окном.</figcaption>
+    </figure>
+    <section class="info">
+      <p class="info-title">ICOR NISEKO</p>
+      <dl>
+        <div><dt>Адрес</dt><dd>префектура Хоккайдо, уезд Абута, Нисэко, Йотэй, 99-3</dd></div>
+        <div><dt>Телефон</dt><dd>+81 136-55-5460</dd></div>
+        <div><dt>Часы работы</dt><dd>10:00–17:00</dd></div>
+        <div><dt>Выходные</dt><dd>среда, новогодние праздники</dd></div>
+        <div><dt>Сайт</dt><dd><a href="https://icor.jp/pages/shop" target="_blank" rel="noopener">icor.jp</a></dd></div>
+      </dl>
+    </section>
+
+  </div>
+</article>
+<!-- АКТУАЛИЗИРОВАНО
+- НЕ ПРОВЕРЯЛОСЬ: цены и часы по оригиналу 2022 года
+- работает: в октябре 2025 года в магазине ICOR NISEKO продавали мороженое и ласси с хаскапом вместе с фермой Takahashi Farm, источник: https://www.hokkaido-np.co.jp/article/1225082/ ; часы 10:00–17:00, выходной среда: https://icotto.jp/restaurants/54515 (официальная страница icor.jp/pages/shop не открылась, 429)
+- открыт в 2021 году («昨年オープン» в статье 2022 года)
+- сад-огород перед магазином в 2022 году был в планах («オープン予定»), открылся ли он, не проверено
+- справка о Луисе Баррагане (1902–1988, Притцкеровская премия 1980, дом-мастерская в списке ЮНЕСКО с 2004): общеизвестно, в оригинале упомянут
+-->
+</body>
+</html>
