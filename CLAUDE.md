@@ -42,7 +42,7 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
   For generated sub-articles (Kagawa, Kochi) the block comes from `BAR` in `tools/pref_map_build.py`.
 - Article styling lives inside each page under `.mj-article` (fonts: Playfair Display + PT Serif, red accent #B3261E). Keep new styles scoped so they don't leak into other pages.
 
-## Prefecture article maps (Kagawa, Kochi, Ehime, Tokushima, Hiroshima, Okayama, Yamaguchi, Tottori, Shimane, Hyogo, Wakayama, Osaka, Shiga, Kyushu and Okinawa, Mie, Nara, Kyoto, Ishikawa, Toyama, Niigata, Nagano, Gifu, Fukui, Shizuoka, Aichi, Yamanashi, Hokkaido, Aomori, Akita, Iwate, Miyagi, Yamagata, Fukushima)
+## Prefecture article maps (Kagawa, Kochi, Ehime, Tokushima, Hiroshima, Okayama, Yamaguchi, Tottori, Shimane, Hyogo, Wakayama, Osaka, Shiga, Kyushu and Okinawa, Mie, Nara, Kyoto, Ishikawa, Toyama, Niigata, Nagano, Gifu, Fukui, Shizuoka, Aichi, Yamanashi, Hokkaido, Aomori, Akita, Iwate, Miyagi, Yamagata, Fukushima, Ibaraki)
 
 Prefectures with their own sub-articles get the same three things, all **generated** by
 `tools/pref_map_build.py <pref>` from a config in `tools/prefs/<pref>.py`:
@@ -157,6 +157,8 @@ and `GROUPS` (themes of the article list; must cover every article).
   - Fukushima (7): 13 articles by Claude (2026-10-21, quality-checked and photo-checked the same day; cards not checked yet), 39 pins
     (38 on the top map, see `TOP_SKIP`). No 10, 12 (nowhere to visit). No MERGE, no DROP; Takayu onsen keeps two pins (02, 06, Ren).
     Slugs: 03 `tashiroyama-drive` (Mt Tashiro, not Oze), 15 `nekoma-mountain` (Alts Bandai and Nekoma merged in 2023).
+  - Ibaraki (8): 6 articles by Claude (2026-10-21, quality-checked and photo-checked the same day; cards not checked yet), 15 pins.
+    No 07, 08, 09 (nowhere to visit). No MERGE, no DROP. 02 uses the official «Kiuchi Brewery» (Ren).
   - Photographer 宮地工 (Kou Miyaji) is «Ко Миядзи» on every page (Ren, 2026-10-21).
 - `TOP_SKIP` (optional, a set of pin names, or `('NN', name)` to hide only that article's pin when two articles share a name): pins shown on the prefecture page only, because an older top-map pin at that place
   already links to the article (Osaka: Храм Ситэнно-дзи → `kn3-osaka-shitennoji`; also Yutoku Inari, Dazaifu, Ohori Terrace,
@@ -168,7 +170,7 @@ and `GROUPS` (themes of the article list; must cover every article).
 ### On the top-page Japan map
 - Article pins appear only once their prefecture is open (`clusterOf` = prefecture code: Kagawa 37, Kochi 39, Ehime 38,
   Tokushima 36, Hiroshima 34, Okayama 33, Yamaguchi 35, Tottori 31, Shimane 32, Hyogo 28, Wakayama 30, Osaka 27, Shiga 25,
-  Fukuoka 40, Saga 41, Nagasaki 42, Kumamoto 43, Oita 44, Miyazaki 45, Kagoshima 46, Okinawa 47, Mie 24, Nara 29, Kyoto 26, Ishikawa 17, Toyama 16, Niigata 15, Nagano 20, Gifu 21, Fukui 18, Shizuoka 22, Aichi 23, Yamanashi 19, Hokkaido 1, Aomori 2, Iwate 3, Miyagi 4, Akita 5, Yamagata 6, Fukushima 7).
+  Fukuoka 40, Saga 41, Nagasaki 42, Kumamoto 43, Oita 44, Miyazaki 45, Kagoshima 46, Okinawa 47, Mie 24, Nara 29, Kyoto 26, Ishikawa 17, Toyama 16, Niigata 15, Nagano 20, Gifu 21, Fukui 18, Shizuoka 22, Aichi 23, Yamanashi 19, Hokkaido 1, Aomori 2, Iwate 3, Miyagi 4, Akita 5, Yamagata 6, Fukushima 7, Ibaraki 8).
 - Categories map to the map filters in `KG_TYPE` in index.html
   (see→Виды, eat/shop→Гастрономия, art→История, craft→Активности, stay→Где остановиться).
 - Pin colors = filter type (`TYPE_COLOR`; the filter chips show the same dots). A pin takes the color of its first type, or of its
@@ -210,7 +212,7 @@ and `GROUPS` (themes of the article list; must cover every article).
   and Oga (03) linked. Miyagi: Tanabata (01), Naruko onsen (02). Iwate: older pins left as they are (Ren), including
   `th2-towada-art` (Aomori's Towada, but prefId 3). Yamagata: older pins left as they are (none at an article place).
   Fukushima: Tsurugajo (05) and Bandai (15) linked; `th-ouchijuku` (~14 km off) removed, 08's Ouchi-juku pin shows instead;
-  «Гошикинума» renamed «Госикинума» (Ren). Older names with stray Latin letters (Hokkaido «Ниseko», «Сounкё» etc.,
+  «Гошикинума» renamed «Госикинума» (Ren). Ibaraki: older pins left as they are (none at an article place). Older names with stray Latin letters (Hokkaido «Ниseko», «Сounкё» etc.,
   Akita «Кисаки-мабэ») are not fixed yet.
   Known offsets of older pins, left as they are (Ren): r2-kanedajo, ky3-usuki, ky2-obi, ky3-satsuma, cs5-saga-yutoku (~20 km);
   titles: ky-kurokawa «Онсэн Куроками», ky5-saga-arita2 «Керамические печи Имари» (linked to Arita 05), ky-kuju (old park name).
