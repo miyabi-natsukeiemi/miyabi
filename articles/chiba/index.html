@@ -95,7 +95,68 @@
   </figure>
   <div class="mj-body">
   <p class="lede">Гора с зазубренным хребтом и площадка над пропастью, праздник, ради которого в Нариту съезжается почти полмиллиона гостей, рыбацкая закуска из сырой рыбы и рёкан, из окон которого видно Тихий океан. Рассказываем, за чем ехать в префектуру Тиба.</p>
-  <p class="byline">Префектура Тиба · 8 минут чтения · цены указаны на 2020 год</p>
+  <p class="byline">Префектура Тиба · 8 минут чтения · цены указаны на 2020 год</p><p class="kg-jump" style="font-size:16px;margin:16px 0 0"><a href="#chiba-map">Карта: 18 мест из 17 статей</a> · <a href="#chiba-articles">все статьи о Тибе</a></p><!-- chiba-map -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+.kg-map{margin:56px -110px 0;scroll-margin-top:72px}
+.kg-map .kicker{margin-top:0}
+.kg-map .kg-intro{max-width:712px;margin:0 auto 20px;padding:0 110px;box-sizing:content-box;font-size:17px}
+.kg-filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 14px;font-family:Inter,system-ui,sans-serif}
+.kg-filters button{font:inherit;font-size:14px;display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;cursor:pointer}
+.kg-filters button i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.kg-filters button[aria-pressed="false"]{opacity:.45}
+.kg-filters button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+#kg-leaflet{height:560px;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);background:#e8eef0}
+.kg-note{font-size:14px;font-style:italic;color:var(--muted);margin:10px 0 0;text-align:center}
+.kg-pop{font-family:"PT Serif",Georgia,serif;font-size:15px;line-height:1.45;min-width:200px}
+.kg-pop b{font-family:"Playfair Display",Georgia,serif;font-size:17px;display:block}
+.kg-pop .ar{color:#5C5C5C;font-size:13px}
+.kg-pop .ct{font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin:4px 0 6px;display:block}
+.kg-pop ul{margin:6px 0;padding-left:16px}.kg-pop li{margin:3px 0}
+.kg-pop a{color:#B3261E}
+.kg-pop .ap{font-size:12px;color:#5C5C5C;font-style:italic}
+@media (max-width:960px){.kg-map{margin:48px 0 0}.kg-map .kg-intro{padding:0}#kg-leaflet{height:460px}}
+.kg-articles{margin-top:16px}
+.kg-group h4{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:21px;font-weight:600;margin:28px 0 6px}
+.kg-group ul{margin:0;padding-left:20px}.kg-group li{margin:6px 0}.kg-group li::marker{color:var(--red)}
+.kg-nopin{font-size:13px;color:var(--muted);font-style:italic;white-space:nowrap}
+</style>
+<section class="kg-map" id="chiba-map" aria-labelledby="kg-map-h">
+<p class="kicker">Карта</p><h2 id="kg-map-h">Тиба на карте</h2>
+<p class="kg-intro">18 мест из наших статей о префектуре Тиба: святилище Катори и купеческая Сахара, натуральное сакэ и стекло Sugahara, железная дорога Коминато и музей у озера Итихара, юг полуострова Босо, Ураясу и город Тиба. Нажмите на точку, чтобы открыть статью.</p>
+<div class="kg-filters" id="kg-filters" role="group" aria-label="Фильтр по типу места"></div>
+<div id="kg-leaflet" role="region" aria-label="Карта префектуры Тиба"></div>
+<p class="kg-note">Пунктирный круг означает, что точка примерная: место находится в этом районе или на этом острове.</p>
+</section>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+var C={see:["Посмотреть","#1F5A7A"],stay:["Где остановиться","#7A4A8C"],eat:["Где поесть","#B3261E"],shop:["Где купить","#A0740A"],art:["Архитектура и искусство","#2F6B4A"],craft:["Мастерские","#4E6E8E"]};
+var ART={"katori-jingu": "Святилище Катори: дом Фуцунуси, бога меча и воинской доблести", "nipponia-sawara": "Сахара: старый склад сакэварни стал рестораном отеля, разбросанного по купеческому городу", "terada-honke": "«Тэрада Хонкэ»: сакэварня в Кодзаки, где сакэ варят вместе с микробами и с песней", "sghr-sugahara": "Sghr Sugahara в Кудзюкури: стеклодувы, которые сами придумывают свои стаканы", "kominato-railway": "Железная дорога Коминато: маленький дизельный поезд среди рапсовых полей Босо", "ichihara-lakeside-museum": "Художественный музей у озера Итихара: современное искусство на берегу озера Такатаки", "bamboo-forest": "The Bamboo Forest: глэмпинг в бамбуковой роще по соседству с жирафами и капибарами", "hoki-museum": "Музей Хоки в Тибе: картины, которые легко принять за фотографии", "ushimaru": "Ushimaru в Санму: итальянская кухня из всего, что растёт и ловится в Тибе", "tail-tateyama": "TAIL в Татэяме: джин из одного растения, гостевой дом и офис для мечтателей", "monya": "«Киссуй-но ядо Монъя»: рёкан у маяка Нодзимадзаки, где рады детям и хорошо кормят", "kisarazu-underground-library": "Подземная библиотека в Кисарадзу: читать книги под травой на ферме KURKKU FIELDS", "oriental-hotel-tokyo-bay": "Oriental Hotel Tokyo Bay: средиземноморский курорт в 17 минутах от станции Токио", "urayasu-brighton": "Urayasu Brighton Hotel Tokyo Bay: вечер над Токийским заливом от ужина у тэппана до ванны с видом", "imadeya": "IMADEYA в Тибе: винный магазин, собственный погреб и десять японских вин на лето", "hana-ichikawa": "Печенье hana в Итикаве: рождественские коробки с рисунками Самиро Юноки", "sansha-brandy": "SANSHA: бренди из шелковицы и шелкопряда с винокурни в Тибе"}, P=[{"n": "Святилище Катори", "a": "Катори", "c": "see", "la": 35.886303, "ln": 140.527725, "x": 0, "s": ["katori-jingu"]}, {"n": "SAWARA MERCHANT TOWN NIPPONIA", "a": "Сахара, Катори", "c": "stay", "la": 35.888279, "ln": 140.495453, "x": 0, "s": ["nipponia-sawara"]}, {"n": "«Тэрада Хонкэ»", "a": "Кодзаки", "c": "shop", "la": 35.9052, "ln": 140.401, "x": 1, "s": ["terada-honke"]}, {"n": "«Хакко-кураси кэнкюдзё» и кафе «Уфуфу»", "a": "Кодзаки", "c": "eat", "la": 35.9056, "ln": 140.4005, "x": 1, "s": ["terada-honke"]}, {"n": "Sghr Sugahara", "a": "Кудзюкури", "c": "craft", "la": 35.528988, "ln": 140.396576, "x": 0, "s": ["sghr-sugahara"]}, {"n": "Железная дорога Коминато, станция Гои", "a": "Итихара", "c": "see", "la": 35.51278, "ln": 140.08976, "x": 0, "s": ["kominato-railway"]}, {"n": "Художественный музей у озера Итихара", "a": "Итихара, озеро Такатаки", "c": "art", "la": 35.3495, "ln": 140.1608, "x": 0, "s": ["ichihara-lakeside-museum"]}, {"n": "The Bamboo Forest", "a": "Итихара", "c": "stay", "la": 35.3564, "ln": 140.1807, "x": 1, "s": ["bamboo-forest"]}, {"n": "Музей Хоки", "a": "Тиба, район Мидори", "c": "art", "la": 35.522137, "ln": 140.280106, "x": 0, "s": ["hoki-museum"]}, {"n": "Ushimaru", "a": "Санму", "c": "eat", "la": 35.618764, "ln": 140.475111, "x": 0, "s": ["ushimaru"]}, {"n": "TAIL", "a": "Татэяма", "c": "stay", "la": 34.993488, "ln": 139.864883, "x": 0, "s": ["tail-tateyama"]}, {"n": "«Киссуй-но ядо Монъя»", "a": "Минами-Босо", "c": "stay", "la": 34.904165, "ln": 139.883955, "x": 0, "s": ["monya"]}, {"n": "Подземная библиотека KURKKU FIELDS", "a": "Кисарадзу", "c": "art", "la": 35.324621, "ln": 139.983252, "x": 0, "s": ["kisarazu-underground-library"]}, {"n": "Oriental Hotel Tokyo Bay", "a": "Ураясу, Синъураясу", "c": "stay", "la": 35.651051, "ln": 139.912766, "x": 0, "s": ["oriental-hotel-tokyo-bay"]}, {"n": "Urayasu Brighton Hotel Tokyo Bay", "a": "Ураясу", "c": "stay", "la": 35.649757, "ln": 139.911453, "x": 0, "s": ["urayasu-brighton"]}, {"n": "IMADEYA", "a": "Тиба", "c": "shop", "la": 35.57837, "ln": 140.16658, "x": 0, "s": ["imadeya"]}, {"n": "hana", "a": "Итикава", "c": "shop", "la": 35.733906, "ln": 139.903275, "x": 0, "s": ["hana-ichikawa"]}, {"n": "mitosaya", "a": "Отаки", "c": "shop", "la": 35.285477, "ln": 140.233043, "x": 0, "s": ["sansha-brandy"]}];
+var map=L.map("kg-leaflet",{scrollWheelZoom:false}).setView([35.5,140.15],9);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+var on={},layers={};Object.keys(C).forEach(function(k){on[k]=true;layers[k]=L.layerGroup().addTo(map)});
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var all=[];
+P.forEach(function(p){
+  var m=L.circleMarker([p.la,p.ln],{radius:p.x?11:8,color:p.x?C[p.c][1]:"#fff",weight:2,dashArray:p.x?"3 3":null,fillColor:C[p.c][1],fillOpacity:p.x?.45:.95});
+  var links=p.s.map(function(s){return '<li><a href="'+s+'/index.html">'+esc(ART[s])+'</a></li>'}).join("");
+  m.bindPopup('<div class="kg-pop"><b>'+esc(p.n)+'</b><span class="ar">'+esc(p.a)+'</span><span class="ct" style="color:'+C[p.c][1]+'">'+C[p.c][0]+'</span><ul>'+links+'</ul>'+(p.x?'<span class="ap">Точка примерная</span>':'')+'</div>');
+  m.bindTooltip(p.n);
+  m.addTo(layers[p.c]);all.push(m);
+});
+var f=document.getElementById("kg-filters");
+Object.keys(C).forEach(function(k){
+  var n=P.filter(function(p){return p.c===k}).length;
+  var b=document.createElement("button");b.type="button";b.setAttribute("aria-pressed","true");
+  b.innerHTML='<i style="background:'+C[k][1]+'"></i>'+C[k][0]+' · '+n;
+  b.onclick=function(){on[k]=!on[k];b.setAttribute("aria-pressed",on[k]);on[k]?map.addLayer(layers[k]):map.removeLayer(layers[k])};
+  f.appendChild(b);
+});
+map.fitBounds(L.featureGroup(all).getBounds().pad(0.05));
+})();
+</script>
+<!-- /chiba-map -->
 
   <p class="kicker" id="about">О префектуре</p>
   <h2>Полуостров, который кормит всю столицу</h2>
@@ -319,7 +380,7 @@
   </tbody></table></div>
   <h3>Природные памятники</h3>
   <p>Рыбка миякотанаго, тысячествольный гинкго, ракушечный слой Киносита, огромное камфорное дерево в Кандзаки, гигантская криптомерия в Сэйтё, обрывы Бёбугаура и другие.</p>
-  </div>
+  <!-- chiba-articles --><p class="kicker" id="chiba-articles">Наши статьи</p><h2>Все статьи о Тибе</h2><div class="kg-articles"><div class="kg-group"><h4>Катори и Сахара</h4><ul><li><a href="katori-jingu/index.html">Святилище Катори: дом Фуцунуси, бога меча и воинской доблести</a></li><li><a href="nipponia-sawara/index.html">Сахара: старый склад сакэварни стал рестораном отеля, разбросанного по купеческому городу</a></li><li><a href="terada-honke/index.html">«Тэрада Хонкэ»: сакэварня в Кодзаки, где сакэ варят вместе с микробами и с песней</a></li></ul></div><div class="kg-group"><h4>Побережье Кудзюкури</h4><ul><li><a href="sghr-sugahara/index.html">Sghr Sugahara в Кудзюкури: стеклодувы, которые сами придумывают свои стаканы</a></li><li><a href="ushimaru/index.html">Ushimaru в Санму: итальянская кухня из всего, что растёт и ловится в Тибе</a></li></ul></div><div class="kg-group"><h4>Итихара и центр Босо</h4><ul><li><a href="kominato-railway/index.html">Железная дорога Коминато: маленький дизельный поезд среди рапсовых полей Босо</a></li><li><a href="ichihara-lakeside-museum/index.html">Художественный музей у озера Итихара: современное искусство на берегу озера Такатаки</a></li><li><a href="bamboo-forest/index.html">The Bamboo Forest: глэмпинг в бамбуковой роще по соседству с жирафами и капибарами</a></li><li><a href="hoki-museum/index.html">Музей Хоки в Тибе: картины, которые легко принять за фотографии</a></li><li><a href="sansha-brandy/index.html">SANSHA: бренди из шелковицы и шелкопряда с винокурни в Тибе</a></li></ul></div><div class="kg-group"><h4>Юг Босо</h4><ul><li><a href="tail-tateyama/index.html">TAIL в Татэяме: джин из одного растения, гостевой дом и офис для мечтателей</a></li><li><a href="monya/index.html">«Киссуй-но ядо Монъя»: рёкан у маяка Нодзимадзаки, где рады детям и хорошо кормят</a></li><li><a href="kisarazu-underground-library/index.html">Подземная библиотека в Кисарадзу: читать книги под травой на ферме KURKKU FIELDS</a></li></ul></div><div class="kg-group"><h4>Ураясу и Тиба</h4><ul><li><a href="oriental-hotel-tokyo-bay/index.html">Oriental Hotel Tokyo Bay: средиземноморский курорт в 17 минутах от станции Токио</a></li><li><a href="urayasu-brighton/index.html">Urayasu Brighton Hotel Tokyo Bay: вечер над Токийским заливом от ужина у тэппана до ванны с видом</a></li><li><a href="imadeya/index.html">IMADEYA в Тибе: винный магазин, собственный погреб и десять японских вин на лето</a></li><li><a href="hana-ichikawa/index.html">Печенье hana в Итикаве: рождественские коробки с рисунками Самиро Юноки</a></li></ul></div></div><!-- /chiba-articles --></div>
 </article>
 <!-- АКТУАЛИЗИРОВАНО 2026
 - редактура имён собственных (v1) -->

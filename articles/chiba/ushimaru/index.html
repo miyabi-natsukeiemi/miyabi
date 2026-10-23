@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ushimaru в Санму: итальянская кухня из всего, что растёт и ловится в Тибе</title>
+<meta name="description" content="Ресторан Ushimaru в Санму готовит итальянские курсы из продуктов префектуры Тиба: дикие угри, лягушки, грибы, мясо джерсейских бычков и соль из морской воды.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+body{margin:0;background:#fff}
+.mj-article{--ink:#141414;--muted:#5C5C5C;--line:#DADADA;--red:#B3261E;--paper:#FFFFFF;
+  background:var(--paper);color:var(--ink);font-family:"PT Serif",Georgia,"Times New Roman",serif;font-size:19px;line-height:1.7;padding-block:0 96px}
+.mj-article *{box-sizing:border-box}
+.mj-article img{display:block;max-width:100%;height:auto}
+.mj-article a{color:var(--red);text-underline-offset:3px}
+.mj-article a:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.mj-head{max-width:980px;margin:0 auto;padding:64px 16px 40px;text-align:center}
+.mj-eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 18px}
+.mj-article h1{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:clamp(34px,6vw,64px);line-height:1.08;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.mj-hero{max-width:1280px;margin:0 auto}
+.mj-article .mj-hero img{width:100%;aspect-ratio:16/8;object-fit:cover}
+.mj-article .mj-hero figcaption{margin:0;padding:10px 16px 0;font-size:14px;font-style:italic;color:var(--muted)}
+.mj-body{max-width:712px;margin:0 auto;padding:56px 16px 0}
+.mj-article .lede{font-size:23px;line-height:1.55;margin:0 0 32px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.mj-article .lede::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:92px;line-height:.8;padding:8px 10px 0 0;color:var(--red)}
+.mj-article .kicker{margin:72px 0 0;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);text-align:center}
+.mj-article h2{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-style:italic;font-size:clamp(28px,4vw,40px);line-height:1.15;text-align:center;margin:12px 0 28px;text-wrap:balance}
+.mj-article h3{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:24px;line-height:1.3;margin:32px 0 8px}
+.mj-article p{margin:0 0 16px}
+.mj-article blockquote{margin:32px 0;padding:0 0 0 24px;border-left:3px solid var(--red);font-size:21px;font-style:italic;line-height:1.55}
+.mj-article blockquote p{margin:0 0 8px}
+.mj-article blockquote cite{display:block;font-size:15px;font-style:normal;color:var(--muted)}
+.mj-article figure{margin:36px -110px}
+.mj-article figure img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.mj-article figure.obj img{object-fit:contain;background:#fff;padding:24px;border:1px solid var(--line)}
+.mj-article figure.tall img{aspect-ratio:auto}
+.mj-article figcaption{font-size:14px;font-style:italic;color:var(--muted);margin:10px 110px 0;line-height:1.5}
+.mj-article .mj-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mj-article .mj-pair img{aspect-ratio:4/5}
+.mj-article .mj-pair figcaption{grid-column:1/-1}
+.mj-article .mj-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:36px -110px}
+.mj-article .mj-gallery figure{margin:0}
+.mj-article .mj-gallery img{aspect-ratio:1/1}
+.mj-article .mj-gallery figcaption{margin:6px 0 0;font-size:13px}
+@media (max-width:960px){.mj-article figure,.mj-article .mj-gallery{margin:28px 0}.mj-article figcaption{margin:10px 0 0}}
+@media (max-width:560px){.mj-article .mj-gallery{grid-template-columns:1fr 1fr}.mj-article .mj-pair{grid-template-columns:1fr}.mj-article .lede{font-size:20px}}
+.mj-article .info{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:12px 0;margin:32px 0;font-size:16px}
+.mj-article .info .info-title{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:20px;margin:0 0 8px}
+.mj-article .info dl{margin:0;display:grid;gap:4px}
+.mj-article .info dl div{display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px}
+.mj-article .info dt{font-weight:700}
+.mj-article .info dd{margin:0;overflow-wrap:anywhere}
+@media (max-width:480px){.mj-article .info dl div{grid-template-columns:1fr;gap:0}}
+.mj-article ul,.mj-article ol{margin:0 0 16px;padding-left:24px}
+.mj-article li{margin:6px 0}
+.mj-article li::marker{color:var(--red);font-weight:700}
+.mj-article .profile{background:#F6F4F1;padding:20px 24px;margin:32px 0;font-size:16px;line-height:1.6}
+.mj-article .profile b{font-family:"Playfair Display",Georgia,serif;font-size:19px;display:block;margin-bottom:4px}
+</style>
+</head>
+<body>
+<!-- site-bar -->
+<style>.mj-hero{margin-left:auto!important;margin-right:auto!important}  /* center the hero photo on wide screens */
+p.credits{font-size:14px;line-height:1.5;color:var(--muted,#5C5C5C);margin:48px 0 0}  /* closing "Фото: …" line: small and quiet */
+.site-bar{position:sticky;top:0;z-index:1000;background:rgba(252,252,250,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(22,24,26,.14);font-family:Inter,system-ui,sans-serif}
+.site-bar .in{max-width:1180px;margin:0 auto;padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.site-bar a{text-decoration:none;color:#16181A;font-size:14px}.site-bar .brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;font-weight:600}
+.site-bar .back{color:#1E3050}.site-bar .back:hover{color:#B3352D}</style>
+<div class="site-bar"><div class="in"><a class="brand" href="../../../index.html">Omamori Concierge</a><a class="back" href="../index.html#chiba-map">&larr; Тиба на карте</a></div></div>
+<!-- /site-bar -->
+
+<article class="mj-article">
+
+  <header class="mj-head">
+    <p class="mj-eyebrow">Префектура Тиба · Санму · еда</p>
+    <h1>Ushimaru в Санму: итальянская кухня из всего, что растёт и ловится в Тибе</h1>
+  </header>
+
+  <figure class="mj-hero" style="margin:0">
+    <img src="images/01.jpg" alt="Светлый зал ресторана с накрытыми белыми скатертями столами" loading="eager">
+    <figcaption>Зал Ushimaru: несколько столов у окон, картины на стенах и белые скатерти.</figcaption>
+  </figure>
+
+  <div class="mj-body">
+
+    <p class="lede">Ресторан Ushimaru стоит в сельской части префектуры Тиба, вдали от больших городов. За ужином здесь едут даже из Токио: шеф Кэн Утия готовит итальянскую кухню почти целиком из того, что дают местные поля, леса и океан.</p>
+
+    <p class="kicker">Шеф</p>
+    <h2>Тиба как кладовая</h2>
+    <p>Тибу, соседку огромного Токио, привыкли считать его огородом. Цифры это подтверждают: в 2014 году префектура была четвёртой в стране по стоимости сельхозпродукции и девятнадцатой по улову. Ценят здесь не только количество, но и качество. Появились поставщики, которые выращивают овощи по заказу поваров и точно рассчитывают время сбора и доставки. А раз продукты так хороши, всё больше поваров переносят свою работу в Тибу.</p>
+    <p>Кэн Утия, шеф Ushimaru, один из первых среди них. Ресторан находится в Санму, небольшом городе у побережья Кудзюкури на востоке префектуры. Ushimaru открылся в 2000 году как ресторан теппанъяки, а в 2008 году, когда пришёл новый шеф, стал итальянским и сделал ставку на местные продукты. Шеф старается лично знакомиться с теми, кто растит овощи, ловит рыбу и откармливает скот.</p>
+    <div class="profile">
+      <b>Кэн Утия</b>
+      Родился в 1977 году в префектуре Ниигата. После кулинарной школы учился в ресторанах Токио: в итальянском, во французском, где специализировались на дичи, и ещё в одном итальянском, где особенно строго выбирали продукты. Захотел работать рядом с тем местом, где растут продукты, и год провёл в ресторане в префектуре Нагано. С 2008 года шеф Ushimaru.
+    </div>
+    <p>Слава приходила постепенно, и гостей из Токио становилось всё больше. За десять лет ресторан два года подряд получал бронзовую награду японского гастрономического портала Tabelog. Местные жители видят здесь привычные продукты в таком виде, какого не ожидали, а гости из столицы пробуют редкие продукты Тибы в тонкой подаче. Именно на этих двух опорах держится успех Ushimaru.</p>
+    <figure>
+      <img src="images/04.jpg" alt="Вход в ресторан Ushimaru с вывеской над дверью и цветами в горшках" loading="lazy">
+      <figcaption>Ресторан занимает светлый дом с черепичной крышей, вход украшен камнем и цветами.</figcaption>
+    </figure>
+    <p class="kicker">Продукты</p>
+    <h2>Что приносят леса, реки и океан</h2>
+    <p>Ресторан, который строится на местных продуктах, требует, чтобы повар хорошо знал свою землю. Даже уроженцы края часто не знают, что именно вокруг них растёт и ловится, а их сведения нередко застряли в детстве. Шеф родом из Ниигаты и никак не был связан с Тибой. Поэтому он годами собирает сведения о нужных продуктах сам, объезжая хозяйства и побережье.</p>
+    <p>Перед съёмкой ресторанный критик, писавшая об Ushimaru, попросила показать местные продукты такими, как они есть. На стол легли несколько видов редких грибов, которые шеф собрал сам, дикие угри и живые съедобные лягушки. Лягушки оказались на удивление крупными и красивыми. Летом грибов в окрестных лесах много, а ранним летом с рисовых полей доносится лягушачий хор. Мясо лягушек лёгкое и тонкое на вкус.</p>
+    <figure>
+      <img src="images/02.jpg" alt="Живые угри в большой металлической миске" loading="lazy">
+      <figcaption>Дикие угри с побережья Кудзюкури. Крупную рыбу шеф жарит на углях по собственному способу.</figcaption>
+    </figure>
+    <p>Мясо в Ushimaru джерсейское. Бычков джерсейской породы 18 месяцев растит фермер, потом туши разделывают, а филейную часть от шеи до лопатки ресторан выдерживает сам. Владелец ресторана вырос в семье молочных фермеров, которые держали джерсейских коров.</p>
+    <p>Есть и продукт, которым шеф особенно гордится: соль. Он вываривает её сам из морской воды Кудзюкури в большом котле, долго, пока не останется одна соль. Её не очищают, поэтому вкус у неё мягкий и круглый.</p>
+    <figure>
+      <img src="images/03.jpg" alt="Горка хлопьевидной соли ручной выварки в стеклянной чаше" loading="lazy">
+      <figcaption>Соль получается зернистой, мелкой, как пудра, или в виде хрупких кристаллов, и каждую форму используют по-своему.</figcaption>
+    </figure>
+    <p class="kicker">Кухня</p>
+    <h2>Угли, стекло и свежая паста</h2>
+    <p>Хорошие продукты здесь только начало. Стиль шефа подчинён одной задаче: раскрыть продукт. Он не спеша готовит на углях или в печи, и блюдо само собой становится итальянским. На тарелке рядом с главным продуктом только то, что его подчёркивает.</p>
+    <p>Угли тоже работают по-особому. Шеф не только регулирует жар, но и сбрызгивает продукт водой, так что он одновременно жарится и томится. Поэтому угорь получается сочным и пышным, хотя его жарят прямо над огнём.</p>
+    <figure class="mj-pair">
+      <img src="images/11.jpg" alt="Шеф жарит рыбу на угольном гриле" loading="lazy">
+      <img src="images/12.jpg" alt="Официант нарезает большой хлеб на доске в зале" loading="lazy">
+      <figcaption>Слева: шеф сбрызгивает продукт водой над углями. Справа: фокаччу приносят в середине ужина и нарезают у гостей на глазах.</figcaption>
+    </figure>
+    <p>Подают блюда в основном на посуде местной марки <a href="https://miyabi-concierge.pages.dev/articles/chiba/sghr-sugahara/" target="_blank" rel="noopener">Sghr Sugahara</a>: прозрачное стекло и выразительная еда на нём. Гостей из Токио больше всего удивляет, что уровень кухни здесь выше, чем во многих ресторанах столицы.</p>
+    <p>Для пасты берут два сорта японской муки, «Юмэхосино» и «W8». Пасту подают после мяса, поэтому порцию подстраивают под гостя: можно взять совсем немного, на пробу, а можно попросить полную тарелку. Для фокаччи к тем же сортам добавляют муку «Норин 61» из Тибы. Чтобы вкус муки раскрылся полностью, фокаччу пекут одним большим караваем на всех гостей и посреди ужина выносят в зал горячей.</p>
+    <figure>
+      <img src="images/05.jpg" alt="Домашняя паста на стеклянной тарелке" loading="lazy">
+      <figcaption>Паста из местной муки упругая и сладковатая, к ней соус из молодого чеснока с огорода ресторана и оливкового масла.</figcaption>
+    </figure>
+    <p>Последнее, о чём нельзя забыть, это мороженое. Владелец знает, каким вкусным бывает мороженое из свежего молока джерсейских коров, и хочет, чтобы его попробовали все. Поэтому в каждом десерте Ushimaru есть мороженое, а в 2018 году его продавали и в стаканчиках.</p>
+    <figure>
+      <img src="images/10.jpg" alt="Белое мороженое в стеклянном стакане на стеклянной подставке" loading="lazy">
+      <figcaption>Мороженое из молока, йогурта и сливок джерсейских коров. Под стаканом спрятан десерт из японской сливы умэ.</figcaption>
+    </figure>
+    <p>Ресторанный критик советует просто съездить в Ushimaru и почувствовать, на что способна провинция. Ресторанная культура принадлежит не только городам: самые крепкие примеры успеха как раз в глубинке.</p>
+    <p class="kicker">Курс</p>
+    <h2>Ужин из продуктов Тибы</h2>
+    <p>Состав курса за 10 000 иен (цена 2018 года без налога и сервисного сбора) зависит от того, что удалось достать в этот день: меняются и число блюд, и сами блюда. Обычно за одним столом подают один курс, а все блюда начинают выносить одновременно. Вина в основном японские, а в пару к блюдам могут предложить и сакэ или сётю. Есть вино из Тибы, с винодельни «Сайто Будоэн». Если осталось место, после мяса можно заказать сыры: Тиба славится молочным хозяйством, и местные сыроварни популярны даже в Токио.</p>
+    <p>Летний курс, описанный ресторанным критиком, начинался с диких грибов, которые шеф собрал сам, и брезаолы из джерсейского бычка. К ним подали рубец.</p>
+    <figure>
+      <img src="images/06.jpg" alt="Грибы и вяленая говядина на срезе древесного нароста" loading="lazy">
+      <figcaption>Первое блюдо: дикие грибы и брезаола, вяленая говядина из джерсейского бычка, с рубцом.</figcaption>
+    </figure>
+    <p>Дальше шли дикий угорь из Кудзюкури на углях с домашним тёртым хреном и солью с японским перцем сансё, суп из цветков цуккини с картофелем и моцареллой на бульоне из мелкой рыбки сирасу и лягушка с лисичками. Лягушку лишь солят и быстро прогревают, запаха у неё нет совсем, а вкус лёгкий, как у куриной грудки.</p>
+    <figure class="mj-pair">
+      <img src="images/07.jpg" alt="Кусок жареного угря на длинной стеклянной тарелке" loading="lazy">
+      <img src="images/08.jpg" alt="Лягушка с лисичками на прозрачном стеклянном блюде" loading="lazy">
+      <figcaption>Слева: угорь на углях, румяный снаружи, сочный внутри. Справа: лягушка с яркими лисичками.</figcaption>
+    </figure>
+    <p>Потом подали устрицу, золотистого берикса из порта Кацуура, зажаренного прямо в чешуе до хруста, и салат примерно из десяти сезонных овощей с огорода ресторана и соседних ферм. Главным мясным блюдом стал джерсейский бычок на углях. Мясо нежное, а соус сальса верде с толчёным сансё добавляет свежести.</p>
+    <figure>
+      <img src="images/09.jpg" alt="Кусок говядины на углях на волнистом стеклянном блюде" loading="lazy">
+      <figcaption>Джерсейский бычок на углях с сальсой верде на сансё.</figcaption>
+    </figure>
+    <p>Перед пастой подают щербет из сансё и молочной сыворотки, лёгкий и кисловатый, а завершает ужин десерт с мороженым.</p>
+    <section class="info">
+      <p class="info-title">Ushimaru</p>
+      <dl>
+        <div><dt>Адрес</dt><dd>префектура Тиба, Санму, Мацуо-мати, Кигатана, 1307-2</dd></div>
+        <div><dt>Телефон</dt><dd>+81 479-86-1222</dd></div>
+        <div><dt>Часы работы</dt><dd>12:00–14:00 (последний заказ), 18:00–21:30 (последний заказ)</dd></div>
+        <div><dt>Выходные</dt><dd>среда и второй вторник месяца; в четверг только ужин</dd></div>
+        <div><dt>Цены / Вход</dt><dd>обед 3 800 и 10 000 иен, ужин 6 000 и 10 000 иен; в субботу, воскресенье и праздники днём и вечером 6 000 и 10 000 иен; налог и сервисный сбор 10% отдельно</dd></div>
+      </dl>
+    </section>
+
+    <p class="credits">Фото: Мунэаки Маэда.</p>
+
+  </div>
+</article>
+<!-- АКТУАЛИЗИРОВАНО
+- НЕ ПРОВЕРЯЛОСЬ: цены и часы по оригиналу 2018 года (статья журнала Discover Japan, номер за август 2018 года, опубликована на сайте 14 мая 2021 года)
+- работает в 2026 году: отзывы гостей 2026 года и награда Tabelog Award 2026 (Silver), https://foodle.pro/001758421/meals/sanmu/5a05a3cd53f3d/64727 ; карточка Tabelog https://tabelog.com/chiba/A1205/A120502/12000598/ (тот же адрес и телефон)
+- официальный сайт не найден
+- по сводке отзывов Tabelog в 2026 году курс стоил 15 000 иен (не проверено, в тексте цены 2018 года)
+- чтение адреса 松尾町木刀 = マツオマチキガタナ по почтовому справочнику Japan Post (289-1531)
+- как добраться (не из оригинала, не в карточке): по данным Mapple, около 10 минут на такси от станции Мацуо линии JR Собу
+-->
+</body>
+</html>
