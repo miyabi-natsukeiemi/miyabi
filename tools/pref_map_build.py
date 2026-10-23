@@ -161,6 +161,9 @@ def build(key):
     section_map=(SECTION_MAP.replace('__KEY__',key).replace('__MAP_TITLE__',C.MAP_TITLE).replace('__ARIA__',C.ARIA)
         .replace('__VIEW__',C.VIEW).replace('__INTRO__',C.INTRO.format(places=places))
         .replace('__ART__',json.dumps(art_js,ensure_ascii=False)).replace('__PINS__',json.dumps(pins_js,ensure_ascii=False)))
+    if getattr(C,'FIT_MINLAT',None) is not None:  # open on the main area; far-off islands south of this latitude stay on the map when zoomed out
+        section_map=section_map.replace('map.fitBounds(L.featureGroup(all).getBounds().pad(0.05));',
+            'map.fitBounds(L.featureGroup(all.filter(function(m,i){return P[i].la>=%s})).getBounds().pad(0.05));'%C.FIT_MINLAT)
     section_list=f'''<!-- {key}-articles --><p class="kicker" id="{key}-articles">Наши статьи</p><h2>{C.LIST_TITLE}</h2><div class="kg-articles">{"".join(lst)}</div><!-- /{key}-articles -->'''
     page_path=os.path.join(OUT,'index.html'); page=open(page_path,encoding='utf-8').read()
     page=re.sub(rf'<!-- {key}-map -->.*?<!-- /{key}-map -->','',page,flags=re.S)
