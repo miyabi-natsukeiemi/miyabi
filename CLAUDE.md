@@ -175,9 +175,11 @@ and `GROUPS` (themes of the article list; must cover every article).
   - Kanagawa (14): 46 articles (no 05, 31, 33, 35), 55 pins (54 on the top map). No MERGE, no DROP. Slugs follow the official names:
     04 `enoura-retreat-rimon`, 06 `calanques-yugawara`, 10 `yokohama-timber-wharf`, 30 `femme-de-bateau-aoki`, 34 `hayama-kachi-tei`.
     Latin shop names stay (Ren). «тапрум» everywhere (Nagano 29 and Yamanashi 06 changed from «таплум» the same day, Ren).
-  - Tokyo (13), part 1: 30 articles by Claude (2026-10-23, quality-checked and photo-checked the same day; cards not checked yet),
-    62 pins (60 on the top map, see `TOP_SKIP`). No MERGE, no DROP. Ren limited part 1 to 30 (larger batches mean more errors);
-    part 2 candidates are in `_pipeline/tokyo_tasks.md`. eyebrow is «Токио · …» (not a prefecture). Ren's answers 2026-10-23: 19 Mori
+  - Tokyo (13): part 1 (01–30) and part 2 (31–63) by Claude (2026-10-23/24, quality-checked and photo-checked; cards not checked yet),
+    62 articles (no 59: HINOKO TOKYO closed in 2023), 111 pins (109 on the top map, see `TOP_SKIP`). No MERGE, no DROP. Ren limited each
+    part to about 30 (larger batches mean more errors); further candidates are in `_pipeline/tokyo_tasks.md`. Slugs: 39 `hanaju` (花重),
+    60 `shizenjin-mura` (the campsite, run by do-mo). 56 YUEN BETTEI DAITA has only pre-opening renderings, captioned as such (Ren).
+    Temporary (COVID-era) hours in a source are replaced by the official 2026 hours (Ren: 19, 43, 50, 58). eyebrow is «Токио · …» (not a prefecture). Ren's answers 2026-10-23: 19 Mori
     shows the official 2026 hours; 24 keeps «Тихий Дон» with a short note on the manga; Ханако Усуи is named with her role (03, 14, 17).
     Island pins (Kozushima, Hachijojima, Ogasawara) are left out of both map frames: `FIT_MINLAT=35` in `tools/prefs/tokyo.py`
     (the Leaflet map opens on mainland Tokyo) and `PIN_FRAME_MINLAT` in index.html (the top map frames mainland Tokyo only).
@@ -240,7 +242,7 @@ and `GROUPS` (themes of the article list; must cover every article).
   Mizusawa udon and Morinji left as they are. Saitama: railway museum (01), Kawagoe (02), Chichibu night festival (04);
   «Холм Хицудзияма (Титибу)» renamed. Chiba: Katori (01); «Мыс Инубо», «Гора Нокогирияма» renamed. Kanagawa: Odawara castle (01),
   Oyama (02, ~1 km off, no TOP_SKIP); the other 13 left as they are. Tokyo, linked via `url`: Asakusa and Nakamise (01), Tsukiji
-  (17, renamed «Рынок Цукидзи»; the 9 shop pins stay), Roppongi (19), Yanaka (10, ~150 m off); `kt3-oedo-onsen` removed (closed 2021);
+  (17, renamed «Рынок Цукидзи»; the 9 shop pins stay), Roppongi (19), Yanaka (10, ~150 m off), Toyosu `kt3-mitorquets` (47; the 4 shop pins stay); `kt3-oedo-onsen` removed (closed 2021);
   «Китидзёдзи и парк Инокасира», «Улица Юякэ Дандан», «Накамисэ-дори», «Янака, старый квартал Токио» renamed. Older names with stray Latin letters (Hokkaido «Ниseko», «Сounкё» etc.,
   Akita «Кисаки-мабэ») are not fixed yet.
   Known offsets of older pins, left as they are (Ren): r2-kanedajo, ky3-usuki, ky2-obi, ky3-satsuma, cs5-saga-yutoku (~20 km);
