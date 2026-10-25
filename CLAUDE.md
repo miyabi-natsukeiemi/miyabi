@@ -175,10 +175,11 @@ and `GROUPS` (themes of the article list; must cover every article).
   - Kanagawa (14): 46 articles (no 05, 31, 33, 35), 55 pins (54 on the top map). No MERGE, no DROP. Slugs follow the official names:
     04 `enoura-retreat-rimon`, 06 `calanques-yugawara`, 10 `yokohama-timber-wharf`, 30 `femme-de-bateau-aoki`, 34 `hayama-kachi-tei`.
     Latin shop names stay (Ren). «тапрум» everywhere (Nagano 29 and Yamanashi 06 changed from «таплум» the same day, Ren).
-  - Tokyo (13): part 1 (01–30) and part 2 (31–63) by Claude (2026-10-23/24, quality-checked and photo-checked; cards not checked yet),
-    62 articles (no 59: HINOKO TOKYO closed in 2023), 111 pins (109 on the top map, see `TOP_SKIP`). No MERGE, no DROP. Ren limited each
+  - Tokyo (13): parts 1–3 (01–30, 31–63, 64–93) by Claude (2026-10-23/24, quality-checked and photo-checked; cards not checked yet),
+    92 articles (no 59: HINOKO TOKYO closed in 2023), 147 pins (145 on the top map, see `TOP_SKIP`). No MERGE, no DROP. Ren limited each
     part to about 30 (larger batches mean more errors); further candidates are in `_pipeline/tokyo_tasks.md`. Slugs: 39 `hanaju` (花重),
-    60 `shizenjin-mura` (the campsite, run by do-mo). 56 YUEN BETTEI DAITA has only pre-opening renderings, captioned as such (Ren).
+    60 `shizenjin-mura` (the campsite, run by do-mo), 71 `kabuki` (蕪木). 86 Homeikan: the main building is closed for renovation from
+    2026-04-30 (said in the text, kept like Chiba's Hoki museum, Ren). 56 YUEN BETTEI DAITA has only pre-opening renderings, captioned as such (Ren).
     Temporary (COVID-era) hours in a source are replaced by the official 2026 hours (Ren: 19, 43, 50, 58). eyebrow is «Токио · …» (not a prefecture). Ren's answers 2026-10-23: 19 Mori
     shows the official 2026 hours; 24 keeps «Тихий Дон» with a short note on the manga; Ханако Усуи is named with her role (03, 14, 17).
     Island pins (Kozushima, Hachijojima, Ogasawara) are left out of both map frames: `FIT_MINLAT=35` in `tools/prefs/tokyo.py`
