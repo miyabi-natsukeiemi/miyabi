@@ -811,7 +811,7 @@ document.documentElement.classList.add('intro-on');
     var cards = Array.prototype.slice.call(deck.querySelectorAll('.pc')), n = cards.length;
     var f = 12, tf = 12, dot = document.getElementById('scrubDot'), nEl = document.getElementById('scrubN'), nmEl = document.getElementById('scrubName'), lastC = -1;
     var sp = window.innerWidth < 900 ? 34 : 58;
-    deck.addEventListener('pointermove', function(e){ var r = deck.getBoundingClientRect(); var x = Math.max(0, Math.min(1, (e.clientX - r.left - r.width * .08) / (r.width * .84))); tf = x * (n - 1); });
+    deck.addEventListener('pointermove', function(e){ if (e.pointerType === 'touch') return; var r = deck.getBoundingClientRect(); var x = Math.max(0, Math.min(1, (e.clientX - r.left - r.width * .08) / (r.width * .84))); tf = x * (n - 1); });
     deck.addEventListener('wheel', function(e){ var d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : 0; if (d) { e.preventDefault(); tf = Math.max(0, Math.min(n - 1, tf + d * .02)); } }, {passive: false});
     deck.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight') { tf = Math.min(n - 1, Math.round(tf) + 1); e.preventDefault(); } if (e.key === 'ArrowLeft') { tf = Math.max(0, Math.round(tf) - 1); e.preventDefault(); } if (e.key === 'Enter') open(cards[Math.round(f)]); });
     var tx0 = null;
@@ -822,14 +822,12 @@ document.documentElement.classList.add('intro-on');
       var id = +c.dataset.pref, reg = c.dataset.reg, map = document.getElementById('map');
       window.slowScrollTo(document.getElementById('map-section'), function(){ if (map && map.select) { map.select(reg, id); if (map._emit) map._emit('select'); } });
     }
-    // cards keep moving under the pointer, so down and up can land on different cards: remember the one pressed
+    // the deck follows the pointer (~11px per card) while cards are drawn 58px apart, so the card under the cursor is
+    // usually a neighbour of the highlighted one: a click opens the highlighted (front) card, taken when the button goes down
     var pressed = null;
-    // cards sit behind the deck's plane in 3D, so the deck itself gets the hit: look underneath it
-    function cardAt(e){ var els = document.elementsFromPoint(e.clientX, e.clientY); for (var k = 0; k < els.length; k++) { var c = els[k].closest && els[k].closest('.pc'); if (c) return c; } return null; }
-    deck.addEventListener('pointerdown', function(e){ pressed = cardAt(e); });
+    deck.addEventListener('pointerdown', function(){ pressed = Math.round(f); tf = pressed; });
     deck.addEventListener('click', function(e){
-      var c = pressed || cardAt(e); pressed = null; e.preventDefault(); if (!c) return;
-      var i = +c.dataset.i; if (Math.abs(i - f) > 1.6) { tf = i; } else open(c);
+      e.preventDefault(); var i = pressed !== null ? pressed : Math.round(f); pressed = null; open(cards[i]);
     });
     (function tick(){
       f += (tf - f) * (reduce ? 1 : .09);
