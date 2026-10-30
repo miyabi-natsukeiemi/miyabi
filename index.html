@@ -293,8 +293,11 @@ form.ask label{font-size:13px;color:var(--dim);margin-top:8px}
 form.ask input,form.ask textarea{font-family:inherit;font-size:16px;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line2);padding:14px 0;width:100%;outline:none}
 form.ask input:focus,form.ask textarea:focus{border-bottom-color:var(--ink)}
 form.ask .btn{align-self:flex-start;margin-top:28px}
-form.ask .ask-msg{font-size:15px;color:var(--ink);margin:16px 0 0}
-form.ask .ask-msg.err{color:var(--gold)}
+.ask .ways{list-style:none;margin:0;padding:0;border-top:1px solid var(--line2)}
+.ask .ways li{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;padding:18px 0;border-bottom:1px solid var(--line2)}
+.ask .way{font-size:18px;color:var(--head);min-width:120px}
+.ask .how{font-size:14px;color:var(--dim)}
+.ask .ask-note{font-size:15px;line-height:1.6;color:var(--body2);margin:24px 0 0}
 .sect{border-top:1px solid var(--line)}
 
 footer{padding:36px 56px 40px;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;font-size:13px;color:var(--dim);border-top:1px solid var(--line)}
@@ -423,7 +426,7 @@ document.documentElement.classList.add('intro-on');
     <div class="how4head"><h2 class="rv-words"><span class="w"><span>Как</span></span> <span class="w"><span>это</span></span> <span class="w"><span>происходит</span></span></h2><p class="rv">Четыре шага от первого сообщения до возвращения домой.</p></div>
     <ol class="how4grid"><li class="h4">
         <div class="h4top rv"><svg class="h4i" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 14h34a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4H24l-9 8v-8H8a4 4 0 0 1-4-4V18a4 4 0 0 1 4-4z"/><path d="M12 22h26M12 29h18"/><path d="M40 6h18a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H52"/><path d="M40 8l10 8 10-8"/></svg><span class="h4n">01</span></div>
-        <h3 class="rv">Напишите нам</h3><p class="rv">В любой удобный мессенджер, на почту или через форму на сайте.</p></li><li class="h4">
+        <h3 class="rv">Напишите нам</h3><p class="rv">В любой удобный мессенджер или на почту.</p></li><li class="h4">
         <div class="h4top rv"><svg class="h4i" viewBox="0 0 64 64" aria-hidden="true"><circle cx="22" cy="20" r="9"/><path d="M8 50c0-9 6-15 14-15s14 6 14 15"/><path d="M40 12h18a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3h-6l-6 5v-5h-6a3 3 0 0 1-3-3V15a3 3 0 0 1 3-3z"/><path d="M46 21c0-2 3-3 3 0 0-3 3-2 3 0 0 2-3 4-3 4s-3-2-3-4z"/></svg><span class="h4n">02</span></div>
         <h3 class="rv">Знакомимся</h3><p class="rv">Созваниваемся или переписываемся — как вам удобнее. Узнаём, чем вы живёте и что любите, чтобы собрать идеальное путешествие.</p></li><li class="h4">
         <div class="h4top rv"><svg class="h4i" viewBox="0 0 64 64" aria-hidden="true"><path d="M6 14l16-6 18 6 18-6v42l-18 6-18-6-16 6z"/><path d="M22 8v42M40 14v42"/><path class="dash" d="M12 42c6-2 6-10 14-12s10 6 16 2"/><path d="M50 18c-3.5 0-6 2.5-6 6 0 4.5 6 10 6 10s6-5.5 6-10c0-3.5-2.5-6-6-6z"/><circle cx="50" cy="24" r="2"/></svg><span class="h4n">03</span></div>
@@ -438,18 +441,16 @@ document.documentElement.classList.add('intro-on');
   <div class="wrap two">
     <div class="left">
       <h2 style="grid-column:auto">Расскажите, куда хочется</h2>
-      <p>Ответим в течение дня. Если удобнее мессенджер — <a href="#">Telegram</a> или <a href="#">WhatsApp</a>.</p>
+      <p>Напишите нам, как вам удобнее, — ответим в течение дня.</p>
     </div>
-    <form class="ask right" id="askForm" action="https://formspree.io/f/xjgnwqvq" method="post">
-      <label for="f-name">Как к вам обращаться</label>
-      <input id="f-name" name="name" type="text" autocomplete="name">
-      <label for="f-contact">Куда ответить</label>
-      <input id="f-contact" name="contact" type="text" autocomplete="email" required>
-      <label for="f-text">Куда и когда хочется, с кем едете</label>
-      <textarea id="f-text" name="text" rows="3"></textarea>
-      <button class="btn solid" type="submit">Отправить</button>
-      <p class="ask-msg" id="askMsg" role="status" hidden></p>
-    </form>
+    <div class="ask right">
+      <ul class="ways">
+        <li><span class="way">Telegram</span><span class="how">быстрее всего</span></li>
+        <li><span class="way">WhatsApp</span><span class="how">если Telegram у вас не работает</span></li>
+        <li><span class="way">Почта</span><span class="how">для длинных писем и документов</span></li>
+      </ul>
+      <p class="ask-note">В первом сообщении расскажите, куда и когда хочется поехать, сколько вас и что вы любите: еда, история, природа, онсэны. Чем подробнее, тем точнее будет первый вариант маршрута.</p>
+    </div>
   </div>
 </section>
 
@@ -896,21 +897,6 @@ document.documentElement.classList.add('intro-on');
   }
   document.querySelectorAll('.themes button').forEach(function(b){ b.addEventListener('click', function(){ setTheme(b.dataset.theme); }); });
   setTheme(document.documentElement.getAttribute('data-theme') || 'washi');
-  // contact form → Formspree (form ID as on the previous homepage); the action attribute is the no-JS fallback
-  (function(){
-    var form = document.getElementById('askForm'); if (!form) return;
-    var msg = document.getElementById('askMsg'), btn = form.querySelector('button[type="submit"]'), sending = false;
-    function say(text, err){ msg.textContent = text; msg.classList.toggle('err', !!err); msg.hidden = false; }
-    form.addEventListener('submit', function(e){
-      e.preventDefault(); if (sending) return;
-      sending = true; btn.disabled = true; btn.textContent = 'Отправляем…'; msg.hidden = true;
-      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
-        .then(function(r){ if (!r.ok) throw new Error('status ' + r.status);
-          form.reset(); btn.textContent = 'Отправлено'; say('Спасибо! Ответим в течение дня.'); })
-        .catch(function(){ btn.disabled = false; btn.textContent = 'Отправить'; sending = false;
-          say('Не удалось отправить. Проверьте соединение и попробуйте ещё раз.', true); });
-    });
-  })();
   // the three columns preselect a map filter
   document.querySelectorAll('.tri a[data-filter]').forEach(function(a){
     a.addEventListener('click', function(){

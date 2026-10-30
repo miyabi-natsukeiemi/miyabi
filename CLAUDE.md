@@ -40,8 +40,10 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
   - Three columns Еда / Культура / Технология (`#tri`) that preselect a map filter.
   - The map section (`#map-section`, `<japan-map>`, see below).
   - «Как это происходит» (`#how`): four steps that fade in when scrolled to.
-  - Contact form (`#ask`, `#askForm`), sent to Formspree form `xjgnwqvq` by fetch (as on the old homepage).
-    The Telegram/WhatsApp links are still `#` and the footer has a placeholder for the legal details.
+  - Contact section (`#ask`): no form, only how to reach us (Telegram, WhatsApp, email) and what to write. The site collects
+    no personal data on purpose (Russian law 152-ФЗ: data of Russian citizens must first be stored in Russia, so no
+    Formspree or other foreign form service; Ren, 2026-10-30). The real addresses are not given yet, so the three ways
+    have no links; the footer still has a placeholder for the legal details.
   - 4 colour themes (`data-theme` on `<html>`: washi (default), aizome, sumi, ai; buttons in the header, choice kept in
     localStorage `miyabi-theme`). The map uses the theme's `--map-*` colours.
 - Japan map (`<japan-map>` in index.html): 9 regions; Okinawa is its own region (not part of Kyūshū). It lives only in the
