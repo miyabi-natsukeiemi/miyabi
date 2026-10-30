@@ -19,7 +19,8 @@ Owner: Ren (GitHub: miyabi-natsukeiemi). Ren talks to Claude in Japanese; all si
 ## Layout
 
 ```
-index.html                 Top page with the interactive SVG Japan map (#map-section). Large (~1.2 MB), inline everything.
+index.html                 Top page (~1.5 MB, inline everything except assets/noren/). See "Homepage" below.
+assets/noren/              three.min.js (0.149) and the noren textures (basecolor.jpg, normal.jpg) for the homepage intro.
 tokyo.html, osaka.html,    Small redirect stubs kept for old links. Leave as they are.
 kyoto.html, hokkaido.html,
 fukuoka.html
@@ -31,6 +32,18 @@ articles/kagawa/<slug>/    Kagawa sub-articles (44). index.html + images/ + thum
 articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12), tokushima (9), hiroshima (22)
 ```
 
+- Homepage (new design, 2026-10-30; the old homepage is in git history before the commit "New homepage: 3D noren intro,
+  prefecture cards, steps section"), top to bottom:
+  - Intro: a 3D noren (three.js, `assets/noren/`) with 雅 that sways with the pointer; a click, Enter or Esc opens the site.
+  - Hero «Иное лицо Японии» (`#top`) with a fan of 47 prefecture cards (`#deck47`): they follow the pointer left/right
+    (a vertical wheel scrolls the page); clicking the front card scrolls to the map and opens that prefecture.
+  - Three columns Еда / Культура / Технология (`#tri`) that preselect a map filter.
+  - The map section (`#map-section`, `<japan-map>`, see below).
+  - «Как это происходит» (`#how`): four steps that fade in when scrolled to.
+  - Contact form (`#ask`, `#askForm`), sent to Formspree form `xjgnwqvq` by fetch (as on the old homepage).
+    The Telegram/WhatsApp links are still `#` and the footer has a placeholder for the legal details.
+  - 4 colour themes (`data-theme` on `<html>`: washi (default), aizome, sumi, ai; buttons in the header, choice kept in
+    localStorage `miyabi-theme`). The map uses the theme's `--map-*` colours.
 - Japan map (`<japan-map>` in index.html): 9 regions; Okinawa is its own region (not part of Kyūshū). It lives only in the
   bottom-left inset, which shows on the whole-Japan view and grows to fill the map when Okinawa is opened (main map hidden).
   Inside Okinawa, island groups (`ISLES`: main island, Miyako, Yaeyama, Daitō; split by polygon longitude) can be clicked to zoom in,
