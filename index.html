@@ -303,15 +303,198 @@ form.ask .btn{align-self:flex-start;margin-top:28px}
 footer{padding:36px 56px 40px;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;font-size:13px;color:var(--dim);border-top:1px solid var(--line)}
 @media(max-width:760px){footer{padding:28px 16px}}
 </style>
+<!-- loading screen: 雅 written stroke by stroke as the intro's files arrive (markup and drawing right after <body>) -->
+<style>
+html.ld-on,html.ld-on body{overflow:hidden}
+/* no background of its own: the intro's paper is the page, the noren dyes in under the ink */
+.ld{position:fixed;inset:0;z-index:2000}
+.ld-c{position:absolute;inset:0;opacity:0;transition:opacity .3s ease}
+.ld.show .ld-c{opacity:1}
+.ld-k{position:absolute;left:30%;top:13%;width:40%;height:56%;transition:left .6s ease,top .6s ease,width .6s ease,height .6s ease}
+.ld-k>svg{display:block;width:100%;height:100%;overflow:visible;transition:opacity .35s ease}
+.ld-k path{fill:none;stroke:url(#ldi);stroke-linecap:round;stroke-linejoin:round}
+.ld-k circle{fill:var(--head);opacity:0}
+.ld-k circle.on{animation:lddr 1.6s ease-in-out infinite}
+@keyframes lddr{0%,100%{opacity:.12}50%{opacity:.4}}
+.ld-s{position:absolute;right:-17%;bottom:-2%;width:14%;aspect-ratio:1;opacity:0}
+.ld-s svg{position:relative;display:block;width:100%;height:100%;transition:opacity .35s ease .3s}
+.ld-s::before{content:'';position:absolute;inset:-6%;border-radius:20%;background:var(--gold);opacity:0;filter:blur(3px)}
+.ld-s.on{animation:ldst .42s cubic-bezier(.3,1.5,.5,1) forwards}
+.ld-s.on::before{animation:ldsp .7s ease-out .16s}
+@keyframes ldst{0%{opacity:0;transform:scale(1.7) rotate(-5deg)}55%{opacity:1;transform:scale(.92) rotate(-5deg)}100%{opacity:1;transform:scale(1) rotate(-5deg)}}
+@keyframes ldsp{0%{opacity:.4;transform:scale(.92)}100%{opacity:0;transform:scale(1.3)}}
+.ld-w{position:absolute;display:flex;justify-content:space-between;align-items:center;font:500 12px/1 system-ui,sans-serif;color:var(--mute);transition:opacity .4s ease}
+.ld-w span{opacity:0;transition:opacity .6s ease}
+.ld-w span.on{opacity:1}
+.ld-h{position:absolute;height:1px;background:var(--line);overflow:hidden;transition:opacity .4s ease}
+.ld-h i{display:block;height:100%;background:var(--gold);transform:scaleX(0);transform-origin:0 50%;transition:transform .4s ease}
+.ld.hand .ld-w,.ld.hand .ld-h,.ld.hand .ld-s svg{opacity:0}
+.ld.hand2 .ld-k>svg{opacity:0}
+/* the noren waits, hidden, under the loader; its hint and glow come in at the hand-over */
+html.ld-on .intro .rod,html.ld-on .intro .glow,html.ld-on .intro .ihint{opacity:0}
+.intro .glow,.intro .ihint{transition:opacity .45s ease}
+</style>
+<script>
+(function(){
+  document.documentElement.classList.add('ld-on'); window.__ldCalm = 0;
+  // 13 units = 13 strokes; each finished file unlocks its share
+  var W = {head: 1, page: 1, fonts: 1, three: 3, bc: 2, nm: 2, gl: 1, d3: 1, geo: 1}, got = {}, L = window.__ld = {n: 0, t: performance.now(), got: got};
+  L.hit = function(k){ if (got[k] || !W[k]) return; got[k] = Math.round(performance.now()); L.n += W[k]; L.t = performance.now(); };
+  L.ready = function(){ L.hit('gl'); if (L.place) L.place(); };   // the noren has drawn its first textured frames
+  var F = {'basecolor.jpg': 'bc', 'normal.jpg': 'nm', 'd3.min.js': 'd3', 'japan.geojson': 'geo'};
+  try { new PerformanceObserver(function(l){ l.getEntries().forEach(function(e){ for (var s in F) if (e.name.indexOf(s) > -1) L.hit(F[s]); }); }).observe({type: 'resource', buffered: true}); }
+  catch (e) { addEventListener('load', function(){ for (var s in F) L.hit(F[s]); }); }
+  document.addEventListener('DOMContentLoaded', function(){
+    L.hit('page'); if (!window.THREE) L.hit('three');
+    if (!window.__noren3d) { L.hit('bc'); L.hit('nm'); }   // CSS noren: no textures to wait for
+    if (document.fonts) document.fonts.ready.then(function(){ L.hit('fonts'); }); else L.hit('fonts');
+  });
+  addEventListener('keydown', function(e){ if (!L.over) e.stopImmediatePropagation(); }, true);
+})();
+</script>
 <script>
 document.documentElement.classList.add('intro-on');
 (function(){ var t='washi'; try { t = localStorage.getItem('miyabi-theme') || t; } catch(e){} document.documentElement.setAttribute('data-theme', t); })();
 </script>
-<script src="assets/noren/three.min.js"></script>
 <script>window.NOREN_TEX={bc:'assets/noren/basecolor.jpg',nm:'assets/noren/normal.jpg'};</script>
 
 </head>
 <body>
+<div class="ld" id="ld" role="progressbar" aria-label="Загрузка сайта" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+  <div class="ld-c" aria-hidden="true">
+    <div class="ld-k">
+      <!-- 雅 (U+96C5): stroke paths from KanjiVG (https://kanjivg.tagaini.net, 096c5.svg), © Ulrich Apel, CC BY-SA 3.0 -->
+      <svg viewBox="10.75 14.75 87.81 82.5" preserveAspectRatio="none"><defs>
+        <linearGradient id="ldi" gradientUnits="userSpaceOnUse" x1="0" y1="14.75" x2="0" y2="97.25"><stop offset="0" style="stop-color:var(--head)"/><stop offset="0" style="stop-color:var(--head)"/><stop offset="0" style="stop-color:var(--head)"/><stop offset="1" style="stop-color:var(--head)"/></linearGradient>
+        <filter id="ldb" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".32" numOctaves="2" seed="7"/>
+          <feDisplacementMap in="SourceGraphic" scale="1" result="d"/><feGaussianBlur in="d" stdDeviation=".8" result="b"/>
+          <feComponentTransfer in="b" result="b"><feFuncA type="linear" slope=".38"/></feComponentTransfer><feMerge><feMergeNode in="b"/><feMergeNode in="d"/></feMerge></filter>
+        <g id="ldk"><path d="M15.41,22.6c2.47,0.65,4.8,0.51,6.71,0.22c6.85-1.05,16.35-2.35,22.16-3.43c1.71-0.32,3.85-0.65,5.58-0.26"/><path d="M23.94,26.15c0.83,0.83,1.09,2.05,0.99,3.1c-0.68,7-1.18,13.75-1.38,18.6"/><path d="M11.85,50.13c2.41,0.52,5.1,0.31,7.52-0.09c8.02-1.32,18.18-2.91,25.02-4.12c1.73-0.31,2.99-0.67,5.13-0.31"/><path d="M40.56,23.3c0.76,0.76,1.3,1.83,1.3,4.05c0,18.6-0.01,55.23-0.01,61.56c0,12.67-5.95,2.92-7.5,1.32"/><path d="M39.9,48.43c0,0.82-0.65,3.01-1.04,3.86C34.88,61,25.03,76.51,10.75,86.5"/><path d="M63.63,15c0.15,1.79-0.05,2.85-0.54,4.35C59.94,28.88,55.7,38.11,48.5,49.5"/><path d="M57.01,35.84c0.58,0.58,0.91,1.36,0.91,2.66c0,9.03-0.03,34.3-0.04,49.63c0,3.78,0,6.95,0,9.12"/><path d="M82.75,14.75c0.08,0.88,0.04,2.05-0.28,2.77c-2.21,4.98-3.46,7.87-7.2,13.57"/><path d="M58.68,34.14c7.57-0.89,20.82-1.89,31.11-3.16c2.73-0.34,3.72-0.23,5.47-0.04"/><path d="M75.86,34.6c0.77,0.77,1.14,2.17,1.14,3.48c0,2.5,0,43.32,0,50.8"/><path d="M58.97,52.38c5.43-0.54,19.53-1.88,29.03-2.79c2.45-0.23,4.33-0.19,5.23-0.08"/><path d="M59.1,70.67c5.94-0.41,21.25-1.88,29.94-2.54c2.11-0.16,3.75-0.24,4.66-0.21"/><path d="M58.98,91.44c6.85-0.37,25.32-2.15,35.04-2.68c2.01-0.11,3.59-0.17,4.54-0.14"/></g>
+      </defs><g id="ldg" filter="url(#ldb)"><circle id="ldd" r="3.3"/></g></svg>
+      <div class="ld-s" id="lds"><svg viewBox="-12 -12 133 133"><rect x="-12" y="-12" width="133" height="133" rx="16" fill="var(--gold)" filter="url(#ldb)"/>
+        <use href="#ldk" style="stroke:#FFF8EE;stroke-width:8;fill:none;stroke-linecap:square"/></svg></div>
+    </div>
+    <div class="ld-w"><span>M</span><span>I</span><span>Y</span><span>A</span><span>B</span><span>I</span></div>
+    <div class="ld-h"><i></i></div>
+  </div>
+</div>
+<script>
+(function(){
+  var L = window.__ld, el = document.getElementById('ld'); if (!L || !el) return;
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var g = document.getElementById('ldg'), seal = document.getElementById('lds'), bar = el.querySelector('.ld-h i'), ws = el.querySelectorAll('.ld-w span');
+  var kbox = el.querySelector('.ld-k'), wbox = el.querySelector('.ld-w'), hbox = el.querySelector('.ld-h'), stops = document.querySelectorAll('#ldi stop');
+  // the ink 雅 lies exactly over the 雅 printed on the noren. Until the noren script has run, the same camera as its fit():
+  // a 1.5 × 1.2 m cloth (9.2 × 7.36 units) under the rod at y 3.25; the print spans u .232–.768, v .107–.756 of the cloth
+  function rest3d(u0, v0, u1, v1){
+    var w = innerWidth, h = innerHeight, vh = 7.81 / .7; if (vh * w / h < 9.2 / .9) vh = 9.2 / .9 * h / w;
+    var s = h / vh, cy = 3.5 - vh * .46, X = function(u){ return w / 2 + (u - .5) * 9.2 * s; }, Y = function(v){ return h / 2 - (3.25 - v * 7.36 - cy) * s; };
+    return {x: X(u0), y: Y(v0), w: X(u1) - X(u0), h: Y(v1) - Y(v0)};
+  }
+  function nor(){ return window.__noren || {k: function(){ return rest3d(.2324, .1074, .7676, .7559); }, wd: function(){ return rest3d(.4238, .8887, .5762, .916); }}; }
+  function px(b, e){ e.style.left = b.x.toFixed(1) + 'px'; e.style.top = b.y.toFixed(1) + 'px'; e.style.width = b.w.toFixed(1) + 'px'; if (e === kbox) e.style.height = b.h.toFixed(1) + 'px'; }
+  var K;
+  L.place = function(){
+    var N = nor(), w = N.wd(); K = N.k(); px(K, kbox);
+    // MIYABI over the printed MIYABI, the hairline just under it
+    px(w, wbox); wbox.style.fontSize = Math.max(9, w.h * 1.15).toFixed(1) + 'px'; wbox.style.height = w.h.toFixed(1) + 'px';
+    px({x: K.x + K.w * .2, y: w.y + w.h * 2.6, w: K.w * .6}, hbox);
+  };
+  L.place(); addEventListener('resize', L.place);
+  // three passes per stroke, the wider ones only over its first part: a brush that presses down, then tapers
+  var LAY = [[3.1, 1], [4.7, .8], [6.4, .55]];
+  var st = Array.prototype.map.call(document.querySelectorAll('#ldk path'), function(p){
+    var l = p.getTotalLength();
+    return {l: l, q: LAY.map(function(a){ var c = p.cloneNode(); c.setAttribute('stroke-width', a[0]); c.style.visibility = 'hidden'; g.appendChild(c); return c; })};
+  });
+  function ink(i, f){
+    if (f > 0 && f < 1) f = f < .5 ? 2 * f * f : 1 - 2 * (1 - f) * (1 - f);
+    st[i].q.forEach(function(c, j){ var s = Math.min(f * st[i].l, st[i].l * LAY[j][1]);
+      c.style.visibility = s > 0 ? 'visible' : 'hidden'; c.style.strokeDasharray = s.toFixed(2) + ' ' + (st[i].l + 9).toFixed(1); });
+  }
+  if (rm) for (var i = 0; i < 13; i++) ink(i, 1);
+  // while the next file is on its way, the brush rests where the next stroke starts
+  var drop = document.getElementById('ldd'), at = -1;
+  function rest(i){ if (i === at) return; at = i; drop.classList.toggle('on', i >= 0);
+    if (i >= 0) { var s = st[i].q[0].getPointAtLength(0); drop.setAttribute('cx', s.x); drop.setAttribute('cy', s.y); } }
+  L.hit('head');   // the page's head has arrived
+  var hid = [];
+  document.addEventListener('DOMContentLoaded', function(){
+    if (L.over) return;
+    Array.prototype.forEach.call(document.body.children, function(c){ if (c !== el && c.tagName !== 'SCRIPT' && !c.hasAttribute('aria-hidden')) { c.setAttribute('aria-hidden', 'true'); hid.push(c); } });
+  });
+  function end(){
+    L.over = 1; el.remove(); document.documentElement.classList.remove('ld-on');
+    hid.forEach(function(c){ c.removeAttribute('aria-hidden'); });
+    var c0 = performance.now();   // the noren starts to sway (and to follow the pointer) only now
+    (function calm(){ var k = Math.min(1, (performance.now() - c0) / 1600); window.__ldCalm = k * k; if (k < 1) requestAnimationFrame(calm); })();
+  }
+  // the hand-over: the noren is dyed in from the rod down to the hem; where the dye has passed, the ink turns the cream of the
+  // printed 雅 and then dissolves into it. The page under the ink is never bare.
+  function mask(e, a, b){ var t = e.getBoundingClientRect().top, v = 'linear-gradient(#000 ' + (a - t).toFixed(1) + 'px,transparent ' + (b - t).toFixed(1) + 'px)';
+    e.style.webkitMaskImage = e.style.maskImage = v; }
+  function hand(inked){
+    var N = window.__noren, els = N ? N.els : [], cream = N ? N.cream : '#F1EAE0', t0 = performance.now(), prev = t0, hinted = 0, faded = 0;
+    if (inked) seal.classList.add('on');
+    if (rm) {   // a plain 400 ms crossfade (the site's reduced-motion rule turns CSS transitions off, so it is done here)
+      if (inked) seal.style.opacity = 1;
+      document.documentElement.classList.remove('ld-on');
+      var c = el.querySelector('.ld-c');
+      return (function x(now){ var k = Math.max(0, Math.min(1, (now - t0) / 400));
+        els.forEach(function(e){ e.style.opacity = k; }); c.style.opacity = 1 - k;
+        if (k < 1) requestAnimationFrame(x); else end(); })(t0);
+    }
+    stops[0].style.stopColor = stops[1].style.stopColor = cream;
+    var D0 = inked ? .2 : 0, DUR = inked ? .8 : .7, END = inked ? 1.25 : .95;
+    (function f(now){
+      if (now - prev > 70) t0 += now - prev - 17;   // a busy main thread (the map being built) pauses the scene instead of skipping it
+      prev = now;
+      var t = Math.max(0, (now - t0) / 1000), y0 = N ? N.y0() : 0, y1 = N ? N.y1() : innerHeight, soft = (y1 - y0) * .16;
+      var d = Math.max(0, Math.min(1, (t - D0) / DUR)); d = d < .5 ? 2 * d * d : 1 - 2 * (1 - d) * (1 - d);
+      var F = y0 + d * (y1 - y0 + soft);   // the dye's lower edge; full colour from F - soft up
+      els.forEach(function(e){ e.style.opacity = 1; mask(e, F - soft, F); });
+      var a = (F - soft - K.y) / K.h, b = (F - K.y) / K.h;
+      stops[1].setAttribute('offset', Math.max(0, Math.min(1, a)).toFixed(3)); stops[2].setAttribute('offset', Math.max(0, Math.min(1, b)).toFixed(3));
+      if (t > .35) el.classList.add('hand');
+      if (!faded && (a > .85 || t > D0 + DUR)) { faded = 1; el.classList.add('hand2'); }
+      if (!hinted && t > END - .45) { hinted = 1; document.documentElement.classList.remove('ld-on'); }
+      if (t < END) return requestAnimationFrame(f);
+      els.forEach(function(e){ e.style.webkitMaskImage = e.style.maskImage = ''; });
+      end();
+    })(t0);
+  }
+  // "hangs" = no new file for 8 s, or for twice the time the biggest file (three.min.js, ~600 KB) needs at the speed
+  // the page itself arrived so far, whichever is longer: a slow but working connection is not a hang
+  var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  var bps = document.documentElement.outerHTML.length / Math.max(.05, (performance.now() - (nav ? nav.responseStart : 0)) / 1000);
+  var HANG = L.hang = Math.max(8000, Math.min(60000, 2 * 620000 / bps * 1000));
+  var cur = 0, fast = 0, shown = false, last = performance.now();
+  (function frame(now){
+    var dt = Math.max(0, Math.min(.05, (now - last) / 1000)); last = now;   // a frame's timestamp can precede the script's start
+    if (L.n < 13 && now - L.t > HANG) L.n = 13;   // something hangs: finish anyway, the page falls back on its own
+    var n = Math.min(13, L.n), p = n / 13;
+    el.setAttribute('aria-valuenow', Math.round(p * 100));
+    if (!shown) {
+      if (n >= 13) return hand(false);   // all cached: the noren just dyes in
+      // a cached visit has most files by 350 ms (parsing the page itself takes ~400): give it till 700 ms before showing anything
+      if (now > (n >= 9 ? 700 : 350)) { shown = true; el.classList.add('show'); }
+    }
+    bar.style.transform = 'scaleX(' + p.toFixed(3) + ')';
+    for (var k = 0; k < 6; k++) if (p >= k / 6) ws[k].classList.add('on');
+    if (rm) { cur = n; g.style.opacity = (.15 + .85 * p).toFixed(3); }
+    else {
+      // once everything is in, the strokes still left are written in about half a second: nobody waits for the animation
+      if (n >= 13 && !fast) fast = Math.max(.01, 13 - cur) / .45;
+      if (cur < n) { var i = Math.min(12, Math.floor(cur)); cur = Math.min(n, cur + dt * Math.max(1 / (.16 + st[i].l / 240), fast)); }
+      for (var i = 0; i < 13; i++) ink(i, Math.max(0, Math.min(1, cur - i)));
+      rest(shown && cur >= n && n < 13 ? Math.floor(cur) : -1);
+    }
+    if (cur >= 13 && shown) return hand(true);
+    requestAnimationFrame(frame);
+  })(last);
+})();
+</script>
+<script src="assets/noren/three.min.js" onload="__ld.hit('three')" onerror="__ld.hit('three')"></script>
 <div id="intro" class="intro" role="dialog" aria-modal="true" aria-label="Вход на сайт 雅">
   <div class="glow"></div>
   <div class="rod"></div>
@@ -623,6 +806,8 @@ document.documentElement.classList.add('intro-on');
     try { R = new T.WebGLRenderer({canvas: cv, antialias: true, alpha: true}); } catch (e) { return; }
     window.__noren3d = true;
     intro.classList.add('is3d'); intro.insertBefore(cv, intro.querySelector('.ihint'));
+    var LD = window.__ld && !window.__ld.over ? window.__ld : null;
+    if (LD) cv.style.opacity = 0;   // transparent until it is really ready, the loader dyes it in
     R.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
     R.outputEncoding = T.sRGBEncoding; R.shadowMap.enabled = true; R.shadowMap.type = T.PCFSoftShadowMap;
     R.toneMapping = T.NoToneMapping;
@@ -662,10 +847,14 @@ document.documentElement.classList.add('intro-on');
       for (var y = 0; y < c.height; y += 3) { g.fillStyle = 'rgba(0,0,0,' + (.04 + Math.random() * .07) + ')'; g.fillRect(0, y, c.width, 1); }
       var t = new T.CanvasTexture(c); return t;
     }
-    var TL = new T.TextureLoader(), NT = window.NOREN_TEX || {};
-    var bcT = NT.bc ? TL.load(NT.bc) : fabricTex(); bcT.encoding = T.sRGBEncoding; bcT.anisotropy = R.capabilities.getMaxAnisotropy();
+    // ready = both textures in, shaders compiled, textures uploaded, and two frames after the first textured render
+    var TL = new T.TextureLoader(), NT = window.NOREN_TEX || {}, pend = (NT.bc ? 1 : 0) + (NT.nm ? 1 : 0), warm = 0;
+    function txOk(){ if (--pend > 0) return; R.compile(scene, cam); [mat.map, mat.normalMap].forEach(function(t){ if (t) R.initTexture(t); }); warm = 1; }
+    var bcT = NT.bc ? TL.load(NT.bc, txOk, undefined, function(){ mat.map = fabricTex(); mat.needsUpdate = true; txOk(); }) : fabricTex();
+    bcT.encoding = T.sRGBEncoding; bcT.anisotropy = R.capabilities.getMaxAnisotropy();
     var mat = new T.MeshPhysicalMaterial({map: bcT, roughness: .9, metalness: 0, sheen: .3, sheenRoughness: .8, sheenColor: new T.Color(0xc08070), side: T.DoubleSide});
-    if (NT.nm) { mat.normalMap = TL.load(NT.nm); mat.normalScale = new T.Vector2(.9, .9); } else { mat.bumpMap = weaveTex(); mat.bumpScale = .012; }
+    if (NT.nm) { mat.normalMap = TL.load(NT.nm, txOk, undefined, function(){ mat.normalMap = null; mat.needsUpdate = true; txOk(); }); mat.normalScale = new T.Vector2(.9, .9); }
+    else { mat.bumpMap = weaveTex(); mat.bumpScale = .012; }
     // cloth
     var NX = 13, NY = 29, panels = [];
     for (var k = 0; k < N; k++) {
@@ -701,6 +890,16 @@ document.documentElement.classList.add('intro-on');
       cam.position.set(0, cy, D); cam.lookAt(0, cy, 0); cam.updateProjectionMatrix(); base = {cy: cy, D: D};
     }
     var base; fit(); window.addEventListener('resize', fit);
+    if (!pend) setTimeout(txOk);
+    // for the loader: where the printed 雅 and MIYABI are on screen (u, v of the cloth, the cloth as it hangs now), and the dye's range
+    var pv = new T.Vector3();
+    function scr(u, v){ var p = panels[2].P, j = Math.min(NY - 1.001, v * (NY - 1)), j0 = Math.floor(j), f = j - j0, c = (NX - 1) / 2,
+        y = p[(j0 * NX + c) * 3 + 1] * (1 - f) + p[((j0 + 1) * NX + c) * 3 + 1] * f;
+      pv.set((u - .5) * TW, y, 0).project(cam); return [(pv.x + 1) / 2 * window.innerWidth, (1 - pv.y) / 2 * window.innerHeight]; }
+    function box(u0, v0, u1, v1){ var a = scr(u0, v0), b = scr(u1, v1); return {x: a[0], y: a[1], w: b[0] - a[0], h: b[1] - a[1]}; }
+    window.__noren = {els: [cv], cream: '#F1EAE0',
+      k: function(){ return box(.2324, .1074, .7676, .7559); }, wd: function(){ return box(.4238, .8887, .5762, .916); },
+      y0: function(){ return scr(.5, 0)[1] - window.innerHeight * .04; }, y1: function(){ return scr(.5, 1)[1] + window.innerHeight * .06; }};
     // walking through on enter: a body (sphere) moves from in front of the cloth to behind it
     var body = null, t0 = performance.now(), open = false, raf;
     var G = -7.5, DT = 1 / 60;
@@ -712,7 +911,7 @@ document.documentElement.classList.add('intro-on');
           var o = v * 3, x = P[o], y = P[o + 1], z = P[o + 2];
           var vx = (x - Q[o]) * .985, vy = (y - Q[o + 1]) * .985, vz = (z - Q[o + 2]) * .985;
           Q[o] = x; Q[o + 1] = y; Q[o + 2] = z;
-          var wind = reduce ? 0 : (Math.sin(t * .9 + x * .45 + y * .25) * .5 + Math.sin(t * 2.1 + x * 1.3 - y * .6) * .22) * .9;
+          var wind = reduce ? 0 : (Math.sin(t * .9 + x * .45 + y * .25) * .5 + Math.sin(t * 2.1 + x * 1.3 - y * .6) * .22) * .9 * (window.__ldCalm == null ? 1 : window.__ldCalm);
           var fall = (ROD - y) / H;
           P[o] = x + vx + Math.sin(t * .7 + y) * .0004 * fall;
           P[o + 1] = y + vy + G * DT * DT;
@@ -743,6 +942,7 @@ document.documentElement.classList.add('intro-on');
       step(t);
       panels.forEach(function(p){ var a = p.geo.attributes.position; a.array.set(p.P); a.needsUpdate = true; p.geo.computeVertexNormals(); });
       R.render(scene, cam);
+      if (warm === 1) { warm = 2; requestAnimationFrame(function(){ requestAnimationFrame(function(){ if (LD) LD.ready(); }); }); }
       raf = requestAnimationFrame(draw);
     }
     raf = requestAnimationFrame(draw);
@@ -769,6 +969,14 @@ document.documentElement.classList.add('intro-on');
     }
     function lay(){ var W = set.clientWidth; ps.forEach(function(o){ var x = o.el.offsetLeft; o.el.querySelectorAll('.big,.sm').forEach(function(s){ s.style.left = (-x) + 'px'; s.style.width = W + 'px'; }); }); }
     lay(); window.addEventListener('resize', lay);
+    // for the loader: the printed 雅 and MIYABI of the first panel (each panel carries the whole word, clipped), and the dye's range
+    function txt(s){ var r = document.createRange(); r.selectNodeContents(ps[0].el.querySelector(s)); return r.getBoundingClientRect(); }
+    var rod = intro.querySelector('.rod');
+    window.__noren = {els: [rod, set], cream: getComputedStyle(document.documentElement).getPropertyValue('--on-accent').trim() || '#FBF8F1',
+      k: function(){ var b = txt('.big'); return {x: b.left + b.width * .03, y: b.top + b.height * .07, w: b.width * .94, h: b.height * .76}; },
+      wd: function(){ var b = txt('.sm'); return {x: b.left, y: b.top, w: b.width, h: b.height}; },
+      y0: function(){ return rod.getBoundingClientRect().top - window.innerHeight * .03; }, y1: function(){ return set.getBoundingClientRect().bottom + window.innerHeight * .05; }};
+    if (window.__ld && !window.__ld.over) { set.style.opacity = 0; window.__ld.hit('bc'); window.__ld.hit('nm'); window.__ld.ready(); }
     var lastX = null, open = false, t = 0;
     intro.addEventListener('pointermove', function(e){
       var r = set.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width, ny = (e.clientY - r.top) / r.height;
@@ -782,7 +990,7 @@ document.documentElement.classList.add('intro-on');
       t += .016;
       ps.forEach(function(o, k){
         o.v += -o.a * .04; o.v *= .935; o.a += o.v; o.a = Math.max(-34, Math.min(34, o.a));
-        var breeze = reduce ? 0 : Math.sin(t * 1.1 + k * .8) * .9 + Math.sin(t * 2.3 + k * 1.7) * .35;
+        var breeze = reduce ? 0 : (Math.sin(t * 1.1 + k * .8) * .9 + Math.sin(t * 2.3 + k * 1.7) * .35) * (window.__ldCalm == null ? 1 : window.__ldCalm);
         var ang = o.a * .6 + breeze;
         o.el.style.transform = 'rotate(' + ang.toFixed(2) + 'deg) skewX(' + (-o.a * .45).toFixed(2) + 'deg) scaleY(' + (1 - Math.abs(o.a) * .0025).toFixed(4) + ')';
         o.el.style.setProperty('--sh', (o.a / 34).toFixed(3));
@@ -1166,7 +1374,14 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
     loader = urls.reduce(function (chain, url) {
       return chain.catch(function () { return loadOneScript(url); });
     }, Promise.reject());
+    loader.then(ldHit('d3'), ldHit('d3'));
     return loader;
+  }
+  // the loading screen counts these too (a fetch answered from memory cache leaves no resource-timing entry)
+  function ldHit(k) { return function () { if (window.__ld) window.__ld.hit(k); }; }
+  // building the map blocks the page for a moment: it waits until the loading screen has handed over to the noren
+  function afterLoader() {
+    return new Promise(function (res) { (function w() { if (!window.__ld || window.__ld.over) res(); else setTimeout(w, 100); })(); });
   }
 
   var geoCache = {};
@@ -1187,6 +1402,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       geoCache[key] = urls.reduce(function (chain, u) {
         return chain.catch(function () { return fetchGeoOne(u); });
       }, Promise.reject());
+      geoCache[key].then(ldHit('geo'), ldHit('geo'));
     }
     return geoCache[key];
   }
@@ -1230,7 +1446,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       this._built = true;
       this._build();
       var self = this;
-      Promise.all([loadD3(this.getAttribute('d3-src') || D3), loadGeo(this.getAttribute('data-src') || GEO)])
+      Promise.all([loadD3(this.getAttribute('d3-src') || D3), loadGeo(this.getAttribute('data-src') || GEO), afterLoader()])
         .then(function (r) { self._draw(r[0], r[1]); })
         .catch(function (e) {
           var l = self._root.querySelector('.loading');

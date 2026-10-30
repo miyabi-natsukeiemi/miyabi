@@ -34,6 +34,14 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
 
 - Homepage (new design, 2026-10-30; the old homepage is in git history before the commit "New homepage: 3D noren intro,
   prefecture cards, steps section"), top to bottom:
+  - Loading screen (`#ld`, right after `<body>`; CSS and progress counter in `<head>`): 雅 is written stroke by stroke
+    (13 KanjiVG strokes, `096c5.svg`, © Ulrich Apel, CC BY-SA 3.0; keep the attribution comment) as the intro's files
+    really arrive (`__ld.hit`: page, fonts, three.js, both textures, d3, GeoJSON, and `gl` = the noren's first textured frames).
+    The ink 雅 lies exactly over the 雅 printed on the noren (`window.__noren.k()`); the loader has no background of its own.
+    Hand-over (~1.2 s): seal stamped, the noren dyes in from the rod to the hem (CSS mask), the ink turns cream where the dye
+    has passed and dissolves, then the hint fades in and only then does the noren sway. Reduced motion: 400 ms crossfade.
+    Cached visits skip the ink. The map waits for the hand-over before building (`afterLoader`), because building blocks
+    the page for ~0.4–1 s.
   - Intro: a 3D noren (three.js, `assets/noren/`) with 雅 that sways with the pointer; a click, Enter or Esc opens the site.
   - Hero «Иное лицо Японии» (`#top`) with a fan of 47 prefecture cards (`#deck47`): they follow the pointer left/right
     (a vertical wheel scrolls the page); clicking the front card scrolls to the map and opens that prefecture.
