@@ -322,6 +322,9 @@ form.ask .btn{align-self:flex-start;margin-top:28px}
 .ask .ways{list-style:none;margin:0;padding:0;border-top:1px solid var(--line2)}
 .ask .ways li{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;padding:18px 0;border-bottom:1px solid var(--line2)}
 .ask .way{font-size:18px;color:var(--head);min-width:120px}
+.ask a.way{text-decoration:none}
+.ask a.way[href]{border-bottom:1px solid var(--line2)}
+.ask a.way[href]:hover{color:var(--gold);border-color:var(--gold)}
 .ask .how{font-size:14px;color:var(--dim)}
 .ask .ask-note{font-size:15px;line-height:1.6;color:var(--body2);margin:24px 0 0}
 .sect{border-top:1px solid var(--line)}
@@ -676,9 +679,9 @@ document.documentElement.classList.add('intro-on');
     </div>
     <div class="ask right">
       <ul class="ways">
-        <li><span class="way">Telegram</span><span class="how">быстрее всего</span></li>
-        <li><span class="way">WhatsApp</span><span class="how">если Telegram у вас не работает</span></li>
-        <li><span class="way">Почта</span><span class="how">для длинных писем и документов</span></li>
+        <li><a class="way" data-contact="telegram">Telegram</a><span class="how">быстрее всего</span></li>
+        <li><a class="way" data-contact="whatsapp">WhatsApp</a><span class="how">если Telegram у вас не работает</span></li>
+        <li><a class="way" data-contact="email">Почта</a><span class="how">для длинных писем и документов</span></li>
       </ul>
       <p class="ask-note">В первом сообщении расскажите, куда и когда хочется поехать, сколько вас и что вы любите: еда, история, природа, онсэны. Чем подробнее, тем точнее будет первый вариант маршрута.</p>
     </div>
@@ -7213,5 +7216,6 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
   });
 })();
 </script>
+<script src="assets/contacts.js"></script>
 </body>
 </html>
