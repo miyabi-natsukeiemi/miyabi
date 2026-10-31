@@ -1,7 +1,9 @@
 """Shared parts of every article page (the 47 prefecture guides and their sub-articles): the 雅 logo in the site-bar, the
-closing call to action and, in <head>, the site icons.
+closing call to action and, in <head>, the site icons and the share tags (Open Graph, Twitter; og:image = the article's
+first photo).
 Usage: python3 tools/site_chrome.py   (all pages under articles/; idempotent). pref_map_build.py applies it to the pages it writes."""
-import os, re, sys
+import os, re, sys, html
+from sitemap_build import SITE
 REPO=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # the logo: 雅 in the homepage's style (Cormorant Garamond 500, ink colour), linking to the homepage
@@ -38,18 +40,35 @@ ICONS='''<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">'''
 
-def head(page):
+def share(page,url):
+    """Open Graph and Twitter tags. url: the page's address on the site, e.g. /articles/kagawa/guntu/"""
+    a=lambda v:html.escape(html.unescape(v),quote=True)
+    m=re.search(r'<title>(.*?)</title>',page,re.S); title=a(m.group(1).strip()) if m else '雅'
+    m=re.search(r'<meta name="description" content="([^"]*)"',page); desc=a(m.group(1)) if m else ''
+    body=page[page.find('<body'):]
+    img=next((s for s in re.findall(r'<img[^>]+src="([^"]+)"',body) if not s.startswith(('http','data:'))),None)
+    img=SITE+(re.sub(r'/[^/]*/\.\./','/',url+img) if img else '/assets/og.jpg')
+    tags=[('property','og:type','article'),('property','og:site_name','雅'),('property','og:locale','ru_RU'),('property','og:title',title),
+        ('property','og:description',desc),('property','og:url',SITE+url),('property','og:image',img),('name','twitter:card','summary_large_image'),
+        ('name','twitter:title',title),('name','twitter:description',desc),('name','twitter:image',img)]
+    return '\n'.join(f'<meta {k}="{n}" content="{v}">' for k,n,v in tags)
+
+def head(page,url):
     page=re.sub(r'<!-- site-head -->.*?<!-- /site-head -->\n?','',page,flags=re.S)
     i=page.find('</head>')
-    return page[:i]+'<!-- site-head -->\n'+ICONS+'\n<!-- /site-head -->\n'+page[i:] if i>-1 else page
+    return page[:i]+'<!-- site-head -->\n'+ICONS+'\n'+share(page,url)+'\n<!-- /site-head -->\n'+page[i:] if i>-1 else page
 
-def apply(page):
-    return head(cta(brand(page)))
+def url_of(path):
+    return '/'+os.path.relpath(os.path.dirname(path),REPO).replace(os.sep,'/')+'/'
+
+def apply(page,path):
+    """path: where the page is written (articles/<pref>/[<slug>/]index.html)"""
+    return head(cta(brand(page)),url_of(path))
 
 def run(paths):
     n=0
     for p in paths:
-        s=open(p,encoding='utf-8').read(); t=apply(s)
+        s=open(p,encoding='utf-8').read(); t=apply(s,p)
         if t!=s: open(p,'w',encoding='utf-8').write(t); n+=1
     return n
 

@@ -144,7 +144,7 @@ def build(key):
         if '<!-- site-bar -->' not in src:
             src=re.sub(r'(<body[^>]*>)',lambda m:m.group(1)+'\n'+bar,src,count=1)
         out=os.path.join(OUT,s); os.makedirs(out,exist_ok=True)
-        open(os.path.join(out,'index.html'),'w',encoding='utf-8').write(site_chrome.apply(src))
+        open(os.path.join(out,'index.html'),'w',encoding='utf-8').write(site_chrome.apply(src,os.path.join(out,'index.html')))
         imd=os.path.join(SRC,d,'images')
         if os.path.isdir(imd):
             shutil.copytree(imd,os.path.join(out,'images'),dirs_exist_ok=True,ignore=shutil.ignore_patterns('.DS_Store'))
@@ -177,7 +177,7 @@ def build(key):
     page=re.sub(r'</p>(\s*)<p class="kicker" id="about">',lambda m:'</p>'+jump+section_map+m.group(1)+'<p class="kicker" id="about">',page,count=1)
     page=re.sub(r'</div>(\s*)</article>',lambda m:section_list+'</div>'+m.group(1)+'</article>',page,count=1)
     assert f'{key}-map -->' in page and f'{key}-articles' in page
-    open(page_path,'w',encoding='utf-8').write(site_chrome.apply(page))
+    open(page_path,'w',encoding='utf-8').write(site_chrome.apply(page,page_path))
     print(key+':',len(titles),'articles,',len(P),'pins; nopin:',sorted(s for s in titles if s not in used))
 
     # Same pins on the top-page Japan map (index.html): shown when the user zooms into this prefecture.
