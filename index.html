@@ -578,16 +578,16 @@ document.documentElement.classList.add('intro-on');
     <p>Лапшичная, которой сто лет, рынок на рассвете, ужин у мастера, к которому не попасть без звонка. Еда — самый короткий путь внутрь страны.</p>
     <span class="more">Места на карте</span>
   </a>
-  <a href="#map-section" data-filter="history">
+  <a href="#map-section" data-filter="history festival">
     <span class="kj" aria-hidden="true">文</span>
     <h3>Культура</h3>
-    <p>Храмы без очередей, гончарные мастерские, деревенские фестивали, в которых можно участвовать, а не смотреть из-за ленты.</p>
+    <p>Храмы без очередей, старые дома и сады, деревенские фестивали, в которых можно участвовать, а не смотреть из-за ленты.</p>
     <span class="more">Места на карте</span>
   </a>
-  <a href="#map-section" data-filter="activity">
+  <a href="#map-section" data-filter="craft">
     <span class="kj" aria-hidden="true">技</span>
-    <h3>Технология</h3>
-    <p>Заводы, куда пускают гостей, музеи роботов и поездов, лаборатории дизайна и те самые туалеты. Япония будущего рядом с Японией прошлого.</p>
+    <h3>Мастерство</h3>
+    <p>Ножи, которые куют уже семь веков, лаковая посуда, стекло, бумага васи и ткани. Заглядываем в мастерские, где ремесло переходит в семье из поколения в поколение, — а кое-где можно попробовать сделать что-то своими руками.</p>
     <span class="more">Места на карте</span>
   </a>
 </section>
@@ -618,6 +618,7 @@ document.documentElement.classList.add('intro-on');
               <button class="chip" data-val="onsen">Онсэны</button>
               <button class="chip" data-val="festival">Праздники</button>
               <button class="chip" data-val="activity">Активности</button>
+              <button class="chip" data-val="craft">Мастерские</button>
               <button class="chip" data-val="history">История</button>
               <button class="chip" data-val="night">Ночная жизнь</button>
               <button class="chip" data-val="nature">Природа</button>
@@ -1102,13 +1103,13 @@ document.documentElement.classList.add('intro-on');
   }
   document.querySelectorAll('.themes button').forEach(function(b){ b.addEventListener('click', function(){ setTheme(b.dataset.theme); }); });
   setTheme(document.documentElement.getAttribute('data-theme') || 'washi');
-  // the three columns preselect a map filter
+  // the three columns preselect map filters (data-filter: one or more chip values)
   document.querySelectorAll('.tri a[data-filter]').forEach(function(a){
     a.addEventListener('click', function(){
-      var chip = document.querySelector('#map-section .chip[data-val="' + a.dataset.filter + '"]');
-      if (!chip) return;
-      document.querySelectorAll('#map-section .chip.on').forEach(function(c){ if (c !== chip) c.click(); });
-      if (!chip.classList.contains('on')) chip.click();
+      var want = a.dataset.filter.split(' ');
+      document.querySelectorAll('#map-section .chip[data-val]').forEach(function(c){
+        if (c.classList.contains('on') !== (want.indexOf(c.dataset.val) > -1)) c.click();
+      });
     });
   });
 })();
@@ -6931,7 +6932,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
     [window.GUNMA_PINS, 10, 'gm'], [window.SAITAMA_PINS, 11, 'st'], [window.CHIBA_PINS, 12, 'cb'], [window.KANAGAWA_PINS, 14, 'kn'],
     [window.TOKYO_PINS, 13, 'to']];
   window.MIYABI_PIN_SETS = PREF_SETS;   // the homepage hero's static map plots them too
-  var KG_TYPE = { see:['view'], eat:['food'], shop:['food'], art:['history'], craft:['activity'], stay:['stay'] };
+  var KG_TYPE = { see:['view'], eat:['food'], shop:['food'], art:['history'], craft:['activity', 'craft'], stay:['stay'] };
   var KG_PINS = [];
   PREF_SETS.forEach(function(set){
     var KG = set[0], pref = set[1], pre = set[2];
@@ -6951,7 +6952,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
   // one color per filter type: chips show it, pins take the color of their first type
   // (with filters on: of their first selected type)
   var TYPE_COLOR = { view:'#2F6FB5', food:'#C8541E', onsen:'#B5487A', festival:'#C99A12', activity:'#138A7E',
-    history:'#7A5230', night:'#3B3F8F', nature:'#5E8F2A', stay:'#7A4A8C' };
+    history:'#7A5230', night:'#3B3F8F', nature:'#5E8F2A', stay:'#7A4A8C', craft:'#5C6B73' };
   document.querySelectorAll('.chips[data-axis="type"] .chip').forEach(function(b){
     b.style.setProperty('--c', TYPE_COLOR[b.dataset.val]);
   });
