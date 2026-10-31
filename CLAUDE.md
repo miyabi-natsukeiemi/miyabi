@@ -20,6 +20,7 @@ Owner: Ren (GitHub: miyabi-natsukeiemi). Ren talks to Claude in Japanese; all si
 
 ```
 index.html                 Top page (~1.5 MB, inline everything except assets/noren/). See "Homepage" below.
+services/index.html        «Услуги» page. Uses assets/site.css (palettes, header, footer: a copy of the homepage's inline CSS, keep in sync).
 assets/noren/              three.min.js (0.149) and the noren textures (basecolor.jpg, normal.jpg) for the homepage intro.
 tokyo.html, osaka.html,    Small redirect stubs kept for old links. Leave as they are.
 kyoto.html, hokkaido.html,

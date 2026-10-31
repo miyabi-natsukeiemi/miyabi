@@ -307,6 +307,11 @@ section{padding:96px 0 80px}
 .h4:hover .h4i{stroke:var(--gold)}
 @media(max-width:1000px){.how4grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:64px}.h4top{margin-bottom:40px}}
 @media(max-width:600px){.how4head{grid-template-columns:1fr;margin-bottom:48px}.how4grid{grid-template-columns:1fr}.h4top{margin-bottom:20px}}
+.how4more{margin-top:72px;font-size:17px}
+.how4more a{text-decoration:none;border-bottom:1px solid var(--line2);padding-bottom:2px}
+.how4more a::after{content:' →'}
+.how4more a:hover{color:var(--head);border-color:var(--gold)}
+@media(max-width:600px){.how4more{margin-top:48px}}
 .steps{margin:0;padding:0 0 0 1.4em;display:flex;flex-direction:column;gap:28px;font-size:17px;line-height:1.6;color:var(--body2)}
 @media(max-width:900px){.two h2,.two .right,.two .left{grid-column:1/span 12}.two .right{margin-top:28px}}
 form.ask{display:flex;flex-direction:column;gap:8px}
@@ -525,7 +530,7 @@ document.documentElement.classList.add('intro-on');
 </div>
 <header class="top">
   <a class="logo" href="#top" aria-label="雅, на главную">雅</a>
-  <nav aria-label="Основная навигация"><a href="#tri">Что искать</a><a href="#map-section">Карта</a><a href="#how">Как мы работаем</a><a href="#ask">Написать</a></nav>
+  <nav aria-label="Основная навигация"><a href="#tri">Что искать</a><a href="#map-section">Карта</a><a href="services/">Услуги</a><a href="#how">Как мы работаем</a><a href="#ask">Написать</a></nav>
   <div class="themes" role="group" aria-label="Цвет сайта">
     <span class="lbl">Тема</span>
     <button type="button" data-theme="washi" style="--sw:#F5F0E6;--sa:#9E3B26" aria-label="Васи — кремовая бумага, киноварный акцент" title="Васи — светлая, 朱"></button>
@@ -659,6 +664,7 @@ document.documentElement.classList.add('intro-on');
         <div class="h4top rv"><svg class="h4i" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 44h44"/><path d="M14 44c0-10 8-18 18-18s18 8 18 18"/><path d="M32 26v-5M28 21h8"/><path d="M6 50h52"/><path d="M44 10c3 1 5 3 6 6M48 4c5 2 9 6 11 11"/></svg><span class="h4n">04</span></div>
         <h3 class="rv">Рядом всю поездку</h3><p class="rv">Поддерживаем вас на протяжении всего путешествия и берём на себя всё, что понадобится в пути.</p></li>
     </ol>
+    <p class="how4more"><a href="services/">Подробнее об услугах</a></p>
   </div>
 </section>
 
