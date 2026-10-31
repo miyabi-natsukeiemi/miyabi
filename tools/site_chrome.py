@@ -1,5 +1,5 @@
-"""Shared parts of every article page (the 47 prefecture guides and their sub-articles): the 雅 logo in the site-bar and the
-closing call to action.
+"""Shared parts of every article page (the 47 prefecture guides and their sub-articles): the 雅 logo in the site-bar, the
+closing call to action and, in <head>, the site icons.
 Usage: python3 tools/site_chrome.py   (all pages under articles/; idempotent). pref_map_build.py applies it to the pages it writes."""
 import os, re, sys
 REPO=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,8 +33,18 @@ def cta(page):
     i=page.rfind('</body>')
     return page[:i]+CTA+page[i:] if i>-1 else page
 
+# in <head>: the site icons (files at the site root, made from favicon.svg)
+ICONS='''<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">'''
+
+def head(page):
+    page=re.sub(r'<!-- site-head -->.*?<!-- /site-head -->\n?','',page,flags=re.S)
+    i=page.find('</head>')
+    return page[:i]+'<!-- site-head -->\n'+ICONS+'\n<!-- /site-head -->\n'+page[i:] if i>-1 else page
+
 def apply(page):
-    return cta(brand(page))
+    return head(cta(brand(page)))
 
 def run(paths):
     n=0
