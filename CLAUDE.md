@@ -67,7 +67,7 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
   Its `<style>` also carries a rule that centers the hero photo (`.mj-hero` has an inline `margin:0` in the article HTML)
   and, in sub-articles, the `p.credits` style.
   For generated sub-articles (Kagawa, Kochi) the block comes from `BAR` in `tools/pref_map_build.py`.
-  Shared parts of all article pages (the 雅 logo, …) are applied by `tools/site_chrome.py` (no argument = every page under
+  Shared parts of all article pages (the 雅 logo, the closing «Хотите поехать сюда?» block `<!-- site-cta -->`, …) are applied by `tools/site_chrome.py` (no argument = every page under
   articles/, idempotent); `pref_map_build.py` applies it to the pages it writes. Run it after putting a new guide from a zip.
 - Article styling lives inside each page under `.mj-article` (fonts: Playfair Display + PT Serif, red accent #B3261E). Keep new styles scoped so they don't leak into other pages.
 
