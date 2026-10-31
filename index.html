@@ -75,18 +75,64 @@ header.top nav{display:flex;gap:28px;flex-wrap:wrap}
 header.top nav a{text-decoration:none;color:var(--ink)}
 @media(max-width:760px){header.top{padding:20px 16px 0}}
 
-/* hero */
-.hero{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;padding:40px 56px 56px;align-items:center;min-height:calc(100vh - 80px)}
-.hero .copy{grid-column:1/span 4;display:flex;flex-direction:column;gap:24px}
-.hero h1{font-size:56px;line-height:1.06}
-.hero p{font-size:16px;line-height:1.6;color:var(--mute);max-width:26rem}
-.hero .cta{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-.hero .cta span{font-size:14px;color:var(--dim)}
-.hero{padding-bottom:0;align-items:end}
-.hero .copy{align-self:center;padding-bottom:56px}
-.hero .cat{grid-column:5/span 8;position:relative;display:flex;align-items:flex-end;justify-content:center;align-self:end}
-.hero .cat::before{content:'';position:absolute;left:50%;top:8%;width:min(820px,110%);aspect-ratio:1;transform:translateX(-50%);
-  background:radial-gradient(circle at 42% 38%,var(--glow),var(--glow2) 38%,transparent 62%);pointer-events:none}
+/* hero: a manifesto in four steps beside a map that follows them (script at the end of the page) */
+.mf{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;padding:0 56px}
+.mf-text{grid-column:1/span 5}
+.mf-side{grid-column:7/span 6}
+.mf-step{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;gap:22px;padding:48px 0;transition:opacity .5s ease}
+.mf.js .mf-step{opacity:.3}
+.mf.js .mf-step.on{opacity:1}
+.mf-kick{font-size:14px;color:var(--mute)}
+.mf h1{font-size:76px;line-height:1.02;letter-spacing:-.01em}
+.mf-lead{font-size:18px;line-height:1.55;color:var(--mute);max-width:26rem}
+.mf-cta{display:flex;flex-wrap:wrap;gap:16px 20px;align-items:center;margin-top:6px}
+.mf-cue{font-size:14px;color:var(--dim)}
+.mf-lbl{display:flex;align-items:center;gap:12px;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.mf-lbl::before{content:'';width:28px;height:1px;background:var(--gold)}
+.mf-p{font-family:'Cormorant Garamond',serif;font-size:31px;line-height:1.36;color:var(--head);max-width:34rem}
+.mf-p em{font-style:italic;color:var(--gold)}
+.mf-stick{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:24px 0}
+.mf-map{position:relative;flex:0 1 auto;height:min(calc(100vh - 150px),760px)}
+.mf-map svg{display:block;width:100%;height:calc(100% - 84px);margin-top:84px;overflow:visible}  /* the top strip keeps room for the count */
+.mf-map .land{fill:var(--map-land);stroke:var(--map-land);stroke-width:.6;vector-effect:non-scaling-stroke;transition:fill .6s ease,stroke .6s ease}  /* the stroke only closes the hairline seams between prefectures */
+.mf-map[data-step="1"] .land.big3{fill:color-mix(in srgb,var(--gold) 30%,var(--map-land));stroke:color-mix(in srgb,var(--gold) 30%,var(--map-land))}
+.mf-map .pn{fill:none;stroke:var(--gold);stroke-width:4;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:0;transition:opacity .6s ease}
+.mf-map[data-step="1"] .pn.big3,.mf-map[data-step="2"] .pn,.mf-map[data-step="3"] .pn{opacity:1}
+.mf-map[data-step="2"] .pn:not(.big3){transition-delay:calc(var(--b) * .15s)}
+.mf-map .city{opacity:0;transition:opacity .5s ease}
+.mf-map[data-step="1"] .city{opacity:1}
+.mf-map .city path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.mf-map .city .ring{stroke:var(--head);stroke-width:11}
+.mf-map .city .dot{stroke:var(--paper);stroke-width:5}
+.mf-map .city text{font:500 calc(var(--u,1) * 14px) 'Golos Text',system-ui,sans-serif;fill:var(--head);paint-order:stroke;stroke:var(--paper);stroke-width:calc(var(--u,1) * 4px);stroke-linejoin:round}
+.mf-map .oki rect{fill:none;stroke:color-mix(in srgb,var(--ink) 20%,transparent);stroke-width:1;vector-effect:non-scaling-stroke}
+.mf-map .oki text{font:500 calc(var(--u,1) * 11px) 'Golos Text',system-ui,sans-serif;letter-spacing:.12em;fill:var(--dim)}
+.mf-count{position:absolute;top:0;right:0;display:flex;flex-direction:column;align-items:flex-end;text-align:right;opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease;pointer-events:none}
+.mf-map[data-step="3"] .mf-count{opacity:1;transform:none}
+.mf-count b{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:64px;line-height:1;color:var(--head);white-space:nowrap}
+.mf-count span{font-size:14px;color:var(--mute)}
+.mf-cap{min-height:1.6em;font-size:15px;color:var(--mute)}
+.mf-dots{display:flex;margin-left:-16px}
+.mf-dots button{width:44px;height:44px;border:0;background:none;cursor:pointer;display:grid;place-items:center;padding:0}
+.mf-dots button::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--line2);transition:background .3s,transform .3s}
+.mf-dots button:hover::before{background:var(--mute)}
+.mf-dots button[aria-current="true"]::before{background:var(--gold);transform:scale(1.25)}
+@media(max-width:1100px){.mf h1{font-size:60px}.mf-p{font-size:27px}}
+@media(max-width:900px){
+  .mf{display:flex;flex-direction:column;padding:0 16px}
+  .mf-side{display:contents}
+  .mf-stick{order:-1;z-index:6;top:0;height:270px;margin:0 -16px;padding:8px 16px 6px;gap:4px;background:var(--paper);border-bottom:1px solid var(--line)}
+  .mf-map{height:auto;flex:1 1 0;min-height:0}
+  .mf-cap{font-size:13px;min-height:1.5em}
+  .mf-dots{display:none}
+  .mf-map svg{height:100%;margin-top:0}
+  .mf-count{right:auto;left:0;align-items:flex-start;text-align:left}
+  .mf-count b{font-size:34px}
+  .mf-count span{font-size:12px}
+  .mf-step{min-height:calc(100vh - 270px);min-height:calc(100svh - 270px);padding:40px 0}
+  .mf h1{font-size:44px}
+  .mf-p{font-size:24px;line-height:1.4}
+}
 [data-theme="washi"] .depth,[data-theme="aizome"] .depth{--extrude:#A99D85}
 /* ── noren intro ── */
 .intro .ncv{position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -114,30 +160,6 @@ html.intro-on,html.intro-on body{overflow:hidden}
 .intro.open{opacity:0;visibility:hidden;pointer-events:none}
 .intro.open .ihint{opacity:0;transition:opacity .3s}
 .intro.open .np{transition:transform .85s cubic-bezier(.55,0,.25,1)}
-/* ── 47 prefecture cards ── */
-.deck47wrap{flex-direction:column;align-items:stretch!important;justify-content:center;gap:10px;align-self:center!important;padding-bottom:40px}
-.deck47{position:relative;height:min(64vh,560px);perspective:1500px;transform-style:preserve-3d;outline:none;cursor:grab}
-.pc{position:absolute;left:50%;top:50%;width:200px;height:290px;margin:-145px 0 0 -100px;padding:16px;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line2);border-radius:4px;
-  text-decoration:none;color:var(--ink);box-shadow:0 18px 40px -20px var(--shadow);will-change:transform,opacity;transition:border-color .2s,box-shadow .3s}
-.pc .ph{display:flex;justify-content:space-between;font-size:12px;color:var(--dim)}
-.pc svg{flex:1;min-height:0;width:100%;margin:10px 0}
-.pc svg path{fill:var(--map-land);stroke:none;transition:fill .25s}
-.pc.c svg path{fill:var(--gold)}
-.pc.c{border-color:color-mix(in srgb,var(--gold) 55%,var(--line2))}
-.pc.c{box-shadow:0 30px 60px -22px var(--shadow)}
-.pc .pk{font-family:serif;font-size:30px;line-height:1.1;color:var(--head)}
-.pc .pr{font-size:15px;margin-top:4px;color:var(--head)}
-.pc .pn{font-size:12px;color:var(--mute)}
-.scrub{position:relative;margin:0 6%;padding-top:4px}
-.scrub .line{position:relative;height:1px;background:var(--line2)}
-.scrub .line i{position:absolute;top:-4px;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:var(--gold)}
-.scrub .tks{position:relative;height:22px}
-.scrub .tk{position:absolute;top:8px;font-size:11px;color:var(--dim);transform:translateX(-2px);cursor:pointer;white-space:nowrap}
-.scrub .tk:hover{color:var(--head)}
-.scrub .tk:nth-child(even){top:24px}
-.scrub .now{margin-top:22px;font-size:13px;color:var(--mute)}
-.scrub .now b{font-weight:500;color:var(--head)}
-@media(max-width:900px){.pc{width:150px;height:220px;margin:-110px 0 0 -75px}.scrub .tk{display:none}.nset{top:calc(5vh + 9px)}}
 .depth{perspective:1700px;perspective-origin:50% 40%;align-self:center!important;align-items:center!important;height:min(84vh,800px)}
 .depth .stage{position:relative;height:100%;aspect-ratio:650/700;transform-style:preserve-3d;transform:rotateX(18deg) rotateY(-8deg) rotateZ(-4deg);will-change:transform}
 .depth .lyr{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
@@ -164,7 +186,6 @@ html.intro-on,html.intro-on body{overflow:hidden}
 .neko.gaze #nekoGaze{opacity:1}
 #nekoPoster{transition:opacity 300ms ease}
 .neko.ready #nekoPoster{opacity:0}
-@media(max-width:900px){.hero{padding:32px 16px 0;min-height:0}.hero .copy,.hero .cat{grid-column:1/span 12}.hero h1{font-size:40px}.hero .copy{padding-bottom:24px}.neko{height:min(62vh,520px)}}
 
 /* three columns */
 .tri{padding:0 56px 110px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px;border-top:1px solid var(--line)}
@@ -514,19 +535,39 @@ document.documentElement.classList.add('intro-on');
   </div>
 </header>
 
-<section class="hero" id="top">
-  <div class="copy">
-    <h1>Иное лицо Японии</h1>
-    <p>47 префектур — и в каждой своя Япония. Покажем ту, что подходит вам.</p>
-    <div class="cta">
-      <a class="btn solid" href="#map-section">Выбрать край</a>
-      
+<section class="mf" id="top">
+  <div class="mf-text">
+    <div class="mf-step" data-step="0">
+      <span class="mf-kick">雅 · консьерж-сервис по Японии</span>
+      <h1>Япония за поворотом</h1>
+      <p class="mf-lead">Листайте вниз — расскажем, почему мы этим занимаемся.</p>
+      <div class="mf-cta"><a class="btn solid" href="#map-section">Выбрать край</a><span class="mf-cue">↓ три коротких абзаца</span></div>
+    </div>
+    <div class="mf-step" data-step="1">
+      <span class="mf-lbl">01 — Что видят туристы</span>
+      <p class="mf-p">За последние годы Япония стала одной из самых посещаемых стран мира — сюда приезжают десятки миллионов туристов в год. Но большинство из них видят лишь крупные города и самые известные достопримечательности. И нам, честно говоря, от этого <em>немного обидно</em>.</p>
+    </div>
+    <div class="mf-step" data-step="2">
+      <span class="mf-lbl">02 — Что за углом</span>
+      <p class="mf-p">Япония — страна небольшая, но именно в этом её сила. С древних времён люди селились по всему архипелагу, и поэтому у каждой префектуры, каждого города, каждой деревни и даже каждой улицы — свой яркий характер. Стоит лишь <em>свернуть за угол</em>, и вы окажетесь среди лавок и ресторанчиков с вековой историей, старинных храмов и домов, о которых не пишут в путеводителях.</p>
+    </div>
+    <div class="mf-step" data-step="3">
+      <span class="mf-lbl">03 — Зачем мы</span>
+      <p class="mf-p">Туристы о них почти ничего не знают. Мы основали 雅, чтобы осветить эти места и показать вам Японию <em>с другой стороны</em> — не только ту, которую знают все.</p>
+      <div class="mf-cta"><a class="btn solid" href="#map-section">Выбрать край</a><a class="btn" href="#ask">Написать нам</a></div>
     </div>
   </div>
-  <div class="cat deck47wrap">
-    <div class="deck47" id="deck47" tabindex="0" aria-label="47 префектур Японии. Ведите курсором или стрелками, нажмите на карточку — откроем её на карте"><a class="pc" href="#map-section" data-i="0" data-pref="1" data-reg="hokkaido" aria-label="Хоккайдо, 45 мест в гиде"><span class="ph"><span class="no">01</span><span class="rg">Хоккайдо</span></span><svg viewBox="386.9 -9.8 289.4 190.5" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M641.9 20.0L650.2 10.7L655.0 10.2L656.4 11.7L654.7 13.9L655.9 16.2L655.1 18.2L649.4 18.4L645.9 21.3L640.9 22.8L635.3 26.9L630.4 32.3L627.2 32.7L625.7 30.7L624.0 30.9L622.0 36.7L615.4 41.4L612.0 46.9L608.7 47.1L605.3 52.1L603.0 51.3L603.2 49.5L605.4 47.4L605.3 44.4L606.5 46.4L607.4 45.1L606.8 43.4L609.1 44.2L611.4 42.3L611.8 40.0L609.6 39.0L609.5 37.4L612.8 38.0L613.6 35.7L620.2 30.9L620.6 27.5L619.7 26.6L623.9 27.8L626.0 23.5L629.5 22.4L629.0 17.2L630.5 14.8L632.0 15.1L633.9 20.9L641.9 20.0ZM464.0 24.2L463.8 22.1L466.0 17.8L465.8 14.0L466.7 15.7L469.7 15.6L471.4 14.6L472.3 11.7L473.6 11.3L476.4 15.8L488.4 28.6L492.5 36.7L501.3 47.2L516.1 58.4L525.1 62.1L534.2 63.6L535.5 68.3L538.4 69.7L544.0 70.7L548.6 70.2L559.0 60.5L562.7 55.0L563.6 58.2L556.5 71.6L555.8 76.7L557.8 80.6L563.0 82.8L563.1 83.8L561.6 84.0L562.7 82.6L559.2 81.4L561.2 89.2L564.1 93.4L566.9 94.3L571.1 89.8L574.0 89.5L575.4 90.6L569.0 93.7L567.7 98.0L564.7 97.2L557.8 98.7L556.3 102.3L553.3 104.6L550.7 104.4L549.6 103.4L550.2 102.2L548.7 101.8L546.7 104.7L548.1 106.3L539.6 105.9L537.1 104.0L534.8 103.8L525.6 108.5L517.1 116.8L511.6 124.9L509.6 130.4L509.6 137.7L508.0 142.3L500.5 135.4L496.6 134.6L487.8 130.0L480.2 123.7L475.9 122.4L471.7 118.6L465.4 117.3L467.1 116.2L458.0 120.3L452.1 124.7L448.8 128.9L447.0 127.7L449.0 127.3L446.6 126.5L445.4 123.3L443.0 121.9L441.2 118.9L434.8 118.8L430.8 124.7L430.0 130.6L436.9 135.5L441.1 134.7L442.5 135.5L447.7 142.5L452.7 144.7L453.7 146.6L448.0 149.8L442.9 147.6L441.0 148.8L441.4 146.5L439.4 146.1L438.3 148.7L434.2 150.7L433.3 156.6L429.3 157.9L427.7 160.8L426.3 159.7L424.8 160.1L423.3 158.6L422.1 153.5L424.4 146.5L425.7 145.9L426.0 140.5L423.2 135.6L420.5 134.9L419.4 132.3L416.6 130.4L416.8 127.1L418.6 123.2L417.9 117.8L419.8 115.4L423.7 114.9L426.2 112.8L427.4 110.1L429.0 112.3L430.5 111.9L430.5 110.1L432.8 106.7L436.2 104.3L436.3 102.8L431.1 96.0L431.6 91.9L433.7 92.1L435.6 90.5L443.3 96.9L449.2 95.3L449.1 97.0L453.1 98.7L456.4 96.8L459.9 92.1L457.5 77.7L459.0 74.7L463.6 72.8L465.8 69.7L465.9 56.2L468.4 51.8L469.6 44.0L467.8 33.8L464.0 24.2ZM449.6 20.6L448.0 13.5L449.0 14.6L449.7 13.6L450.6 15.0L449.6 20.6ZM452.7 22.4L454.0 21.1L456.7 22.7L457.5 25.2L456.4 26.7L454.8 27.1L453.2 25.7L452.2 23.9L452.7 22.4ZM573.6 65.3L573.5 63.9L580.1 55.8L583.7 49.0L584.9 48.8L589.0 52.3L595.5 51.0L593.2 54.7L591.7 53.9L588.2 57.5L583.3 58.0L581.5 61.0L578.3 62.7L577.1 66.9L575.4 67.1L574.5 70.2L569.6 72.4L568.1 80.1L568.4 77.5L565.4 78.0L564.6 73.7L573.6 65.3ZM597.3 78.5L596.7 76.5L595.7 77.0L595.7 74.7L600.0 74.3L599.4 73.3L602.0 71.7L604.3 73.2L603.9 74.8L602.4 74.6L602.7 75.4L598.6 76.9L597.3 78.5ZM583.3 87.4L581.9 85.1L583.7 84.1L585.8 84.7L585.4 86.3L583.3 87.4ZM408.0 137.8L406.9 133.2L410.9 130.6L409.4 136.2L408.0 137.8Z"/></svg><span class="pk">北海道</span><span class="pr">Хоккайдо</span><span class="pn">45 мест в гиде</span></a><a class="pc" href="#map-section" data-i="1" data-pref="2" data-reg="tohoku" aria-label="Аомори, 19 мест в гиде"><span class="ph"><span class="no">02</span><span class="rg">Тохоку</span></span><svg viewBox="415.0 151.8 55.7 53.9" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M443.0 167.4L446.5 155.6L455.8 162.3L458.6 161.8L461.0 159.7L459.1 168.8L459.7 183.3L461.6 190.1L462.9 191.1L463.9 190.6L466.8 193.8L463.1 197.2L460.5 196.4L458.0 197.9L457.1 196.5L449.0 201.8L447.4 200.5L448.4 194.6L445.2 194.1L445.6 191.7L441.8 195.0L439.5 195.4L438.0 194.3L436.7 195.4L432.7 192.5L431.3 194.2L425.3 194.3L424.3 193.2L423.0 194.8L420.8 194.6L421.0 190.4L418.8 188.1L420.6 187.1L422.5 183.6L423.9 182.8L425.7 183.7L429.1 181.6L431.0 173.1L430.9 171.5L429.0 170.0L430.9 169.6L431.4 165.6L434.7 168.4L437.0 166.7L439.1 168.0L439.9 176.5L441.8 180.6L445.1 178.6L445.4 176.6L444.5 176.3L445.6 174.4L451.6 179.2L453.1 178.6L456.1 169.3L454.7 165.9L453.1 165.0L450.3 168.3L448.3 167.8L443.9 170.3L442.6 169.7L443.0 167.4Z"/></svg><span class="pk">青森県</span><span class="pr">Аомори</span><span class="pn">19 мест в гиде</span></a><a class="pc" href="#map-section" data-i="2" data-pref="3" data-reg="tohoku" aria-label="Иватэ, 13 мест в гиде"><span class="ph"><span class="no">03</span><span class="rg">Тохоку</span></span><svg viewBox="435.2 189.2 46.5 67.4" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M464.1 196.4L464.2 195.3L466.8 193.8L470.3 200.0L470.7 201.7L469.7 202.8L471.8 204.4L470.6 206.3L473.9 209.8L473.5 212.1L475.2 217.0L473.7 223.3L475.8 221.1L475.8 223.7L477.0 224.8L475.3 227.2L473.9 227.5L474.5 228.5L476.7 227.4L476.3 229.0L474.5 228.9L474.0 231.3L472.4 232.0L475.0 231.5L474.3 232.8L472.1 233.1L473.2 234.3L472.2 234.1L472.3 235.0L474.3 235.0L471.7 236.4L473.0 237.4L470.8 238.4L473.0 239.8L472.0 240.5L470.1 239.6L471.8 241.2L470.2 241.5L471.2 242.4L468.1 242.7L468.0 241.0L467.5 242.6L468.4 243.5L467.5 243.5L467.4 245.5L466.3 243.2L465.2 243.4L465.4 244.4L461.7 243.5L460.3 250.7L459.6 251.2L457.0 249.4L454.5 251.9L451.6 249.4L452.5 247.5L448.4 247.6L444.2 244.6L442.9 244.8L443.8 241.5L442.3 240.5L442.2 238.7L443.8 237.3L442.6 236.7L443.2 235.3L440.8 233.2L439.8 229.3L441.5 227.1L441.7 224.2L444.1 221.3L442.9 218.4L444.8 216.3L443.2 215.4L443.1 213.9L445.6 213.6L444.7 206.8L446.1 202.0L447.6 200.8L449.5 201.7L457.1 196.5L458.0 197.9L460.5 196.4L462.9 197.4L464.1 196.4Z"/></svg><span class="pk">岩手県</span><span class="pr">Иватэ</span><span class="pn">13 мест в гиде</span></a><a class="pc" href="#map-section" data-i="3" data-pref="4" data-reg="tohoku" aria-label="Мияги, 12 мест в гиде"><span class="ph"><span class="no">04</span><span class="rg">Тохоку</span></span><svg viewBox="426.5 240.0 43.3 47.9" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M461.5 244.1L462.2 243.3L465.4 244.4L466.5 247.9L463.9 246.6L464.7 249.2L462.4 251.1L463.6 252.2L463.5 253.9L462.6 253.0L461.8 254.4L460.5 254.4L460.5 255.4L462.7 255.6L460.9 257.7L461.9 259.2L462.8 258.6L463.1 260.2L461.2 259.5L462.3 261.9L460.6 262.2L461.2 263.8L463.0 263.6L461.5 264.4L462.8 265.6L462.6 267.9L460.6 266.4L461.0 265.2L459.8 265.4L460.9 264.5L460.1 263.6L458.6 264.2L458.2 263.2L455.8 263.0L453.0 264.8L453.5 266.3L452.4 266.2L452.3 264.4L450.5 264.6L449.5 266.3L451.2 266.9L448.8 267.9L450.0 268.1L446.9 274.1L447.0 280.5L445.0 280.6L445.0 283.5L442.9 283.5L443.4 284.6L440.8 283.6L439.9 280.3L437.4 279.6L435.3 280.3L435.0 278.8L433.2 277.9L431.7 278.7L429.9 277.8L429.8 275.1L433.6 274.1L435.1 271.0L434.9 268.0L438.8 261.8L437.3 259.9L437.7 258.0L436.6 255.7L438.3 255.6L439.5 251.2L436.9 247.1L439.3 247.3L442.1 244.9L444.2 244.6L448.4 247.6L452.5 247.5L451.6 249.4L455.0 251.9L457.0 249.4L459.6 251.2L460.3 250.7L461.5 244.1Z"/></svg><span class="pk">宮城県</span><span class="pr">Мияги</span><span class="pn">12 мест в гиде</span></a><a class="pc" href="#map-section" data-i="4" data-pref="5" data-reg="tohoku" aria-label="Акита, 13 мест в гиде"><span class="ph"><span class="no">05</span><span class="rg">Тохоку</span></span><svg viewBox="409.9 187.2 43.3 65.0" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M445.6 191.7L445.2 194.1L448.4 194.6L448.7 197.1L447.8 197.4L447.3 201.5L445.1 203.3L445.6 213.6L443.1 213.9L443.2 215.4L444.8 216.3L442.9 218.4L444.1 221.3L441.7 224.2L441.5 227.1L439.7 230.1L441.4 234.1L443.2 235.3L442.6 236.7L443.8 237.3L442.2 238.7L442.3 240.5L443.8 241.5L442.9 244.8L437.3 247.7L434.7 246.1L433.9 243.7L431.2 242.2L430.7 242.9L427.8 242.2L427.7 241.3L426.5 241.7L424.2 240.2L424.1 238.9L422.4 239.8L419.1 239.4L420.3 234.0L422.0 232.8L423.2 229.2L423.8 217.1L420.4 212.7L416.1 214.2L414.4 209.5L417.6 210.7L421.3 206.3L423.2 197.6L420.8 194.6L423.0 194.8L424.3 193.2L425.3 194.3L431.3 194.2L432.7 192.5L436.7 195.4L438.0 194.3L439.5 195.4L441.8 195.0L445.6 191.7Z"/></svg><span class="pk">秋田県</span><span class="pr">Акита</span><span class="pn">13 мест в гиде</span></a><a class="pc" href="#map-section" data-i="5" data-pref="6" data-reg="tohoku" aria-label="Ямагата, 15 мест в гиде"><span class="ph"><span class="no">06</span><span class="rg">Тохоку</span></span><svg viewBox="406.6 235.1 36.6 54.4" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M419.1 239.4L422.4 239.8L424.1 238.9L424.2 240.2L426.5 241.7L432.0 242.5L434.2 244.1L434.7 246.1L436.6 246.8L439.5 251.2L438.3 255.6L436.6 255.7L437.7 258.0L437.3 259.9L438.8 261.8L434.9 268.0L435.1 271.0L433.4 274.4L429.8 275.1L429.4 282.5L430.4 283.4L428.7 285.4L425.6 285.8L423.8 284.4L422.3 285.0L420.9 282.7L417.5 283.6L412.8 280.5L414.6 270.2L416.9 270.6L419.8 267.2L414.8 263.9L415.2 260.4L410.4 258.3L416.2 250.1L419.1 239.4Z"/></svg><span class="pk">山形県</span><span class="pr">Ямагата</span><span class="pn">15 мест в гиде</span></a><a class="pc" href="#map-section" data-i="6" data-pref="7" data-reg="tohoku" aria-label="Фукусима, 13 мест в гиде"><span class="ph"><span class="no">07</span><span class="rg">Тохоку</span></span><svg viewBox="396.5 273.8 57.3 47.1" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M429.9 277.8L431.7 278.7L433.2 277.9L435.0 278.8L435.3 280.3L437.4 279.6L440.7 280.7L440.6 283.2L441.6 284.3L444.9 283.8L445.0 280.6L446.1 280.2L448.4 282.9L449.9 294.3L447.9 311.1L444.0 313.2L443.2 314.9L437.7 312.0L438.1 314.3L434.7 317.0L428.9 312.0L429.1 309.3L427.9 309.4L426.1 306.6L419.9 305.1L418.1 305.8L417.8 307.3L413.9 308.2L406.5 313.1L402.3 312.2L402.9 304.7L400.5 302.3L402.3 298.8L401.9 295.5L406.7 295.0L407.5 293.2L411.6 293.2L410.7 288.7L415.7 283.1L414.1 282.1L414.8 281.8L417.5 283.6L420.9 282.7L422.3 285.0L423.8 284.4L425.6 285.8L428.7 285.4L430.4 283.4L429.4 282.5L429.9 277.8Z"/></svg><span class="pk">福島県</span><span class="pr">Фукусима</span><span class="pn">13 мест в гиде</span></a><a class="pc" href="#map-section" data-i="7" data-pref="8" data-reg="kanto" aria-label="Ибараки, 6 мест в гиде"><span class="ph"><span class="no">08</span><span class="rg">Канто</span></span><svg viewBox="411.3 309.1 36.7 45.4" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M437.4 312.2L443.7 315.7L442.1 317.4L438.6 327.0L439.0 330.4L437.2 334.5L440.9 344.9L439.9 345.2L440.2 346.2L441.1 345.3L444.8 351.3L435.9 344.2L435.7 345.9L434.6 345.3L430.9 347.3L426.4 347.9L420.9 344.8L416.9 339.5L415.4 340.0L414.4 337.2L414.4 336.2L417.8 335.1L418.5 332.7L420.1 333.1L421.8 330.5L427.5 329.7L429.3 326.0L428.3 320.5L430.2 319.6L429.3 318.1L429.1 312.5L430.3 312.5L434.7 317.0L438.1 314.3L437.4 312.2Z"/></svg><span class="pk">茨城県</span><span class="pr">Ибараки</span><span class="pn">6 мест в гиде</span></a><a class="pc" href="#map-section" data-i="8" data-pref="9" data-reg="kanto" aria-label="Тотиги, 16 мест в гиде"><span class="ph"><span class="no">09</span><span class="rg">Канто</span></span><svg viewBox="402.4 302.6 30.3 36.2" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M421.5 305.1L426.1 306.6L427.9 309.4L429.1 309.3L429.2 317.9L430.2 319.6L428.3 320.5L429.3 326.0L427.4 329.9L421.8 330.5L420.1 333.1L418.5 332.7L417.8 335.1L414.0 336.3L413.1 334.2L408.4 334.0L405.9 330.9L408.9 323.9L404.9 322.4L405.5 317.6L406.9 315.8L405.4 315.0L408.3 311.1L417.8 307.3L419.0 305.3L421.5 305.1Z"/></svg><span class="pk">栃木県</span><span class="pr">Тотиги</span><span class="pn">16 мест в гиде</span></a><a class="pc" href="#map-section" data-i="9" data-pref="10" data-reg="kanto" aria-label="Гумма, 20 мест в гиде"><span class="ph"><span class="no">10</span><span class="rg">Канто</span></span><svg viewBox="377.6 305.4 39.0 40.7" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M386.9 329.5L382.8 329.8L380.4 328.7L381.1 323.4L383.7 321.6L383.4 320.3L389.0 317.9L390.7 318.5L391.5 316.2L394.3 315.7L394.2 314.0L395.7 313.7L395.3 310.8L397.4 310.6L398.8 308.2L402.6 312.4L406.5 313.1L405.4 315.0L406.9 315.8L405.5 317.6L404.8 322.2L408.9 323.9L405.7 330.4L408.4 334.0L412.6 334.0L413.8 336.0L408.2 336.7L405.7 334.6L404.7 335.4L399.6 333.6L397.3 338.7L395.1 338.8L388.6 343.3L386.5 341.9L386.9 339.0L385.1 337.4L386.7 337.2L385.7 333.8L387.1 333.0L386.9 329.5Z"/></svg><span class="pk">群馬県</span><span class="pr">Гумма</span><span class="pn">20 мест в гиде</span></a><a class="pc" href="#map-section" data-i="10" data-pref="11" data-reg="kanto" aria-label="Сайтама, 12 мест в гиде"><span class="ph"><span class="no">11</span><span class="rg">Канто</span></span><svg viewBox="386.1 331.1 36.1 22.3" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M399.6 333.6L404.7 335.4L405.7 334.6L408.2 336.7L414.2 336.2L415.4 340.0L416.6 339.9L419.5 346.2L419.7 349.9L416.4 348.8L415.6 350.0L413.5 349.3L410.6 350.9L409.8 350.5L410.4 349.1L406.5 350.5L404.1 348.3L396.8 346.2L393.4 348.1L389.2 346.0L388.6 343.3L389.8 341.7L397.3 338.7L399.6 333.6Z"/></svg><span class="pk">埼玉県</span><span class="pr">Сайтама</span><span class="pn">12 мест в гиде</span></a><a class="pc" href="#map-section" data-i="11" data-pref="12" data-reg="kanto" aria-label="Тиба, 17 мест в гиде"><span class="ph"><span class="no">12</span><span class="rg">Канто</span></span><svg viewBox="412.9 336.8 35.6 44.7" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M416.6 339.9L420.9 344.8L426.6 348.0L430.9 347.3L434.6 345.3L435.7 345.9L435.9 344.2L445.4 352.0L445.3 352.8L439.7 353.0L436.3 355.8L433.3 360.3L432.6 369.2L430.7 370.9L425.7 371.5L419.6 378.4L416.0 376.2L418.8 375.1L417.5 373.9L418.4 372.4L417.7 369.5L419.1 367.6L418.3 365.7L416.7 365.0L418.3 364.4L418.4 363.1L419.8 363.6L420.0 361.3L423.1 360.1L424.1 357.7L425.8 356.9L422.2 354.1L422.1 352.9L419.2 355.0L420.4 352.7L419.4 350.5L419.9 347.2L416.6 339.9Z"/></svg><span class="pk">千葉県</span><span class="pr">Тиба</span><span class="pn">17 мест в гиде</span></a><a class="pc" href="#map-section" data-i="12" data-pref="13" data-reg="kanto" aria-label="Токио, 92 места в гиде"><span class="ph"><span class="no">13</span><span class="rg">Канто</span></span><svg viewBox="392.6 344.1 29.8 22.9" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M394.7 347.6L396.8 346.2L404.1 348.3L406.5 350.5L410.4 349.1L409.8 350.5L410.6 350.9L413.1 349.4L415.6 350.0L416.1 348.9L417.8 348.9L419.7 349.9L420.4 352.7L419.2 354.6L417.2 355.1L416.2 354.1L415.8 356.2L417.0 358.2L414.7 357.9L411.0 354.8L410.0 354.5L409.3 355.7L408.4 355.0L409.5 356.6L408.6 356.6L408.5 359.0L406.7 356.3L402.5 355.6L401.9 354.3L396.9 352.0L394.7 347.6ZM407.7 385.5L405.7 384.7L405.7 381.6L407.6 382.5L407.7 385.5ZM409.4 405.6L409.1 403.4L410.4 403.2L411.0 404.9L409.4 405.6ZM418.1 437.2L416.1 435.3L415.8 433.7L418.5 435.0L418.1 437.2Z"/></svg><span class="pk">東京都</span><span class="pr">Токио</span><span class="pn">92 места в гиде</span></a><a class="pc" href="#map-section" data-i="13" data-pref="14" data-reg="kanto" aria-label="Канагава, 46 мест в гиде"><span class="ph"><span class="no">14</span><span class="rg">Канто</span></span><svg viewBox="392.2 351.7 26.7 20.9" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M399.6 353.5L402.9 355.8L406.7 356.3L408.5 359.0L408.6 356.6L409.5 356.6L408.0 355.5L409.3 355.7L410.0 354.5L413.7 356.2L414.7 357.9L417.0 358.2L412.8 360.2L414.4 361.0L412.6 362.4L413.5 363.2L412.9 365.7L415.8 367.0L413.5 369.2L414.0 370.7L412.3 370.6L412.7 368.2L411.2 365.7L407.7 364.9L402.7 365.8L400.1 367.4L400.4 370.6L397.0 370.3L395.6 367.6L396.7 364.6L396.2 362.3L394.0 362.0L399.2 357.9L399.6 353.5Z"/></svg><span class="pk">神奈川県</span><span class="pr">Канагава</span><span class="pn">46 мест в гиде</span></a><a class="pc" href="#map-section" data-i="14" data-pref="15" data-reg="chubu" aria-label="Ниигата, 23 места в гиде"><span class="ph"><span class="no">15</span><span class="rg">Тюбу</span></span><svg viewBox="355.5 253.7 69.2 69.9" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M410.6 258.5L415.2 260.4L414.8 263.9L418.5 265.5L419.9 267.8L416.9 270.6L414.9 270.1L414.2 271.3L414.4 275.1L412.6 279.7L415.7 283.1L410.7 288.7L411.6 293.2L407.5 293.2L406.7 295.0L402.1 295.3L401.4 296.6L402.3 298.8L400.5 302.3L402.9 304.7L402.5 312.1L398.8 308.2L397.4 310.6L395.3 310.8L395.7 313.7L394.2 314.0L394.3 315.7L391.5 316.2L391.5 317.9L388.4 318.8L387.5 317.5L388.1 314.8L385.4 313.0L384.8 309.4L383.4 309.2L380.3 310.2L377.8 313.0L377.5 315.2L375.5 314.4L371.3 316.7L370.0 315.9L370.3 313.3L366.5 312.9L366.7 314.5L363.7 317.8L362.3 312.0L360.3 310.8L367.5 308.2L372.6 304.4L375.6 304.6L376.6 303.3L376.5 304.1L384.5 297.7L389.5 290.2L392.0 283.2L398.0 278.6L402.3 277.2L406.0 273.5L408.0 269.0L408.2 263.7L410.6 258.5ZM376.3 283.6L375.3 282.7L377.1 281.9L377.4 279.7L378.9 278.2L377.8 276.8L376.6 278.2L375.9 277.7L376.3 274.1L382.0 266.3L383.4 265.9L381.3 274.1L382.6 274.9L384.7 274.1L384.3 276.7L382.3 280.4L376.3 283.6Z"/></svg><span class="pk">新潟県</span><span class="pr">Ниигата</span><span class="pn">23 места в гиде</span></a><a class="pc" href="#map-section" data-i="15" data-pref="16" data-reg="chubu" aria-label="Тояма, 23 места в гиде"><span class="ph"><span class="no">16</span><span class="rg">Тюбу</span></span><svg viewBox="335.4 308.7 30.3 27.3" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M360.3 310.8L362.5 312.6L363.6 321.2L363.4 323.6L361.7 324.5L362.2 326.0L359.2 330.1L354.3 329.0L353.9 327.9L351.9 329.0L351.7 327.7L349.0 328.9L347.8 328.0L343.0 333.9L342.2 331.6L340.3 331.7L340.2 330.9L338.1 333.1L337.5 328.9L338.8 324.9L337.9 322.5L339.0 321.0L338.1 319.4L339.6 318.1L340.9 312.6L344.6 311.2L343.2 314.3L346.0 317.7L351.9 318.1L353.9 316.5L355.1 312.4L360.3 310.8Z"/></svg><span class="pk">富山県</span><span class="pr">Тояма</span><span class="pn">23 места в гиде</span></a><a class="pc" href="#map-section" data-i="16" data-pref="17" data-reg="chubu" aria-label="Исикава, 29 мест в гиде"><span class="ph"><span class="no">17</span><span class="rg">Тюбу</span></span><svg viewBox="319.8 288.6 37.1 55.9" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M345.9 294.8L350.9 292.5L352.7 293.1L353.1 295.2L350.4 295.9L350.1 300.0L346.2 300.9L344.3 304.0L342.2 303.0L342.6 302.3L341.1 303.0L339.9 307.8L341.4 307.2L343.2 308.6L345.1 306.6L345.1 311.2L340.9 312.6L339.6 318.1L338.1 319.4L338.8 324.9L337.5 329.1L338.1 333.1L339.7 334.8L337.4 337.6L337.1 340.1L334.8 340.7L331.8 337.8L328.9 338.4L326.4 337.2L326.0 335.4L323.7 333.2L332.4 323.7L337.0 315.5L337.5 310.1L336.3 308.3L336.4 305.7L334.9 305.2L336.7 298.7L345.9 294.8ZM342.2 307.1L341.0 305.1L343.6 305.7L344.8 304.8L344.9 306.1L342.2 307.1Z"/></svg><span class="pk">石川県</span><span class="pr">Исикава</span><span class="pn">29 мест в гиде</span></a><a class="pc" href="#map-section" data-i="17" data-pref="18" data-reg="chubu" aria-label="Фукуи, 13 мест в гиде"><span class="ph"><span class="no">18</span><span class="rg">Тюбу</span></span><svg viewBox="300.2 330.3 41.8 36.3" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M323.7 333.2L326.8 337.5L329.3 338.4L331.8 337.8L334.8 340.7L337.1 340.1L336.4 343.0L338.1 344.6L339.1 347.8L338.1 349.4L331.1 349.7L330.6 351.0L327.2 349.5L325.9 350.2L324.7 353.9L321.3 352.7L321.7 357.0L320.3 356.4L320.1 358.1L318.0 358.1L317.5 359.3L315.7 358.4L314.4 362.2L312.5 361.9L311.2 363.7L304.9 362.9L303.1 360.1L303.2 357.4L303.6 358.3L304.6 357.5L305.1 359.4L308.4 357.5L307.5 359.4L306.3 359.4L309.9 359.6L311.1 357.9L309.9 358.4L309.8 356.8L312.9 357.9L312.1 356.8L313.5 356.1L312.4 354.5L313.8 355.6L316.8 354.9L316.1 351.9L317.8 350.5L318.0 353.2L319.3 353.8L319.9 350.1L316.2 343.5L320.7 336.6L320.6 334.7L323.7 333.2Z"/></svg><span class="pk">福井県</span><span class="pr">Фукуи</span><span class="pn">13 мест в гиде</span></a><a class="pc" href="#map-section" data-i="18" data-pref="19" data-reg="chubu" aria-label="Яманаси, 22 места в гиде"><span class="ph"><span class="no">19</span><span class="rg">Тюбу</span></span><svg viewBox="372.5 341.7 29.2 30.2" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M379.6 343.8L381.5 344.4L382.3 346.2L385.4 345.5L386.0 347.0L387.7 347.1L389.1 345.8L393.4 348.1L394.7 347.6L396.9 352.0L399.6 353.5L399.1 358.0L394.6 360.7L393.3 362.7L387.8 363.7L387.4 362.4L385.9 362.5L384.6 361.2L383.4 365.1L383.9 368.7L382.8 369.8L380.4 368.7L379.3 365.0L377.4 365.4L376.4 364.5L377.0 358.6L374.6 352.2L376.1 350.7L374.8 349.5L376.2 346.7L377.4 347.4L379.6 343.8Z"/></svg><span class="pk">山梨県</span><span class="pr">Яманаси</span><span class="pn">22 места в гиде</span></a><a class="pc" href="#map-section" data-i="19" data-pref="20" data-reg="chubu" aria-label="Нагано, 42 места в гиде"><span class="ph"><span class="no">20</span><span class="rg">Тюбу</span></span><svg viewBox="347.4 304.3 46.5 69.3" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M383.7 309.1L385.3 310.6L385.4 313.0L388.1 314.8L388.2 318.7L384.2 319.9L383.7 321.6L382.0 322.2L380.4 328.7L382.0 329.7L387.0 329.6L387.1 333.0L385.7 333.8L386.7 337.2L385.1 337.4L386.9 339.0L386.5 341.9L388.6 343.3L389.1 345.8L386.3 347.1L385.4 345.5L381.9 346.1L381.7 344.6L379.6 343.8L377.4 347.4L376.2 346.7L374.8 349.5L376.1 350.7L374.6 352.2L375.7 354.4L373.6 357.3L373.6 363.2L366.5 368.1L364.0 368.6L361.6 367.6L358.8 368.8L358.0 367.0L359.5 364.3L358.7 362.3L360.3 362.2L359.2 360.8L360.2 358.8L357.1 355.6L357.9 354.2L355.7 350.6L352.2 348.9L353.6 346.4L356.1 346.3L359.2 342.4L359.7 340.4L358.2 338.3L360.8 332.9L359.1 330.2L362.2 326.0L361.7 324.5L363.4 323.6L363.4 318.3L366.7 314.5L366.5 312.9L370.3 313.3L370.0 315.9L371.3 316.7L375.5 314.4L377.5 315.2L377.8 313.0L380.3 310.2L383.7 309.1Z"/></svg><span class="pk">長野県</span><span class="pr">Нагано</span><span class="pn">42 места в гиде</span></a><a class="pc" href="#map-section" data-i="20" data-pref="21" data-reg="chubu" aria-label="Гифу, 24 места в гиде"><span class="ph"><span class="no">21</span><span class="rg">Тюбу</span></span><svg viewBox="321.1 324.2 42.9 50.1" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M345.1 330.7L347.8 328.0L349.0 328.9L351.7 327.7L351.9 329.0L353.9 327.9L354.3 329.0L357.1 329.1L360.6 331.7L358.2 338.3L359.7 340.4L359.2 342.4L356.1 346.3L353.6 346.4L352.2 348.9L355.7 350.6L357.7 353.7L357.1 355.6L360.2 358.8L359.2 360.8L360.3 362.2L358.7 362.3L359.5 364.3L358.4 366.0L354.9 368.0L351.7 365.8L348.9 367.1L345.8 365.8L343.4 361.5L339.2 363.7L337.6 363.3L335.1 367.4L334.9 370.9L331.3 366.9L328.9 368.2L327.3 367.4L329.0 362.6L327.8 358.1L327.1 357.1L325.7 357.6L325.8 355.3L324.6 354.1L325.9 350.2L327.2 349.5L330.6 351.0L331.1 349.7L338.1 349.4L338.9 346.2L336.4 343.0L337.4 337.6L339.7 334.8L338.1 333.1L340.2 330.9L340.3 331.7L342.2 331.6L343.0 333.9L345.1 330.7Z"/></svg><span class="pk">岐阜県</span><span class="pr">Гифу</span><span class="pn">24 места в гиде</span></a><a class="pc" href="#map-section" data-i="21" data-pref="22" data-reg="chubu" aria-label="Сидзуока, 30 мест в гиде"><span class="ph"><span class="no">22</span><span class="rg">Тюбу</span></span><svg viewBox="352.8 350.9 50.8 40.8" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M375.7 354.4L377.0 358.6L376.4 364.5L377.4 365.4L379.3 365.0L381.5 369.5L383.9 368.7L383.4 365.1L383.9 362.0L385.2 360.8L387.8 363.7L396.2 362.3L396.7 364.6L395.6 367.6L397.0 370.3L399.1 370.6L398.0 373.3L400.1 377.2L396.1 383.4L395.9 386.1L394.8 385.6L392.1 387.9L389.3 385.1L390.3 383.1L390.4 374.6L393.3 374.6L393.7 373.6L387.9 370.5L384.5 371.9L382.9 374.1L383.1 375.6L383.9 374.7L383.4 375.7L379.3 377.9L377.8 382.5L375.1 385.7L375.9 388.2L371.6 386.1L356.3 385.6L356.4 381.2L360.4 378.6L364.7 371.8L365.4 368.4L373.6 363.2L373.6 357.3L375.7 354.4Z"/></svg><span class="pk">静岡県</span><span class="pr">Сидзуока</span><span class="pn">30 мест в гиде</span></a><a class="pc" href="#map-section" data-i="22" data-pref="23" data-reg="chubu" aria-label="Айти, 30 мест в гиде"><span class="ph"><span class="no">23</span><span class="rg">Тюбу</span></span><svg viewBox="332.6 359.1 35.5 32.1" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M342.6 361.8L343.4 361.5L345.8 365.8L348.5 367.0L351.7 365.8L354.9 368.0L358.5 365.9L358.8 368.8L361.6 367.6L365.6 368.3L360.4 378.6L356.4 381.2L356.3 385.6L344.1 388.7L345.6 386.0L346.7 386.9L351.1 383.8L351.7 385.5L351.7 384.0L352.9 383.9L351.4 381.2L349.3 380.8L348.1 382.7L348.0 382.0L344.3 382.3L342.3 380.8L343.2 376.5L341.4 382.5L342.9 384.9L339.4 382.7L340.1 380.4L338.9 378.9L338.9 376.3L340.9 372.5L340.1 372.2L339.6 374.1L339.1 372.5L339.4 374.2L338.3 373.5L337.6 374.5L335.0 370.8L335.1 367.4L337.6 363.3L339.2 363.7L342.6 361.8Z"/></svg><span class="pk">愛知県</span><span class="pr">Айти</span><span class="pn">30 мест в гиде</span></a><a class="pc" href="#map-section" data-i="23" data-pref="24" data-reg="kinki" aria-label="Миэ, 27 мест в гиде"><span class="ph"><span class="no">24</span><span class="rg">Кинки</span></span><svg viewBox="309.6 363.0 35.9 56.7" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M331.2 366.9L333.5 370.4L334.3 369.8L337.0 372.5L337.6 374.4L334.4 375.4L334.0 376.8L334.8 377.2L331.3 383.1L331.1 385.4L332.0 385.7L331.2 387.6L334.2 388.3L338.8 391.6L339.2 391.0L340.3 393.4L341.6 392.9L341.3 395.1L338.7 395.4L340.1 396.2L341.2 395.5L340.4 396.4L341.0 398.3L339.6 399.2L337.5 398.8L340.1 398.0L338.5 396.7L338.1 397.9L337.3 397.1L335.4 398.0L336.4 396.2L334.7 396.1L334.1 397.3L335.1 397.0L333.2 398.9L332.8 397.7L331.7 399.1L330.6 398.3L330.7 399.8L329.6 398.9L329.2 400.1L325.8 400.9L324.6 401.9L325.1 404.3L323.9 404.1L324.4 403.0L322.6 404.6L324.7 406.5L323.7 406.6L324.5 407.9L322.9 407.1L322.4 408.0L323.4 408.8L321.2 409.4L317.6 415.8L316.4 415.8L313.5 411.5L314.6 411.2L314.5 409.6L317.6 408.2L317.8 405.9L320.0 406.3L319.8 400.9L320.8 399.1L319.8 397.5L320.7 397.0L319.1 394.6L319.8 393.2L322.7 392.8L323.3 391.4L321.4 389.3L318.6 388.6L319.2 386.8L318.4 386.0L319.6 385.5L317.8 381.9L319.7 381.1L320.2 378.3L323.9 379.7L326.9 378.2L328.9 373.1L329.3 370.0L328.2 368.2L331.2 366.9Z"/></svg><span class="pk">三重県</span><span class="pr">Миэ</span><span class="pn">27 мест в гиде</span></a><a class="pc" href="#map-section" data-i="24" data-pref="25" data-reg="kinki" aria-label="Сига, 19 мест в гиде"><span class="ph"><span class="no">25</span><span class="rg">Кинки</span></span><svg viewBox="308.8 350.4 22.8 33.9" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M321.3 352.7L324.7 353.9L325.8 355.3L325.7 357.6L327.1 357.1L327.8 358.1L329.0 362.6L327.3 367.4L329.2 370.3L326.9 378.2L323.9 379.7L320.2 378.3L319.7 381.1L318.0 381.9L315.7 378.6L313.8 378.6L314.1 376.9L312.4 373.7L313.6 366.1L311.1 364.1L312.5 361.9L314.4 362.2L315.7 358.4L317.5 359.3L318.0 358.1L320.1 358.1L320.3 356.4L321.7 357.0L321.3 352.7Z"/></svg><span class="pk">滋賀県</span><span class="pr">Сига</span><span class="pn">19 мест в гиде</span></a><a class="pc" href="#map-section" data-i="25" data-pref="26" data-reg="kinki" aria-label="Киото, 63 места в гиде"><span class="ph"><span class="no">26</span><span class="rg">Кинки</span></span><svg viewBox="284.4 347.2 37.1 40.1" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M292.0 357.9L289.1 358.7L287.2 356.2L287.5 354.0L289.3 354.2L296.9 350.0L299.1 352.8L296.1 357.8L297.7 355.9L297.4 357.9L299.7 358.5L299.3 360.6L300.1 359.3L301.5 359.8L301.4 358.6L300.1 358.9L300.0 357.4L303.2 355.7L303.1 360.1L304.9 362.9L311.2 363.7L312.9 366.3L313.6 365.9L312.6 374.8L314.1 376.9L313.8 378.6L315.7 378.6L315.9 379.9L318.0 380.9L318.8 383.6L318.1 384.6L315.4 382.9L314.4 384.5L310.9 383.9L308.8 378.4L306.8 377.5L307.1 376.1L306.1 376.1L306.3 377.6L305.3 377.9L303.7 376.8L303.8 375.4L301.1 374.8L301.3 371.0L298.4 370.5L298.2 369.5L295.9 369.6L295.2 366.8L292.8 367.5L289.1 365.2L289.3 362.1L292.3 362.1L292.0 357.9Z"/></svg><span class="pk">京都府</span><span class="pr">Киото</span><span class="pn">63 места в гиде</span></a><a class="pc" href="#map-section" data-i="26" data-pref="27" data-reg="kinki" aria-label="Осака, 15 мест в гиде"><span class="ph"><span class="no">27</span><span class="rg">Кинки</span></span><svg viewBox="291.5 371.7 21.1 28.7" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M300.8 373.7L301.1 374.8L303.9 375.5L303.7 376.8L305.3 377.9L306.3 377.6L306.1 376.1L307.1 376.1L306.8 377.5L307.9 377.4L310.6 381.4L308.1 387.7L308.9 388.5L308.1 389.7L308.9 394.1L304.4 396.4L303.8 395.5L293.9 398.4L293.5 397.1L296.8 396.1L300.9 392.0L301.0 390.2L301.3 391.0L302.4 390.1L301.6 388.0L302.1 388.9L303.3 388.5L302.2 388.2L302.9 386.5L301.6 385.0L303.1 383.7L302.0 378.1L303.3 377.5L300.1 376.3L299.7 374.1L300.8 373.7Z"/></svg><span class="pk">大阪府</span><span class="pr">Осака</span><span class="pn">15 мест в гиде</span></a><a class="pc" href="#map-section" data-i="27" data-pref="28" data-reg="kinki" aria-label="Хёго, 22 места в гиде"><span class="ph"><span class="no">28</span><span class="rg">Кинки</span></span><svg viewBox="267.6 349.6 39.5 55.3" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M287.5 354.0L287.2 356.2L289.1 358.7L291.9 357.8L292.2 358.8L292.3 362.1L289.3 362.1L289.1 365.2L292.8 367.5L295.2 366.8L295.9 369.6L298.2 369.5L298.4 370.5L301.3 371.0L301.5 372.7L299.7 374.1L300.1 376.3L303.3 377.6L302.0 378.1L303.1 383.7L301.3 385.4L299.5 384.0L292.6 387.2L282.0 382.0L277.2 383.0L277.0 381.3L275.5 383.9L274.1 383.1L273.2 384.1L273.0 381.5L271.6 380.7L272.5 378.1L271.4 377.2L271.7 374.5L274.4 370.5L275.5 370.4L274.8 368.0L278.3 366.3L278.2 363.8L274.4 355.4L278.8 353.6L281.1 354.6L284.8 353.4L287.5 354.0ZM285.4 393.5L291.1 387.7L291.7 388.7L288.2 393.8L289.8 398.6L283.9 401.1L283.7 399.0L282.0 399.4L281.9 397.7L283.9 396.6L285.4 393.5Z"/></svg><span class="pk">兵庫県</span><span class="pr">Хёго</span><span class="pn">22 места в гиде</span></a><a class="pc" href="#map-section" data-i="28" data-pref="29" data-reg="kinki" aria-label="Нара, 37 мест в гиде"><span class="ph"><span class="no">29</span><span class="rg">Кинки</span></span><svg viewBox="302.8 379.8 22.8 34.1" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M309.7 382.2L310.9 383.9L313.3 384.6L315.4 382.9L317.7 384.5L318.8 383.6L319.6 385.5L318.4 386.0L319.2 386.8L318.6 388.6L321.4 389.3L323.3 391.4L322.7 392.8L319.8 393.2L319.1 394.6L320.7 397.0L319.8 397.5L320.8 399.1L319.8 400.9L320.0 406.3L317.8 405.9L315.4 407.7L314.9 409.7L313.8 409.6L313.9 411.6L312.3 410.0L307.3 411.1L307.7 407.4L305.2 404.7L308.0 400.1L310.2 399.8L308.7 398.2L308.1 394.9L309.1 392.7L308.1 387.7L309.7 382.2Z"/></svg><span class="pk">奈良県</span><span class="pr">Нара</span><span class="pn">37 мест в гиде</span></a><a class="pc" href="#map-section" data-i="29" data-pref="30" data-reg="kinki" aria-label="Вакаяма, 16 мест в гиде"><span class="ph"><span class="no">30</span><span class="rg">Кинки</span></span><svg viewBox="290.1 392.5 29.9 34.8" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M304.9 395.9L308.1 394.9L308.7 398.2L310.2 399.7L308.0 400.1L305.4 404.0L307.7 407.4L307.3 411.1L309.1 410.1L313.3 410.4L313.5 412.8L315.8 415.5L317.6 415.8L316.8 418.2L315.6 418.5L316.2 420.3L312.0 422.9L311.7 424.9L310.8 424.9L311.0 423.4L302.8 421.3L299.7 417.5L301.5 415.9L297.2 414.0L294.8 410.8L292.5 410.9L294.0 408.4L292.8 407.8L295.6 406.1L293.1 404.7L294.8 403.5L294.3 402.8L296.5 402.3L292.6 398.7L292.9 397.4L295.0 398.4L299.9 396.4L304.9 395.9ZM315.1 408.0L317.5 406.9L317.6 408.2L315.2 409.8L315.1 408.0Z"/></svg><span class="pk">和歌山県</span><span class="pr">Вакаяма</span><span class="pn">16 мест в гиде</span></a><a class="pc" href="#map-section" data-i="30" data-pref="31" data-reg="chugoku" aria-label="Тоттори, 9 мест в гиде"><span class="ph"><span class="no">31</span><span class="rg">Тюгоку</span></span><svg viewBox="239.1 352.5 42.1 23.7" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M274.4 355.4L278.2 363.8L278.3 366.3L276.9 367.6L275.1 367.0L269.2 369.7L268.4 366.2L265.0 365.3L265.1 363.9L262.9 364.4L260.3 367.2L258.0 364.9L254.1 364.1L253.1 367.2L251.7 367.8L252.2 369.3L248.8 369.4L249.0 371.5L246.3 371.8L245.5 373.3L242.0 372.9L243.5 369.7L242.4 368.1L246.6 366.5L246.8 362.1L244.2 359.7L244.1 357.6L245.4 357.4L245.4 359.1L248.8 360.6L253.3 358.1L258.7 359.0L266.8 358.4L271.2 357.4L274.4 355.4Z"/></svg><span class="pk">鳥取県</span><span class="pr">Тоттори</span><span class="pn">9 мест в гиде</span></a><a class="pc" href="#map-section" data-i="31" data-pref="32" data-reg="chugoku" aria-label="Симанэ, 22 места в гиде"><span class="ph"><span class="no">32</span><span class="rg">Тюгоку</span></span><svg viewBox="198.1 326.2 55.8 76.6" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M244.9 337.6L243.2 336.0L243.2 333.5L245.8 331.5L248.6 334.1L248.1 336.2L246.5 336.4L247.4 337.3L245.8 336.7L244.9 337.6ZM238.4 341.6L237.0 340.8L237.8 339.1L240.8 338.3L239.5 339.4L239.6 340.9L238.6 339.4L237.9 340.0L238.4 341.6ZM244.8 357.5L243.6 358.2L246.8 362.1L246.6 366.5L242.4 368.1L243.5 369.7L242.1 372.7L235.1 371.9L231.8 376.5L228.8 378.2L230.5 379.0L230.5 380.2L228.3 380.2L226.3 381.7L223.6 380.9L222.5 382.2L218.5 381.4L217.9 383.2L215.5 384.5L216.4 385.3L215.4 388.5L213.4 390.5L213.9 392.2L212.0 393.5L212.5 395.3L211.0 397.3L210.0 396.3L207.7 397.5L206.2 396.5L206.7 393.2L204.2 393.2L203.4 391.0L204.9 388.7L204.0 385.4L208.0 384.5L215.1 376.7L220.2 373.4L223.1 369.1L228.6 365.9L229.8 363.1L228.7 361.2L237.5 358.6L237.6 357.7L240.9 356.5L240.8 355.7L242.4 357.1L247.0 356.9L244.8 357.5Z"/></svg><span class="pk">島根県</span><span class="pr">Симанэ</span><span class="pn">22 места в гиде</span></a><a class="pc" href="#map-section" data-i="32" data-pref="33" data-reg="chugoku" aria-label="Окаяма, 21 место в гиде"><span class="ph"><span class="no">33</span><span class="rg">Тюгоку</span></span><svg viewBox="243.0 361.5 34.9 34.3" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M265.1 363.9L265.0 365.3L268.4 366.2L269.2 369.7L275.2 367.2L275.5 370.4L274.4 370.5L271.7 374.5L271.4 376.9L272.5 378.1L271.4 379.9L273.0 381.5L273.2 384.1L269.6 383.4L271.2 384.7L267.9 388.3L263.3 388.0L265.9 388.7L264.8 390.8L263.7 390.4L263.0 392.7L260.4 392.0L260.0 393.4L259.1 393.2L257.8 390.4L258.0 392.1L256.9 391.9L256.6 389.9L256.4 391.0L252.6 392.4L251.2 390.7L252.3 392.6L250.9 393.0L250.1 389.4L248.5 387.3L248.4 381.4L246.2 378.7L246.9 375.0L245.4 373.5L246.0 372.1L249.0 371.5L249.1 369.2L252.2 369.3L251.7 367.8L253.1 367.2L254.1 364.1L258.0 364.9L260.3 367.2L262.9 364.4L265.1 363.9Z"/></svg><span class="pk">岡山県</span><span class="pr">Окаяма</span><span class="pn">21 место в гиде</span></a><a class="pc" href="#map-section" data-i="33" data-pref="34" data-reg="chugoku" aria-label="Хиросима, 22 места в гиде"><span class="ph"><span class="no">34</span><span class="rg">Тюгоку</span></span><svg viewBox="210.1 369.2 43.2 38.4" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M234.7 372.2L245.0 372.7L246.9 375.0L246.2 378.3L248.4 381.4L248.5 387.3L250.3 390.1L250.1 392.9L249.1 391.9L249.7 393.6L249.1 393.2L247.5 395.5L244.8 394.6L245.0 393.0L244.6 394.0L240.6 394.5L239.5 396.6L236.1 396.4L234.4 397.8L233.5 397.0L231.9 398.1L232.1 399.4L229.0 400.7L227.8 399.7L226.3 400.9L226.8 399.4L225.6 398.9L225.0 396.4L225.8 395.5L221.6 395.6L218.2 398.9L218.6 400.4L217.3 400.6L217.5 399.8L215.9 399.6L215.5 396.5L213.9 395.8L214.2 393.0L213.1 391.1L215.4 388.5L216.4 385.3L215.5 384.5L217.9 383.2L218.5 381.4L222.5 382.2L223.6 380.9L226.3 381.7L228.3 380.2L230.5 380.2L230.5 379.0L228.8 378.2L231.8 376.5L234.7 372.2ZM223.4 403.0L224.1 401.5L221.9 398.9L224.5 400.5L223.5 399.0L224.7 397.7L225.0 402.6L223.4 403.0ZM235.2 400.5L234.1 399.4L236.6 398.0L236.3 400.3L235.2 400.5ZM226.6 404.6L223.9 404.1L226.0 400.7L226.7 401.4L225.8 402.2L226.8 402.3L226.3 403.7L227.7 403.4L226.6 404.6Z"/></svg><span class="pk">広島県</span><span class="pr">Хиросима</span><span class="pn">22 места в гиде</span></a><a class="pc" href="#map-section" data-i="34" data-pref="35" data-reg="chugoku" aria-label="Ямагути, 19 мест в гиде"><span class="ph"><span class="no">35</span><span class="rg">Тюгоку</span></span><svg viewBox="178.7 382.0 49.2 33.8" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M204.0 385.4L204.9 388.7L203.4 391.0L204.2 393.2L206.7 393.2L206.2 396.5L207.7 397.5L210.0 396.3L211.0 397.3L212.5 395.3L212.0 393.5L213.9 392.2L213.9 395.8L215.5 396.5L215.9 399.6L218.6 400.4L218.6 402.4L217.4 403.3L217.7 407.0L215.2 408.6L216.3 412.0L215.2 412.4L215.3 411.0L213.6 409.5L211.3 409.7L208.5 406.9L205.8 407.9L207.6 406.1L206.4 406.1L206.8 405.2L205.4 405.5L205.6 404.8L201.9 406.4L201.5 405.7L200.0 407.2L198.3 405.9L197.3 407.6L196.8 406.6L196.2 407.6L196.8 406.4L195.9 405.5L195.1 408.2L192.8 409.5L192.1 408.6L190.5 409.3L190.3 407.2L186.8 405.3L183.3 409.8L182.5 408.7L183.6 408.8L183.5 405.2L182.1 403.6L184.0 400.4L182.3 398.0L183.2 395.6L183.9 396.2L186.7 395.3L186.2 394.2L184.0 394.6L185.1 393.0L186.3 394.0L189.3 393.8L189.9 395.2L193.9 394.9L196.7 393.5L196.3 392.4L201.7 387.2L201.7 386.0L202.9 386.7L204.0 385.4ZM217.6 411.6L216.7 409.5L217.7 408.2L219.6 408.5L220.8 410.2L224.5 408.6L221.9 409.9L221.9 411.4L219.6 410.2L217.6 411.6Z"/></svg><span class="pk">山口県</span><span class="pr">Ямагути</span><span class="pn">19 мест в гиде</span></a><a class="pc" href="#map-section" data-i="35" data-pref="36" data-reg="shikoku" aria-label="Токусима, 9 мест в гиде"><span class="ph"><span class="no">36</span><span class="rg">Сикоку</span></span><svg viewBox="253.6 397.2 33.1 26.5" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M276.3 400.5L280.1 399.5L280.0 400.6L281.6 401.4L280.2 406.7L280.6 407.6L281.4 406.8L283.3 409.4L281.2 411.6L284.4 412.3L275.1 418.0L273.0 421.4L269.8 421.0L268.6 418.8L269.3 417.1L266.2 416.9L265.6 412.5L263.7 412.3L262.4 413.7L260.5 412.0L255.9 411.2L256.3 406.7L258.9 404.6L263.1 403.4L264.6 404.7L266.0 403.3L267.9 403.3L269.3 401.5L273.9 401.2L275.6 402.1L276.3 400.5Z"/></svg><span class="pk">徳島県</span><span class="pr">Токусима</span><span class="pn">9 мест в гиде</span></a><a class="pc" href="#map-section" data-i="36" data-pref="37" data-reg="shikoku" aria-label="Кагава, 44 места в гиде"><span class="ph"><span class="no">37</span><span class="rg">Сикоку</span></span><svg viewBox="251.2 387.3 26.9 21.2" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M273.4 389.2L274.3 389.2L273.6 393.3L272.0 392.9L273.0 392.5L272.5 391.8L270.8 393.9L270.7 391.8L268.4 392.1L269.5 391.6L269.2 390.2L273.4 389.2ZM268.3 402.3L264.6 404.7L263.1 403.4L260.3 404.0L256.3 406.7L254.1 405.7L255.5 400.9L253.1 398.8L256.1 399.2L256.1 400.0L260.2 396.8L259.9 395.9L260.9 395.7L260.4 396.8L261.7 396.3L262.0 394.9L266.8 396.0L268.3 394.4L269.1 396.7L270.2 395.3L271.7 396.4L271.6 398.1L274.6 398.8L276.3 400.5L275.7 402.1L273.9 401.2L268.3 402.3Z"/></svg><span class="pk">香川県</span><span class="pr">Кагава</span><span class="pn">44 места в гиде</span></a><a class="pc" href="#map-section" data-i="37" data-pref="38" data-reg="shikoku" aria-label="Эхимэ, 12 мест в гиде"><span class="ph"><span class="no">38</span><span class="rg">Сикоку</span></span><svg viewBox="208.9 394.2 51.1 51.2" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M237.3 401.0L238.3 399.1L237.5 398.7L239.1 397.7L239.9 400.1L237.3 401.0ZM239.3 403.7L239.2 401.0L241.3 401.4L239.3 403.7ZM226.1 418.6L229.5 416.3L232.2 407.1L236.3 405.0L235.6 403.3L236.9 402.6L241.5 409.5L246.8 407.3L251.9 408.0L254.1 405.7L256.4 406.9L255.8 410.8L243.5 413.6L241.5 417.8L240.4 418.1L238.8 423.5L233.5 424.0L235.7 428.8L233.0 430.0L230.4 434.3L228.4 432.9L230.1 440.2L227.8 441.4L227.9 440.3L225.6 440.2L225.0 441.8L224.2 440.6L225.3 440.0L224.5 439.6L226.7 439.9L224.8 437.1L222.9 436.9L222.1 437.9L223.0 436.3L224.8 436.9L223.9 434.7L225.3 434.5L223.7 434.3L223.5 433.3L224.3 433.2L222.8 432.2L224.2 432.0L224.9 433.5L226.8 431.6L225.8 430.8L226.4 430.1L224.4 430.6L225.9 428.7L221.9 428.6L223.2 427.4L222.1 426.5L223.2 424.1L220.0 423.7L216.1 426.9L214.8 427.2L214.6 426.4L212.4 427.8L215.3 425.4L216.4 425.7L216.2 424.8L218.9 424.5L226.1 418.6Z"/></svg><span class="pk">愛媛県</span><span class="pr">Эхимэ</span><span class="pn">12 мест в гиде</span></a><a class="pc" href="#map-section" data-i="38" data-pref="39" data-reg="shikoku" aria-label="Коти, 21 место в гиде"><span class="ph"><span class="no">39</span><span class="rg">Сикоку</span></span><svg viewBox="224.8 407.7 51.5 43.1" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M253.7 411.3L260.5 412.0L262.4 413.7L263.7 412.3L265.6 412.5L266.2 416.9L269.3 417.1L268.6 418.8L269.8 421.0L272.8 421.2L270.2 426.2L269.4 431.0L263.0 423.3L257.6 421.7L253.3 422.9L253.2 421.2L253.5 423.0L247.6 425.5L250.4 425.4L247.4 426.1L246.8 427.5L246.0 425.9L244.5 428.5L245.3 430.5L244.3 433.8L242.9 433.9L240.9 437.9L238.7 438.1L238.7 442.3L237.1 443.1L238.9 447.3L237.5 447.1L236.7 445.3L235.0 445.9L234.8 445.2L233.0 446.5L230.8 444.9L228.7 446.1L229.4 443.2L231.1 442.4L230.7 440.9L229.3 441.0L230.3 439.4L228.4 432.9L230.4 434.3L233.0 430.0L235.8 428.5L233.3 424.1L238.8 423.5L240.4 418.1L241.5 417.8L243.5 413.6L253.7 411.3Z"/></svg><span class="pk">高知県</span><span class="pr">Коти</span><span class="pn">21 место в гиде</span></a><a class="pc" href="#map-section" data-i="39" data-pref="40" data-reg="kyushu" aria-label="Фукуока, 21 место в гиде"><span class="ph"><span class="no">40</span><span class="rg">Кюсю</span></span><svg viewBox="158.3 405.9 34.8 35.1" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M177.2 409.7L179.8 408.8L179.3 409.5L180.7 409.3L180.9 410.1L179.0 411.0L180.5 411.1L181.2 409.6L183.0 410.6L184.8 408.3L186.3 408.3L184.7 412.5L185.8 412.9L185.3 413.9L188.3 419.0L190.7 419.2L190.5 422.6L186.6 422.3L183.1 424.6L182.8 426.7L181.5 427.8L182.3 430.2L181.2 431.2L182.8 432.8L181.9 435.2L177.4 433.2L176.9 435.2L174.8 435.0L172.6 437.0L172.8 438.5L169.9 438.6L170.7 437.0L168.4 432.2L173.6 427.8L173.6 424.8L170.3 426.2L166.8 423.6L160.7 423.9L160.7 423.0L163.5 421.7L163.8 421.0L162.6 421.4L163.0 420.7L161.9 420.3L165.0 417.6L166.7 420.3L170.0 419.7L170.8 417.0L168.9 418.4L167.1 417.0L168.0 417.8L169.9 417.1L171.8 414.9L171.2 413.0L172.1 411.6L177.2 409.7Z"/></svg><span class="pk">福岡県</span><span class="pr">Фукуока</span><span class="pn">21 место в гиде</span></a><a class="pc" href="#map-section" data-i="40" data-pref="41" data-reg="kyushu" aria-label="Сага, 14 мест в гиде"><span class="ph"><span class="no">41</span><span class="rg">Кюсю</span></span><svg viewBox="151.6 419.5 23.7 22.1" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M160.5 423.8L166.8 423.6L170.3 426.2L173.6 424.8L173.6 427.8L169.3 431.0L168.9 434.2L167.1 434.0L166.0 432.2L163.4 435.1L162.7 434.7L165.3 439.9L159.8 438.0L157.5 435.8L158.0 433.5L154.7 432.9L153.2 429.5L154.0 427.9L155.7 429.4L155.0 428.0L156.1 425.8L153.8 424.3L154.4 423.4L155.8 424.3L155.5 421.1L156.2 422.4L156.8 421.3L158.4 422.0L157.9 423.6L158.7 424.3L160.5 423.8Z"/></svg><span class="pk">佐賀県</span><span class="pr">Сага</span><span class="pn">14 мест в гиде</span></a><a class="pc" href="#map-section" data-i="41" data-pref="42" data-reg="kyushu" aria-label="Нагасаки, 27 мест в гиде"><span class="ph"><span class="no">42</span><span class="rg">Кюсю</span></span><svg viewBox="117.3 379.2 57.6 78.3" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M143.3 393.6L142.5 394.8L143.7 394.0L142.8 396.1L143.6 396.4L142.5 397.7L142.5 395.2L141.3 396.4L141.4 394.7L140.8 396.3L139.2 395.7L140.5 395.2L140.4 393.1L141.5 392.3L140.4 392.2L142.3 390.1L140.7 389.3L141.7 386.4L143.6 386.7L145.0 384.6L146.3 385.8L145.8 387.4L144.6 387.4L145.8 388.1L145.7 389.4L142.9 392.7L143.3 393.6ZM138.8 404.4L138.8 403.5L137.6 403.8L138.4 397.2L139.0 396.6L139.1 397.8L140.6 397.4L140.9 398.3L140.5 396.7L141.2 398.3L142.1 397.6L142.5 398.3L141.5 398.7L140.6 402.9L138.8 404.4ZM152.1 416.4L150.1 414.4L151.2 414.7L150.3 413.2L151.4 413.3L151.7 411.4L153.5 412.1L152.8 413.2L154.2 413.8L153.1 414.2L153.9 415.3L152.1 416.4ZM143.1 433.3L142.6 432.1L143.7 433.0L143.3 431.5L144.7 431.2L143.8 430.3L145.0 429.5L144.7 427.7L146.6 426.6L147.0 427.5L147.7 426.7L146.8 426.1L147.8 425.8L148.2 427.3L146.7 428.2L146.4 430.5L143.1 433.3ZM149.9 427.2L150.9 426.1L151.1 427.5L154.0 427.0L153.2 429.5L154.7 432.9L158.0 433.5L157.5 435.8L161.1 439.1L164.8 439.9L161.9 443.0L168.4 443.1L169.5 445.6L168.6 448.9L163.9 451.4L162.8 448.3L164.0 448.2L165.0 446.3L164.2 445.1L161.7 445.1L158.2 446.1L156.7 449.2L152.7 452.1L154.7 449.4L154.1 448.2L155.2 448.4L156.1 446.4L154.8 447.4L153.6 444.3L151.7 443.9L149.9 441.0L151.0 435.5L153.2 437.1L152.6 439.0L153.3 438.0L154.8 439.1L153.9 442.8L155.5 443.9L156.4 442.3L159.7 443.4L157.7 441.0L157.5 437.6L156.2 436.6L154.8 437.4L155.2 436.7L153.4 435.4L153.3 437.0L152.4 435.5L153.9 434.1L152.5 434.7L151.7 433.5L151.9 435.0L150.7 435.4L151.6 434.1L150.0 433.4L150.0 431.5L149.7 432.7L149.4 431.6L147.8 431.8L149.6 428.9L148.0 428.4L148.2 426.8L149.9 427.2ZM134.8 444.3L134.2 441.5L135.0 441.6L133.0 440.3L135.0 439.2L134.4 437.7L135.5 437.8L136.2 433.5L135.4 439.0L137.5 438.3L138.0 439.4L136.9 440.6L135.9 439.8L134.8 444.3ZM127.2 451.9L126.3 451.0L122.7 450.7L123.0 449.7L123.9 451.0L124.4 450.2L123.6 450.1L124.7 448.9L124.4 445.4L125.1 446.8L126.8 445.9L127.2 446.9L128.2 444.9L128.1 446.4L129.4 446.6L130.4 449.8L127.1 449.8L127.2 451.9Z"/></svg><span class="pk">長崎県</span><span class="pr">Нагасаки</span><span class="pn">27 мест в гиде</span></a><a class="pc" href="#map-section" data-i="42" data-pref="43" data-reg="kyushu" aria-label="Кумамото, 16 мест в гиде"><span class="ph"><span class="no">43</span><span class="rg">Кюсю</span></span><svg viewBox="156.1 430.1 41.3 39.6" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M188.7 432.9L192.7 439.4L192.5 442.0L194.5 443.9L192.8 444.1L188.6 451.7L187.1 451.5L186.3 452.8L186.3 456.1L188.7 459.6L186.9 462.0L188.7 464.8L186.2 464.4L185.1 466.0L179.5 466.8L175.4 464.0L173.7 465.5L170.1 466.1L169.0 464.2L174.6 456.3L173.7 453.2L176.9 450.2L171.6 450.9L175.5 447.6L175.7 445.1L171.2 441.3L170.4 438.5L172.8 438.5L172.6 437.0L174.8 435.0L176.9 435.2L177.4 433.2L185.5 437.9L186.4 435.9L185.2 434.2L185.6 432.9L188.7 432.9ZM168.8 457.2L165.7 457.8L165.1 456.4L164.9 459.7L163.7 459.4L163.9 460.6L162.1 462.7L159.3 463.7L159.3 461.0L161.4 460.5L158.9 459.6L160.7 454.6L160.0 453.2L160.7 453.9L164.4 452.8L164.8 455.9L167.9 453.7L169.8 454.3L171.6 453.3L170.1 457.5L168.9 458.1L168.8 457.2Z"/></svg><span class="pk">熊本県</span><span class="pr">Кумамото</span><span class="pn">16 мест в гиде</span></a><a class="pc" href="#map-section" data-i="43" data-pref="44" data-reg="kyushu" aria-label="Оита, 31 место в гиде"><span class="ph"><span class="no">44</span><span class="rg">Кюсю</span></span><svg viewBox="178.6 414.5 38.4 34.9" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M200.1 417.3L202.5 417.1L204.0 418.4L205.3 421.0L205.2 424.0L204.3 425.8L202.3 425.4L202.9 426.5L201.4 427.7L198.9 427.3L199.3 430.2L201.3 430.9L204.0 429.8L205.8 431.1L209.5 430.2L206.8 434.6L209.5 434.4L208.2 435.8L209.8 436.5L210.6 435.6L211.4 436.7L212.2 435.6L212.5 436.8L210.3 437.0L209.2 438.9L212.2 440.7L214.3 440.7L211.5 441.0L212.5 442.1L210.6 443.8L212.3 444.0L211.4 445.1L209.2 444.7L208.8 446.7L208.0 446.5L208.4 444.2L206.0 443.7L204.4 445.8L200.7 446.3L199.3 445.8L198.3 443.7L195.3 444.8L192.7 442.4L192.7 439.4L188.4 432.7L185.6 432.9L185.2 434.2L186.4 435.9L185.5 437.9L181.6 435.4L182.8 432.8L181.2 431.2L182.3 430.2L181.5 427.8L183.9 423.6L186.6 422.3L190.5 422.6L190.7 419.2L197.1 420.6L198.9 417.5L200.1 417.3Z"/></svg><span class="pk">大分県</span><span class="pr">Оита</span><span class="pn">31 место в гиде</span></a><a class="pc" href="#map-section" data-i="44" data-pref="45" data-reg="kyushu" aria-label="Миядзаки, 5 мест в гиде"><span class="ph"><span class="no">45</span><span class="rg">Кюсю</span></span><svg viewBox="174.3 440.0 38.4 53.2" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M199.2 445.7L204.4 445.8L206.0 443.7L208.4 444.2L208.1 446.9L209.1 446.6L208.2 448.2L206.3 448.8L203.8 452.9L205.0 454.5L203.1 454.8L202.7 456.2L203.5 455.7L203.0 456.5L203.9 456.7L202.7 457.1L200.8 461.9L197.8 473.8L198.6 476.4L198.1 480.8L195.8 483.6L194.7 489.6L190.0 486.5L191.0 484.8L190.8 481.4L187.9 480.3L187.2 481.1L185.5 476.6L182.6 475.5L183.5 473.3L180.6 471.4L178.0 467.4L178.8 466.4L185.1 466.0L186.2 464.4L188.7 464.8L186.9 462.0L188.7 459.6L186.3 456.1L186.3 452.7L187.1 451.5L188.6 451.7L192.8 444.1L194.8 443.8L195.4 444.8L198.3 443.7L199.2 445.7Z"/></svg><span class="pk">宮崎県</span><span class="pr">Миядзаки</span><span class="pn">5 мест в гиде</span></a><a class="pc" href="#map-section" data-i="45" data-pref="46" data-reg="kyushu" aria-label="Кагосима, 30 мест в гиде"><span class="ph"><span class="no">46</span><span class="rg">Кюсю</span></span><svg viewBox="108.8 450.8 94.3 172.3" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M163.7 467.0L161.9 464.2L164.1 462.7L165.0 465.0L163.7 467.0ZM175.1 464.0L178.5 466.7L178.0 468.0L180.0 469.4L180.6 471.4L183.5 473.3L182.6 475.5L185.5 476.6L187.2 481.1L187.9 480.3L190.1 481.0L191.2 482.8L190.0 486.4L188.7 486.0L186.3 488.6L186.3 489.7L188.7 490.5L187.9 492.3L189.2 492.2L186.3 493.6L184.8 496.4L176.9 500.8L176.7 498.5L179.2 496.3L180.6 490.3L177.9 486.4L177.9 483.6L176.3 483.8L175.1 482.6L177.3 481.3L178.4 482.1L178.1 483.5L179.6 483.3L181.1 480.4L180.4 479.0L177.6 478.0L176.0 478.7L173.0 485.4L174.5 491.0L177.1 492.4L174.9 495.9L173.2 495.6L171.7 493.0L165.2 493.0L165.4 491.1L164.1 490.7L165.0 490.0L162.3 488.0L163.7 487.1L165.4 488.4L166.7 487.5L168.3 483.6L167.8 480.4L163.9 476.2L165.4 472.5L164.1 470.1L164.9 468.0L164.1 466.6L167.6 466.4L169.0 464.6L171.5 466.3L175.1 464.0ZM156.1 476.0L156.0 474.2L154.8 474.6L155.2 473.5L157.1 474.7L157.7 474.0L157.6 475.3L156.1 476.0ZM152.0 481.5L150.5 480.4L151.8 478.4L153.6 477.8L153.9 476.3L152.0 481.5ZM184.5 511.8L187.3 505.6L187.9 509.9L184.8 516.6L185.3 519.1L182.4 520.7L181.9 516.9L184.0 514.6L184.5 511.8ZM173.2 524.3L171.0 523.9L169.4 519.8L172.6 516.9L177.1 519.8L176.6 522.2L173.2 524.3ZM150.2 578.4L150.9 577.5L150.2 576.3L151.3 575.5L151.9 578.7L149.4 579.4L147.5 582.0L143.9 583.9L145.7 585.1L143.8 585.6L143.8 586.7L142.1 586.3L143.1 588.0L140.1 585.9L140.9 584.7L139.9 584.4L139.7 585.2L136.7 583.7L140.4 583.5L140.9 582.8L138.8 582.2L142.1 580.3L143.7 580.7L143.6 579.8L145.0 579.9L145.4 579.0L146.3 580.0L147.5 577.5L149.6 577.1L148.7 579.0L149.5 577.9L149.6 578.9L150.2 578.4ZM158.1 583.1L157.4 581.8L160.3 580.2L158.1 583.1ZM141.6 589.5L141.7 588.5L140.7 589.4L139.9 588.0L138.9 589.0L137.8 585.7L140.3 586.3L139.7 587.7L142.3 587.9L141.6 589.5ZM130.7 598.7L130.3 594.8L132.5 594.5L132.4 596.7L134.2 598.4L132.9 601.1L131.3 601.3L130.1 599.6L130.7 598.7ZM122.1 609.1L125.7 608.1L121.6 611.2L120.7 609.5L122.1 609.1Z"/></svg><span class="pk">鹿児島県</span><span class="pr">Кагосима</span><span class="pn">30 мест в гиде</span></a><a class="pc" href="#map-section" data-i="46" data-pref="47" data-reg="okinawa" aria-label="Окинава, 69 мест в гиде"><span class="ph"><span class="no">47</span><span class="rg">Окинава</span></span><svg viewBox="11.8 599.7 234.7 102.8" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M154.8 620.0L154.7 619.3L156.7 617.9L157.1 615.9L158.4 616.6L159.0 619.2L156.8 622.3L154.7 622.4L154.7 623.3L154.0 623.1L154.7 624.1L153.3 625.0L151.8 624.5L152.3 625.4L151.0 625.7L149.8 627.6L147.9 627.1L146.9 627.8L149.1 631.5L147.8 630.2L147.1 630.5L145.1 633.9L145.6 634.8L146.7 634.3L146.9 634.9L144.4 637.0L142.8 637.3L143.0 635.4L142.2 634.1L145.2 631.1L144.0 627.5L146.1 627.7L147.2 625.8L149.1 625.5L150.6 624.0L148.5 623.1L148.1 620.3L151.1 620.8L150.6 621.9L151.6 622.5L154.1 621.7L153.5 621.1L154.8 620.0ZM120.1 630.1L119.7 629.5L121.4 628.9L122.5 630.1L122.2 631.6L120.1 630.1ZM229.5 644.5L229.3 643.1L230.3 643.0L230.3 644.2L229.5 644.5ZM85.6 674.1L84.3 672.9L85.0 673.1L84.4 671.9L85.3 670.5L84.3 668.8L86.3 671.8L89.5 673.9L85.6 674.1ZM82.6 671.4L82.1 670.0L83.5 671.0L82.6 671.4ZM58.1 684.3L56.5 683.4L57.3 682.1L56.6 681.6L55.9 682.1L55.7 681.1L56.7 681.2L56.6 680.3L57.2 681.4L59.2 681.0L59.4 679.8L60.6 679.6L61.4 676.9L62.1 677.0L60.0 680.7L59.9 683.6L58.1 684.3ZM29.9 681.4L28.0 681.1L28.7 680.5L30.6 680.7L29.9 681.4ZM50.8 686.3L47.1 685.1L46.1 685.6L45.7 684.9L46.2 684.3L46.8 684.8L46.7 683.8L47.8 684.8L48.3 681.5L49.4 682.7L50.8 682.3L52.4 683.4L50.8 686.3Z"/></svg><span class="pk">沖縄県</span><span class="pr">Окинава</span><span class="pn">69 мест в гиде</span></a></div>
-    <div class="scrub" id="scrub"><div class="line"><i id="scrubDot"></i></div><div class="tks"><span class="tk" style="left:0.00%" data-i="0">Хоккайдо</span><span class="tk" style="left:2.17%" data-i="1">Тохоку</span><span class="tk" style="left:15.22%" data-i="7">Канто</span><span class="tk" style="left:30.43%" data-i="14">Тюбу</span><span class="tk" style="left:50.00%" data-i="23">Кинки</span><span class="tk" style="left:65.22%" data-i="30">Тюгоку</span><span class="tk" style="left:76.09%" data-i="35">Сикоку</span><span class="tk" style="left:84.78%" data-i="39">Кюсю</span><span class="tk" style="left:100.00%" data-i="46">Окинава</span></div>
-      <div class="now"><b id="scrubN">13</b> / 47 · <span id="scrubName">Токио</span></div></div>
+  <div class="mf-side">
+    <div class="mf-stick">
+      <div class="mf-map" id="mfMap" data-step="0" role="img" aria-label="Япония: 47 префектур">
+        <svg aria-hidden="true" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="mf-count" aria-hidden="true"><b id="mfN"></b><span id="mfNw">мест в гиде 雅</span></div>
+      </div>
+      <p class="mf-cap" id="mfCap" aria-live="polite">Япония: 47 префектур</p>
+      <div class="mf-dots" role="group" aria-label="Абзацы">
+        <button type="button" data-go="0" aria-label="К началу" aria-current="true"></button><button type="button" data-go="1" aria-label="01 — Что видят туристы"></button><button type="button" data-go="2" aria-label="02 — Что за углом"></button><button type="button" data-go="3" aria-label="03 — Зачем мы"></button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1012,48 +1053,6 @@ document.documentElement.classList.add('intro-on');
     document.getElementById('introEnter').focus({preventScroll: true});
     document.addEventListener('keydown', function(e){ if (!open && (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ')) enter(e); });
   })();
-  // ── 47 prefecture cards: the deck slides under the pointer ──
-  (function(){
-    var deck = document.getElementById('deck47'); if (!deck) return;
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var cards = Array.prototype.slice.call(deck.querySelectorAll('.pc')), n = cards.length;
-    var f = 12, tf = 12, dot = document.getElementById('scrubDot'), nEl = document.getElementById('scrubN'), nmEl = document.getElementById('scrubName'), lastC = -1;
-    var sp = window.innerWidth < 900 ? 34 : 58;
-    deck.addEventListener('pointermove', function(e){ if (e.pointerType === 'touch') return; var r = deck.getBoundingClientRect(); var x = Math.max(0, Math.min(1, (e.clientX - r.left - r.width * .08) / (r.width * .84))); tf = x * (n - 1); });
-    deck.addEventListener('wheel', function(e){ var d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : 0; if (d) { e.preventDefault(); tf = Math.max(0, Math.min(n - 1, tf + d * .02)); } }, {passive: false});
-    deck.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight') { tf = Math.min(n - 1, Math.round(tf) + 1); e.preventDefault(); } if (e.key === 'ArrowLeft') { tf = Math.max(0, Math.round(tf) - 1); e.preventDefault(); } if (e.key === 'Enter') open(cards[Math.round(f)]); });
-    var tx0 = null;
-    deck.addEventListener('touchstart', function(e){ tx0 = e.touches[0].clientX; }, {passive: true});
-    deck.addEventListener('touchmove', function(e){ if (tx0 === null) return; var x = e.touches[0].clientX; tf = Math.max(0, Math.min(n - 1, tf - (x - tx0) / 40)); tx0 = x; }, {passive: true});
-    document.querySelectorAll('#scrub .tk').forEach(function(t){ t.addEventListener('click', function(){ tf = +t.dataset.i; }); });
-    function open(c){
-      var id = +c.dataset.pref, reg = c.dataset.reg, map = document.getElementById('map');
-      window.slowScrollTo(document.getElementById('map-section'), function(){ if (map && map.select) { map.select(reg, id); if (map._emit) map._emit('select'); } });
-    }
-    // the deck follows the pointer (~11px per card) while cards are drawn 58px apart, so the card under the cursor is
-    // usually a neighbour of the highlighted one: a click opens the highlighted (front) card, taken when the button goes down
-    var pressed = null;
-    deck.addEventListener('pointerdown', function(){ pressed = Math.round(f); tf = pressed; });
-    deck.addEventListener('click', function(e){
-      e.preventDefault(); var i = pressed !== null ? pressed : Math.round(f); pressed = null; open(cards[i]);
-    });
-    (function tick(){
-      f += (tf - f) * (reduce ? 1 : .09);
-      for (var i = 0; i < n; i++) {
-        var d = i - f, ad = Math.abs(d), c = cards[i];
-        if (ad > 8) { if (c.style.visibility !== 'hidden') c.style.visibility = 'hidden'; continue; }
-        c.style.visibility = 'visible';
-        c.style.transform = 'translateX(' + (d * sp).toFixed(1) + 'px) translateY(' + (Math.pow(ad, 1.5) * 5).toFixed(1) + 'px) translateZ(' + (-ad * 46).toFixed(1) + 'px) rotateY(' + (-d * 5).toFixed(2) + 'deg) rotateZ(' + (d * 3).toFixed(2) + 'deg)';
-        c.style.zIndex = 200 - Math.round(ad * 10);
-        c.style.opacity = Math.max(0, Math.min(1, 1 - (ad - 5.5) / 2.5)).toFixed(3);
-      }
-      var ci = Math.round(f);
-      if (ci !== lastC) { if (lastC >= 0) cards[lastC].classList.remove('c'); cards[ci].classList.add('c'); lastC = ci;
-        nEl.textContent = ci + 1; nmEl.textContent = cards[ci].querySelector('.pr').textContent; }
-      dot.style.left = (f / (n - 1) * 100).toFixed(2) + '%';
-      requestAnimationFrame(tick);
-    })();
-  })();
   // ── steps: icons draw themselves when the section scrolls in ──
   (function(){
     var s = document.querySelector('.how4'); if (!s) return;
@@ -1407,6 +1406,52 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
     return geoCache[key];
   }
 
+  // the map's shape and projections, shared by <japan-map> and the homepage's static map (window.JapanGeo)
+  function japanGeometry(d3, geo, W, H, PAD, INSET) {
+    // 北方領土（国後・択捉・色丹・歯舞）は描かない。北海道の多角形のうち、島の中心が
+    // 東経145.85°より東、または東経145.3°以東かつ北緯43.6°以北のものを除く（根室半島・知床半島・ユルリ島は残る）
+    geo.features.forEach(function (f) {
+      if (f.properties.id !== 1 || f.geometry.type !== 'MultiPolygon') return;
+      f.geometry.coordinates = f.geometry.coordinates.filter(function (c) {
+        var ct = d3.geoCentroid({ type: 'Polygon', coordinates: c });
+        return !(ct[0] > 145.85 || (ct[0] > 145.3 && ct[1] > 43.6));
+      });
+    });
+    var feats = geo.features.filter(function (f) { return REGION_OF[f.properties.id]; });
+    var main = feats.filter(function (f) { return f.properties.id !== 47; });
+    var okinawa = feats.filter(function (f) { return f.properties.id === 47; });
+    var proj = d3.geoMercator().fitExtent([[PAD, PAD], [W - PAD, H - PAD]], { type: 'FeatureCollection', features: main });
+    var path = d3.geoPath(proj);
+    var projOki = d3.geoMercator().fitExtent([[8, 8], [INSET.w - 8, INSET.h - 8]], { type: 'FeatureCollection', features: okinawa });
+
+    // 本土のみを投影基準に（伊豆・小笠原などの離島を除外）
+    function cores() {
+      feats.forEach(function (f) {
+        var polys = f.geometry.type === 'MultiPolygon'
+          ? f.geometry.coordinates.map(function (c) { return { type: 'Polygon', coordinates: c }; })
+          : [f.geometry];
+        var areas = polys.map(function (g) { return path.area({ type: 'Feature', geometry: g, properties: {} }) || 0; });
+        var max = Math.max.apply(null, areas.concat([0]));
+        var keep = polys.filter(function (g, i) { return areas[i] >= max * 0.06; });
+        f.core = { type: 'Feature', properties: f.properties,
+          geometry: keep.length > 1 ? { type: 'MultiPolygon', coordinates: keep.map(function (g) { return g.coordinates; }) } : (keep[0] || f.geometry) };
+      });
+    }
+    cores();
+    var coreFC = { type: 'FeatureCollection', features: main.map(function (f) { return f.core; }) };
+    proj = d3.geoMercator().fitExtent([[PAD, PAD], [W - PAD, H - PAD]], coreFC);
+    path = d3.geoPath(proj);
+    cores();
+    var bb = path.bounds({ type: 'FeatureCollection', features: main.map(function (f) { return f.core; }) });
+    return { feats: feats, main: main, okinawa: okinawa, proj: proj, path: path, projOki: projOki, pathOki: d3.geoPath(projOki),
+      VB: { x: bb[0][0] - PAD, y: bb[0][1] - PAD, w: (bb[1][0] - bb[0][0]) + PAD * 2, h: (bb[1][1] - bb[0][1]) + PAD * 2 } };
+  }
+  window.JapanGeo = {
+    load: function () { return Promise.all([loadD3(D3), loadGeo(GEO), afterLoader()]); },
+    build: function (d3, geo) { return japanGeometry(d3, geo, 1000, 900, 46, { w: 190, h: 155 }); },
+    REGION_OF: REGION_OF
+  };
+
   function esc(v) {
     return String(v).replace(/[&<>"]/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
@@ -1541,55 +1586,18 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       var self = this, W = this.W, H = this.H, PAD = this.PAD, INSET = this.INSET;
       var l = this._root.querySelector('.loading'); if (l) l.remove();
 
-      // 北方領土（国後・択捉・色丹・歯舞）は描かない。北海道の多角形のうち、島の中心が
-      // 東経145.85°より東、または東経145.3°以東かつ北緯43.6°以北のものを除く（根室半島・知床半島・ユルリ島は残る）
-      geo.features.forEach(function (f) {
-        if (f.properties.id !== 1 || f.geometry.type !== 'MultiPolygon') return;
-        f.geometry.coordinates = f.geometry.coordinates.filter(function (c) {
-          var ct = d3.geoCentroid({ type: 'Polygon', coordinates: c });
-          return !(ct[0] > 145.85 || (ct[0] > 145.3 && ct[1] > 43.6));
-        });
-      });
-      var feats = geo.features.filter(function (f) { return REGION_OF[f.properties.id]; });
-      this._main = feats.filter(function (f) { return f.properties.id !== 47; });
-      var okinawa = feats.filter(function (f) { return f.properties.id === 47; });
+      var G = japanGeometry(d3, geo, W, H, PAD, INSET);
+      var feats = G.feats, okinawa = G.okinawa;
+      this._main = G.main;
       this._byPref = {};
 
       var svg = d3.select(this._root.querySelector('svg'));
-      var proj = d3.geoMercator().fitExtent([[PAD, PAD], [W - PAD, H - PAD]],
-        { type: 'FeatureCollection', features: this._main });
-      var path = d3.geoPath(proj);
-      var pathOkiProj = d3.geoMercator().fitExtent([[8, 8], [INSET.w - 8, INSET.h - 8]],
-        { type: 'FeatureCollection', features: okinawa });
-      var pathOki = d3.geoPath(pathOkiProj);
-
-      // 本土のみを投影基準に（伊豆・小笠原などの離島を除外）
-      function cores() {
-        feats.forEach(function (f) {
-          var polys = f.geometry.type === 'MultiPolygon'
-            ? f.geometry.coordinates.map(function (c) { return { type: 'Polygon', coordinates: c }; })
-            : [f.geometry];
-          var areas = polys.map(function (g) { return path.area({ type: 'Feature', geometry: g, properties: {} }) || 0; });
-          var max = Math.max.apply(null, areas.concat([0]));
-          var keep = polys.filter(function (g, i) { return areas[i] >= max * 0.06; });
-          f.core = { type: 'Feature', properties: f.properties,
-            geometry: keep.length > 1 ? { type: 'MultiPolygon', coordinates: keep.map(function (g) { return g.coordinates; }) } : (keep[0] || f.geometry) };
-        });
-      }
-      cores();
-      var coreFC = function () {
-        return { type: 'FeatureCollection', features: self._main.map(function (f) { return f.core; }) };
-      };
-      proj = d3.geoMercator().fitExtent([[PAD, PAD], [W - PAD, H - PAD]], coreFC());
-      path = d3.geoPath(proj);
-      cores();
+      var proj = G.proj, path = G.path, pathOkiProj = G.projOki, pathOki = G.pathOki;
       this._path = path;
       this._proj = proj;
       this._d3 = d3;
 
-      var bb = path.bounds(coreFC());
-      this.VB = { x: bb[0][0] - PAD, y: bb[0][1] - PAD,
-        w: (bb[1][0] - bb[0][0]) + PAD * 2, h: (bb[1][1] - bb[0][1]) + PAD * 2 };
+      this.VB = G.VB;
       svg.attr('viewBox', this.VB.x + ' ' + this.VB.y + ' ' + this.VB.w + ' ' + this.VB.h);
       INSET.x = this.VB.x + 14; INSET.y = this.VB.y + this.VB.h - INSET.h - 14;
 
@@ -6922,6 +6930,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
     [window.FUKUSHIMA_PINS, 7, 'fs'], [window.IBARAKI_PINS, 8, 'ib'], [window.TOCHIGI_PINS, 9, 'tc'],
     [window.GUNMA_PINS, 10, 'gm'], [window.SAITAMA_PINS, 11, 'st'], [window.CHIBA_PINS, 12, 'cb'], [window.KANAGAWA_PINS, 14, 'kn'],
     [window.TOKYO_PINS, 13, 'to']];
+  window.MIYABI_PIN_SETS = PREF_SETS;   // the homepage hero's static map plots them too
   var KG_TYPE = { see:['view'], eat:['food'], shop:['food'], art:['history'], craft:['activity'], stay:['stay'] };
   var KG_PINS = [];
   PREF_SETS.forEach(function(set){
@@ -7116,6 +7125,85 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
   // pin popover and prefecture card share the corner: hide the card while a pin popover is open
   new MutationObserver(function(){ card.style.visibility = pop.classList.contains('show') ? 'hidden' : ''; })
     .observe(pop, { attributes:true, attributeFilter:['class'] });
+})();
+</script>
+<script>
+// ── hero: the four steps of the manifesto drive the map beside them ──
+(function(){
+  var sec = document.getElementById('top'), box = document.getElementById('mfMap'); if (!sec || !box) return;
+  var steps = sec.querySelectorAll('.mf-step'), dots = sec.querySelectorAll('.mf-dots button'), cap = document.getElementById('mfCap');
+  var svg = box.querySelector('svg'), NS = 'http://www.w3.org/2000/svg', BIG3 = {13: 1, 26: 1, 27: 1};
+  // every article pin of the 47 prefectures; the count is the whole guide
+  var pins = [];
+  (window.MIYABI_PIN_SETS || []).forEach(function(set){ if (set[0]) set[0].pins.forEach(function(p){ pins.push({la: p.la, ln: p.ln, pref: set[1]}); }); });
+  var N = pins.length;
+  function fmt(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  function places(n){ var a = n % 100, b = n % 10; return a > 10 && a < 20 ? 'мест' : b === 1 ? 'место' : b > 1 && b < 5 ? 'места' : 'мест'; }
+  var about = Math.ceil(N / 100) * 100;
+  var CAPS = ['Япония: 47 префектур', 'Токио, Киото, Осака — куда едут почти все', 'А это места из нашего гида — по всей стране',
+    (about > N ? 'Почти ' : 'Уже ') + about + ' ' + places(about) + ', и их становится больше'];
+  document.getElementById('mfN').textContent = fmt(N);
+  document.getElementById('mfNw').textContent = places(N) + ' в гиде 雅';
+
+  var cur = -1;
+  function go(i){
+    if (i === cur) return; cur = i;
+    box.setAttribute('data-step', i);
+    box.setAttribute('aria-label', CAPS[i]); cap.textContent = CAPS[i];
+    steps.forEach(function(s, k){ s.classList.toggle('on', k === i); });
+    dots.forEach(function(d, k){ d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+  }
+  go(0);
+  if ('IntersectionObserver' in window) {
+    sec.classList.add('js');
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) go(+e.target.dataset.step); }); }, {rootMargin: '-45% 0px -45% 0px'});
+    steps.forEach(function(s){ io.observe(s); });
+  }
+  dots.forEach(function(d){ d.addEventListener('click', function(){ var s = steps[+d.dataset.go]; window.slowScrollTo ? window.slowScrollTo(s) : s.scrollIntoView(); }); });
+
+  // the map: the same shape and projection as <japan-map>, drawn once, flat
+  if (!window.JapanGeo) return;
+  window.JapanGeo.load().then(function(r){
+    var d3 = r[0], G = window.JapanGeo.build(d3, r[1]), VB = G.VB, IW = 190, IH = 155;
+    // Okinawa's box sits left of Kyūshū, as on the big map; the view widens to take it in
+    var ix = VB.x - IW * .85, iy = VB.y + VB.h - IH - 14, x0 = ix - 6;
+    svg.setAttribute('viewBox', [x0, VB.y, VB.x + VB.w - x0, VB.h].map(function(v){ return v.toFixed(1); }).join(' '));
+    function el(tag, at, parent){ var e = document.createElementNS(NS, tag); for (var k in at) e.setAttribute(k, at[k]); (parent || svg).appendChild(e); return e; }
+    var land = el('g', {});
+    G.main.forEach(function(f){ el('path', {d: G.path(f), 'class': 'land' + (BIG3[f.properties.id] ? ' big3' : '')}, land); });
+    var oki = el('g', {'class': 'oki', transform: 'translate(' + ix.toFixed(1) + ',' + iy.toFixed(1) + ')'});
+    el('rect', {width: IW, height: IH}, oki);
+    G.okinawa.forEach(function(f){ el('path', {d: G.pathOki(f), 'class': 'land'}, oki); });
+    el('text', {x: 4, y: -8}, oki).textContent = 'ОКИНАВА';
+    // units per screen pixel, for the labels and for merging dots that would land on one ~2.5px cell
+    function unit(){ var m = svg.getScreenCTM(); return m && m.a ? 1 / m.a : 1.5; }
+    var u = unit();
+    var cell = 2.5 * u, seen = {}, paths = {};
+    var kyo = G.proj([135.77, 35.01]);
+    pins.forEach(function(p){
+      var o = p.pref === 47, xy = o ? G.projOki([p.ln, p.la]) : G.proj([p.ln, p.la]);
+      if (!xy || isNaN(xy[0])) return;
+      var x = o ? xy[0] + ix : xy[0], y = o ? xy[1] + iy : xy[1], key = Math.round(x / cell) + ',' + Math.round(y / cell);
+      if (seen[key]) return; seen[key] = 1;
+      // the wave starts at the three big cities and runs out to the ends of the country: 10 delay buckets
+      var big = !!BIG3[p.pref], b = big ? 0 : Math.min(9, Math.floor(Math.hypot(o ? 900 : x - kyo[0], o ? 0 : y - kyo[1]) / 70));
+      var k = big ? 'big' : b; (paths[k] = paths[k] || []).push('M' + x.toFixed(1) + ' ' + y.toFixed(1) + 'h.01');
+    });
+    for (var k in paths) { var pe = el('path', {d: paths[k].join(''), 'class': 'pn' + (k === 'big' ? ' big3' : '')}); if (k !== 'big') pe.style.setProperty('--b', k); }
+    // labels: Kyoto above and Osaka below its dot, both to the left, so the two never meet; offsets are in screen pixels
+    var cities = [['Токио', 139.69, 35.69, 1, 5], ['Киото', 135.77, 35.01, -1, -4], ['Осака', 135.50, 34.69, -1, 15]].map(function(c){
+      var xy = G.proj([c[1], c[2]]), g = el('g', {'class': 'city'}), d = 'M' + xy[0].toFixed(1) + ' ' + xy[1].toFixed(1) + 'h.01';
+      el('path', {d: d, 'class': 'ring'}, g); el('path', {d: d, 'class': 'dot'}, g);
+      var t = el('text', {'text-anchor': c[3] > 0 ? 'start' : 'end'}, g); t.textContent = c[0];
+      return {t: t, x: xy[0], y: xy[1], dx: c[3] * 11, dy: c[4]};
+    });
+    function fit(){
+      var u = unit(); svg.style.setProperty('--u', u.toFixed(3));
+      cities.forEach(function(c){ c.t.setAttribute('x', (c.x + c.dx * u).toFixed(1)); c.t.setAttribute('y', (c.y + c.dy * u).toFixed(1)); });
+    }
+    fit();
+    var rz; addEventListener('resize', function(){ clearTimeout(rz); rz = setTimeout(fit, 150); });
+  });
 })();
 </script>
 </body>

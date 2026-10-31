@@ -43,8 +43,10 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
     Cached visits skip the ink. The map waits for the hand-over before building (`afterLoader`), because building blocks
     the page for ~0.4–1 s.
   - Intro: a 3D noren (three.js, `assets/noren/`) with 雅 that sways with the pointer; a click, Enter or Esc opens the site.
-  - Hero «Иное лицо Японии» (`#top`) with a fan of 47 prefecture cards (`#deck47`): they follow the pointer left/right
-    (a vertical wheel scrolls the page); clicking the front card scrolls to the map and opens that prefecture.
+  - Hero «Япония за поворотом» (`#top`, `.mf`): a scroll manifesto. Four text blocks on the left (the one in the middle of the
+    viewport is active, IntersectionObserver), a sticky static map on the right (`#mfMap`, steps 0–3: plain → Tokyo/Kyoto/Osaka →
+    all article pins as a wave → the count «N мест в гиде 雅», N counted at runtime). The map uses `window.JapanGeo` (the shape and
+    projection shared with `<japan-map>`) and `window.MIYABI_PIN_SETS` (= `PREF_SETS`). Mobile: the map sticks to the top, 270px.
   - Three columns Еда / Культура / Технология (`#tri`) that preselect a map filter.
   - The map section (`#map-section`, `<japan-map>`, see below).
   - «Как это происходит» (`#how`): four steps that fade in when scrolled to.
