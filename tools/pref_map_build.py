@@ -214,3 +214,4 @@ def build(key):
 if __name__=='__main__':
     keys=sys.argv[1:] or sorted(f[:-3] for f in os.listdir(os.path.join(REPO,'tools','prefs')) if f.endswith('.py'))
     for k in keys: build(k)
+    import sitemap_build; print('sitemap.xml:',sitemap_build.build(),'URLs')
