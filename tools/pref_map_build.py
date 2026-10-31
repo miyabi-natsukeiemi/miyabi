@@ -2,6 +2,8 @@
 and its pins on the top-page Japan map (index.html).
 Usage: python3 tools/pref_map_build.py kagawa   (config per prefecture: tools/prefs/<pref>.py; see CLAUDE.md)."""
 import os, re, sys, shutil, json, html, importlib.util
+sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
+import site_chrome  # logo and other shared parts of article pages
 REPO=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def plural(n,one,few,many):
@@ -18,9 +20,9 @@ BAR='''<!-- site-bar -->
 p.credits{font-size:14px;line-height:1.5;color:var(--muted,#5C5C5C);margin:48px 0 0}  /* closing "Фото: …" line: small and quiet */
 .site-bar{position:sticky;top:0;z-index:1000;background:rgba(252,252,250,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(22,24,26,.14);font-family:Inter,system-ui,sans-serif}
 .site-bar .in{max-width:1180px;margin:0 auto;padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.site-bar a{text-decoration:none;color:#16181A;font-size:14px}.site-bar .brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;font-weight:600}
+.site-bar a{text-decoration:none;color:#16181A;font-size:14px}.site-bar .brand{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:500;line-height:1}
 .site-bar .back{color:#1E3050}.site-bar .back:hover{color:#B3352D}</style>
-<div class="site-bar"><div class="in"><a class="brand" href="../../../index.html">Omamori Concierge</a><a class="back" href="../index.html#__KEY__-map">&larr; __BACK__</a></div></div>
+<div class="site-bar"><div class="in"><a class="brand" href="../../../index.html" aria-label="雅, на главную">雅</a><a class="back" href="../index.html#__KEY__-map">&larr; __BACK__</a></div></div>
 <!-- /site-bar -->
 '''
 SECTION_MAP='''<!-- __KEY__-map -->
@@ -142,7 +144,7 @@ def build(key):
         if '<!-- site-bar -->' not in src:
             src=re.sub(r'(<body[^>]*>)',lambda m:m.group(1)+'\n'+bar,src,count=1)
         out=os.path.join(OUT,s); os.makedirs(out,exist_ok=True)
-        open(os.path.join(out,'index.html'),'w',encoding='utf-8').write(src)
+        open(os.path.join(out,'index.html'),'w',encoding='utf-8').write(site_chrome.apply(src))
         imd=os.path.join(SRC,d,'images')
         if os.path.isdir(imd):
             shutil.copytree(imd,os.path.join(out,'images'),dirs_exist_ok=True,ignore=shutil.ignore_patterns('.DS_Store'))
@@ -175,7 +177,7 @@ def build(key):
     page=re.sub(r'</p>(\s*)<p class="kicker" id="about">',lambda m:'</p>'+jump+section_map+m.group(1)+'<p class="kicker" id="about">',page,count=1)
     page=re.sub(r'</div>(\s*)</article>',lambda m:section_list+'</div>'+m.group(1)+'</article>',page,count=1)
     assert f'{key}-map -->' in page and f'{key}-articles' in page
-    open(page_path,'w',encoding='utf-8').write(page)
+    open(page_path,'w',encoding='utf-8').write(site_chrome.apply(page))
     print(key+':',len(titles),'articles,',len(P),'pins; nopin:',sorted(s for s in titles if s not in used))
 
     # Same pins on the top-page Japan map (index.html): shown when the user zooms into this prefecture.
