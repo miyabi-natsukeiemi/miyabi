@@ -10,7 +10,8 @@ Owner: Ren (GitHub: miyabi-natsukeiemi). Ren talks to Claude in Japanese; all si
 - Plain static HTML/CSS/JS. No build step, no framework, no package.json.
   (A Next.js rebuild is planned separately; do not migrate this repo unless Ren asks.)
 - Hosting: **Cloudflare Pages**, project `miyabi-concierge`. Every push to `main` deploys automatically.
-  - Production: https://miyabi-concierge.pages.dev/
+  - Production: https://omamori-concierge.com/ (custom domain). The Pages project is still called `miyabi-concierge`, and the old
+    address https://miyabi-concierge.pages.dev/ still works.
   - Check a deploy: `gh api repos/miyabi-natsukeiemi/miyabi/commits/main/check-runs --jq '.check_runs[] | {name,conclusion}'` and look for "Cloudflare Pages".
   - Two Cloudflare **Workers** builds (`miyabi`, `miyabi-pro`) are also wired to this repo and currently fail. They do not affect the Pages site. Ignore unless Ren asks.
 - Workflow: edit → preview locally (`python3 -m http.server 8765` in the repo root, open http://localhost:8765/) → commit → push to `main`.

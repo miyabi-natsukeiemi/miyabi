@@ -2,7 +2,7 @@
 Usage: python3 tools/sitemap_build.py   (pref_map_build.py runs it after a build)."""
 import os
 REPO=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE='https://miyabi-concierge.pages.dev'  # production address; change it here when the site gets its own domain
+SITE='https://omamori-concierge.com'  # production address
 
 def build():
     urls=['/','/services/']

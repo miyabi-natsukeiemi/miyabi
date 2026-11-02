@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://miyabi-concierge.pages.dev/sitemap.xml
+Sitemap: https://omamori-concierge.com/sitemap.xml
