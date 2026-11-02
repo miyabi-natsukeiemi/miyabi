@@ -22,7 +22,7 @@ p.credits{font-size:14px;line-height:1.5;color:var(--muted,#5C5C5C);margin:48px 
 .site-bar .in{max-width:1180px;margin:0 auto;padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .site-bar a{text-decoration:none;color:#16181A;font-size:14px}.site-bar .brand{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:500;line-height:1}
 .site-bar .back{color:#1E3050}.site-bar .back:hover{color:#B3352D}</style>
-<div class="site-bar"><div class="in"><a class="brand" href="../../../index.html" aria-label="雅, на главную">雅</a><a class="back" href="../index.html#__KEY__-map">&larr; __BACK__</a></div></div>
+<div class="site-bar"><div class="in"><a class="brand" href="../../../index.html" aria-label="__BRAND__, на главную">__BRAND__</a><a class="back" href="../index.html#__KEY__-map">&larr; __BACK__</a></div></div>
 <!-- /site-bar -->
 '''
 SECTION_MAP='''<!-- __KEY__-map -->
@@ -136,7 +136,7 @@ def build(key):
     slug=getattr(C,'slug',default_slug)
     folders=sorted(d for d in os.listdir(SRC) if os.path.isdir(os.path.join(SRC,d)) and d not in C.SKIP and os.path.exists(os.path.join(SRC,d,'article_ru.html')))
     num={}; titles={}
-    bar=BAR.replace('__KEY__',key).replace('__BACK__',C.BAR_BACK)
+    bar=BAR.replace('__BRAND__',site_chrome.BRAND).replace('__KEY__',key).replace('__BACK__',C.BAR_BACK)
     for d in folders:
         s=slug(d); num[d[:2]]=s
         src=open(os.path.join(SRC,d,'article_ru.html'),encoding='utf-8').read()

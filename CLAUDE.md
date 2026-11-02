@@ -3,6 +3,12 @@
 Static website for a Japan travel concierge aimed at Russian-speaking travelers.
 Owner: Ren (GitHub: miyabi-natsukeiemi). Ren talks to Claude in Japanese; all site copy is in Russian.
 
+Brand: **omamori** (lowercase Latin; provisional spelling, 2026-11-02; it was 雅 before). It appears in the logo, titles, share tags
+and Russian copy of index.html, services/index.html and 404.html (hand-written), and in every article page through the tools:
+one constant `BRAND` in `tools/site_chrome.py` (logo, CTA label, og:site_name; `pref_map_build.py` takes it from there). To change
+the spelling: edit `BRAND`, run `python3 tools/site_chrome.py`, and fix the three hand-written pages. Still 雅 / MIYABI on purpose
+(decided later): the noren intro and the loading screen, og.jpg and the favicons, and internal names (`MIYABI_*`, `miyabi-theme`).
+
 > This repo is deployed as-is, so this file is publicly readable on the site. Never put secrets, tokens or private notes here.
 
 ## Stack and deploy
@@ -51,7 +57,7 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
   - Intro: a 3D noren (three.js, `assets/noren/`) with 雅 that sways with the pointer; a click, Enter or Esc opens the site.
   - Hero «Япония за поворотом» (`#top`, `.mf`): a scroll manifesto. Four text blocks on the left (the one in the middle of the
     viewport is active, IntersectionObserver), a sticky static map on the right (`#mfMap`, steps 0–3: plain → Tokyo/Kyoto/Osaka →
-    all article pins as a wave → the count «N мест в гиде 雅», N counted at runtime). The map uses `window.JapanGeo` (the shape and
+    all article pins as a wave → the count «N мест в гиде omamori», N counted at runtime). The map uses `window.JapanGeo` (the shape and
     projection shared with `<japan-map>`) and `window.MIYABI_PIN_SETS` (= `PREF_SETS`). Mobile: the map sticks to the top, 270px.
   - Three columns Еда / Культура / Мастерство (`#tri`) that preselect map filters (`data-filter`, one or more chip values:
     food; history + festival; craft).
@@ -72,7 +78,7 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
   Its `<style>` also carries a rule that centers the hero photo (`.mj-hero` has an inline `margin:0` in the article HTML)
   and, in sub-articles, the `p.credits` style.
   For generated sub-articles (Kagawa, Kochi) the block comes from `BAR` in `tools/pref_map_build.py`.
-  Shared parts of all article pages (the 雅 logo, the closing «Хотите поехать сюда?» block `<!-- site-cta -->`, the icons and share tags in
+  Shared parts of all article pages (the brand logo, the closing «Хотите поехать сюда?» block `<!-- site-cta -->`, the icons and share tags in
   `<!-- site-head -->`) are applied by `tools/site_chrome.py` (no argument = every page under
   articles/, idempotent); `pref_map_build.py` applies it to the pages it writes. Run it after putting a new guide from a zip.
 - Article styling lives inside each page under `.mj-article` (fonts: Playfair Display + PT Serif, red accent #B3261E). Keep new styles scoped so they don't leak into other pages.

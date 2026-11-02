@@ -1,4 +1,4 @@
-"""Shared parts of every article page (the 47 prefecture guides and their sub-articles): the 雅 logo in the site-bar, the
+"""Shared parts of every article page (the 47 prefecture guides and their sub-articles): the brand logo in the site-bar, the
 closing call to action and, in <head>, the site icons and the share tags (Open Graph, Twitter; og:image = the article's
 first photo).
 Usage: python3 tools/site_chrome.py   (all pages under articles/; idempotent). pref_map_build.py applies it to the pages it writes."""
@@ -6,11 +6,13 @@ import os, re, sys, html
 from sitemap_build import SITE
 REPO=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# the logo: 雅 in the homepage's style (Cormorant Garamond 500, ink colour), linking to the homepage
+BRAND='omamori'  # the brand name (provisional spelling): logo, CTA label, og:site_name. pref_map_build.py uses it too
+
+# the logo: the brand name in the homepage's style (Cormorant Garamond 500, ink colour), linking to the homepage
 BRAND_CSS='.site-bar .brand{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:500;line-height:1}'
 
 def brand(page):
-    page=re.sub(r'<a class="brand" href="([^"]*)"[^>]*>[^<]*</a>',lambda m:f'<a class="brand" href="{m.group(1)}" aria-label="雅, на главную">雅</a>',page,count=1)
+    page=re.sub(r'<a class="brand" href="([^"]*)"[^>]*>[^<]*</a>',lambda m:f'<a class="brand" href="{m.group(1)}" aria-label="{BRAND}, на главную">{BRAND}</a>',page,count=1)
     return re.sub(r'\.site-bar \.brand\{[^}]*\}',lambda m:BRAND_CSS,page,count=1)
 
 # closing call to action, at the end of the page (before </body>; the editorial comments some articles end with are invisible)
@@ -25,7 +27,7 @@ CTA='''<!-- site-cta -->
 .site-cta .sv{color:#141414;text-decoration:none;border-bottom:1px solid #DADADA;padding-bottom:2px}
 .site-cta .sv:hover{color:#B3261E;border-color:#B3261E}
 .site-cta a:focus-visible{outline:2px solid #B3261E;outline-offset:3px}</style>
-<aside class="site-cta" aria-label="Поездка с 雅"><div class="in"><h2>Хотите поехать сюда? Соберём маршрут под вас</h2>
+<aside class="site-cta" aria-label="Поездка с __BRAND__"><div class="in"><h2>Хотите поехать сюда? Соберём маршрут под вас</h2>
 <div class="go"><a class="btn" href="/#ask">Написать нам</a><a class="sv" href="/services/">Услуги</a></div></div></aside>
 <!-- /site-cta -->
 '''
@@ -33,7 +35,7 @@ CTA='''<!-- site-cta -->
 def cta(page):
     page=re.sub(r'<!-- site-cta -->.*?<!-- /site-cta -->\n?','',page,flags=re.S)
     i=page.rfind('</body>')
-    return page[:i]+CTA+page[i:] if i>-1 else page
+    return page[:i]+CTA.replace('__BRAND__',BRAND)+page[i:] if i>-1 else page
 
 # in <head>: the site icons (files at the site root, made from favicon.svg)
 ICONS='''<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
@@ -43,12 +45,12 @@ ICONS='''<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 def share(page,url):
     """Open Graph and Twitter tags. url: the page's address on the site, e.g. /articles/kagawa/guntu/"""
     a=lambda v:html.escape(html.unescape(v),quote=True)
-    m=re.search(r'<title>(.*?)</title>',page,re.S); title=a(m.group(1).strip()) if m else '雅'
+    m=re.search(r'<title>(.*?)</title>',page,re.S); title=a(m.group(1).strip()) if m else BRAND
     m=re.search(r'<meta name="description" content="([^"]*)"',page); desc=a(m.group(1)) if m else ''
     body=page[page.find('<body'):]
     img=next((s for s in re.findall(r'<img[^>]+src="([^"]+)"',body) if not s.startswith(('http','data:'))),None)
     img=SITE+(re.sub(r'/[^/]*/\.\./','/',url+img) if img else '/assets/og.jpg')
-    tags=[('property','og:type','article'),('property','og:site_name','雅'),('property','og:locale','ru_RU'),('property','og:title',title),
+    tags=[('property','og:type','article'),('property','og:site_name',BRAND),('property','og:locale','ru_RU'),('property','og:title',title),
         ('property','og:description',desc),('property','og:url',SITE+url),('property','og:image',img),('name','twitter:card','summary_large_image'),
         ('name','twitter:title',title),('name','twitter:description',desc),('name','twitter:image',img)]
     return '\n'.join(f'<meta {k}="{n}" content="{v}">' for k,n,v in tags)
