@@ -7,7 +7,7 @@ Brand: **omamori** (lowercase Latin; provisional spelling, 2026-11-02; it was �
 and Russian copy of index.html, services/index.html and 404.html (hand-written), and in every article page through the tools:
 one constant `BRAND` in `tools/site_chrome.py` (logo, CTA label, og:site_name; `pref_map_build.py` takes it from there). To change
 the spelling: edit `BRAND`, run `python3 tools/site_chrome.py`, and fix the three hand-written pages. Still 雅 / MIYABI on purpose
-(decided later): the noren intro and the loading screen, og.jpg and the favicons, and internal names (`MIYABI_*`, `miyabi-theme`).
+(decided later): the noren intro, og.jpg and the favicons, and internal names (`MIYABI_*`, `miyabi-theme`).
 
 > This repo is deployed as-is, so this file is publicly readable on the site. Never put secrets, tokens or private notes here.
 
@@ -46,14 +46,13 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
 
 - Homepage (new design, 2026-10-30; the old homepage is in git history before the commit "New homepage: 3D noren intro,
   prefecture cards, steps section"), top to bottom:
-  - Loading screen (`#ld`, right after `<body>`; CSS and progress counter in `<head>`): 雅 is written stroke by stroke
-    (13 KanjiVG strokes, `096c5.svg`, © Ulrich Apel, CC BY-SA 3.0; keep the attribution comment) as the intro's files
-    really arrive (`__ld.hit`: page, fonts, three.js, both textures, d3, GeoJSON, and `gl` = the noren's first textured frames).
-    The ink 雅 lies exactly over the 雅 printed on the noren (`window.__noren.k()`); the loader has no background of its own.
-    Hand-over (~1.2 s): seal stamped, the noren dyes in from the rod to the hem (CSS mask), the ink turns cream where the dye
-    has passed and dissolves, then the hint fades in and only then does the noren sway. Reduced motion: 400 ms crossfade.
-    Cached visits skip the ink. The map waits for the hand-over before building (`afterLoader`), because building blocks
-    the page for ~0.4–1 s.
+  - Loading screen (`#ld`, right after `<body>`; CSS and progress counter in `<head>`): a plain thin progress bar with a
+    percentage in the middle of the screen (2026-11-02, Ren; before that 雅 was written stroke by stroke, see git history).
+    It fills as the intro's files really arrive (`__ld.hit`: page, fonts, three.js, both textures, d3, GeoJSON, and `gl` =
+    the noren's first textured frames); the loader has no background of its own. Hand-over (~1 s): the bar fades, the noren
+    dyes in from the rod to the hem (CSS mask), the hint fades in and only then does the noren sway. Reduced motion: 400 ms
+    crossfade. Cached visits show no bar. The map waits for the hand-over before building (`afterLoader`), because building
+    blocks the page for ~0.4–1 s.
   - Intro: a 3D noren (three.js, `assets/noren/`) with 雅 that sways with the pointer; a click, Enter or Esc opens the site.
   - Hero «Япония за поворотом» (`#top`, `.mf`): a scroll manifesto. Four text blocks on the left (the one in the middle of the
     viewport is active, IntersectionObserver), a sticky static map on the right (`#mfMap`, steps 0–3: plain → Tokyo/Kyoto/Osaka →
