@@ -63,6 +63,8 @@ articles/kochi/<slug>/     Kochi sub-articles (21), same layout; also ehime (12)
     food; history + festival; craft).
   - The map section (`#map-section`, `<japan-map>`, see below).
   - «Как это происходит» (`#how`): four steps that fade in when scrolled to.
+  - «Чем мы поможем» (`#services`, `.svc-*`): the services with prices, the same list as services/index.html (keep the two in
+    sync). The header's «Услуги» link and the link under `#how` point here.
   - Contact section (`#ask`): no form, only how to reach us (Telegram, WhatsApp, email) and what to write. The site collects
     no personal data on purpose (Russian law 152-ФЗ: data of Russian citizens must first be stored in Russia, so no
     Formspree or other foreign form service; Ren, 2026-10-30). The real addresses are not given yet, so the three ways
