@@ -8,12 +8,15 @@ REPO=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 BRAND='omamori'  # the brand name (provisional spelling): logo, CTA label, og:site_name. pref_map_build.py uses it too
 
-# the logo: the brand name in the homepage's style (Cormorant Garamond 500, ink colour), linking to the homepage
-BRAND_CSS='.site-bar .brand{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:500;line-height:1}'
+# the logo: the mark (assets/logo/omamori-mark.svg, inlined; its masks have ids, so only once per page) + the brand name in the
+# homepage's style (Cormorant Garamond 500, ink colour), linking to the homepage. Article pages have no themes, so --gold falls back on vermilion
+MARK=open(os.path.join(REPO,'assets/logo/omamori-mark.svg'),encoding='utf-8').read().strip().replace('\n','').replace('<svg ','<svg aria-hidden="true" focusable="false" ',1)
+LOGO=MARK+BRAND
+BRAND_CSS='.site-bar .brand{display:inline-flex;align-items:baseline;gap:8px;font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:500;line-height:1}.site-bar .brand svg{align-self:center;position:relative;top:2px;width:17px;height:28px;color:var(--gold,#9E3B26)}'
 
 def brand(page):
-    page=re.sub(r'<a class="brand" href="([^"]*)"[^>]*>[^<]*</a>',lambda m:f'<a class="brand" href="{m.group(1)}" aria-label="{BRAND}, на главную">{BRAND}</a>',page,count=1)
-    return re.sub(r'\.site-bar \.brand\{[^}]*\}',lambda m:BRAND_CSS,page,count=1)
+    page=re.sub(r'<a class="brand" href="([^"]*)"[^>]*>.*?</a>',lambda m:f'<a class="brand" href="{m.group(1)}" aria-label="{BRAND}, на главную">{LOGO}</a>',page,count=1,flags=re.S)
+    return re.sub(r'(?:\.site-bar \.brand(?: svg)?\{[^}]*\})+',lambda m:BRAND_CSS,page,count=1)
 
 # closing call to action, at the end of the page (before </body>; the editorial comments some articles end with are invisible)
 CTA='''<!-- site-cta -->
