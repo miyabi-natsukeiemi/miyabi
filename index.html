@@ -166,8 +166,9 @@ html.intro-on,html.intro-on body{overflow:hidden}
 .np::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:3;
   background:linear-gradient(90deg,rgba(0,0,0,calc(.08 + var(--sh,0)*.25)),rgba(255,255,255,calc(.06 - var(--sh,0)*.06)) 45%,rgba(0,0,0,calc(.10 - var(--sh,0)*.2)));transition:background .1s}
 .np .hem{position:absolute;left:0;right:0;bottom:0;height:12px;background:rgba(0,0,0,.12);z-index:2}
-.np .big{position:absolute;top:13vh;font-family:'Cormorant Garamond',serif;font-size:min(42vh,38vw);line-height:1;color:var(--on-accent);white-space:nowrap;text-align:center;opacity:.96}
-.np .sm{position:absolute;bottom:5vh;font-size:13px;letter-spacing:.42em;color:var(--on-accent);opacity:.85;white-space:nowrap;text-align:center}
+.np .big{position:absolute;top:11.6%;height:61.8%;display:flex;justify-content:center;color:var(--on-accent);opacity:.96}
+.np .big svg{display:block;height:100%;width:auto}
+.np .sm{position:absolute;bottom:5vh;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:17px;line-height:1;letter-spacing:.24em;color:var(--on-accent);opacity:.9;white-space:nowrap;text-align:center}
 .ihint{position:absolute;left:0;right:0;bottom:6vh;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;font-size:14px;color:var(--mute)}
 .ihint .ij{font-size:26px;letter-spacing:.14em;color:var(--head)}
 .ienter{margin-top:6px;min-height:42px;padding:0 22px;font-size:14px}
@@ -872,17 +873,31 @@ document.documentElement.classList.add('intro-on');
     var wood = new T.MeshStandardMaterial({color: 0x6b4a2e, roughness: .55, metalness: .05});
     var rod = new T.Mesh(new T.CylinderGeometry(.085, .085, TW + 1, 32), wood); rod.rotation.z = Math.PI / 2; rod.position.set(0, ROD + .02, .02); rod.castShadow = true; scene.add(rod);
     [-1, 1].forEach(function(s){ var cap = new T.Mesh(new T.SphereGeometry(.12, 24, 16), wood); cap.position.set(s * (TW / 2 + .5), ROD + .02, .02); cap.castShadow = true; scene.add(cap); });
-    // fabric texture: colour + kanji across all panels, woven bump
+    // fabric texture (only when basecolor.jpg fails): colour, the omamori mark across all panels and the word under it, as on the
+    // real texture; the mark is drawn once assets/logo/omamori-mark.svg has loaded
     function fabricTex(){
       var c = document.createElement('canvas'); c.width = 2048; c.height = 1360; var g = c.getContext('2d');
       g.fillStyle = ACC; g.fillRect(0, 0, c.width, c.height);
-      g.fillStyle = INK; g.textAlign = 'center'; g.textBaseline = 'middle';
-      g.font = '900px "Hiragino Mincho ProN","Yu Mincho","Noto Serif JP","Noto Serif CJK JP","Songti SC",serif'; g.globalAlpha = .96;
-      g.fillText('雅', c.width / 2, c.height * .44);
-      g.globalAlpha = .85; g.font = '500 40px "Golos Text",system-ui,sans-serif';
-      var cap = 'Я П О Н И Я  ·  В  Г Л У Б И Н У'; g.fillText(cap, c.width / 2, c.height * .885);
-      g.globalAlpha = 1; g.fillStyle = 'rgba(0,0,0,.14)'; g.fillRect(0, c.height - 26, c.width, 26);
-      var t = new T.CanvasTexture(c); t.encoding = T.sRGBEncoding; t.anisotropy = R.capabilities.getMaxAnisotropy(); return t;
+      g.textAlign = 'center'; g.textBaseline = 'middle';
+      g.fillStyle = 'rgba(0,0,0,.14)'; g.fillRect(0, c.height - 26, c.width, 26);
+      var t = new T.CanvasTexture(c); t.encoding = T.sRGBEncoding; t.anisotropy = R.capabilities.getMaxAnisotropy();
+      // the word where the texture has it (v .89–.915), once its font is in
+      var F = '500 64px "Cormorant Garamond",serif';
+      (document.fonts ? document.fonts.load(F) : Promise.resolve()).catch(function(){}).then(function(){
+        g.fillStyle = INK; g.globalAlpha = .9; g.font = F; if ('letterSpacing' in g) g.letterSpacing = '14px';
+        var sx = (c.height / 7.36) / (c.width / 9.2);   // undo the canvas' horizontal stretch over the cloth, so the letters keep their shape
+        g.save(); g.translate(c.width / 2, c.height * .903); g.scale(sx, 1); g.fillText('omamori', 0, 0); g.restore();
+        if ('letterSpacing' in g) g.letterSpacing = '0px'; g.globalAlpha = 1; t.needsUpdate = true;
+      });
+      // the mark in the box the kanji used (v .1074–.7559), its own proportions kept on the 9.2 × 7.36 cloth the canvas is stretched over
+      fetch('assets/logo/omamori-mark.svg').then(function(r){ return r.text(); }).then(function(svg){
+        var h = c.height * (.7559 - .1074), w = h * 52 / 88 * (c.width / 9.2) / (c.height / 7.36);
+        svg = svg.replace(/currentColor/g, INK).replace('<svg ', '<svg preserveAspectRatio="none" width="' + Math.round(w) + '" height="' + Math.round(h) + '" ');
+        var img = new Image();
+        img.onload = function(){ g.globalAlpha = .96; g.drawImage(img, (c.width - w) / 2, c.height * .1074, w, h); g.globalAlpha = 1; t.needsUpdate = true; };
+        img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+      }).catch(function(){});
+      return t;
     }
     function weaveTex(){
       var c = document.createElement('canvas'); c.width = 2048; c.height = 1360; var g = c.getContext('2d');
@@ -935,14 +950,14 @@ document.documentElement.classList.add('intro-on');
     }
     var base; fit(); window.addEventListener('resize', fit);
     if (!pend) setTimeout(txOk);
-    // for the loader: where the printed 雅 and MIYABI are on screen (u, v of the cloth, the cloth as it hangs now), and the dye's range
+    // for the loader: where the dyed mark and word are on screen (u, v of the cloth, the cloth as it hangs now), and the dye's range
     var pv = new T.Vector3();
     function scr(u, v){ var p = panels[2].P, j = Math.min(NY - 1.001, v * (NY - 1)), j0 = Math.floor(j), f = j - j0, c = (NX - 1) / 2,
         y = p[(j0 * NX + c) * 3 + 1] * (1 - f) + p[((j0 + 1) * NX + c) * 3 + 1] * f;
       pv.set((u - .5) * TW, y, 0).project(cam); return [(pv.x + 1) / 2 * window.innerWidth, (1 - pv.y) / 2 * window.innerHeight]; }
     function box(u0, v0, u1, v1){ var a = scr(u0, v0), b = scr(u1, v1); return {x: a[0], y: a[1], w: b[0] - a[0], h: b[1] - a[1]}; }
     window.__noren = {els: [cv], cream: '#F1EAE0',
-      k: function(){ return box(.2324, .1074, .7676, .7559); }, wd: function(){ return box(.4238, .8887, .5762, .916); },
+      k: function(){ return box(.368, .1162, .632, .7344); }, wd: function(){ return box(.4281, .8916, .5656, .915); },
       y0: function(){ return scr(.5, 0)[1] - window.innerHeight * .04; }, y1: function(){ return scr(.5, 1)[1] + window.innerHeight * .06; }};
     // walking through on enter: a body (sphere) moves from in front of the cloth to behind it
     var body = null, t0 = performance.now(), open = false, raf;
@@ -1006,18 +1021,19 @@ document.documentElement.classList.add('intro-on');
     var intro = document.getElementById('intro'); if (!intro || window.__noren3d) return;
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var set = document.getElementById('nset'), N = window.innerWidth < 700 ? 3 : 5, ps = [];
+    var MARK = '<svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="24 7 52 88"><defs><mask id="om-cloth" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><path d="M50,21 C56,22.4 63,25 68,27.6 C70.6,28.9 71.6,30.6 71.6,33.2 C72.6,50 72.9,70 72.1,86 C71.9,90 69.6,92.2 65.6,92.2 L34.4,92.2 C30.4,92.2 28.1,90 27.9,86 C27.1,70 27.4,50 28.4,33.2 C28.4,30.6 29.4,28.9 32,27.6 C37,25 44,22.4 50,21 Z" fill="#fff"/><g fill="none" stroke="#000" stroke-linecap="round"><path d="M28,39 C42,42.2 58,42.2 72,39" stroke-width="1.512"/><path d="M47.6,38.5 C45.6,28 40,12.5 50,10 C60,12.5 54.4,28 52.4,38.5 M47.2,48.5 C46.2,58 43.6,66 42.4,75 M52.8,48.5 C53.8,58 56.4,66 57.6,75" stroke-width="3.6"/><rect x="45" y="38.5" width="10" height="10" rx="1.8" stroke-width="3.6"/></g><rect x="46.8" y="40.3" width="6.4" height="6.4" fill="#fff"/></mask><mask id="om-out" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M50,21 C56,22.4 63,25 68,27.6 C70.6,28.9 71.6,30.6 71.6,33.2 C72.6,50 72.9,70 72.1,86 C71.9,90 69.6,92.2 65.6,92.2 L34.4,92.2 C30.4,92.2 28.1,90 27.9,86 C27.1,70 27.4,50 28.4,33.2 C28.4,30.6 29.4,28.9 32,27.6 C37,25 44,22.4 50,21 Z" fill="#000"/></mask></defs><rect width="100" height="100" fill="currentColor" mask="url(#om-cloth)"/><path d="M47.6,38.5 C45.6,28 40,12.5 50,10 C60,12.5 54.4,28 52.4,38.5" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" mask="url(#om-out)"/></svg>';
     for (var i = 0; i < N; i++) {
       var el = document.createElement('div'); el.className = 'np';
-      el.innerHTML = '<span class="big">雅</span><span class="sm">MIYABI</span><span class="hem"></span>';
+      el.innerHTML = '<span class="big">' + MARK.replace(/om-(cloth|out)/g, 'om-$1-np' + i) + '</span><span class="sm">omamori</span><span class="hem"></span>';
       set.appendChild(el); ps.push({el: el, a: 0, v: 0});
     }
     function lay(){ var W = set.clientWidth; ps.forEach(function(o){ var x = o.el.offsetLeft; o.el.querySelectorAll('.big,.sm').forEach(function(s){ s.style.left = (-x) + 'px'; s.style.width = W + 'px'; }); }); }
     lay(); window.addEventListener('resize', lay);
-    // for the loader: the printed 雅 and MIYABI of the first panel (each panel carries the whole word, clipped), and the dye's range
+    // for the loader: the mark and word of the first panel (each panel carries the whole mark, clipped), and the dye's range
     function txt(s){ var r = document.createRange(); r.selectNodeContents(ps[0].el.querySelector(s)); return r.getBoundingClientRect(); }
     var rod = intro.querySelector('.rod');
     window.__noren = {els: [rod, set], cream: getComputedStyle(document.documentElement).getPropertyValue('--on-accent').trim() || '#FBF8F1',
-      k: function(){ var b = txt('.big'); return {x: b.left + b.width * .03, y: b.top + b.height * .07, w: b.width * .94, h: b.height * .76}; },
+      k: function(){ var b = ps[0].el.querySelector('.big svg').getBoundingClientRect(); return {x: b.left, y: b.top, w: b.width, h: b.height}; },
       wd: function(){ var b = txt('.sm'); return {x: b.left, y: b.top, w: b.width, h: b.height}; },
       y0: function(){ return rod.getBoundingClientRect().top - window.innerHeight * .03; }, y1: function(){ return set.getBoundingClientRect().bottom + window.innerHeight * .05; }};
     if (window.__ld && !window.__ld.over) { set.style.opacity = 0; window.__ld.hit('bc'); window.__ld.hit('nm'); window.__ld.ready(); }
