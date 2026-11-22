@@ -242,6 +242,8 @@ and `GROUPS` (themes of the article list; must cover every article).
     Island pins (Kozushima, Hachijojima, Ogasawara) are left out of both map frames: `FIT_MINLAT=35` in `tools/prefs/tokyo.py`
     (the Leaflet map opens on mainland Tokyo) and `PIN_FRAME_MINLAT` in index.html (the top map frames mainland Tokyo only).
   - Photographer 宮地工 (Kou Miyaji) is «Ко Миядзи» on every page (Ren, 2026-10-21).
+  - «Префектурный» (not «Префектуральный») on every page (2026-11-23). Akita 04 Goshado and Iwate 01 roadside station pins moved to
+    their OSM points (x=0); Iwate pin names «Камасада», «Храм Тэндайдзи» (2026-11-23, closing the report questions).
 - `TOP_SKIP` (optional, a set of pin names, or `('NN', name)` to hide only that article's pin when two articles share a name): pins shown on the prefecture page only, because an older top-map pin at that place
   already links to the article (Osaka: Храм Ситэнно-дзи → `kn3-osaka-shitennoji`; also Yutoku Inari, Dazaifu, Ohori Terrace,
   Nakadake, Usuki Buddhas, Usa, Kuju, Aoshima, Saitobaru, Sengan-en, the Ibusuki sand baths, Nara's Kimpusen-ji → `kn-yoshino`, Kyoto's Fushimi Inari → `kyo-fushimi`, Nijo castle → `kn3-kyoto-nijo`, Ishikawa's Abare festival → `r2-abare-matsuri`, Natadera of 26, Toyama's Amaharashi coast → `cb-amaharashi`, Niigata's Sado Kinzan → `cb-sado`, Gifu castle → `r2-gifucastle`, Gujo-odori → `cb2-gujo-hachiman`, Fukui's dinosaur museum of 04, Aichi's Inuyama castle → `cb2-inuyama`, Yamanashi's Oshino Hakkai → `cb-oshinohakkai` and Fuji fifth station → `cb2-fuji5th`, Aomori's Nebuta → `th-nebuta`, Hirosaki park → `th-hirosaki`, Miyagi's Tanabata → `th-tanabata`, Fukushima's Tsurugajo → `th-tsurugajo`, Gunma's Yubatake → `kt-kusatsu` and Tomioka → `kt2-gunma-tomioka`, Saitama's railway museum → `kt2-saitama-railmuseum` and two Kawagoe restaurants → `kt-kawagoe`, Chiba's Katori → `r2-katori-jingu`, Kanagawa's Odawara castle → `kt7-kanagawa-odawara`, Tokyo's Senso-ji → `tky-asakusa` and Mori museum → `kt4-roppongi`).
@@ -309,7 +311,7 @@ and `GROUPS` (themes of the article list; must cover every article).
   Oyama (02, ~1 km off, no TOP_SKIP); the other 13 left as they are. Tokyo, linked via `url`: Asakusa and Nakamise (01), Tsukiji
   (17, renamed «Рынок Цукидзи»; the 9 shop pins stay), Roppongi (19), Yanaka (10, ~150 m off), Toyosu `kt3-mitorquets` (47; the 4 shop pins stay); `kt3-oedo-onsen` removed (closed 2021);
   «Китидзёдзи и парк Инокасира», «Улица Юякэ Дандан», «Накамисэ-дори», «Янака, старый квартал Токио» renamed. Older names with stray Latin letters (Hokkaido «Ниseko», «Сounкё» etc.,
-  Akita «Кисаки-мабэ») are not fixed yet.
+  Akita «Кисаки-мабэ» → «Киритампо») were fixed on 2026-11-23 (16 titles in `PINS`).
   Known offsets of older pins, left as they are (Ren): r2-kanedajo, ky3-usuki, ky2-obi, ky3-satsuma, cs5-saga-yutoku (~20 km);
   titles: ky-kurokawa «Онсэн Куроками», ky5-saga-arita2 «Керамические печи Имари» (linked to Arita 05), ky-kuju (old park name).
   Okinawa inset: article pins show once Okinawa is open; close pins merge into numbered markers that zoom step by step
