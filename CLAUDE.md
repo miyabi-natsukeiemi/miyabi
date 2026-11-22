@@ -242,7 +242,8 @@ and `GROUPS` (themes of the article list; must cover every article).
     Island pins (Kozushima, Hachijojima, Ogasawara) are left out of both map frames: `FIT_MINLAT=35` in `tools/prefs/tokyo.py`
     (the Leaflet map opens on mainland Tokyo) and `PIN_FRAME_MINLAT` in index.html (the top map frames mainland Tokyo only).
   - Photographer 宮地工 (Kou Miyaji) is «Ко Миядзи» on every page (Ren, 2026-10-21).
-  - «Префектурный» (not «Префектуральный») on every page (2026-11-23). Akita 04 Goshado and Iwate 01 roadside station pins moved to
+  - «Префектурный» (not «Префектуральный») on every page (2026-11-23). Sake breweries are «сакэварня», soy sauce breweries «соусоварня»,
+    never «пивоварня» (beer only); Toyama 04 says «острова к северо-востоку от Хоккайдо», not «южные Курилы» (Ren, 2026-11-23). Akita 04 Goshado and Iwate 01 roadside station pins moved to
     their OSM points (x=0); Iwate pin names «Камасада», «Храм Тэндайдзи» (2026-11-23, closing the report questions).
 - `TOP_SKIP` (optional, a set of pin names, or `('NN', name)` to hide only that article's pin when two articles share a name): pins shown on the prefecture page only, because an older top-map pin at that place
   already links to the article (Osaka: Храм Ситэнно-дзи → `kn3-osaka-shitennoji`; also Yutoku Inari, Dazaifu, Ohori Terrace,
