@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Поиск по статьям — omamori</title>
+<meta name="description" content="Поиск по статьям omamori о Японии: места, рёканы, еда и ремёсла во всех 47 префектурах. Фильтры по префектуре и теме.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="omamori">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Поиск по статьям — omamori">
+<meta property="og:description" content="Поиск по статьям omamori о Японии: места, рёканы, еда и ремёсла во всех 47 префектурах. Фильтры по префектуре и теме.">
+<meta property="og:url" content="https://omamori-concierge.com/search/">
+<meta property="og:image" content="https://omamori-concierge.com/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Поиск по статьям — omamori">
+<meta name="twitter:description" content="Поиск по статьям omamori о Японии: места, рёканы, еда и ремёсла во всех 47 префектурах. Фильтры по префектуре и теме.">
+<meta name="twitter:image" content="https://omamori-concierge.com/assets/og.jpg">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Golos+Text:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<script>(function(){ var t='washi'; try { t = localStorage.getItem('miyabi-theme') || t; } catch(e){} document.documentElement.setAttribute('data-theme', t); })();</script>
+<style>
+.sr{max-width:var(--max);margin:0 auto;padding:88px 56px 112px}
+.sr-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;margin-bottom:40px}
+.sr-head .mono{grid-column:1/span 12;margin-bottom:18px}
+.sr-head h1{grid-column:1/span 7;font-size:clamp(40px,5.4vw,72px);line-height:1;letter-spacing:-.01em}
+.sr-head p{grid-column:8/span 5;align-self:end;font-size:17px;line-height:1.55;color:var(--mute);max-width:28rem}
+.sr-form{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:14px;align-items:center}
+.sr-q{position:relative}
+.sr-q input{width:100%;height:58px;padding:0 20px 0 50px;border:1px solid var(--line2);border-radius:999px;background:var(--panel);color:var(--head);font:inherit;font-size:18px}
+.sr-q input:focus{outline:none;border-color:var(--gold)}
+.sr-q svg{position:absolute;left:19px;top:50%;width:18px;height:18px;transform:translateY(-50%);color:var(--mute)}
+.sr-form select{height:58px;padding:0 18px;border:1px solid var(--line2);border-radius:999px;background:var(--panel);color:var(--ink);font:inherit;font-size:16px}
+.sr-cats{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.sr-cats button{height:38px;padding:0 16px;border:1px solid var(--line2);border-radius:999px;background:transparent;color:var(--ink);font:inherit;font-size:15px;cursor:pointer}
+.sr-cats button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--on-accent)}
+.sr-count{margin:36px 0 8px;font-size:15px;color:var(--mute)}
+.sr-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line2)}
+.sr-list li{border-bottom:1px solid var(--line2)}
+.sr-list a{display:grid;grid-template-columns:148px minmax(0,1fr);gap:24px;padding:22px 0;text-decoration:none;color:var(--ink)}
+.sr-list img,.sr-list .ph{width:148px;height:100px;object-fit:cover;border-radius:6px;background:var(--board)}
+.sr-meta{font-size:13px;color:var(--mute)}
+.sr-list h2{margin:4px 0 6px;font-size:25px;line-height:1.15}
+.sr-list a:hover h2{color:var(--gold)}
+.sr-list p{font-size:15px;line-height:1.55;color:var(--body2)}
+.sr-more{margin-top:28px}
+.sr-more .btn[hidden]{display:none}
+.sr-empty{padding:28px 0;color:var(--mute);font-size:16px}
+mark{background:none;color:var(--gold)}
+@media(max-width:900px){
+  .sr{padding:56px 16px 72px}
+  .sr-head h1,.sr-head p{grid-column:1/span 12}
+  .sr-head p{margin-top:18px}
+  .sr-form{grid-template-columns:1fr}
+  .sr-list a{grid-template-columns:96px minmax(0,1fr);gap:16px;padding:18px 0}
+  .sr-list img,.sr-list .ph{width:96px;height:72px}
+  .sr-list h2{font-size:21px}
+  .sr-list p{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="/" aria-label="omamori, на главную"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="24 7 52 88"><defs><mask id="om-cloth" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><path d="M50,21 C56,22.4 63,25 68,27.6 C70.6,28.9 71.6,30.6 71.6,33.2 C72.6,50 72.9,70 72.1,86 C71.9,90 69.6,92.2 65.6,92.2 L34.4,92.2 C30.4,92.2 28.1,90 27.9,86 C27.1,70 27.4,50 28.4,33.2 C28.4,30.6 29.4,28.9 32,27.6 C37,25 44,22.4 50,21 Z" fill="#fff"/><g fill="none" stroke="#000" stroke-linecap="round"><path d="M28,39 C42,42.2 58,42.2 72,39" stroke-width="1.512"/><path d="M47.6,38.5 C45.6,28 40,12.5 50,10 C60,12.5 54.4,28 52.4,38.5 M47.2,48.5 C46.2,58 43.6,66 42.4,75 M52.8,48.5 C53.8,58 56.4,66 57.6,75" stroke-width="3.6"/><rect x="45" y="38.5" width="10" height="10" rx="1.8" stroke-width="3.6"/></g><rect x="46.8" y="40.3" width="6.4" height="6.4" fill="#fff"/></mask><mask id="om-out" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M50,21 C56,22.4 63,25 68,27.6 C70.6,28.9 71.6,30.6 71.6,33.2 C72.6,50 72.9,70 72.1,86 C71.9,90 69.6,92.2 65.6,92.2 L34.4,92.2 C30.4,92.2 28.1,90 27.9,86 C27.1,70 27.4,50 28.4,33.2 C28.4,30.6 29.4,28.9 32,27.6 C37,25 44,22.4 50,21 Z" fill="#000"/></mask></defs><rect width="100" height="100" fill="currentColor" mask="url(#om-cloth)"/><path d="M47.6,38.5 C45.6,28 40,12.5 50,10 C60,12.5 54.4,28 52.4,38.5" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" mask="url(#om-out)"/></svg>omamori</a>
+  <nav aria-label="Основная навигация"><a href="/#tri">Что искать</a><a href="/#map-section">Карта</a><a href="/search/" aria-current="page">Поиск</a><a href="/services/">Услуги</a><a href="/#how">Как мы работаем</a><a href="/#ask">Написать</a></nav>
+  <div class="themes" role="group" aria-label="Цвет сайта">
+    <span class="lbl">Тема</span>
+    <button type="button" data-theme="washi" style="--sw:#F5F0E6;--sa:#9E3B26" aria-label="Васи — кремовая бумага, киноварный акцент" title="Васи — светлая, 朱"></button>
+    <button type="button" data-theme="aizome" style="--sw:#F5F0E6;--sa:#244D74" aria-label="Айдзомэ — кремовая бумага, индиго" title="Айдзомэ — светлая, 藍"></button>
+    <button type="button" data-theme="sumi" style="--sw:#16171A;--sa:#C9A063" aria-label="Суми — тушь" title="Суми — тёмная"></button>
+    <button type="button" data-theme="ai" style="--sw:#14203A;--sa:#D7A84F" aria-label="Кон — ночной индиго" title="Кон — ночной индиго"></button>
+  </div>
+</header>
+
+<main class="sr">
+  <div class="sr-head">
+    <span class="mono">Поиск</span>
+    <h1>Поиск по статьям</h1>
+    <p>Места, рёканы, еда и ремёсла во всех 47 префектурах. Названия можно писать по-разному: Нисэко, Нисеко или Niseko.</p>
+  </div>
+  <form class="sr-form" role="search" onsubmit="return false">
+    <label class="sr-q"><span class="mono" style="position:absolute;left:-9999px">Что найти</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <input id="q" type="search" placeholder="Например: Нисэко, рамэн, рёкан с онсэном" autocomplete="off" enterkeyhint="search"></label>
+    <select id="pref" aria-label="Префектура"><option value="">Все префектуры</option></select>
+  </form>
+  <div class="sr-cats" id="cats" role="group" aria-label="Тема"></div>
+  <p class="sr-count" id="count" aria-live="polite">Загрузка…</p>
+  <ul class="sr-list" id="list"></ul>
+  <p class="sr-more"><button class="btn" id="more" type="button" hidden>Показать ещё</button></p>
+</main>
+
+<footer>
+  <span>omamori · Консьерж-сервис путешествий по Японии</span>
+  <span>[ЮРЛИЦО, ИНН, РЕЕСТРОВЫЙ НОМЕР]</span>
+</footer>
+<script src="/assets/contacts.js"></script>
+<script>
+(function(){
+  function setTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+    document.querySelectorAll('.themes button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.theme === t ? 'true' : 'false'); });
+    try { localStorage.setItem('miyabi-theme', t); } catch(e){}
+  }
+  document.querySelectorAll('.themes button').forEach(function(b){ b.addEventListener('click', function(){ setTheme(b.dataset.theme); }); });
+  setTheme(document.documentElement.getAttribute('data-theme') || 'washi');
+})();
+</script>
+<script src="/assets/search.js"></script>
+<script>
+(function(){
+  var q = document.getElementById('q'), pref = document.getElementById('pref'), cats = document.getElementById('cats');
+  var list = document.getElementById('list'), count = document.getElementById('count'), more = document.getElementById('more');
+  var cat = '', shown = 0, res = [], STEP = 30;
+  var P = new URLSearchParams(location.search);
+  q.value = P.get('q') || ''; cat = P.get('cat') || '';
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function plural(n){ var a = n % 10, b = n % 100; return a === 1 && b !== 11 ? 'статья' : a >= 2 && a <= 4 && (b < 12 || b > 14) ? 'статьи' : 'статей'; }
+  function item(e){
+    var meta = e.k === 'g' ? 'Путеводитель по префектуре · ' + e.pn : e.pn + (e.g ? ' · ' + e.g : '');
+    var img = e.i ? '<img src="' + esc(e.i) + '" alt="" loading="lazy">' : '<span class="ph"></span>';
+    return '<li><a href="' + esc(e.u) + '">' + img + '<div><span class="sr-meta">' + esc(meta) + '</span><h2>' + esc(e.t) + '</h2>' +
+      (e.l ? '<p>' + esc(e.l) + '</p>' : '') + '</div></a></li>';
+  }
+  function page(){
+    list.insertAdjacentHTML('beforeend', res.slice(shown, shown + STEP).map(item).join(''));
+    shown = Math.min(res.length, shown + STEP);
+    more.hidden = shown >= res.length;
+  }
+  function run(){
+    var text = q.value.trim();
+    res = OmSearch.find(text, { pref: pref.value, cat: cat });
+    if (!text && !pref.value && !cat) res = res.filter(function(e){ return e.k === 'g'; });  // nothing chosen: the 47 guides
+    list.innerHTML = ''; shown = 0;
+    var n = res.filter(function(e){ return e.k === 'a'; }).length;
+    count.textContent = res.length ? (!text && !pref.value && !cat ? 'Путеводители по 47 префектурам. Начните вводить название или выберите тему.' :
+      'Нашлось: ' + n + ' ' + plural(n) + (res.length > n ? ' и путеводитель по префектуре' : '')) :
+      '';
+    if (!res.length) list.innerHTML = '<li class="sr-empty">Ничего не нашлось. Попробуйте другое написание или уберите фильтр. Или напишите нам — подскажем, куда поехать.</li>';
+    page();
+    var u = new URLSearchParams();
+    if (text) u.set('q', text); if (pref.value) u.set('pref', pref.value); if (cat) u.set('cat', cat);
+    history.replaceState(null, '', location.pathname + (u.toString() ? '?' + u : ''));
+  }
+  var t = null;
+  q.addEventListener('input', function(){ clearTimeout(t); t = setTimeout(run, 120); });
+  pref.addEventListener('change', run);
+  more.addEventListener('click', page);
+  OmSearch.load().then(function(d){
+    d.prefs.forEach(function(p){ var o = document.createElement('option'); o.value = p.p; o.textContent = p.n; pref.appendChild(o); });
+    pref.value = P.get('pref') || '';
+    var all = [['', 'Все темы']].concat(Object.keys(d.cats).map(function(k){ return [k, d.cats[k]]; }));
+    all.forEach(function(c){
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = c[1]; b.dataset.cat = c[0];
+      b.setAttribute('aria-pressed', c[0] === cat ? 'true' : 'false');
+      b.addEventListener('click', function(){
+        cat = c[0]; cats.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x.dataset.cat === cat ? 'true' : 'false'); });
+        run();
+      });
+      cats.appendChild(b);
+    });
+    run();
+  }).catch(function(){ count.textContent = 'Не удалось загрузить поиск. Обновите страницу.'; });
+})();
+</script>
+</body>
+</html>

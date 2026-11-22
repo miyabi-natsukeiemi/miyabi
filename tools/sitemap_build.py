@@ -1,11 +1,11 @@
-"""Write sitemap.xml: the homepage, /services/, every prefecture guide and every article.
+"""Write sitemap.xml: the homepage, /services/, /search/, every prefecture guide and every article.
 Usage: python3 tools/sitemap_build.py   (pref_map_build.py runs it after a build)."""
 import os
 REPO=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE='https://omamori-concierge.com'  # production address
 
 def build():
-    urls=['/','/services/']
+    urls=['/','/services/','/search/']
     for root,dirs,files in os.walk(os.path.join(REPO,'articles')):
         dirs[:]=sorted(d for d in dirs if d not in ('img','images'))
         if 'index.html' in files: urls.append('/'+os.path.relpath(root,REPO).replace(os.sep,'/')+'/')

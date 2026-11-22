@@ -224,6 +224,19 @@ section{padding:96px 0 80px}
 /* map board */
 #map-section{border-top:1px solid var(--line)}
 #map-section .board{position:relative;border:1px solid var(--line);background:var(--board)}
+#map-section .map-search{position:relative;max-width:560px;margin:0 0 16px;z-index:30}
+#map-section .ms-box{position:relative;display:block}
+#map-section .ms-box svg{position:absolute;left:17px;top:50%;width:17px;height:17px;transform:translateY(-50%);color:var(--mute);pointer-events:none}
+#map-section .ms-box input{width:100%;height:50px;padding:0 18px 0 46px;border:1px solid var(--line2);border-radius:999px;background:var(--panel);color:var(--head);font:inherit;font-size:16px}
+#map-section .ms-box input:focus{outline:none;border-color:var(--gold)}
+#map-section .ms-list{position:absolute;left:0;right:0;top:56px;list-style:none;margin:0;padding:6px 0;background:var(--panel);border:1px solid var(--line2);box-shadow:0 20px 50px var(--lift);max-height:440px;overflow:auto}
+#map-section .ms-list li a,#map-section .ms-list li button{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;width:100%;padding:8px 14px;border:0;background:none;text-align:left;font:inherit;color:var(--ink);text-decoration:none;cursor:pointer}
+#map-section .ms-list li.on a,#map-section .ms-list li.on button,#map-section .ms-list li a:hover,#map-section .ms-list li button:hover{background:color-mix(in srgb,var(--gold) 9%,transparent)}
+#map-section .ms-list img,#map-section .ms-list .ph{width:64px;height:44px;object-fit:cover;border-radius:4px;background:var(--board)}
+#map-section .ms-list .t{display:block;font-size:14.5px;line-height:1.3;color:var(--head);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#map-section .ms-list .m{display:block;font-size:12.5px;color:var(--mute)}
+#map-section .ms-list .ms-all a{display:block;padding:10px 14px 6px;font-size:13.5px;color:var(--gold)}
+#map-section .ms-list .ms-none{padding:10px 14px;font-size:14px;color:var(--mute)}
 #map-section .map-mobile-alt{display:none}
 #map-section japan-map{height:720px;display:block}
 #map-section .filters{position:absolute;top:16px;right:16px;width:280px;background:var(--glass);border:1px solid var(--line2);backdrop-filter:blur(6px);z-index:5;font-size:13px}
@@ -495,7 +508,7 @@ document.documentElement.classList.add('intro-on');
 </div>
 <header class="top">
   <a class="logo" href="#top" aria-label="omamori, на главную"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="24 7 52 88"><defs><mask id="om-cloth" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><path d="M50,21 C56,22.4 63,25 68,27.6 C70.6,28.9 71.6,30.6 71.6,33.2 C72.6,50 72.9,70 72.1,86 C71.9,90 69.6,92.2 65.6,92.2 L34.4,92.2 C30.4,92.2 28.1,90 27.9,86 C27.1,70 27.4,50 28.4,33.2 C28.4,30.6 29.4,28.9 32,27.6 C37,25 44,22.4 50,21 Z" fill="#fff"/><g fill="none" stroke="#000" stroke-linecap="round"><path d="M28,39 C42,42.2 58,42.2 72,39" stroke-width="1.512"/><path d="M47.6,38.5 C45.6,28 40,12.5 50,10 C60,12.5 54.4,28 52.4,38.5 M47.2,48.5 C46.2,58 43.6,66 42.4,75 M52.8,48.5 C53.8,58 56.4,66 57.6,75" stroke-width="3.6"/><rect x="45" y="38.5" width="10" height="10" rx="1.8" stroke-width="3.6"/></g><rect x="46.8" y="40.3" width="6.4" height="6.4" fill="#fff"/></mask><mask id="om-out" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M50,21 C56,22.4 63,25 68,27.6 C70.6,28.9 71.6,30.6 71.6,33.2 C72.6,50 72.9,70 72.1,86 C71.9,90 69.6,92.2 65.6,92.2 L34.4,92.2 C30.4,92.2 28.1,90 27.9,86 C27.1,70 27.4,50 28.4,33.2 C28.4,30.6 29.4,28.9 32,27.6 C37,25 44,22.4 50,21 Z" fill="#000"/></mask></defs><rect width="100" height="100" fill="currentColor" mask="url(#om-cloth)"/><path d="M47.6,38.5 C45.6,28 40,12.5 50,10 C60,12.5 54.4,28 52.4,38.5" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" mask="url(#om-out)"/></svg>omamori</a>
-  <nav aria-label="Основная навигация"><a href="#tri">Что искать</a><a href="#map-section">Карта</a><a href="#services">Услуги</a><a href="#how">Как мы работаем</a><a href="#ask">Написать</a></nav>
+  <nav aria-label="Основная навигация"><a href="#tri">Что искать</a><a href="#map-section">Карта</a><a href="/search/">Поиск</a><a href="#services">Услуги</a><a href="#how">Как мы работаем</a><a href="#ask">Написать</a></nav>
   <div class="themes" role="group" aria-label="Цвет сайта">
     <span class="lbl">Тема</span>
     <button type="button" data-theme="washi" style="--sw:#F5F0E6;--sa:#9E3B26" aria-label="Васи — кремовая бумага, киноварный акцент" title="Васи — светлая, 朱"></button>
@@ -567,7 +580,13 @@ document.documentElement.classList.add('intro-on');
     <div class="sec-head">
       <span class="mono">Карта</span>
       <h2>Какой край вам ближе</h2>
-      <p>Выберите настроение путешествия — на карте останутся только подходящие места. Нажмите на регион, а затем на префектуру, чтобы открыть её гид.</p>
+      <p>Выберите настроение путешествия — на карте останутся только подходящие места. Нажмите на префектуру, чтобы увидеть места из наших статей, или найдите место по названию.</p>
+    </div>
+
+    <div class="map-search" id="mapSearch">
+      <label class="ms-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="msQ" type="search" placeholder="Найти место или статью: Нисэко, рамэн, рёкан…" autocomplete="off" aria-label="Поиск по статьям" aria-controls="msList" aria-expanded="false" role="combobox"></label>
+      <ul class="ms-list" id="msList" role="listbox" hidden></ul>
     </div>
 
     <div class="board">
@@ -604,12 +623,13 @@ document.documentElement.classList.add('intro-on');
         </div>
       </div>
 
-      <div class="map-hint" id="mapHint" role="note"><span class="ic" aria-hidden="true">☝</span><span class="tx">Нажмите на регион Японии, который вас интересует</span></div>
+      <div class="map-hint" id="mapHint" role="note"><span class="ic" aria-hidden="true">☝</span><span class="tx">Нажмите на префектуру или на фото места</span></div>
 
       <div class="pop" id="pop"></div>
       <div class="pref-card" id="prefCard" aria-live="polite"></div>
     </div>
 
+    <script src="assets/search.js"></script>
     <div class="map-mobile-alt">
       <div class="pref-list"><div class="pref-group"><span class="mono">Хоккайдо</span><ul><li><a href="articles/hokkaido/index.html">Хоккайдо</a></li></ul></div><div class="pref-group"><span class="mono">Тохоку</span><ul><li><a href="articles/aomori/index.html">Аомори</a></li><li><a href="articles/iwate/index.html">Иватэ</a></li><li><a href="articles/miyagi/index.html">Мияги</a></li><li><a href="articles/akita/index.html">Акита</a></li><li><a href="articles/yamagata/index.html">Ямагата</a></li><li><a href="articles/fukushima/index.html">Фукусима</a></li></ul></div><div class="pref-group"><span class="mono">Канто</span><ul><li><a href="articles/ibaraki/index.html">Ибараки</a></li><li><a href="articles/tochigi/index.html">Тотиги</a></li><li><a href="articles/gunma/index.html">Гумма</a></li><li><a href="articles/saitama/index.html">Сайтама</a></li><li><a href="articles/chiba/index.html">Тиба</a></li><li><a href="articles/tokyo/index.html">Токио</a></li><li><a href="articles/kanagawa/index.html">Канагава</a></li></ul></div><div class="pref-group"><span class="mono">Тюбу</span><ul><li><a href="articles/niigata/index.html">Ниигата</a></li><li><a href="articles/toyama/index.html">Тояма</a></li><li><a href="articles/ishikawa/index.html">Исикава</a></li><li><a href="articles/fukui/index.html">Фукуи</a></li><li><a href="articles/yamanashi/index.html">Яманаси</a></li><li><a href="articles/nagano/index.html">Нагано</a></li><li><a href="articles/gifu/index.html">Гифу</a></li><li><a href="articles/shizuoka/index.html">Сидзуока</a></li><li><a href="articles/aichi/index.html">Айти</a></li></ul></div><div class="pref-group"><span class="mono">Кансай</span><ul><li><a href="articles/mie/index.html">Миэ</a></li><li><a href="articles/shiga/index.html">Сига</a></li><li><a href="articles/kyoto/index.html">Киото</a></li><li><a href="articles/osaka/index.html">Осака</a></li><li><a href="articles/hyogo/index.html">Хёго</a></li><li><a href="articles/nara/index.html">Нара</a></li><li><a href="articles/wakayama/index.html">Вакаяма</a></li></ul></div><div class="pref-group"><span class="mono">Тюгоку</span><ul><li><a href="articles/tottori/index.html">Тоттори</a></li><li><a href="articles/shimane/index.html">Симанэ</a></li><li><a href="articles/okayama/index.html">Окаяма</a></li><li><a href="articles/hiroshima/index.html">Хиросима</a></li><li><a href="articles/yamaguchi/index.html">Ямагути</a></li></ul></div><div class="pref-group"><span class="mono">Сикоку</span><ul><li><a href="articles/tokushima/index.html">Токусима</a></li><li><a href="articles/kagawa/index.html">Кагава</a></li><li><a href="articles/ehime/index.html">Эхимэ</a></li><li><a href="articles/kochi/index.html">Коти</a></li></ul></div><div class="pref-group"><span class="mono">Кюсю</span><ul><li><a href="articles/fukuoka/index.html">Фукуока</a></li><li><a href="articles/saga/index.html">Сага</a></li><li><a href="articles/nagasaki/index.html">Нагасаки</a></li><li><a href="articles/kumamoto/index.html">Кумамото</a></li><li><a href="articles/oita/index.html">Оита</a></li><li><a href="articles/miyazaki/index.html">Миядзаки</a></li><li><a href="articles/kagoshima/index.html">Кагосима</a></li></ul></div><div class="pref-group"><span class="mono">Окинава</span><ul><li><a href="articles/okinawa/index.html">Окинава</a></li></ul></div></div>
     </div>
@@ -1283,8 +1303,20 @@ svg{display:block; width:100%; height:100%}
 .plabel{font-size:17px; font-weight:600; fill:var(--_ink); paint-order:stroke; stroke:var(--_bg);
   stroke-width:4px; stroke-linejoin:round; pointer-events:none; text-anchor:middle}
 #prefLabels{opacity:0; transition:opacity .3s linear}
-#regionLabels{transition:opacity .35s linear}
-#regionLabels.hide{opacity:0}
+#callouts{transition:opacity .35s linear}
+#callouts.hide{opacity:0; pointer-events:none}
+.co{cursor:pointer; outline:none}
+.co-line{stroke:color-mix(in srgb,var(--_ink) 45%,transparent); stroke-width:1; vector-effect:non-scaling-stroke}
+.co-dot{fill:var(--_accent); stroke:var(--_bg); stroke-width:1.5}
+.co-bg{fill:var(--_land)}
+.co-frame{fill:none; stroke:var(--_bg); stroke-width:2.5}
+.co-card{transition:transform .2s var(--_ease)}
+.co-card > *{transition:transform .2s var(--_ease)}
+.co:hover .co-card > *,.co:focus-visible .co-card > *{transform:scale(1.12)}
+.co:hover .co-frame,.co:focus-visible .co-frame{stroke:var(--_accent)}
+.co-label{font-size:14px; font-weight:700; fill:var(--_ink); text-anchor:middle; paint-order:stroke; stroke:var(--_bg);
+  stroke-width:4px; stroke-linejoin:round; pointer-events:none}
+.hlabel{pointer-events:none; dominant-baseline:middle}
 .inset-frame{fill:none; stroke:color-mix(in srgb,var(--_ink) 20%,transparent); stroke-width:2;
   transition:stroke .3s linear, stroke-width .3s linear}
 .inset-frame.focus{stroke:var(--_accent); stroke-width:4}
@@ -1641,17 +1673,10 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
           .text(PREF_RU[f.properties.id]);
       });
 
-      var NUDGE = { kanto: [40, 20], kinki: [10, 10], chugoku: [-26, -14], shikoku: [2, 22],
-        kyushu: [-30, 26], chubu: [0, -8], tohoku: [8, 0], hokkaido: [0, -6] };
-      var rl = svg.append('g').attr('id', 'regionLabels');
-      REGIONS.forEach(function (r) {
-        var fs = self._main.filter(function (f) { return REGION_OF[f.properties.id] === r.id; });
-        if (!fs.length) return;
-        var c = path.centroid({ type: 'FeatureCollection', features: fs.map(function (f) { return f.core; }) });
-        var n = NUDGE[r.id] || [0, 0];
-        rl.append('text').attr('class', 'rlabel').attr('x', c[0] + n[0]).attr('y', c[1] + n[1]).text(REGION_RU[r.id]);
-      });
-
+      // whole-Japan view (2026-11, Ren): no region names; prefecture borders, a name on hover, and photo callouts
+      // of well-known places (set from the page via .callouts). Regions still exist one level down.
+      this._calloutLayer = svg.append('g').attr('id', 'callouts');
+      this._hoverLbl = svg.append('text').attr('class', 'plabel hlabel').style('display', 'none');
       var ins = svg.append('g').attr('id', 'inset').attr('transform', 'translate(' + INSET.x + ',' + INSET.y + ')');
       ins.append('rect').attr('class', 'inset-frame').attr('width', INSET.w).attr('height', INSET.h);
       var okiPref = ins.append('g').attr('class', 'region').attr('data-region', 'okinawa')
@@ -1703,8 +1728,6 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       this._clusterLayerOki = ins.append('g').attr('id', 'clusterLayerOki');
 
       svg.selectAll('.region')
-        .on('mouseenter', function () { self._hoverRegion(this.dataset.region, true); })
-        .on('mouseleave', function () { self._hoverRegion(this.dataset.region, false); })
         .on('click', function (e) {
           e.stopPropagation();
           self.select(this.dataset.region); self._emit('select');
@@ -1715,7 +1738,9 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
         .on('click', function (e) {
           e.stopPropagation();
           var id = +this.dataset.pref, reg = REGION_OF[id];
-          if (self._active !== reg) self.select(reg);
+          self._hoverPref(id, false);
+          if (!self._active) self.select(reg, id);
+          else if (self._active !== reg) self.select(reg);
           else if (self._pref === id && self._hasGroups()) return;
           else self.select(reg, self._pref === id ? null : id);
           self._emit('select');
@@ -1729,7 +1754,38 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       if (r0 || p0) this.select(r0 || REGION_OF[+p0], p0);
       else this._render();
       if (this._pinsPending) { this.pins = this._pinsPending; this._pinsPending = null; }
+      if (this._callouts) this._renderCallouts();
       this._emit('ready');
+    }
+
+    // Photo callouts on the whole-Japan view: [{lon, lat, label, img, dx, dy, ...}] (dx, dy: where the photo sits,
+    // in viewBox units from the place). A click emits japan-map:callout with the item; the page decides what to open.
+    set callouts(arr) {
+      this._callouts = arr || [];
+      if (this._ready) this._renderCallouts();
+    }
+    _renderCallouts() {
+      var self = this, d3 = this._d3, proj = this._proj, W = 86, H = 58;
+      var g = this._calloutLayer.selectAll('g.co').data(this._callouts, function (c) { return c.label; });
+      g.exit().remove();
+      var en = g.enter().append('g').attr('class', 'co').attr('tabindex', 0).attr('role', 'button')
+        .attr('aria-label', function (c) { return c.label + ': открыть на карте'; })
+        .on('click', function (e, c) { e.stopPropagation(); self._emit('callout', { callout: c }); })
+        .on('keydown', function (e, c) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); self._emit('callout', { callout: c }); } });
+      en.each(function (c, i) {
+        var n = d3.select(this), xy = proj([c.lon, c.lat]), x = xy[0] + c.dx, y = xy[1] + c.dy, id = 'co-clip-' + i;
+        // the line runs from the place to the nearest point of the photo's frame
+        var ex = Math.max(x - W / 2, Math.min(xy[0], x + W / 2)), ey = Math.max(y - H / 2, Math.min(xy[1], y + H / 2));
+        n.append('line').attr('class', 'co-line').attr('x1', xy[0]).attr('y1', xy[1]).attr('x2', ex).attr('y2', ey);
+        n.append('circle').attr('class', 'co-dot').attr('cx', xy[0]).attr('cy', xy[1]).attr('r', 3.2);
+        var card = n.append('g').attr('class', 'co-card').attr('transform', 'translate(' + x + ',' + y + ')');
+        card.append('clipPath').attr('id', id).append('rect').attr('x', -W / 2).attr('y', -H / 2).attr('width', W).attr('height', H).attr('rx', 5);
+        card.append('rect').attr('class', 'co-bg').attr('x', -W / 2).attr('y', -H / 2).attr('width', W).attr('height', H).attr('rx', 5);
+        card.append('image').attr('href', c.img).attr('x', -W / 2).attr('y', -H / 2).attr('width', W).attr('height', H)
+          .attr('preserveAspectRatio', 'xMidYMid slice').attr('clip-path', 'url(#' + id + ')');
+        card.append('rect').attr('class', 'co-frame').attr('x', -W / 2).attr('y', -H / 2).attr('width', W).attr('height', H).attr('rx', 5);
+        card.append('text').attr('class', 'co-label').attr('x', 0).attr('y', H / 2 + 15).text(c.label);
+      });
     }
 
     set pins(arr) {
@@ -1763,10 +1819,10 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
           self._emit('pin', { pin: d, trigger: 'click', node: this });
         })
         .on('mouseenter', function (e, d) {
-          if (!d.cluster && !d.group) self._emit('pin', { pin: d, trigger: 'hover', node: this });
+          if (!d.cluster && (!d.group || !self._pref)) self._emit('pin', { pin: d, trigger: 'hover', node: this });
         })
         .on('mouseleave', function (e, d) {
-          if (!d.cluster && !d.group) self._emit('pinout', { pin: d });
+          if (!d.cluster && (!d.group || !self._pref)) self._emit('pinout', { pin: d });
         });
       // sizes also as attributes: browsers without the CSS `r` property (older Safari) would draw nothing
       enter.filter(function (d) { return d.cluster; }).append('circle').attr('class', 'jm-halo').attr('r', 17);
@@ -1790,11 +1846,13 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       var topLevel = !self._active;
       this._pinsLayer.selectAll('g.jm-pin').each(function (d) {
         var visible;
+        // region view: a few article pins per prefecture (d.regionPick, more for prefectures with more articles, with a cap;
+        // set by the page), not the older pins, so a small prefecture with many articles (Tokyo) is not hidden by a big one
+        // with old pins (Saitama). Prefecture view: all its pins. Whole Japan: no pins, the callouts speak for the map.
         if (d.cluster) visible = self._pref !== d.prefId;
-        else if (d.clusterOf) visible = self._pref === d.clusterOf;
+        else if (d.clusterOf) visible = self._pref ? self._pref === d.clusterOf : !!self._active && !!d.regionPick && REGION_OF[d.clusterOf] === self._active;
         else if (self._pref) visible = d.prefId === self._pref;
-        else if (self._active) visible = REGION_OF[d.prefId] === self._active;
-        else visible = true; // whole-Japan view: shown so filters stay visible, but made non-interactive below
+        else visible = false;
         var xy = self._proj([d.lon, d.lat]);
         self._d3.select(this)
           .style('display', (visible && d.__match !== false) ? '' : 'none')
@@ -1808,7 +1866,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       var okiInteractive = self._active === 'okinawa', okiS = okiInteractive ? 1 / (this._insetK || 1) : 0.6;
       this._pinsLayerOki.selectAll('g.jm-pin').each(function (d) {
         var xy = self._projOki([d.lon, d.lat]);
-        var visible = d.clusterOf ? okiInteractive : true;  // article pins only once Okinawa is open, as in other prefectures
+        var visible = okiInteractive && !!d.clusterOf;  // only once Okinawa is open, and only its article pins (as other prefectures)
         self._d3.select(this)
           .style('display', (visible && d.__match !== false) ? '' : 'none')
           .style('pointer-events', okiInteractive ? null : 'none')
@@ -1849,7 +1907,11 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
         var sel = layer.selectAll('g.jm-cl').data(data, function (c) { return c.key; });
         sel.exit().remove();
         var en = sel.enter().append('g').attr('class', 'jm-cl').style('cursor', 'pointer')
-          .on('click', function (e, c) { e.stopPropagation(); self._focusOn(c.pins); });
+          .on('click', function (e, c) {
+            e.stopPropagation();
+            if (!self._pref && c.pins[0].clusterOf) { var p = c.pins[0].clusterOf; self.select(REGION_OF[p], p); self._emit('select'); return; }
+            self._focusOn(c.pins);
+          });
         en.append('circle').attr('class', 'jm-hit').attr('r', 16);
         en.append('circle').attr('class', 'jm-dot').attr('r', 10);
         en.append('text').attr('class', 'jm-n').attr('dy', '.35em');
@@ -2062,7 +2124,17 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
     }
 
     _hoverPref(id, on) {
-      if (!this._active || REGION_OF[+id] !== this._active || this._pref) return;
+      if (!this._active) {  // whole Japan: the prefecture lights up and its name shows at its centre
+        this._root.querySelectorAll('#camera .pref[data-pref="' + id + '"], #inset .pref[data-pref="' + id + '"]').forEach(function (n) { n.classList.toggle('hov', on); });
+        var lbl = this._hoverLbl, f = this._byPref && this._byPref[+id];
+        if (lbl) {
+          if (on && f) { var c = this._path.centroid(f.core); lbl.attr('x', c[0]).attr('y', c[1]).text(PREF_RU[+id]).style('display', null); }
+          else lbl.style('display', 'none');
+        }
+        if (on) this._emit('hover', { hoverPref: +id, hoverPrefName: PREF_JA[+id] });
+        return;
+      }
+      if (REGION_OF[+id] !== this._active || this._pref) return;
       this._root.querySelectorAll('.pref[data-pref="' + id + '"]').forEach(function (n) { n.classList.toggle('hov', on); });
       if (on) this._emit('hover', { hoverPref: +id, hoverPrefName: PREF_JA[+id] });
     }
@@ -2097,7 +2169,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
         n.style.background = '';
         n.classList.toggle('on', n.dataset.rail === active);
       });
-      var rlg = R.querySelector('#regionLabels'); if (rlg) rlg.classList.toggle('hide', !!active);
+      var cl = R.querySelector('#callouts'); if (cl) cl.classList.toggle('hide', !!active);
       var back = R.querySelector('.back');
       back.classList.toggle('on', !!active);
       back.textContent = this._focus ? '← Ко всей префектуре' : this._isle ? '← Ко всей Окинаве' : (pref && active !== 'okinawa') ? '← Назад к региону' : '← Ко всей карте';
@@ -2190,7 +2262,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       [this._pinsLayer, this._clusterLayer].forEach(function (l) {
         if (l) l.style('transition', 'opacity .14s linear').style('opacity', 0);
       });
-      var rlg = R.querySelector('#regionLabels'); if (rlg) rlg.classList.add('hide');
+      var cl = R.querySelector('#callouts'); if (cl) cl.classList.add('hide');
     }
 
     _flyDone() {
@@ -2198,7 +2270,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
       [this._pinsLayer, this._clusterLayer].forEach(function (l) {
         if (l) l.style('transition', 'opacity .32s linear').style('opacity', null);
       });
-      var rlg = R.querySelector('#regionLabels'); if (rlg) rlg.classList.toggle('hide', !!this._active);
+      var cl = R.querySelector('#callouts'); if (cl) cl.classList.toggle('hide', !!this._active);
       if (this._afterFly) { var f = this._afterFly; this._afterFly = null; f(); }
     }
 
@@ -6962,6 +7034,30 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
         links:p.s.map(function(s){ var a = KG.art[s]; return { href:a.u, title:a.t, img:a.i, lede:a.l }; }) });
     });
   });
+  // region view: a few article pins per prefecture, more where there are more articles, at most 12 (Ren, 2026-11):
+  // one pin per article, spread out over the prefecture (farthest point first, starting from the first article)
+  (function(){
+    var MINLAT = { 13: 35 };  // Tokyo: not the far-off islands
+    PREF_SETS.forEach(function(set){
+      if (!set[0]) return;
+      var pref = set[1], nArt = Object.keys(set[0].art).length;
+      var k = Math.max(3, Math.min(12, Math.round(1.6 * Math.sqrt(nArt))));
+      var seen = {}, cand = KG_PINS.filter(function(p){
+        if (p.clusterOf !== pref || seen[p.art] || p.lat < (MINLAT[pref] || -90)) return false;
+        return (seen[p.art] = true);
+      });
+      if (!cand.length) return;
+      var cos = Math.cos(cand[0].lat * Math.PI / 180);
+      function dist(a, b){ return Math.hypot((a.lon - b.lon) * cos, a.lat - b.lat); }
+      var pick = [cand[0]], best = cand.map(function(p){ return dist(p, cand[0]); });
+      while (pick.length < Math.min(k, cand.length)) {
+        var i = best.indexOf(Math.max.apply(null, best));
+        pick.push(cand[i]);
+        cand.forEach(function(p, j){ best[j] = Math.min(best[j], dist(p, cand[i])); });
+      }
+      pick.forEach(function(p){ p.regionPick = true; });
+    });
+  })();
   var ALL = PINS.concat(KG_PINS);
   // places that share an article (in list order), for "Место N из M" and highlighting on the map
   var KG_BY_ART = {};
@@ -6989,8 +7085,100 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
 
   map.addEventListener('japan-map:ready', function(){
     map.pins = ALL.filter(function(p){ return !p.cluster; });
+    map.callouts = CALLOUTS;
     applyFilters();
   });
+
+  // ---- photo callouts on the whole-Japan view: well-known places, each opens its prefecture and the place's card ----
+  // [pin set, pin name, label, dx, dy] (dx, dy: where the photo sits, in map units from the place)
+  var CALLOUT_SPEC = [
+    ['HOKKAIDO', 'Гора Нисэко-Аннупури', 'Нисэко', -110, -30],
+    ['AOMORI', 'Фестиваль нэпута в Хиросаки', 'Хиросаки', -105, -10],
+    ['TOCHIGI', 'Ироха-дзака', 'Никко', 115, -40],
+    ['TOKYO', 'Святилище Асакуса (праздник Сандзя)', 'Токио', 120, 30],
+    ['YAMANASHI', 'Святилище Кавагути Асама', 'Фудзи', 40, 115],
+    ['ISHIKAWA', 'Музей современного искусства XXI века', 'Канадзава', -94, -166],
+    ['GIFU', 'Утренний рынок Миягава', 'Такаяма', 20, -120],
+    ['KYOTO', 'Храм Тэнрю-дзи', 'Киото', -154, -131],
+    ['NARA', 'Святилище Касуга-тайся', 'Нара', 40, 110],
+    ['HIROSHIMA', 'Большой тории', 'Миядзима', -166, -51],
+    ['KAGAWA', 'Рёкан Рока', 'Наосима', -10, 104],
+    ['KUMAMOTO', 'Луга Кусасэнри', 'Асо', -122, 24],
+    ['KAGOSHIMA', 'Кедр Дзёмон-суги', 'Якусима', 110, 40]
+  ];
+  var CALLOUTS = [];
+  CALLOUT_SPEC.forEach(function(c){
+    var set = PREF_SETS.filter(function(s){ return s[0] === window[c[0] + '_PINS']; })[0];
+    if (!set) return;
+    var pin = KG_PINS.filter(function(p){ return p.clusterOf === set[1] && p.title === c[1]; })[0];
+    if (!pin || !pin.links[0] || !pin.links[0].img) return;
+    CALLOUTS.push({ lon:pin.lon, lat:pin.lat, label:c[2], img:pin.links[0].img, dx:c[3], dy:c[4], pin:pin });
+  });
+  // open a pin's prefecture and its card (callouts, search)
+  function openPin(pin){
+    var reg = window.JapanMap && JapanMap.REGIONS.filter(function(r){ return r.ids.indexOf(pin.prefId) >= 0; })[0];
+    if (!reg) return;
+    map.select(reg.id, pin.prefId); map._emit('select');
+    setTimeout(function(){ pinned = true; showPop(pin); }, 50);
+  }
+  map.addEventListener('japan-map:callout', function(e){ openPin(e.detail.callout.pin); });
+  window.MIYABI_OPEN_PIN = openPin;
+  window.MIYABI_KG_PINS = KG_PINS;
+
+  // ---- search above the map (assets/search.js): a place with a pin opens on the map, anything else opens its page ----
+  (function(){
+    var q = document.getElementById('msQ'), list = document.getElementById('msList');
+    if (!q || !list || !window.OmSearch) return;
+    var PIN_OF = {};  // "prefecture code:slug" -> first top-map pin of that article
+    KG_PINS.forEach(function(p){ p.links.forEach(function(l){
+      var m = /\/([^\/]+)\/index\.html$/.exec(l.href); if (m && !PIN_OF[p.clusterOf + ':' + m[1]]) PIN_OF[p.clusterOf + ':' + m[1]] = p;
+    }); });
+    var res = [], cur = -1, t = null, MAX = 7;
+    function esc(x){ return String(x).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+    function onMap(e){ return e.k === 'a' && PIN_OF[e.p + ':' + e.s] && window.matchMedia('(min-width: 761px)').matches; }
+    function close(){ list.hidden = true; q.setAttribute('aria-expanded', 'false'); cur = -1; }
+    function render(){
+      var text = q.value.trim();
+      if (!text) { close(); return; }
+      var all = OmSearch.find(text); res = all.slice(0, MAX);
+      list.innerHTML = res.map(function(e, i){
+        var meta = (e.k === 'g' ? 'Путеводитель · ' : '') + e.pn + (e.k === 'a' && onMap(e) ? ' · показать на карте' : '');
+        var inner = (e.i ? '<img src="' + esc(e.i) + '" alt="" loading="lazy">' : '<span class="ph"></span>') +
+          '<span><span class="t">' + esc(e.t) + '</span><span class="m">' + esc(meta) + '</span></span>';
+        return '<li role="option" data-i="' + i + '">' + (onMap(e) ? '<button type="button">' + inner + '</button>' : '<a href="' + esc(e.u) + '">' + inner + '</a>') + '</li>';
+      }).join('') + (all.length ? '<li class="ms-all"><a href="/search/?q=' + encodeURIComponent(text) + '">Все результаты (' + all.length + ') →</a></li>'
+        : '<li class="ms-none">Ничего не нашлось. Попробуйте другое написание.</li>');
+      list.hidden = false; q.setAttribute('aria-expanded', 'true'); cur = -1;
+    }
+    function pick(i){
+      var e = res[i]; if (!e) return;
+      if (onMap(e)) {
+        close(); q.blur();
+        document.getElementById('map-section').scrollIntoView({ behavior:'smooth', block:'start' });
+        openPin(PIN_OF[e.p + ':' + e.s]);
+      } else location.href = e.u;
+    }
+    q.addEventListener('focus', function(){ OmSearch.load().then(function(){ if (q.value.trim()) render(); }); }, { once:false });
+    q.addEventListener('input', function(){ clearTimeout(t); t = setTimeout(function(){ OmSearch.load().then(render); }, 100); });
+    q.addEventListener('keydown', function(ev){
+      var items = list.querySelectorAll('li[data-i]');
+      if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
+        if (list.hidden || !items.length) return;
+        ev.preventDefault();
+        cur = (cur + (ev.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
+        items.forEach(function(li, j){ li.classList.toggle('on', j === cur); });
+      } else if (ev.key === 'Enter') {
+        ev.preventDefault();
+        if (cur >= 0) pick(cur);
+        else if (q.value.trim()) location.href = '/search/?q=' + encodeURIComponent(q.value.trim());
+      } else if (ev.key === 'Escape') close();
+    });
+    list.addEventListener('click', function(ev){
+      var li = ev.target.closest('li[data-i]'); if (!li) return;
+      if (ev.target.closest('button')) { ev.preventDefault(); pick(+li.dataset.i); }
+    });
+    document.addEventListener('click', function(ev){ if (!ev.target.closest('#mapSearch')) close(); });
+  })();
 
   // ---- filters state (single axis: type) ----
   var state = { type:new Set() };
@@ -7130,7 +7318,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
   function syncHint(e){
     if (!hint) return;
     var d = e.detail || {}, text = null;
-    if (!d.region) text = 'Нажмите на регион Японии, который вас интересует';
+    if (!d.region) text = 'Нажмите на префектуру или на фото места';
     else if (d.region === 'okinawa') text = d.isle ? null : 'Нажмите на группу островов, которая вас интересует';
     else if (!d.pref) text = 'Нажмите на префектуру, которая вас интересует';
     if (text) hint.querySelector('.tx').textContent = text;
