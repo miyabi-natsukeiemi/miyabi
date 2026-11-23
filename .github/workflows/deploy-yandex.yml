@@ -1,0 +1,38 @@
+# Deploy the site to Yandex Object Storage (bucket omamori-concierge.com, static website hosting).
+# Russian visitors reach Cloudflare slowly or not at all since 2025, so the production domain points here (2026-11).
+# Cloudflare Pages still builds every push as before (miyabi-concierge.pages.dev stays as a backup).
+# Secrets (GitHub → Settings → Secrets and variables → Actions): YC_ACCESS_KEY_ID, YC_SECRET_ACCESS_KEY
+# = a static access key of a Yandex Cloud service account with the storage.editor role.
+name: Deploy to Yandex Object Storage
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency:
+  group: deploy-yandex
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      BUCKET: omamori-concierge.com
+      ENDPOINT: https://storage.yandexcloud.net
+      AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: ru-central1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Sync files (size-only: unchanged files are skipped)
+        run: |
+          aws s3 sync . "s3://$BUCKET" --endpoint-url "$ENDPOINT" --delete --size-only --no-progress \
+            --exclude ".git/*" --exclude ".github/*" --exclude "tools/*" --exclude "*.DS_Store" \
+            --exclude "*.html" --exclude "*.json" --exclude "*.js" --exclude "*.css" --exclude "*.xml" --exclude "*.txt" \
+            --cache-control "public, max-age=604800"
+      - name: Sync pages and code (re-uploaded on every push: same-size edits must not be missed; short cache)
+        run: |
+          aws s3 sync . "s3://$BUCKET" --endpoint-url "$ENDPOINT" --delete --no-progress \
+            --exclude "*" --include "*.html" --include "*.json" --include "*.js" --include "*.css" --include "*.xml" --include "*.txt" \
+            --exclude ".git/*" --exclude ".github/*" --exclude "tools/*" \
+            --cache-control "public, max-age=300"

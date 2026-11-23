@@ -20,6 +20,11 @@ The noren and og.jpg carry the omamori mark since 2026-11-15.
     address https://miyabi-concierge.pages.dev/ still works.
   - Check a deploy: `gh api repos/miyabi-natsukeiemi/miyabi/commits/main/check-runs --jq '.check_runs[] | {name,conclusion}'` and look for "Cloudflare Pages".
   - Two Cloudflare **Workers** builds (`miyabi`, `miyabi-pro`) are also wired to this repo and currently fail. They do not affect the Pages site. Ignore unless Ren asks.
+- **Yandex Object Storage** (2026-11-23, moving production there because Cloudflare is slow or blocked in Russia): bucket
+  `omamori-concierge.com` (Ren's Yandex Cloud, folder `default`), static website hosting (index.html, error 404.html),
+  public read. `.github/workflows/deploy-yandex.yml` uploads every push to `main` (service account `github-deploy`, role
+  storage.editor; its static key is in the GitHub secrets YC_ACCESS_KEY_ID / YC_SECRET_ACCESS_KEY). Test address:
+  http://omamori-concierge.com.website.yandexcloud.net. DNS still points to Cloudflare Pages until Ren approves the switch.
 - Workflow: edit → preview locally (`python3 -m http.server 8765` in the repo root, open http://localhost:8765/) → commit → push to `main`.
 - Always exclude `.DS_Store` from commits.
 
