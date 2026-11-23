@@ -26,7 +26,7 @@ p.credits{font-size:14px;line-height:1.5;color:var(--muted,#5C5C5C);margin:48px 
 <!-- /site-bar -->
 '''
 SECTION_MAP='''<!-- __KEY__-map -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="/assets/vendor/leaflet/leaflet.css">
 <style>
 .kg-map{margin:56px -110px 0;scroll-margin-top:72px}
 .kg-map .kicker{margin-top:0}
@@ -58,7 +58,7 @@ SECTION_MAP='''<!-- __KEY__-map -->
 <div id="kg-leaflet" role="region" aria-label="__ARIA__"></div>
 <p class="kg-note">Пунктирный круг означает, что точка примерная: место находится в этом районе или на этом острове.</p>
 </section>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/assets/vendor/leaflet/leaflet.js"></script>
 <script>
 (function(){
 var C={see:["Посмотреть","#1F5A7A"],stay:["Где остановиться","#7A4A8C"],eat:["Где поесть","#B3261E"],shop:["Где купить","#A0740A"],art:["Архитектура и искусство","#2F6B4A"],craft:["Мастерские","#4E6E8E"]};

@@ -1185,8 +1185,9 @@ document.documentElement.classList.add('intro-on');
 (function () {
   'use strict';
 
-  var GEO = 'https://cdn.jsdelivr.net/gh/dataofjapan/land@master/japan.geojson';
-  var D3 = 'https://unpkg.com/d3@7.9.0/dist/d3.min.js';
+  // served from the site itself first (Cloudflare-fronted CDNs are slow or blocked in Russia); the CDNs stay as fallbacks
+  var GEO = '/assets/vendor/japan.geojson';  // dataofjapan/land, coordinates rounded to 4 decimals
+  var D3 = '/assets/vendor/d3.min.js';
 
   var REGIONS = [
     {id:'hokkaido', name:'北海道', en:'Hokkaidō', ids:[1], prefs:1, area:'83,424', pop:'約514万人', hub:'札幌市',
@@ -1404,6 +1405,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
 
   var loader = null;
   var D3_FALLBACKS = [
+    '/assets/vendor/d3.min.js',
     'https://unpkg.com/d3@7.9.0/dist/d3.min.js',
     'https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js'
@@ -1436,6 +1438,7 @@ button:focus-visible,.tag:focus-visible{outline:2px solid var(--_accent); outlin
 
   var geoCache = {};
   var GEO_FALLBACKS = [
+    '/assets/vendor/japan.geojson',
     'https://cdn.jsdelivr.net/gh/dataofjapan/land@master/japan.geojson',
     'https://raw.githubusercontent.com/dataofjapan/land/master/japan.geojson'
   ];
