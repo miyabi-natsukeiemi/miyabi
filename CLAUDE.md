@@ -24,7 +24,10 @@ The noren and og.jpg carry the omamori mark since 2026-11-15.
   `omamori-concierge.com` (Ren's Yandex Cloud, folder `default`), static website hosting (index.html, error 404.html),
   public read. `.github/workflows/deploy-yandex.yml` uploads every push to `main` (service account `github-deploy`, role
   storage.editor; its static key is in the GitHub secrets YC_ACCESS_KEY_ID / YC_SECRET_ACCESS_KEY). Test address:
-  http://omamori-concierge.com.website.yandexcloud.net. DNS still points to Cloudflare Pages until Ren approves the switch.
+  http://omamori-concierge.com.website.yandexcloud.net. Since 2026-11-26 the domain points here: Cloudflare DNS keeps an apex CNAME (DNS only, grey cloud) to
+  omamori-concierge.com.website.yandexcloud.net; HTTPS is a Let's Encrypt certificate in Yandex Certificate Manager
+  (`_acme-challenge` CNAME in Cloudflare, keep it). Cloudflare Pages still builds every push (miyabi-concierge.pages.dev = backup).
+  No www record.
 - Workflow: edit → preview locally (`python3 -m http.server 8765` in the repo root, open http://localhost:8765/) → commit → push to `main`.
 - Always exclude `.DS_Store` from commits.
 
